@@ -1,5 +1,5 @@
 package com.simulation.avatar;
 
-public enum Shape {
+public class DJ extends Avatar {
 
 }
