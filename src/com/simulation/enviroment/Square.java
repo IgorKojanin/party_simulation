@@ -33,4 +33,6 @@ public class Square extends java.awt.Rectangle {
     public String getArea() {
         return area;
     }
+
+    // This is a test comment!
 }
