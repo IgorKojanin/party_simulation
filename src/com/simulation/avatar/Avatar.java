@@ -2,19 +2,17 @@
  * 
  */
 package com.simulation.avatar;
-
 import java.util.HashMap;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
+import com.simulation.enums.Color;
 
-/**
- * 
- */
+
 public abstract class Avatar {
 	
 	private Shape shape;
-	private String color;
+	private Color color;
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
@@ -24,7 +22,7 @@ public abstract class Avatar {
 	
 	private String[] hobbiesList = new String[3];
 	
-	public Avatar(Shape shape, String color, int borderWidth, int avatarId, int avatarAge, 
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
 			int drinksConsumed, HashMap<String, Integer> placePriorities, 
 			HashMap<String[], String[]> questionsAnswersList) {
 		this.shape = shape;
