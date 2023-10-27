@@ -2,8 +2,8 @@
 //                   Party Simulator
 // Date:         27/10/2023
 //
-// Class: Color.java
-// Description: Enum list for avatar move directions
+// Class: Direction.java
+// Description: Enum list for the directions the avatar can move
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.enums;
