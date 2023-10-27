@@ -20,5 +20,6 @@ public class MainTest {
 		
 		Bartender bartenderSue = new Bartender(Shape.SQUARE, Color.BLUE, 10, 11, 12, 13, null, null); 
 		System.out.println("Color: " + bartenderSue.getColor());
+		new MyFrame();
 	} 
 }
