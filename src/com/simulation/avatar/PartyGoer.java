@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Date:         27/10/2023
+//
+// Class: PartyGoer.java
+// Description: Class extending avatar.java for the normal people
+//
+///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 
 import java.util.HashMap;
@@ -21,7 +29,7 @@ public class PartyGoer extends Avatar {
 	}
 
 
-
+	// ************** Constructor **************
 	public PartyGoer(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
 			int drinksConsumed, HashMap<String, Integer> placePriorities, 
 			HashMap<String[], String[]> questionsAnswersList) {

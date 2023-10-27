@@ -1,6 +1,14 @@
-package com.simulation.avatar;
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Date:         27/10/2023
+//
+// Class: Bartender.java
+// Description: Class extending avatar.java for the bartender serving people
+//              drinks
+//
+///////////////////////////////////////////////////////////////////////////////
 
-import java.util.HashMap;
+package com.simulation.avatar;
 
 import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
@@ -13,11 +21,10 @@ public class Bartender extends Avatar {
 	private void checkID() {
 		
 	}
-
-	public Bartender(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
-			int drinksConsumed, HashMap<String, Integer> placePriorities, 
-			HashMap<String[], String[]> questionsAnswersList) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
+	
+	// ************** Constructor **************
+	public Bartender(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
 	}
 
 }
