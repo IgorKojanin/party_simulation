@@ -2,7 +2,7 @@
 //                   Party Simulator
 // Semester:         27/10/2023
 //
-// Class: Color.java
+// Class: Shape.java
 // Description: Enum list for avatar body shape
 //
 ///////////////////////////////////////////////////////////////////////////////

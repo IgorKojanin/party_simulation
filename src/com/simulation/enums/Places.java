@@ -2,8 +2,8 @@
 //                   Party Simulator
 // Semester:         27/10/2023
 //
-// Class: Color.java
-// Description: Enum list for places on the bar
+// Class: Places.java
+// Description: Enum list for places in the environment
 //
 ///////////////////////////////////////////////////////////////////////////////
 
