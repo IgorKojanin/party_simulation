@@ -7,11 +7,10 @@ import com.simulation.enums.Places;
 public class Square extends java.awt.Rectangle {
 	private Color color;
 
-	private String area; 
+	private String area;
 	private Boolean isUsable;
 
 	private Places place;
-
 
  
 
@@ -37,7 +36,7 @@ public class Square extends java.awt.Rectangle {
         return place;
     }
 
-    
+
     public Boolean getIsUsable(int x, int y) {
     	if(isUsable == true) {
     		return true;
@@ -46,13 +45,13 @@ public class Square extends java.awt.Rectangle {
     		return false;
     	}
     }
-    
+
     public void setIsUsable(Color color) { //squares which are red, must not be used
     	if(color == Color.red ) {
     		this.isUsable = false;
     	}
-    	
+
     }
-    
+
 
 }
