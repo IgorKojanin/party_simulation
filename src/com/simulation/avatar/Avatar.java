@@ -28,6 +28,7 @@ public abstract class Avatar {
 			int drinksConsumed, HashMap<String, Integer> placePriorities, 
 			HashMap<String[], String[]> questionsAnswersList) {
 		this.shape = shape;
+		this.color = color;
 		this.borderWidth = borderWidth;
 		this.shape = shape;
 		this.shape = shape;
@@ -35,8 +36,22 @@ public abstract class Avatar {
 		this.shape = shape;
 	}
 	
-	private void moveAvatar(Direction direction) {
-		// direction is set externally --> check with the simulation environment 
+	private Direction moveAvatar(int number) {
+		// direction is set externally --> check with the simulation environment
+		Direction dir = Direction.FORWARD;
+		if (number == 1) {
+			dir = Direction.FORWARD;
+		}
+		else if (number == 2) {
+			dir = Direction.RIGHT;
+		}
+		else if (number == 3) {
+			dir = Direction.BACK;
+		}
+		else if (number == 4) {
+			dir = Direction.LEFT;
+		}
+		return dir;
 	} 
 	
 }
