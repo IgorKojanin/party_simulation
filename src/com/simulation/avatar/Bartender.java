@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Semester:         27/10/2023
+//
+// Class: Bartender.java
+// Description: Class extending avatar.java for the bartender serving people
+//              drinks
+//
+///////////////////////////////////////////////////////////////////////////////
+
 package com.simulation.avatar;
 
 import java.util.HashMap;

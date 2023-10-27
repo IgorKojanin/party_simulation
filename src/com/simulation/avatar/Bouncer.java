@@ -1,3 +1,12 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Semester:         27/10/2023
+//
+// Class: Bouncer.java
+// Description: Class extending avatar.java for the bouncer checking people
+//              ages and also stopping fights
+//
+///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 
 import java.util.HashMap;

@@ -1,6 +1,12 @@
-/**
- * 
- */
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Semester:         27/10/2023
+//
+// Class: Avatar.java
+// Description: Abstract class with basic functions for all the people
+//
+///////////////////////////////////////////////////////////////////////////////
+
 package com.simulation.avatar;
 import java.util.HashMap;
 import java.util.Random;
@@ -20,7 +26,6 @@ public abstract class Avatar {
 	private int drinksConsumed;
 	private HashMap<String, Integer> placePriorities = new HashMap<String, Integer>();
 	private HashMap<String[], String[]> questionsAnswersList = new HashMap<String[], String[]>();
-	
 	private String[] hobbiesList = new String[3];
 	
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
