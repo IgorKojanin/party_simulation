@@ -1,4 +1,5 @@
 package com.simulation.avatar;
+import com.simulation.enviroment.MyFrame;
 
 import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
@@ -6,8 +7,6 @@ import com.simulation.enums.Shape;
 public class MainTest {
 
 	public static void main(String[] args) {
-		
-		
 		PartyGoer avatarJoe = new PartyGoer(Shape.CIRCLE, Color.RED, 1, 2, 3, 4, null, null); 
 		System.out.println("Color: " + avatarJoe.getColor());
 		System.out.println("Shape: " + avatarJoe.getShape());
@@ -21,6 +20,5 @@ public class MainTest {
 		
 		Bartender bartenderSue = new Bartender(Shape.SQUARE, Color.BLUE, 10, 11, 12, 13, null, null); 
 		System.out.println("Color: " + bartenderSue.getColor());
-
 	} 
 }
