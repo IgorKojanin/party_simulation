@@ -3,6 +3,8 @@ package com.simulation.enviroment;
 import java.awt.*;
 import javax.swing.*;
 
+import com.simulation.enums.Places;
+
  
 
 public class MyPanel extends JPanel{
@@ -33,65 +35,65 @@ public class MyPanel extends JPanel{
 
                 if (i >= 0 && i <= 1 && j >= 14 && j <= 18) {
                 	// DJ BOOTH
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, "DJ");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.DJ);
                 } else if (j >= 30 && j <= 32 && i >= 0 && i <= 2) {
                 	// BOUNCER
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, "BOUNCER");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.BOUNCER);
                 } else if (j >= 0 && j <= 4 && i >= 8 && i <= 14) {
                 	// BAR
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, "BAR");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.BAR);
                 } else if (j >= 26 && j <= 28 && i >= 9 && i <= 13) {
                 	// FUSSBALL 
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, "FUSSBALL");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.FUSSBALL);
                 } else if (j >= 14 && j <= 18 && i >= 19 && i <= 21) {
                 	// POOL
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, "POOL");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.POOL);
                 } else if (i >= 20 && j >= 27 && j <= 32) {
                 	// TOILET
                 	if (i == 20 && (j == 28 || j == 31)) {
                 		// ENTRANCE 
-                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.WHITE, "PATH");
+                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.WHITE, Places.PATH);
                 	} else if (i == 21 && (j == 28 || j == 31)) {
                 		// USE 
-                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "TOILET");
+                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.TOILET);
                 	} else {
-                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, "TOILET");
+                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.TOILET);
                 	}
                 } else if (i == 1) {
                 	// SEATS TOP
                 	if (j == 3 || j == 5 || j == 7 || j == 9) {
-                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "LOUNGE_BIG");
+                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_BIG);
                 	} else if (j == 23 || j == 25) {
-                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "LOUNGE_SMALL");
+                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_SMALL);
                 	} else {
-                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.WHITE, "PATH");
+                		squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.WHITE, Places.PATH);
                 	}
                 } else if (i == 3 && j == 16) {
                 	// SEAT DJ
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "DJ");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.DJ);
                 } else if (i == 6 && (j == 1 || j == 3)) {
                 	// SEATS BAR TOP
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "BAR");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.BAR);
                 } else if (j == 6 && (i == 9 || i == 11 || i == 13)) {
                 	// SEATS BAR RIGHT
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "BAR");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.BAR);
                 } else if (i >= 7 && i <= 15 && j >= 12 && j <= 20) {
                 	// DANCEFLOOR 
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "DANCEFLOOR");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.DANCEFLOOR);
                 } else if (i == 11 && (j == 24 || j == 30)) {
                 	// FUSSBALL SEATS
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "FUSSBALL");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.FUSSBALL);
                 } else if (i == 20 && (j == 12 || j == 20)) {
                 	// POOL SEATS
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "POOL");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.POOL);
                 } else if (j == 1 && (i == 19 || i == 21)) {
                 	// SMOKING 1 
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "LOUNGE_SMOKING");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_SMOKING);
                 } else if (i == 21 && (j == 3 || j == 5)) {
                 	// SMOKING 2
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, "LOUNGE_SMOKING");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_SMOKING);
                 } else {
-                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.WHITE, "PATH");
+                	squares[i * cols + j] = new Square(x, y, squareSize, squareSize, Color.WHITE, Places.PATH);
                 }
 
             }
@@ -124,5 +126,5 @@ public class MyPanel extends JPanel{
         // ENTRANCE BORDER
         g2D.drawLine(squareSize * 34, squareSize, squareSize * 34, squareSize * 5);
         g2D.drawLine(squareSize * 34, squareSize * 8, squareSize * 34, panelHeight - squareSize);
-	}
+    }
 }
