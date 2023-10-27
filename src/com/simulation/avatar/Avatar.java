@@ -27,17 +27,46 @@ public abstract class Avatar {
 			int drinksConsumed, HashMap<String, Integer> placePriorities, 
 			HashMap<String[], String[]> questionsAnswersList) {
 		this.shape = shape;
-		this.borderWidth = borderWidth;
 		this.color = color;
 		this.borderWidth = borderWidth;
 		this.avatarId = avatarId;
+		this.avatarAge = avatarAge;
 		this.drinksConsumed = drinksConsumed;
 		this.placePriorities = placePriorities;
 		this.questionsAnswersList = questionsAnswersList;
 	}	
 	
+	public Shape getShape() {
+		return this.shape;
+	}
+	
+	public Color getColor() {
+		return this.color;
+	}
+	
+	public int getBorderWidth() {
+		return this.borderWidth;
+	}
+	
+	public int getId() {
+		return this.avatarId;
+	}
+	
 	public int getAge() {
 		return this.avatarAge;
+	}
+	
+	public int getDrinksConsumed() {
+		return this.drinksConsumed;
+	}
+	
+	public HashMap<String, Integer> getPlacePriorities() {
+		return this.placePriorities;
+	}
+	
+
+	public HashMap<String[], String[]> getQuestionsAnswersList() {
+		return this.questionsAnswersList;
 	}
 	
 	public Direction moveAvatar() {
@@ -57,7 +86,6 @@ public abstract class Avatar {
 		else if (number == 3) {
 			dir = Direction.LEFT;
 		}
-		System.out.println(dir);
 		return dir;
 	} 
 	
