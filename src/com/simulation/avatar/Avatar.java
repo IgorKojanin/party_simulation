@@ -3,6 +3,7 @@
  */
 package com.simulation.avatar;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
@@ -35,22 +36,28 @@ public abstract class Avatar {
 		this.questionsAnswersList = questionsAnswersList;
 	}	
 	
+	public int getAge() {
+		return this.avatarAge;
+	}
 	
-	private Direction moveAvatar(int number) {
+	public Direction moveAvatar() {
+		Random rand = new Random();
+		int number = rand.nextInt(4);
 		// direction is set externally --> check with the simulation environment
 		Direction dir = Direction.FORWARD;
-		if (number == 1) {
+		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
-		else if (number == 2) {
+		else if (number == 1) {
 			dir = Direction.RIGHT;
 		}
-		else if (number == 3) {
+		else if (number == 2) {
 			dir = Direction.BACK;
 		}
-		else if (number == 4) {
+		else if (number == 3) {
 			dir = Direction.LEFT;
 		}
+		System.out.println(dir);
 		return dir;
 	} 
 	
