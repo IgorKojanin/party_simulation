@@ -2,19 +2,24 @@ package com.simulation.enviroment;
 
 import java.awt.*;
 
+import com.simulation.enums.Places;
+
 public class Square extends java.awt.Rectangle {
 	private Color color;
-	private String area;
+
+	private String area; 
+	private Boolean isUsable;
+
+	private Places place;
+
 
  
 
-    public Square(int x, int y, int width, int height, Color color, String area) {
+    public Square(int x, int y, int width, int height, Color color, Places place) {
         super(x, y, width, height);
         this.color = color;
-        this.area = area;
+        this.place = place;
     }
-
- 
 
     public Color getColor() {
         return color;
@@ -28,7 +33,26 @@ public class Square extends java.awt.Rectangle {
         return new Point(this.x, this.y);
     }
 
-    public String getArea() {
-        return area;
+    public Places getPlace() {
+        return place;
     }
+
+    
+    public Boolean getIsUsable(int x, int y) {
+    	if(isUsable == true) {
+    		return true;
+    	}
+    	else  {
+    		return false;
+    	}
+    }
+    
+    public void setIsUsable(Color color) { //squares which are red, must not be used
+    	if(color == Color.red ) {
+    		this.isUsable = false;
+    	}
+    	
+    }
+    
+
 }

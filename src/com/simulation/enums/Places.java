@@ -8,6 +8,8 @@ public enum Places {
 	FUSSBALL,
 	LOUNGE_BIG,
 	LOUNGE_SMALL,
-	LOUNGE_SMOKING
-
+	LOUNGE_SMOKING,
+	DJ,
+	BOUNCER,
+	PATH	// this is for all the white spaces
 }
