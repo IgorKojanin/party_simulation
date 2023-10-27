@@ -20,8 +20,6 @@ public class Square extends java.awt.Rectangle {
         return color;
     }
 
- 
-
     public void setColor(Color color) {
         this.color = color;
     }

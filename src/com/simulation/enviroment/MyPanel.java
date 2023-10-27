@@ -124,11 +124,5 @@ public class MyPanel extends JPanel{
         // ENTRANCE BORDER
         g2D.drawLine(squareSize * 34, squareSize, squareSize * 34, squareSize * 5);
         g2D.drawLine(squareSize * 34, squareSize * 8, squareSize * 34, panelHeight - squareSize);
-
- 
-
 	}
-
- 
-
 }
