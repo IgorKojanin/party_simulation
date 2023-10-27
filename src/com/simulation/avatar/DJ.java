@@ -7,7 +7,7 @@ import com.simulation.enums.Shape;
 
 public class DJ extends Avatar {
 
-	private void playMusic() {
+	private void playMusic() { // Music private variable in environment/simulation changed by DJ
 		
 	}
 	

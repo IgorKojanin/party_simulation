@@ -6,11 +6,16 @@ import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
 
 public class Bouncer extends Avatar {
+	private static final int AGELIMIT = 18;
 
-	private void checkAge() {
-		
+	public boolean checkAge(int avatarAge) {
+		boolean isOverAge = false;
+		if(avatarAge >= AGELIMIT) {
+			isOverAge = true;
+		}
+		return isOverAge;
 	}
-	private void hitPerson(int id) {
+	private void hitPerson(int id) { // kick from bar
 		
 	}
 
