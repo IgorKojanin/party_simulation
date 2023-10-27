@@ -26,13 +26,16 @@ public abstract class Avatar {
 			int drinksConsumed, HashMap<String, Integer> placePriorities, 
 			HashMap<String[], String[]> questionsAnswersList) {
 		this.shape = shape;
+		this.borderWidth = borderWidth;
 		this.color = color;
 		this.borderWidth = borderWidth;
-		this.shape = shape;
-		this.shape = shape;
-		this.shape = shape;
-		this.shape = shape;
-	}
+		this.avatarId = avatarId;
+		this.drinksConsumed = drinksConsumed;
+		this.placePriorities = placePriorities;
+		this.questionsAnswersList = questionsAnswersList;
+	}	
+	
+	
 	
 	private Direction moveAvatar(int number) {
 		// direction is set externally --> check with the simulation environment
