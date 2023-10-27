@@ -33,4 +33,6 @@ public class Square extends java.awt.Rectangle {
     public Places getPlace() {
         return place;
     }
+
+    // This is a test comment!
 }
