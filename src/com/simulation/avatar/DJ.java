@@ -11,10 +11,8 @@ public class DJ extends Avatar {
 		
 	}
 	
-	public DJ(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
-			int drinksConsumed, HashMap<String, Integer> placePriorities, 
-			HashMap<String[], String[]> questionsAnswersList) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
+	public DJ(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
 		// TODO Auto-generated constructor stub
 	}
 

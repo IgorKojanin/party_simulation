@@ -34,6 +34,12 @@ public abstract class Avatar {
 		this.drinksConsumed = drinksConsumed;
 		this.placePriorities = placePriorities;
 		this.questionsAnswersList = questionsAnswersList;
+	}
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarId) { // For workers (DJ, bouncer...)
+		this.shape = shape;
+		this.color = color;
+		this.borderWidth = borderWidth;
+		this.avatarId = avatarId;
 	}	
 	
 	public Shape getShape() {

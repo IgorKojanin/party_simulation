@@ -20,11 +20,8 @@ public class Bouncer extends Avatar {
 	}
 
 
-	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
-			int drinksConsumed, HashMap<String, Integer> placePriorities, 
-			HashMap<String[], String[]> questionsAnswersList) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
-		// TODO Auto-generated constructor stub
+	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
 	}
 
 }
