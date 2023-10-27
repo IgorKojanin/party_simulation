@@ -1,6 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Date:         27/10/2023
+//
+// Class: Bouncer.java
+// Description: Class extending avatar.java for the bouncer checking people
+//              ages and also stopping fights
+//
+///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
-
-import java.util.HashMap;
 
 import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
@@ -19,12 +26,9 @@ public class Bouncer extends Avatar {
 		
 	}
 
-
-	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
-			int drinksConsumed, HashMap<String, Integer> placePriorities, 
-			HashMap<String[], String[]> questionsAnswersList) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
-		// TODO Auto-generated constructor stub
+	// ************** Constructor **************
+	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
 	}
 
 }

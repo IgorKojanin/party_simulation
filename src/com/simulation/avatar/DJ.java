@@ -1,6 +1,13 @@
-package com.simulation.avatar;
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Date:         27/10/2023
+//
+// Class: DJ.java
+// Description: Class extending avatar.java for the DJ in charge of music
+//
+///////////////////////////////////////////////////////////////////////////////
 
-import java.util.HashMap;
+package com.simulation.avatar;
 
 import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
@@ -11,10 +18,9 @@ public class DJ extends Avatar {
 		
 	}
 	
-	public DJ(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
-			int drinksConsumed, HashMap<String, Integer> placePriorities, 
-			HashMap<String[], String[]> questionsAnswersList) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
+	// ************** Constructor **************
+	public DJ(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
 		// TODO Auto-generated constructor stub
 	}
 

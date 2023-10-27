@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   Party Simulator
+// Date:         27/10/2023
+//
+// Class: MainTest.java
+// Description: Main class for testing the avatar keep disabled outside of
+//              avatar development
+//
+///////////////////////////////////////////////////////////////////////////////
+
 package com.simulation.avatar;
 import com.simulation.enviroment.MyFrame;
 
@@ -8,6 +18,7 @@ public class MainTest {
 
 	public static void main(String[] args) {
 		PartyGoer avatarJoe = new PartyGoer(Shape.CIRCLE, Color.RED, 1, 2, 3, 4, null, null); 
+		DJ dj_party = new DJ(null, null, 0, 0); 
 		System.out.println("Color: " + avatarJoe.getColor());
 		System.out.println("Shape: " + avatarJoe.getShape());
 		System.out.println("Size: " + avatarJoe.getBorderWidth());
@@ -18,7 +29,7 @@ public class MainTest {
 		System.out.println("My questions and answers: " + avatarJoe.getQuestionsAnswersList());
 		System.out.println("My randomely chosen direction: " + avatarJoe.moveAvatar());
 		
-		Bartender bartenderSue = new Bartender(Shape.SQUARE, Color.BLUE, 10, 11, 12, 13, null, null); 
+		Bartender bartenderSue = new Bartender(null, null, 0, 0);  
 		System.out.println("Color: " + bartenderSue.getColor());
 		new MyFrame();
 	} 
