@@ -22,9 +22,16 @@ public abstract class Avatar {
 	private HashMap<String, Integer> placePriorities = new HashMap<String, Integer>();
 	private HashMap<String[], String[]> questionsAnswersList = new HashMap<String[], String[]>();
 	
-	String[] hobbiesList = new String[3];
+	private String[] hobbiesList = new String[3];
 	
-	public Avatar(Shape shape) {
+	public Avatar(Shape shape, String color, int borderWidth, int avatarId, int avatarAge, 
+			int drinksConsumed, HashMap<String, Integer> placePriorities, 
+			HashMap<String[], String[]> questionsAnswersList) {
+		this.shape = shape;
+		this.borderWidth = borderWidth;
+		this.shape = shape;
+		this.shape = shape;
+		this.shape = shape;
 		this.shape = shape;
 	}
 	
