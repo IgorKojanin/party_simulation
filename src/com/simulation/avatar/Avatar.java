@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                   Party Simulator
-// Semester:         27/10/2023
+// Date:         27/10/2023
 //
 // Class: Avatar.java
 // Description: Abstract class with basic functions for all the people
@@ -28,6 +28,8 @@ public abstract class Avatar {
 	private HashMap<String[], String[]> questionsAnswersList = new HashMap<String[], String[]>();
 	private String[] hobbiesList = new String[3];
 	
+	
+	// ************** Main constructor for PartyGoer **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
 			int drinksConsumed, HashMap<String, Integer> placePriorities, 
 			HashMap<String[], String[]> questionsAnswersList) {
@@ -40,13 +42,15 @@ public abstract class Avatar {
 		this.placePriorities = placePriorities;
 		this.questionsAnswersList = questionsAnswersList;
 	}
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarId) { // For workers (DJ, bouncer...)
+	// ************** Constructor for workers (DJ, bouncer & bartender) **************
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarId) { 
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
 		this.avatarId = avatarId;
 	}	
 	
+	// ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -74,12 +78,12 @@ public abstract class Avatar {
 	public HashMap<String, Integer> getPlacePriorities() {
 		return this.placePriorities;
 	}
-	
 
 	public HashMap<String[], String[]> getQuestionsAnswersList() {
 		return this.questionsAnswersList;
 	}
 	
+	// ************** move function **************
 	public Direction moveAvatar() {
 		Random rand = new Random();
 		int number = rand.nextInt(4);

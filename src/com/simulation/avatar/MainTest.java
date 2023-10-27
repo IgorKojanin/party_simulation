@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                   Party Simulator
-// Semester:         27/10/2023
+// Date:         27/10/2023
 //
 // Class: MainTest.java
 // Description: Main class for testing the avatar keep disabled outside of
