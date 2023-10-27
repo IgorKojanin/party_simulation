@@ -1,5 +1,8 @@
 package com.simulation.avatar;
 
+import java.util.HashMap;
+
+import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
 
 public class Bartender extends Avatar {
@@ -11,9 +14,10 @@ public class Bartender extends Avatar {
 		
 	}
 
-	public Bartender(Shape shape) {
-		super(shape);
-		// TODO Auto-generated constructor stub
+	public Bartender(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
+			int drinksConsumed, HashMap<String, Integer> placePriorities, 
+			HashMap<String[], String[]> questionsAnswersList) {
+		super(shape, color, avatarAge, avatarAge, avatarAge, avatarAge, placePriorities, questionsAnswersList);
 	}
 
 }
