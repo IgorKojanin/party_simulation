@@ -4,7 +4,16 @@
 //
 // Class: Avatar.java
 // Description: Abstract class with basic functions for all the people
-//
+
+/* @param shape            The shape of the avatar.
+ * @param color            The color of the avatar.
+ * @param borderWidth      The border width of the avatar.
+ * @param avatarId         The unique ID of the avatar.
+ * @param avatarAge        The age of the avatar.
+ * @param drinksConsumed   The number of drinks consumed by the avatar.
+ * @param placePriorities  The priorities of places for the avatar.
+ * @param questionsAnswersList  The list of questions and answers for the avatar.
+ */
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
