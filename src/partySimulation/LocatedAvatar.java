@@ -52,6 +52,7 @@ public class LocatedAvatar {
 	}
 
 	public void decY() {
+		y--;
 
 	}
 
