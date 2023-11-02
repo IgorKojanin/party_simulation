@@ -52,7 +52,7 @@ public class LocatedAvatar {
 	}
 
 	public void decY() {
-
+		y--;
 	}
 
 	public void setHeading(Heading heading) {
