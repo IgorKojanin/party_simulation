@@ -9,9 +9,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import com.sim.partypeople.JoeMama;
 import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
+import com.simulation.partypeople.JoeMama;
 
 public class MainTest {
 	public static void main(String[] args) {

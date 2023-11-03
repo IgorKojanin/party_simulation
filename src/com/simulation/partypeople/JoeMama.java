@@ -6,7 +6,7 @@
 // Description: Template for the people
 //
 ///////////////////////////////////////////////////////////////////////////////
-package com.sim.partypeople;
+package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
