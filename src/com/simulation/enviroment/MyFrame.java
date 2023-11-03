@@ -93,16 +93,21 @@ public class MyFrame extends JFrame {
 	}
 
 	public void moveTo(int fromRow, int fromCol, int toRow, int toCol, Color color) {
-        squares[fromRow][fromCol].setColor(squares[fromRow][fromCol].getBaseColor()); // Clear the from-square
-		squares[fromRow][fromCol].setIsUsable(true);
-		repaint();
-		squares[toRow][toCol].setColor(color); // Set the to-square to blue
-		squares[toRow][toCol].setIsUsable(false);
-		repaint();
+		if (toCol <= 22 && toRow <= 37 && toRow >=0 && toCol >= 0) {
+			squares[fromRow][fromCol].setColor(squares[fromRow][fromCol].getBaseColor()); // Clear the from-square
+			squares[fromRow][fromCol].setIsUsable(true);
+			repaint();
+			squares[toRow][toCol].setColor(color); // Set the to-square to avatar color
+			squares[toRow][toCol].setIsUsable(false);
+			repaint();
+			System.out.println("Moved to x: " + toCol + " y: " + toRow);
+		}
 	}
 
 	public boolean isUsable(int x, int y) {
-		return squares[x][y].getIsUsable();
+		if(y <= 22 && x <= 37 && x >=0 && y >= 0) {
+			return squares[x][y].getIsUsable();
+		} else return false;
 	}
 
 	public MyFrame(){
