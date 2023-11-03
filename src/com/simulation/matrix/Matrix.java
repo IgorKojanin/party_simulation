@@ -17,6 +17,7 @@ public class Matrix {
 
 	public Matrix() {
 		env = new MyFrame();
+		env.setVisible(true);
 		avatars = new ArrayList<LocatedAvatar>();
 		Bouncer bouncer = new Bouncer(Shape.CIRCLE, Colors.RED, 0, 0);
 		LocatedAvatar locBouncer = new LocatedAvatar(bouncer, 0, 0);

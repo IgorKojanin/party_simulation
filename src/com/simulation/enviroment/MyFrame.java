@@ -7,112 +7,127 @@ import java.awt.*;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import com.simulation.avatar.Avatar;
-
-import java.awt.Color;
-import java.awt.Dimension;
-
 public class MyFrame extends JFrame {
 	GridPanel panel;
-	private final int rows = 23;
-	private final int cols = 38;
+	private final int maxY = 23;
+	private final int maxX = 38;
 	private int squareSize = 30; // Adjust the size of each square as needed
-	private final int panelLength = squareSize * (cols + 2); // + 2 for padding
-	private final int panelHeight = squareSize * (rows + 2); // + 2 for padding
+	private final int panelLength = squareSize * (maxX + 2); // + 2 for padding
+	private final int panelHeight = squareSize * (maxY + 2); // + 2 for padding
 	private Square[][] squares;
 
 
 	private void createSquares() {
-		squares = new Square[rows][cols];
+		squares = new Square[maxX][maxY];
 
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				int x = squareSize + j * squareSize;
-				int y = squareSize + i * squareSize;
+		for (int ySquare = 0; ySquare < maxY; ySquare++) {
+			for (int xSquare = 0; xSquare < maxX; xSquare++) {
+				int xPixels = squareSize + xSquare * squareSize;
+				int yPixels = squareSize + ySquare * squareSize;
 
 
-				 if (i <= 1 && j >= 14 && j <= 18) {
+				 if (ySquare <= 1 && xSquare >= 14 && xSquare <= 18) {
 					// DJ BOOTH
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.DJ);
-				} else if (j >= 30 && j <= 32 && i <= 2) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.PINK,false, Places.DJ);
+				} else if (xSquare >= 30 && xSquare <= 32 && ySquare <= 2) {
 					// BOUNCER
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.BOUNCER);
-				} else if (j <= 4 && i >= 8 && i <= 14) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.PINK,false, Places.BOUNCER);
+				} else if (xSquare <= 4 && ySquare >= 8 && ySquare <= 14) {
 					// BAR
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.BAR);
-				} else if (j >= 26 && j <= 28 && i >= 9 && i <= 13) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.PINK,false, Places.BAR);
+				} else if (xSquare >= 26 && xSquare <= 28 && ySquare >= 9 && ySquare <= 13) {
 					// FUSSBALL
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.FUSSBALL);
-				} else if (j >= 14 && j <= 18 && i >= 19 && i <= 21) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.PINK,false, Places.FUSSBALL);
+				} else if (xSquare >= 14 && xSquare <= 18 && ySquare >= 19 && ySquare <= 21) {
 					// POOL
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.POOL);
-				} else if (i >= 20 && j >= 27 && j <= 32) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.PINK,false, Places.POOL);
+				} else if (ySquare >= 20 && xSquare >= 27 && xSquare <= 32) {
 					// TOILET
-					if (i == 20 && (j == 28 || j == 31)) {
+					if (ySquare == 20 && (xSquare == 28 || xSquare == 31)) {
 						// ENTRANCE
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE,true, Places.PATH);
-					} else if (i == 21 && (j == 28 || j == 31)) {
+						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.WHITE,true, Places.PATH);
+					} else if (ySquare == 21 && (xSquare == 28 || xSquare == 31)) {
 						// USE
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.TOILET);
+						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.TOILET);
 					} else {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.TOILET);
+						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.PINK,false, Places.TOILET);
 					}
-				} else if (i == 1) {
+				} else if (ySquare == 1) {
 					// SEATS TOP
-					if (j == 3 || j == 5 || j == 7 || j == 9) {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_BIG);
-					} else if (j == 23 || j == 25) {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_SMALL);
+					if (xSquare == 3 || xSquare == 5 || xSquare == 7 || xSquare == 9) {
+						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_BIG);
+					} else if (xSquare == 23 || xSquare == 25) {
+						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_SMALL);
 					} else {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE,true, Places.PATH);
+						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.WHITE,true, Places.PATH);
 					}
-				} else if (i == 3 && j == 16) {
+				} else if (ySquare == 3 && xSquare == 16) {
 					// SEAT DJ
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.DJ);
-				} else if (i == 6 && (j == 1 || j == 3)) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.DJ);
+				} else if (ySquare == 6 && (xSquare == 1 || xSquare == 3)) {
 					// SEATS BAR TOP
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.BAR);
-				} else if (j == 6 && (i == 9 || i == 11 || i == 13)) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.BAR);
+				} else if (xSquare == 6 && (ySquare == 9 || ySquare == 11 || ySquare == 13)) {
 					// SEATS BAR RIGHT
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.BAR);
-				} else if (i >= 7 && i <= 15 && j >= 12 && j <= 20) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.BAR);
+				} else if (ySquare >= 7 && ySquare <= 15 && xSquare >= 12 && xSquare <= 20) {
 					// DANCEFLOOR
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.DANCEFLOOR);
-				} else if (i == 11 && (j == 24 || j == 30)) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.DANCEFLOOR);
+				} else if (ySquare == 11 && (xSquare == 24 || xSquare == 30)) {
 					// FUSSBALL SEATS
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.FUSSBALL);
-				} else if (i == 20 && (j == 12 || j == 20)) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.FUSSBALL);
+				} else if (ySquare == 20 && (xSquare == 12 || xSquare == 20)) {
 					// POOL SEATS
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true,Places.POOL);
-				} else if (j == 1 && (i == 19 || i == 21)) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true,Places.POOL);
+				} else if (xSquare == 1 && (ySquare == 19 || ySquare == 21)) {
 					// SMOKING 1
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true,Places.LOUNGE_SMOKING);
-				} else if (i == 21 && (j == 3 || j == 5)) {
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true,Places.LOUNGE_SMOKING);
+				} else if (ySquare == 21 && (xSquare == 3 || xSquare == 5)) {
 					// SMOKING 2
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_SMOKING);
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_SMOKING);
 				} else {
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE,true, Places.PATH);
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.WHITE,true, Places.PATH);
 				}
 			}
 		}
+		this.addAvatar(0, 0, Color.BLUE);
 	}
 
-	public void moveTo(int fromRow, int fromCol, int toRow, int toCol, Color color) {
-		if (toCol <= 22 && toRow <= 37 && toRow >=0 && toCol >= 0) {
-			squares[fromRow][fromCol].setColor(squares[fromRow][fromCol].getBaseColor()); // Clear the from-square
-			squares[fromRow][fromCol].setIsUsable(true);
+	public void wait(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+
+		}
+	}
+
+	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
+		wait(1000);
+		if (toX < maxX && toY < maxY && toX >=0 && toY >= 0) {
+			System.out.println("original base color" + squares[fromX][fromY].getBaseColor());
+			System.out.println("original color" + squares[fromX][fromY].getColor());
+			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
+			squares[fromX][fromY].setIsUsable(true);
+			System.out.println("new color" + squares[fromX][fromY].getColor());
 			repaint();
-			squares[toRow][toCol].setColor(color); // Set the to-square to avatar color
-			squares[toRow][toCol].setIsUsable(false);
+			squares[toX][toY].setColor(color); // Set the to-square to avatar color
+			squares[toX][toY].setIsUsable(false);
 			repaint();
-			System.out.println("Moved to x: " + toCol + " y: " + toRow);
+			System.out.println("Moved to x: " + toX + " y: " + toY);
 		}
 	}
 
 	public boolean isUsable(int x, int y) {
-		if(y <= 22 && x <= 37 && x >=0 && y >= 0) {
+		if(y < maxY && x < maxX && y >=0 && x >= 0) {
 			return squares[x][y].getIsUsable();
 		} else return false;
+	}
+
+	public void addAvatar(int x, int y, Color color) {
+		if (x < maxX && y < maxY && x >=0 && y >= 0) {
+			squares[x][y].setColor(color); // Set the to-square to avatar color
+		}
 	}
 
 	public MyFrame(){
@@ -131,9 +146,9 @@ public class MyFrame extends JFrame {
 
 		public void paint(Graphics g) {
 			Graphics2D g2d = (Graphics2D) g;
-			for (int i = 0; i < rows; i++) {
-				for (int j = 0; j < cols; j++) {
-					Square square = squares[i][j];
+			for (int i = 0; i < maxY; i++) {
+				for (int j = 0; j < maxX; j++) {
+					Square square = squares[j][i];
 					g2d.setColor(Color.BLACK);
 					g2d.drawRect(square.x, square.y, square.width, square.height);
 					if (square.getColor() != Color.WHITE) {
@@ -160,45 +175,4 @@ public class MyFrame extends JFrame {
 			g2d.drawLine(squareSize * 34, squareSize * 8, squareSize * 34, panelHeight - squareSize);
 		}
 	}
-	
-
-
-	public class AvatarLabel extends JLabel {
-	    
-	    private Avatar avatar;
-
-	    public AvatarLabel(Avatar avatar) {
-	        this.avatar = avatar;
-	        
-	        // Initialize the label with avatar properties
-	        this.setText("Avatar " + avatar.getId()); 
-	        this.setOpaque(true);
-	        this.setBackground(convertColor(avatar.getColor()));
-	        this.setPreferredSize(new Dimension(50, 50));
-	        this.setToolTipText("Avatar Name: " + avatar.getShape().toString());
-	        
-	        
-	        if (avatar.getBorderWidth() > 0) {
-	            setBorder(BorderFactory.createLineBorder(java.awt.Color.BLACK, avatar.getBorderWidth()));
-	        }
-	    }
-	    
-
-	    private Color convertColor(com.simulation.enums.Colors colorEnum) {
-	        switch (colorEnum) {
-	            case RED:
-	                return java.awt.Color.RED;
-	            case GREEN:
-	                return java.awt.Color.GREEN;
-	            case BLUE:
-	                return java.awt.Color.BLUE;
-	           
-	            default:
-	                return java.awt.Color.BLACK; // Default color
-	        }
-	    }
-	    
-	    
-	}
-
 }
