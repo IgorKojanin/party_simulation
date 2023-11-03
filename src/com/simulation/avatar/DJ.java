@@ -18,6 +18,8 @@ public class DJ extends Avatar {
 		
 	}
 	
+	// song request
+	
 	// ************** Constructor **************
 	public DJ(Shape shape, Color color, int borderWidth, int avatarId) {
 		super(shape, color, borderWidth, avatarId);

@@ -165,7 +165,7 @@ public class MyFrame extends JFrame {
 	        this.setText("Avatar " + avatar.getId()); 
 	        this.setOpaque(true);
 	        this.setBackground(convertColor(avatar.getColor()));
-	        this.setPreferredSize(new Dimension(50, 50)); /
+	        this.setPreferredSize(new Dimension(50, 50)); 
 	        this.setToolTipText("Avatar Name: " + avatar.getShape().toString());
 	        
 	        
