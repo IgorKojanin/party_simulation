@@ -92,6 +92,7 @@ public class MyFrame extends JFrame {
 		}
 	}
 
+	/* Original moveTo method
 	public void moveTo(int fromRow, int fromCol, int toRow, int toCol) {
 		if (squares[fromRow][fromCol].getColor() == Color.BLUE) {
 			squares[fromRow][fromCol].setColor(Color.WHITE); // Clear the from-square
@@ -99,6 +100,16 @@ public class MyFrame extends JFrame {
 			squares[toRow][toCol].setColor(Color.BLUE); // Set the to-square to blue
 			repaint();
 		}
+	}
+	*/
+
+	public void moveTo(int fromRow, int fromCol, int toRow, int toCol, Color color) {
+        squares[fromRow][fromCol].setColor(squares[fromRow][fromCol].getBaseColor()); // Clear the from-square
+		squares[fromRow][fromCol].setIsUsable(true);
+		repaint();
+		squares[toRow][toCol].setColor(color); // Set the to-square to blue
+		squares[toRow][toCol].setIsUsable(false);
+		repaint();
 	}
 
 	public boolean isUsable(int x, int y){

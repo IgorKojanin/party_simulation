@@ -26,6 +26,7 @@ public class MainEnv {
         frame.setVisible(true);
 
         // EXAMPLE MOVING AVATAR BY CHANGING SQUARE COLOR
+        /*
         wait(1000);
         frame.moveTo(7,34, 6, 34);
         wait(1000);
@@ -38,5 +39,6 @@ public class MainEnv {
         frame.moveTo(5,32, 5, 31);
         wait(1000);
         frame.moveTo(5,31, 5, 30);
+        */
     }
 }
