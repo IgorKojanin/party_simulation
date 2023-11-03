@@ -4,6 +4,8 @@ import com.simulation.enums.Places;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
 
 import com.simulation.avatar.Avatar;
 
@@ -28,86 +30,80 @@ public class MyFrame extends JFrame {
 				int x = squareSize + j * squareSize;
 				int y = squareSize + i * squareSize;
 
-				// TODO: DELETE THE FIRST IF, IT'S FOR TESTING
-				if(i == 7 && j == 34) {
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.BLUE, Places.DJ);
-				} else if (i <= 1 && j >= 14 && j <= 18) {
+
+				 if (i <= 1 && j >= 14 && j <= 18) {
 					// DJ BOOTH
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.DJ);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.DJ);
 				} else if (j >= 30 && j <= 32 && i <= 2) {
 					// BOUNCER
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.BOUNCER);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.BOUNCER);
 				} else if (j <= 4 && i >= 8 && i <= 14) {
 					// BAR
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.BAR);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.BAR);
 				} else if (j >= 26 && j <= 28 && i >= 9 && i <= 13) {
 					// FUSSBALL
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.FUSSBALL);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.FUSSBALL);
 				} else if (j >= 14 && j <= 18 && i >= 19 && i <= 21) {
 					// POOL
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.POOL);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.POOL);
 				} else if (i >= 20 && j >= 27 && j <= 32) {
 					// TOILET
 					if (i == 20 && (j == 28 || j == 31)) {
 						// ENTRANCE
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE, Places.PATH);
+						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE,true, Places.PATH);
 					} else if (i == 21 && (j == 28 || j == 31)) {
 						// USE
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.TOILET);
+						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.TOILET);
 					} else {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK, Places.TOILET);
+						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.PINK,false, Places.TOILET);
 					}
 				} else if (i == 1) {
 					// SEATS TOP
 					if (j == 3 || j == 5 || j == 7 || j == 9) {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_BIG);
+						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_BIG);
 					} else if (j == 23 || j == 25) {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_SMALL);
+						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_SMALL);
 					} else {
-						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE, Places.PATH);
+						squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE,true, Places.PATH);
 					}
 				} else if (i == 3 && j == 16) {
 					// SEAT DJ
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.DJ);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.DJ);
 				} else if (i == 6 && (j == 1 || j == 3)) {
 					// SEATS BAR TOP
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.BAR);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.BAR);
 				} else if (j == 6 && (i == 9 || i == 11 || i == 13)) {
 					// SEATS BAR RIGHT
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.BAR);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.BAR);
 				} else if (i >= 7 && i <= 15 && j >= 12 && j <= 20) {
 					// DANCEFLOOR
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.DANCEFLOOR);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.DANCEFLOOR);
 				} else if (i == 11 && (j == 24 || j == 30)) {
 					// FUSSBALL SEATS
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.FUSSBALL);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.FUSSBALL);
 				} else if (i == 20 && (j == 12 || j == 20)) {
 					// POOL SEATS
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.POOL);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true,Places.POOL);
 				} else if (j == 1 && (i == 19 || i == 21)) {
 					// SMOKING 1
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_SMOKING);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true,Places.LOUNGE_SMOKING);
 				} else if (i == 21 && (j == 3 || j == 5)) {
 					// SMOKING 2
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN, Places.LOUNGE_SMOKING);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.GREEN,true, Places.LOUNGE_SMOKING);
 				} else {
-					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE, Places.PATH);
+					squares[i][j] = new Square(x, y, squareSize, squareSize, Color.WHITE,true, Places.PATH);
 				}
 			}
 		}
 	}
 
-	public void moveTo(int fromRow, int fromCol, int toRow, int toCol) {
-		if (squares[fromRow][fromCol].getColor() == Color.BLUE) {
-			squares[fromRow][fromCol].setColor(Color.WHITE); // Clear the from-square
-			repaint();
-			squares[toRow][toCol].setColor(Color.BLUE); // Set the to-square to blue
-			repaint();
-		}
-	}
-
-	public boolean isUsable(int x, int y){
-		return squares[x][y].getIsUsable();
+	public void moveTo(int fromRow, int fromCol, int toRow, int toCol, Color color) {
+        squares[fromRow][fromCol].setColor(squares[fromRow][fromCol].getBaseColor()); // Clear the from-square
+		squares[fromRow][fromCol].setIsUsable(true);
+		repaint();
+		squares[toRow][toCol].setColor(color); // Set the to-square to blue
+		squares[toRow][toCol].setIsUsable(false);
+		repaint();
 	}
 
 	public MyFrame(){
