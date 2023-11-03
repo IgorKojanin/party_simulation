@@ -9,9 +9,9 @@
 package com.simulation.avatar;
 
 public interface PartyGoer {
-	public void startDancing();
-	public void stopDancing();
-	public void setTimeout();
+	
+	
+	public void dancingAlgo();
 	public void drink();	
 	public void fight();	
 	public void talk();	

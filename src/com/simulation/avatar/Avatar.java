@@ -11,8 +11,8 @@
  * @param avatarId         The unique ID of the avatar.
  * @param avatarAge        The age of the avatar.
  * @param drinksConsumed   The number of drinks consumed by the avatar.
- * @param placePriorities  The priorities of places for the avatar.
- * @param questionsAnswersList  The list of questions and answers for the avatar.
+ * @param isDancing        State of dancing avatar
+ * @param timeOut          The time it should remain outside
  */
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -31,7 +31,9 @@ public abstract class Avatar {
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
-	private int drinksConsumed;
+	private int drinksConsumed = 0;
+	private int timeOut = 0;
+	private boolean isDancing = false;
 	
 	
 	// ************** Main constructor for PartyGoer **************
@@ -42,8 +44,8 @@ public abstract class Avatar {
 		this.avatarId = avatarId;
 		this.avatarAge = avatarAge;
 		this.drinksConsumed = drinksConsumed;
-
 	}
+	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarId) { 
 		this.shape = shape;
@@ -76,6 +78,29 @@ public abstract class Avatar {
 	public int getDrinksConsumed() {
 		return this.drinksConsumed;
 	}
+	
+	public int getTimeOut() {
+		return this.timeOut;
+	}
+	
+	public boolean getDancing() {
+		return this.isDancing;
+	}
+	
+	// ************** set functions **************
+	
+	public void setDancing(boolean newDancingState) {
+		this.isDancing = newDancingState;
+	}
+	
+	public void setDrinksConsumed(int newDrinksConsumed) {
+		this.drinksConsumed = newDrinksConsumed;
+	}
+	
+	public void setTimeout(int timeout) {
+		this.timeOut = timeout;
+	}
+	
 	
 	// ************** move function **************
 	public Direction moveAvatar() {

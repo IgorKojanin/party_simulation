@@ -25,31 +25,19 @@ public class JoeMama extends Avatar implements PartyGoer {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void startDancing() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void stopDancing() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void setTimeout() {
+	public void dancingAlgo() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	
-	public void drink() {
+	public void drink() { // Ask bartender to drink and update alcohol levels
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	public void fight() {
+	public void fight() { // Call this function if other avatar starts a fight
 		// TODO Auto-generated method stub
 		
 	}
