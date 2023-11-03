@@ -1,10 +1,11 @@
 package com.simulation.matrix;
 
+
+import java.awt.Color;
 import java.util.ArrayList;
 
-import com.simulation.avatar.Avatar;
 import com.simulation.avatar.Bouncer;
-import com.simulation.enums.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
@@ -17,7 +18,7 @@ public class Matrix {
 	public Matrix() {
 		env = new MyFrame();
 		avatars = new ArrayList<LocatedAvatar>();
-		Bouncer bouncer = new Bouncer(Shape.CIRCLE, Color.RED, 0, 0);
+		Bouncer bouncer = new Bouncer(Shape.CIRCLE, Colors.RED, 0, 0);
 		LocatedAvatar locBouncer = new LocatedAvatar(bouncer, 0, 0);
 		avatars.add(locBouncer);
 
@@ -60,7 +61,7 @@ public class Matrix {
 					case SOUTH:changeXY(locAvatar, ChangeInXY.INCX);			
 					}
 				}
-				env.moveTo(oldX, oldY, locAvatar.getX(), locAvatar.getY(), locAvatar.getColor());
+				env.moveTo(oldX, oldY, locAvatar.getX(), locAvatar.getY(), Color.BLUE);
 			}
 		}
 	}

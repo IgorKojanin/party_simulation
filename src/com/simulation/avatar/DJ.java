@@ -9,7 +9,7 @@
 
 package com.simulation.avatar;
 
-import com.simulation.enums.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 
 public class DJ extends Avatar {
@@ -19,7 +19,7 @@ public class DJ extends Avatar {
 	}
 	
 	// ************** Constructor **************
-	public DJ(Shape shape, Color color, int borderWidth, int avatarId) {
+	public DJ(Shape shape, Colors color, int borderWidth, int avatarId) {
 		super(shape, color, borderWidth, avatarId);
 		// TODO Auto-generated constructor stub
 	}
