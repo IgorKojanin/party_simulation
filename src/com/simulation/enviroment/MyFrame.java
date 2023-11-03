@@ -90,7 +90,6 @@ public class MyFrame extends JFrame {
 				}
 			}
 		}
-		this.addAvatar(0, 0, Color.BLUE);
 	}
 
 	public void wait(int ms) {
@@ -122,12 +121,6 @@ public class MyFrame extends JFrame {
 		if(y < maxY && x < maxX && y >=0 && x >= 0) {
 			return squares[x][y].getIsUsable();
 		} else return false;
-	}
-
-	public void addAvatar(int x, int y, Color color) {
-		if (x < maxX && y < maxY && x >=0 && y >= 0) {
-			squares[x][y].setColor(color); // Set the to-square to avatar color
-		}
 	}
 
 	public MyFrame(){
