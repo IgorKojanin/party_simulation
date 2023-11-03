@@ -32,18 +32,21 @@ public abstract class Avatar {
 	private int avatarId;
 	private int avatarAge;
 	private int drinksConsumed = 0;
-	private int timeOut = 0;
 	private boolean isDancing = false;
-	
-	
+	private boolean isHit = false;
+	private int timeoutTimeRemaining = 0;
+	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed) {
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
 		this.avatarId = avatarId;
 		this.avatarAge = avatarAge;
 		this.drinksConsumed = drinksConsumed;
+		this.isHit = isHit;
+		this.timeoutTimeRemaining = timeoutTimeRemaining;
+		this.isInTheParty = isInTheParty;
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
@@ -79,12 +82,20 @@ public abstract class Avatar {
 		return this.drinksConsumed;
 	}
 	
-	public int getTimeOut() {
-		return this.timeOut;
+	public int getTimeoutTimeRemaining() {
+		return this.timeoutTimeRemaining;
+	}
+
+	public boolean getIsInThePartyState() {
+		return this.isInTheParty;
 	}
 	
 	public boolean getDancing() {
 		return this.isDancing;
+	}
+
+	public boolean getIsHitState() {
+		return this.isHit;
 	}
 	
 	// ************** set functions **************
@@ -97,12 +108,19 @@ public abstract class Avatar {
 		this.drinksConsumed = newDrinksConsumed;
 	}
 	
-	public void setTimeout(int timeout) {
-		this.timeOut = timeout;
+	public void setTimeoutTimeRemaining(int timeout) {
+		this.timeoutTimeRemaining = timeout;
+	}
+
+	public void setIsInThePartyState(boolean newInThePartyState) {
+		this.isInTheParty = newInThePartyState;
+	}
+
+	public void setIsHit(boolean newIsHitState) {
+		this.isHit = newIsHitState;
 	}
 	
-	
-	// ************** move function **************
+	// ************** move functions **************
 	public Direction moveAvatar() {
 		Random rand = new Random();
 		int number = rand.nextInt(4);
@@ -122,5 +140,5 @@ public abstract class Avatar {
 		}
 		return dir;
 	} 
-	
+
 }

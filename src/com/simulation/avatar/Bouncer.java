@@ -12,9 +12,21 @@ package com.simulation.avatar;
 import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bouncer extends Avatar {
 	private static final int AGELIMIT = 18;
+	// I think the Simulation should be in charge of these lists of people in the party and people who are not outside:
+	// Everyone starts out outside. If they get granted entry, they get added to the peopleInParty list.
+	// If they get kicked out or the bouncer has to break up a fight with one of them, they get added to the peopleWhoAreOutside list.
+	List<Avatar> peopleInParty = new ArrayList<>();
+	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
 
+	// ************** Constructor **************
+	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
+	}
 	public boolean checkAge(int avatarAge) {
 		boolean isOverAge = false;
 		if(avatarAge >= AGELIMIT) {
@@ -22,24 +34,54 @@ public class Bouncer extends Avatar {
 		}
 		return isOverAge;
 	}
-	
-	// Check entrance
-	
-	// let people in (check age)
-	
-	public void hitPerson(int id, int x, int y) {
-		// kick from bar, we should get a signal from envi. or simulation a fight is taking place with
-		// and where exactly
-		// Send move out an avatar to simulation team
+
+	public boolean checkEntry(Avatar person) {
+		// Check the person's age and if they are in timeout, then let them in or not
+		int personAge = person.getAge();
+		int personTimeoutTimeRemaining = person.getTimeoutTimeRemaining();
+		boolean personIsOldEnough = checkAge(personAge);
+		if (personIsOldEnough == true && personTimeoutTimeRemaining == 0) {
+			person.setIsInThePartyState(true);
+			peopleInParty.add(person);
+			peopleWhoAreOutside.remove(person);
+			return true;
+		}
+		else {
+			person.setIsInThePartyState(false);
+			return false;
+		}
 	}
 
-	// ************** Constructor **************
-	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId) {
-		super(shape, color, borderWidth, avatarId);
+	public void hitPerson(Avatar person){
+		// The bouncer hits the person
+		person.setIsHit(true);
 	}
-	
-	 public void kickout(Avatar person){
-		 
-	 }
 
+	public void breakUpFight(Avatar person1, Avatar person2, int person1DurationKickedOut, int person2DurationKickedOut) {
+		// The bouncer breaks up a fight between two Avatars
+		hitPerson(person1);
+		hitPerson(person2);
+		kickOut(person1,person1DurationKickedOut);
+		kickOut(person2,person2DurationKickedOut);
+	}
+
+	// Here, maybe the Environment keeps track of if the timeout time has elapsed or not
+	public void setTimeout(Avatar person, int timeoutOverride) {
+		// If timeoutOverride is 0, then use the default timeout value of 10.
+		// If timeoutOverride is > 0, then use that value.
+		int timeInTimeout = (timeoutOverride > 0) ? timeoutOverride : 10;
+		person.setTimeoutTimeRemaining(timeInTimeout);
+	}
+	public Avatar kickOut(Avatar person, int duration) {
+		// kick the person out from the party
+		person.setIsInThePartyState(false);
+		peopleWhoAreOutside.add(person);
+		peopleInParty.remove(person);
+		setTimeout(person, duration);
+		// Here, maybe the Environment keep track of how much time is remaining
+		person.setTimeoutTimeRemaining(duration);
+		// Return the Avatar so that the Environment can work with it to keep track of how much time is remaining for
+		// this particular Avatar to be outside
+		return person;
+	}
 }
