@@ -11,7 +11,7 @@ public class MyFrame extends JFrame {
 	GridPanel panel;
 	private final int maxY = 23;
 	private final int maxX = 38;
-	private int squareSize = 30; // Adjust the size of each square as needed
+	private final int squareSize = 30; // Adjust the size of each square as needed
 	private final int panelLength = squareSize * (maxX + 2); // + 2 for padding
 	private final int panelHeight = squareSize * (maxY + 2); // + 2 for padding
 	private Square[][] squares;
@@ -104,16 +104,12 @@ public class MyFrame extends JFrame {
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
 		wait(1000);
 		if (toX < maxX && toY < maxY && toX >=0 && toY >= 0) {
-			System.out.println("original base color" + squares[fromX][fromY].getBaseColor());
-			System.out.println("original color" + squares[fromX][fromY].getColor());
 			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
 			squares[fromX][fromY].setIsUsable(true);
-			System.out.println("new color" + squares[fromX][fromY].getColor());
 			repaint();
 			squares[toX][toY].setColor(color); // Set the to-square to avatar color
 			squares[toX][toY].setIsUsable(false);
 			repaint();
-			System.out.println("Moved to x: " + toX + " y: " + toY);
 		}
 	}
 
