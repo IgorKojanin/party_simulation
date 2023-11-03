@@ -97,7 +97,7 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-	public void moveObject(int fromRow, int fromCol, int toRow, int toCol) {
+	public void moveTo(int fromRow, int fromCol, int toRow, int toCol) {
 		if (squares[fromRow][fromCol].getColor() == Color.BLUE) {
 			squares[fromRow][fromCol].setColor(Color.WHITE); // Clear the from-square
 			repaint();
