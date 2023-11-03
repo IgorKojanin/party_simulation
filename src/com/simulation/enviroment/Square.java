@@ -37,13 +37,8 @@ public class Square extends java.awt.Rectangle {
     }
 
 
-    public Boolean getIsUsable(int x, int y) {
-    	if(isUsable == true) {
-    		return true;
-    	}
-    	else  {
-    		return false;
-    	}
+    public boolean getIsUsable() {
+        return isUsable;
     }
 
     public void setIsUsable(Color color) { //squares which are red, must not be used
