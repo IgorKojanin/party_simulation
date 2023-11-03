@@ -9,7 +9,7 @@
 
 package com.simulation.enums;
 
-public enum Color {
+public enum Colors {
 	BLACK,
 	WHITE,
 	RED,
