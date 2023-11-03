@@ -101,6 +101,10 @@ public class MyFrame extends JFrame {
 		}
 	}
 
+	public boolean isUsable(int x, int y){
+		return squares[x][y].getIsUsable();
+	}
+
 	public MyFrame(){
 		createSquares();
 		panel = new GridPanel();
