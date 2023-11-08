@@ -32,7 +32,7 @@ public class MainTest {
 
 
 		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
-		//dj.playMusic(); // Start playing all tracks in sequence
+		dj.playMusic(); // Start playing all tracks in sequence
 
 		try {
 			Thread.sleep(Long.MAX_VALUE); // Keep the main thread asleep
