@@ -9,7 +9,7 @@
 
 package com.simulation.avatar;
 
-import com.simulation.enums.Colors;
+import com.simulation.enums.Color;
 import com.simulation.enums.Shape;
 import javax.sound.sampled.*;
 import java.io.File;
@@ -22,7 +22,7 @@ public class DJ extends Avatar {
 	ArrayList<String> musicList;
 	private Clip currentClip;
 
-	public DJ(Shape shape, Colors color, int borderWidth, int avatarId) {
+	public DJ(Shape shape, Color color, int borderWidth, int avatarId) {
 		super(shape, color, borderWidth, avatarId);
 		musicList = new ArrayList<>();
 		// Consider adding full paths to the music files
