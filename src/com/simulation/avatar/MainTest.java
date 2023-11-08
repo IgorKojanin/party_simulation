@@ -9,14 +9,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import com.simulation.enums.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
-import com.simulation.partypeople.JoeMama;
 
 public class MainTest {
 	public static void main(String[] args) {
-		//JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Color.RED, 1, 2, 3, 4, null, null); 
-//		DJ dj_party = new DJ(null, null, 0, 0); 
+//		PartyGoer avatarJoe = new PartyGoer(Shape.CIRCLE, Colors.RED, 1, 2, 3, 4, null, null);
+//		DJ dj_party = new DJ(null, null, 0, 0);
 //		System.out.println("Color: " + avatarJoe.getColor());
 //		System.out.println("Shape: " + avatarJoe.getShape());
 //		System.out.println("Size: " + avatarJoe.getBorderWidth());
@@ -27,8 +26,22 @@ public class MainTest {
 //		System.out.println("My questions and answers: " + avatarJoe.getQuestionsAnswersList());
 //		System.out.println("My randomely chosen direction: " + avatarJoe.moveAvatar());
 //
-//		Bartender bartenderSue = new Bartender(null, null, 0, 0);  
+//		Bartender bartenderSue = new Bartender(null, null, 0, 0);
 //
 //		System.out.println("Color: " + bartenderSue.getColor());
+
+
+		DJ dj = new DJ(Shape.CIRCLE, Colors.BLUE, 5, 1);
+		//dj.playMusic(); // Start playing all tracks in sequence
+
+		try {
+			Thread.sleep(Long.MAX_VALUE); // Keep the main thread asleep
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+		}
+
+		// To play a specific track:
+		//dj.playSpecificMusic("Spice");
+
 	}
 }
