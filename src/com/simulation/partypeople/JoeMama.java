@@ -21,8 +21,8 @@ public class JoeMama extends Avatar implements PartyGoer {
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarAge, int drinksConsumed,boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
-		super(shape, color, borderWidth, avatarAge, drinksConsumed, isHit, timeoutTimeRemaining, isInTheParty);
+	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarAge, int drinksConsumed,boolean isHit, int timeoutTimeRemaining, boolean isInTheParty, String avatarName) {
+		super(shape, color, borderWidth, avatarAge, drinksConsumed, isHit, timeoutTimeRemaining, isInTheParty, avatarName);
 		// TODO
 	}
 

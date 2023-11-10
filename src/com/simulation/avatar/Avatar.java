@@ -33,14 +33,16 @@ public abstract class Avatar {
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
+	private String avatarName;
 	private int drinksConsumed = 0;
 	private boolean isDancing = false;
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Colors color, int borderWidth, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+	public Avatar(Shape shape, Colors color, int borderWidth, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty, String avatarName) {
 		Id += Id;
+		this.avatarName = avatarName;
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
@@ -63,6 +65,10 @@ public abstract class Avatar {
 	// ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
+	}
+
+	public String getName() {
+		return this.avatarName;
 	}
 	
 	public Colors getColor() {
