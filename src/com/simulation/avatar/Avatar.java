@@ -17,17 +17,20 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
+
+import java.awt.Color;
+import java.util.HashMap;
+
 import java.util.Random;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-import com.simulation.enums.Colors;
 
 
 public abstract class Avatar {
 	
 	private Shape shape;
-	private Colors color;
+	private Color color;
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
@@ -37,7 +40,11 @@ public abstract class Avatar {
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Colors color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
+			int drinksConsumed, HashMap<String, Integer> placePriorities, 
+			HashMap<String[], String[]> questionsAnswersList) {
+
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
@@ -50,7 +57,7 @@ public abstract class Avatar {
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Colors color, int borderWidth, int avatarId) { 
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarId) { 
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
@@ -62,7 +69,7 @@ public abstract class Avatar {
 		return this.shape;
 	}
 	
-	public Colors getColor() {
+	public Color getColor() {
 		return this.color;
 	}
 	

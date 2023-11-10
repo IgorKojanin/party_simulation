@@ -7,6 +7,38 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
+
+
+import java.awt.Color;
+import java.util.HashMap;
+
+
+import com.simulation.enums.Shape;
+
+public class PartyGoer extends Avatar {
+	
+	private void startDancing(){
+		
+	}
+	private void stopDancing(){
+		
+	}
+	private void setTimeout(){
+		
+	}
+	private void drink(){
+		
+	}
+
+
+	// ************** Constructor **************
+	public PartyGoer(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
+			int drinksConsumed, HashMap<String, Integer> placePriorities, 
+			HashMap<String[], String[]> questionsAnswersList) {
+		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
+		// TODO Auto-generated constructor stub
+	}
+
 public interface PartyGoer {
 	
 	public void dancingAlgo();
@@ -19,4 +51,5 @@ public interface PartyGoer {
 	public void playFußt();
 	public void getWhatISee();
 	public void asdfg();	
+
 }
