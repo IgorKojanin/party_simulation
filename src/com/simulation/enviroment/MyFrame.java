@@ -110,7 +110,7 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-
+	
 
 	public boolean isWall(int fromX, int fromY, int toX, int toY) {
 		if ((fromX <= 32 && toX >= 33) || (fromX >= 33 && toX <= 32)) {
