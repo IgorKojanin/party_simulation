@@ -13,14 +13,14 @@ import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 
-public class JoeMama extends Avatar implements PartyGoer {
+public class Catherine2 extends Avatar implements PartyGoer {
 	
 	// store locally where u are
 	// check with that exactly what can u do?
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed,boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+	public Catherine2(Shape shape, Colors color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed,boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
 		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, isHit, timeoutTimeRemaining, isInTheParty);
 		// TODO Auto-generated constructor stub
 	}
