@@ -26,8 +26,8 @@ public class Bouncer extends Avatar {
 	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
 
 	// ************** Constructor **************
-	public Bouncer(Shape shape, Color color, int borderWidth) {
-		super(shape, color, borderWidth);
+	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
 	}
 	public boolean checkAge(int avatarAge) {
 		boolean isOverAge = false;

@@ -4,19 +4,20 @@
 //
 // Class: Avatar.java
 // Description: Abstract class with basic functions for all the people
-///////////////////////////////////////////////////////////////////////////////
-// @param shape            The shape of the avatar.
-// @param color            The color of the avatar.
-// @param borderWidth      The border width of the avatar.
-// @param avatarId         The unique ID of the avatar.
-// @param avatarAge        The age of the avatar.
-// @param drinksConsumed   The number of drinks consumed by the avatar.
-// @param isDancing        State of dancing avatar
-// @param timeOut          The time it should remain outside
-// 
+
+/* @param shape            The shape of the avatar.
+ * @param color            The color of the avatar.
+ * @param borderWidth      The border width of the avatar.
+ * @param avatarId         The unique ID of the avatar.
+ * @param avatarAge        The age of the avatar.
+ * @param drinksConsumed   The number of drinks consumed by the avatar.
+ * @param isDancing        State of dancing avatar
+ * @param timeOut          The time it should remain outside
+ */
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
+import java.util.Random;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
@@ -27,41 +28,36 @@ import java.util.Random;
 
 
 public abstract class Avatar {
-
-	private static int Id; 
-
+	
 	private Shape shape;
-	private Color color;
+	private Colors color;
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
-	private int AlcoholPercentage = 0;
-	private String avatarName;
+	private int drinksConsumed = 0;
 	private boolean isDancing = false;
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
-		Id += Id;
-		this.avatarName = avatarName;
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
-		this.avatarId = Id;
+		this.avatarId = avatarId;
 		this.avatarAge = avatarAge;
-		this.AlcoholPercentage = 0;
-		this.isHit = false;
-		this.timeoutTimeRemaining = 0;
-		this.isInTheParty = false;
+		this.drinksConsumed = drinksConsumed;
+		this.isHit = isHit;
+		this.timeoutTimeRemaining = timeoutTimeRemaining;
+		this.isInTheParty = isInTheParty;
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Color color, int borderWidth) {
+	public Avatar(Shape shape, Colors color, int borderWidth, int avatarId) { 
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
-		this.avatarId = Id;
+		this.avatarId = avatarId;
 	}	
 	
 	// ************** get functions **************
@@ -72,7 +68,7 @@ public abstract class Avatar {
 	public String getName() {
 		return this.avatarName;
 	}
-	
+
 	public Color getColor() {
 		return this.color;
 	}
@@ -155,5 +151,6 @@ public abstract class Avatar {
 			dir = Direction.LEFT;
 		}
 		return dir;
-	}
+	} 
+
 }

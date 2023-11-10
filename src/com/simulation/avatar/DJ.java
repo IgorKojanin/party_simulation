@@ -23,11 +23,11 @@ public class DJ extends Avatar {
 	private Clip currentClip;
 
 	public DJ(Shape shape, Color color, int borderWidth, int avatarId) {
-		super(shape, color, borderWidth);
+		super(shape, color, borderWidth, avatarId);
 		musicList = new ArrayList<>();
 		// Consider adding full paths to the music files
-		musicList.add("Music\\Latina.wav");
-		musicList.add("Music\\Spice.wav");
+		musicList.add("Latina.wav");
+		musicList.add("Spice.wav");
 	}
 
 	public void playMusic() {
@@ -45,7 +45,7 @@ public class DJ extends Avatar {
 		playWav(musicFile, () -> playNextTrack(trackIndex + 1));
 	}
 
-	void playSpecificMusic(String musicName) {
+	private void playSpecificMusic(String musicName) {
 		String musicFile = musicName + ".wav";
 		if (musicList.contains(musicFile)) {
 			stopMusic(); // Stop the current music if any
@@ -85,8 +85,5 @@ public class DJ extends Avatar {
 		}
 	}
 
-	public Direction moveAvatar() {
-		return Direction.BACK;
-	}
 
 }

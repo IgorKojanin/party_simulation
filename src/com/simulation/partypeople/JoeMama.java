@@ -22,14 +22,19 @@ public class JoeMama extends Avatar implements PartyGoer {
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
-		super(shape, color, borderWidth, avatarAge, avatarName);
-		// TODO
+	public JoeMama(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed) {
+		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed);
+		// TODO Auto-generated constructor stub
 	}
 
 	public void dancingAlgo() {
-		// TODO
+		// TODO Auto-generated method stub
 		
+	}
+
+	
+	public void drink() { // Ask bartender to drink and update alcohol levels
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -40,12 +45,13 @@ public class JoeMama extends Avatar implements PartyGoer {
 
 
 	public void talk(PartyGoer person) {
-		// TODO		
+		// TODO
 	}
 
 
 	public void smoke() {
-		// TODO
+		// TODO Auto-generated method stub
+		
 	}
 
 
@@ -76,4 +82,6 @@ public class JoeMama extends Avatar implements PartyGoer {
 	public void drink(BeverageType type) { // Ask bartender to drink and update alcohol levels
 		// TODO
 	}
+
+
 }
