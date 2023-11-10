@@ -73,7 +73,7 @@ public class JoeMama extends Avatar implements PartyGoer {
 		return dir;
 	}
 
-	public void drink(BeverageType type) { // Ask bartender to drink and update alcohol levels
+	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
 		// TODO
 	}
 }
