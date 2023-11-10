@@ -3,10 +3,11 @@
 // Date:         27/10/2023
 //
 // Class: PartyGoer.java
-// Description: Class extending avatar.java for the normal people
+// Description: Interface providing the basics functions to be implemented
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
+
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -37,5 +38,18 @@ public class PartyGoer extends Avatar {
 		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
 		// TODO Auto-generated constructor stub
 	}
+
+public interface PartyGoer {
+	
+	public void dancingAlgo();
+	public void drink();	
+	public void fight();	
+	public void talk();	
+	public void smoke();
+	public void toilet();
+	public void playPool();	
+	public void playFußt();
+	public void getWhatISee();
+	public void asdfg();	
 
 }

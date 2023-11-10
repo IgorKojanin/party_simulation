@@ -11,14 +11,16 @@
  * @param avatarId         The unique ID of the avatar.
  * @param avatarAge        The age of the avatar.
  * @param drinksConsumed   The number of drinks consumed by the avatar.
- * @param placePriorities  The priorities of places for the avatar.
- * @param questionsAnswersList  The list of questions and answers for the avatar.
+ * @param isDancing        State of dancing avatar
+ * @param timeOut          The time it should remain outside
  */
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
+
 import java.awt.Color;
 import java.util.HashMap;
+
 import java.util.Random;
 
 import com.simulation.enums.Direction;
@@ -32,25 +34,28 @@ public abstract class Avatar {
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
-	private int drinksConsumed;
-	private HashMap<String, Integer> placePriorities = new HashMap<String, Integer>();
-	private HashMap<String[], String[]> questionsAnswersList = new HashMap<String[], String[]>();
-	private String[] hobbiesList = new String[3];
-	
-	
+	private int drinksConsumed = 0;
+	private boolean isDancing = false;
+	private boolean isHit = false;
+	private int timeoutTimeRemaining = 0;
+	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
+
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
 			int drinksConsumed, HashMap<String, Integer> placePriorities, 
 			HashMap<String[], String[]> questionsAnswersList) {
+
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
 		this.avatarId = avatarId;
 		this.avatarAge = avatarAge;
 		this.drinksConsumed = drinksConsumed;
-		this.placePriorities = placePriorities;
-		this.questionsAnswersList = questionsAnswersList;
+		this.isHit = isHit;
+		this.timeoutTimeRemaining = timeoutTimeRemaining;
+		this.isInTheParty = isInTheParty;
 	}
+	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarId) { 
 		this.shape = shape;
@@ -84,15 +89,45 @@ public abstract class Avatar {
 		return this.drinksConsumed;
 	}
 	
-	public HashMap<String, Integer> getPlacePriorities() {
-		return this.placePriorities;
+	public int getTimeoutTimeRemaining() {
+		return this.timeoutTimeRemaining;
 	}
 
-	public HashMap<String[], String[]> getQuestionsAnswersList() {
-		return this.questionsAnswersList;
+	public boolean getIsInThePartyState() {
+		return this.isInTheParty;
 	}
 	
-	// ************** move function **************
+	public boolean getDancing() {
+		return this.isDancing;
+	}
+
+	public boolean getIsHitState() {
+		return this.isHit;
+	}
+	
+	// ************** set functions **************
+	
+	public void setDancing(boolean newDancingState) {
+		this.isDancing = newDancingState;
+	}
+	
+	public void setDrinksConsumed(int newDrinksConsumed) {
+		this.drinksConsumed = newDrinksConsumed;
+	}
+	
+	public void setTimeoutTimeRemaining(int timeout) {
+		this.timeoutTimeRemaining = timeout;
+	}
+
+	public void setIsInThePartyState(boolean newInThePartyState) {
+		this.isInTheParty = newInThePartyState;
+	}
+
+	public void setIsHit(boolean newIsHitState) {
+		this.isHit = newIsHitState;
+	}
+	
+	// ************** move functions **************
 	public Direction moveAvatar() {
 		Random rand = new Random();
 		int number = rand.nextInt(4);
@@ -112,5 +147,5 @@ public abstract class Avatar {
 		}
 		return dir;
 	} 
-	
+
 }
