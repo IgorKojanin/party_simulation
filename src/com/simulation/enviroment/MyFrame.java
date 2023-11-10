@@ -159,7 +159,9 @@ public class MyFrame extends JFrame {
 
 	// Set the letters to be displayed in the individual grids here
 	public void createText() {
-		squares[0][0].setDisplayLetter("B");
+		squares[1][0].setDisplayLetter("B");
+		squares[1][1].setDisplayLetter("A");
+		squares[1][2].setDisplayLetter("R");
 	}
 	/**
 	 * This class represents the grid panel of the frame.
