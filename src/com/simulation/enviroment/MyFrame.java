@@ -110,7 +110,14 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-	
+	public void wait(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException ex) {
+			Thread.currentThread().interrupt();
+
+		}
+	}
 
 	private boolean isWall(int fromX, int fromY,int toX, int toY) {
 		if (fromX == 32 && toX == 33) {
@@ -123,15 +130,7 @@ public class MyFrame extends JFrame {
 	}
 
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
-
-		if (toX < maxX && toY < maxY && toX >=0 && toY >= 0) {
-			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
-			squares[fromX][fromY].setIsUsable(true);
-			repaint();
-			squares[toX][toY].setColor(color); // Set the to-square to avatar color
-			squares[toX][toY].setIsUsable(false);
-			repaint();
-
+		wait(1000);
 		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
 			boolean canMove = !this.isWall(fromX, fromY, toX, toY);
 			if(canMove) {
@@ -142,7 +141,6 @@ public class MyFrame extends JFrame {
 				squares[toX][toY].setIsUsable(false);
 				repaint();
 			}
-
 		}
 		repaint();
 		}
