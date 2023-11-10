@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 
-import com.simulation.enums.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 
 import java.util.ArrayList;
@@ -51,7 +51,6 @@ public class Bouncer extends Avatar {
 			return false;
 		}
 	}
-
 	public void hitPerson(Avatar person){
 		// The bouncer hits the person
 		person.setIsHit(true);

@@ -7,9 +7,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
-
 public interface PartyGoer {
-	
 	
 	public void dancingAlgo();
 	public void drink();	

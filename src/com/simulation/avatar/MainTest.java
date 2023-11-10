@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import com.simulation.enums.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 
 public class MainTest {
@@ -39,7 +39,6 @@ public class MainTest {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-
 		// To play a specific track:
 		//dj.playSpecificMusic("Spice");
 

@@ -9,7 +9,7 @@
 
 package com.simulation.avatar;
 
-import com.simulation.enums.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 import javax.sound.sampled.*;
 import java.io.File;
@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DJ extends Avatar {
-
 	ArrayList<String> musicList;
 	private Clip currentClip;
 
