@@ -108,17 +108,19 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-	/**
-	 * This method moves the avatar from one square to another.
-	 * @param fromX The x-coordinate of the starting square.
-	 * @param fromY The y-coordinate of the starting square.
-	 * @param toX The x-coordinate of the destination square.
-	 * @param toY The y-coordinate of the destination square.
-	 * @param color The color of the avatar.
-	 */
+	public boolean isWall(int fromX, int fromY, int toX, int toY) {
+		if ((fromX <= 32 && toX >= 33) || (fromX >= 33 && toX <= 32)) {
+			if (fromY < 7 && fromY > 3 && toY < 7 && toY > 3) {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
-		wait(1000);
-		if (toX < maxX && toY < maxY && toX >=0 && toY >= 0) {
+		wait(30);
+		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
 			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
 			squares[fromX][fromY].setIsUsable(true);
 			repaint();
@@ -135,9 +137,10 @@ public class MyFrame extends JFrame {
 	 * @return True if the square is usable, false otherwise.
 	 */
 	public boolean isUsable(int x, int y) {
-		if(y < maxY && x < maxX && y >=0 && x >= 0) {
+		if (y < maxY && x < maxX && y >= 0 && x >= 0) {
 			return squares[x][y].getIsUsable();
-		} else return false;
+		} else
+			return false;
 	}
 
 	/**
