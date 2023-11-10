@@ -37,7 +37,7 @@ public abstract class Avatar {
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+	public Avatar(Shape shape, Colors color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
