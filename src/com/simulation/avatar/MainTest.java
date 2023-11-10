@@ -9,12 +9,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import com.simulation.enums.Colors;
+
+import java.awt.Color;
+
 import com.simulation.enums.Shape;
 
 public class MainTest {
 	public static void main(String[] args) {
-		PartyGoer avatarJoe = new PartyGoer(Shape.CIRCLE, Colors.RED, 1, 2, 3, 4, null, null); 
+		PartyGoer avatarJoe = new PartyGoer(Shape.CIRCLE, Color.RED, 1, 2, 3, 4, null, null); 
 		DJ dj_party = new DJ(null, null, 0, 0); 
 		System.out.println("Color: " + avatarJoe.getColor());
 		System.out.println("Shape: " + avatarJoe.getShape());

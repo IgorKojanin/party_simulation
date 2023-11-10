@@ -92,17 +92,9 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-	public void wait(int ms) {
-		try {
-			Thread.sleep(ms);
-		} catch (InterruptedException ex) {
-			Thread.currentThread().interrupt();
-
-		}
-	}
+	
 
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
-		wait(1000);
 		if (toX < maxX && toY < maxY && toX >=0 && toY >= 0) {
 			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
 			squares[fromX][fromY].setIsUsable(true);
