@@ -26,95 +26,54 @@ public class Catherine2 extends Avatar implements PartyGoer {
 		super(shape, color, borderWidth, avatarAge, avatarName);
 		// TODO Auto-generated constructor stub
 	}
-
 	public void dancingAlgo() {
-		// TODO Auto-generated method stub
+		// TODO
 		
 		
 	}
 
-	
-	public void drink() { // Ask bartender to drink and update alcohol levels
-		// TODO Auto-generated method stub
+	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
+		// TODO
 		
 	}
 
 
-	public void fight() { // Call this function if other avatar starts a fight
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void talk() {
-		// TODO Auto-generated method stub
-		
+	public void talk(PartyGoer person) {
+		// TODO		
 	}
 
 
 	public void smoke() {
-		// TODO Auto-generated method stub
-		
+		// TODO
 	}
 
 
-	public void toilet() {
-		// TODO Auto-generated method stub
+	public void toilet(int timeInToilet) {
+		// TODO
 		
 	}
 
 
 	public void playPool() {
-		// TODO Auto-generated method stub
+		// TODO
 		
 	}
 
 
-	public void playFußt() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void getWhatISee() {
-		// get function from simulation, returns array of Places enums. 2 places ahead
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void asdfg() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drink(BeverageType type) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'drink'");
-	}
-
-	@Override
-	public void fight(PartyGoer opponent) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'fight'");
-	}
-
-	@Override
-	public void toilet(int timeInToilet) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'toilet'");
-	}
-
-	@Override
 	public void playFussball() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'playFussball'");
+		// TODO
+		
 	}
 
-	@Override
+
 	public Direction moveAvatar() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'moveAvatar'");
+		// TODO
+		Direction dir = Direction.FORWARD;
+		return dir;
+	}
+
+	public void drink(BeverageType type) { // Ask bartender to drink and update alcohol levels
+		// TODO
 	}
 }
+

@@ -7,14 +7,6 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.partypeople;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
-import java.io.File;
-
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
@@ -46,40 +38,8 @@ public class JoeMama extends Avatar implements PartyGoer {
 	}
 
 
-	public void talk() { //PartyGoer person
-		// TODO
-        try {
-            // Replace "mumble.wav" with the actual path to your "mumble.wav" file
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
-                    new File("SFX\\Speaking.wav")
-            );
- 
-            // Create a Clip object to play the audio
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
- 
-            // Optional: Add a listener to handle events (e.g., when the sound finishes)
-            clip.addLineListener(new LineListener() {
-                @Override
-                public void update(LineEvent event) {
-                    if (event.getType() == LineEvent.Type.STOP) {
-                        clip.close();
-                    }
-                }
-            });
- 
-            // Start playing the sound effect
-            clip.start();
- 
-            // Optional: Wait for the sound to finish playing before exiting
-            while (clip.isRunning()) {
-                Thread.sleep(100);
-            }
- 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-		
+	public void talk(PartyGoer person) {
+		// TODO		
 	}
 
 
