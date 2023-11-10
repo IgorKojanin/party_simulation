@@ -119,8 +119,8 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-	private boolean isWall(int fromX, int fromY,int toX, int toY) {
-		if (fromX == 32 && toX == 33) {
+	public boolean isWall(int fromX, int fromY, int toX, int toY) {
+		if ((fromX <= 32 && toX >= 33) || (fromX >= 33 && toX <= 32)) {
 			if (fromY < 7 && fromY > 3 && toY < 7 && toY > 3) {
 				return false;
 			}
@@ -130,19 +130,15 @@ public class MyFrame extends JFrame {
 	}
 
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
-		wait(1000);
+		wait(30);
 		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
-			boolean canMove = !this.isWall(fromX, fromY, toX, toY);
-			if(canMove) {
-				squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
-				squares[fromX][fromY].setIsUsable(true);
-				repaint();
-				squares[toX][toY].setColor(color); // Set the to-square to avatar color
-				squares[toX][toY].setIsUsable(false);
-				repaint();
-			}
+			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
+			squares[fromX][fromY].setIsUsable(true);
+			repaint();
+			squares[toX][toY].setColor(color); // Set the to-square to avatar color
+			squares[toX][toY].setIsUsable(false);
+			repaint();
 		}
-		repaint();
 	}
 
 	public boolean isUsable(int x, int y) {
