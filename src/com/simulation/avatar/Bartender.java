@@ -23,8 +23,8 @@ public class Bartender extends Avatar {
 	}
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Colors color, int borderWidth, int avatarId) {
-		super(shape, color, borderWidth, avatarId);
+	public Bartender(Shape shape, Colors color, int borderWidth) {
+		super(shape, color, borderWidth);
 	}
 
 }
