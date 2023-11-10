@@ -70,7 +70,7 @@ private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
 	}
 
 	public Direction moveAvatar() {
-		return Direction.BACK;
+		return Direction.IDLE;
 	}
 
 }

@@ -91,6 +91,6 @@ public class Bouncer extends Avatar {
 	}
 
 	public Direction moveAvatar() {
-		return Direction.BACK;
+		return Direction.IDLE;
 	}
 }

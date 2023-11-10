@@ -26,6 +26,7 @@ public class JoeMama extends Avatar implements PartyGoer {
 		// TODO
 	}
 
+	// ************** Methods **************
 	public void dancingAlgo() {
 		// TODO
 		
@@ -68,7 +69,7 @@ public class JoeMama extends Avatar implements PartyGoer {
 
 	public Direction moveAvatar() {
 		// TODO
-		Direction dir = Direction.FORWARD;
+		Direction dir = Direction.IDLE;
 		return dir;
 	}
 

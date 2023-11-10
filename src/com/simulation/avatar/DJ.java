@@ -86,7 +86,7 @@ public class DJ extends Avatar {
 	}
 
 	public Direction moveAvatar() {
-		return Direction.BACK;
+		return Direction.IDLE;
 	}
 
 }
