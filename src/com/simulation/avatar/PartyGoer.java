@@ -37,19 +37,6 @@ public class PartyGoer extends Avatar {
 			HashMap<String[], String[]> questionsAnswersList) {
 		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
 		// TODO Auto-generated constructor stub
-	}
+	}}
 
-public interface PartyGoer {
-	
-	public void dancingAlgo();
-	public void drink();	
-	public void fight();	
-	public void talk();	
-	public void smoke();
-	public void toilet();
-	public void playPool();	
-	public void playFußt();
-	public void getWhatISee();
-	public void asdfg();	
 
-}

@@ -6,9 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
 import java.awt.Dimension;
-
 public class MyFrame extends JFrame {
-	GridPanel panel;
+
 	private final int maxY = 23;
 	private final int maxX = 38;
 	private final int squareSize = 30; // Adjust the size of each square as needed
@@ -124,7 +123,7 @@ public class MyFrame extends JFrame {
 
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
 
-		if (toX < maxX && toY < maxY && toX >=0 && toY >= 0) {
+		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
 			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
 			squares[fromX][fromY].setIsUsable(true);
 			repaint();
@@ -132,21 +131,21 @@ public class MyFrame extends JFrame {
 			squares[toX][toY].setIsUsable(false);
 			repaint();
 
-		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
-			boolean canMove = !this.isWall(fromX, fromY, toX, toY);
-			if(canMove) {
-				squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
-				squares[fromX][fromY].setIsUsable(true);
-				repaint();
-				squares[toX][toY].setColor(color); // Set the to-square to avatar color
-				squares[toX][toY].setIsUsable(false);
-				repaint();
+			if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
+				boolean canMove = !this.isWall(fromX, fromY, toX, toY);
+				if (canMove) {
+					squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
+					squares[fromX][fromY].setIsUsable(true);
+					repaint();
+					squares[toX][toY].setColor(color); // Set the to-square to avatar color
+					squares[toX][toY].setIsUsable(false);
+					repaint();
+				}
+
 			}
-
+			repaint();
 		}
-		repaint();
 	}
-
 	public boolean isUsable(int x, int y) {
 		if (y < maxY && x < maxX && y >= 0 && x >= 0) {
 			return squares[x][y].getIsUsable();
@@ -156,7 +155,7 @@ public class MyFrame extends JFrame {
 
 	public MyFrame() {
 		createSquares();
-		panel = new GridPanel();
+		GridPanel panel = new GridPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(panel);
 		this.pack();

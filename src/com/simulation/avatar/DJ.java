@@ -38,10 +38,7 @@ public class DJ extends Avatar {
 		musicList.add("Music\\Spice.wav");
 	}
 
-	public void playMusic() {
-		System.out.println("Music starts");
-		playNextTrack(0); // Start with the first track
-	}
+	
 
 	private void playNextTrack(int trackIndex) {
 		if (trackIndex >= musicList.size()) {

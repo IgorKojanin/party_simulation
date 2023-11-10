@@ -62,9 +62,21 @@ public abstract class Avatar {
 		this.color = color;
 		this.borderWidth = borderWidth;
 		this.avatarId = avatarId;
-	}	
-	
-	// ************** get functions **************
+	}
+
+    public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+		this.shape = shape;
+		this.color = color;
+		this.borderWidth = borderWidth;
+		this.avatarId = avatarId;
+		this.avatarAge = avatarAge;
+		this.drinksConsumed = drinksConsumed;
+		this.isHit = isHit;
+		this.timeoutTimeRemaining = timeoutTimeRemaining;
+		this.isInTheParty = isInTheParty;
+    }
+
+    // ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
 	}
