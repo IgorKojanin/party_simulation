@@ -63,18 +63,6 @@ public class Bouncer extends Avatar {
 	}
 
 
-	// ************** Constructor **************
-	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId) {
-		super(shape, color, borderWidth, avatarId);
-
-	public void breakUpFight(Avatar person1, Avatar person2, int person1DurationKickedOut, int person2DurationKickedOut) {
-		// The bouncer breaks up a fight between two Avatars
-		hitPerson(person1);
-		hitPerson(person2);
-		kickOut(person1,person1DurationKickedOut);
-		kickOut(person2,person2DurationKickedOut);
-
-	}
 
 	// Here, maybe the Environment keeps track of if the timeout time has elapsed or not
 	public void setTimeout(Avatar person, int timeoutOverride) {

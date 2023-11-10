@@ -133,7 +133,6 @@ public class MyFrame extends JFrame {
 			repaint();
 		}
 	}
-
 	public boolean isUsable(int x, int y) {
 		if (y < maxY && x < maxX && y >= 0 && x >= 0) {
 			return squares[x][y].getIsUsable();
@@ -143,7 +142,7 @@ public class MyFrame extends JFrame {
 
 	public MyFrame() {
 		createSquares();
-		panel = new GridPanel();
+		panel panel = new GridPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(panel);
 		this.pack();

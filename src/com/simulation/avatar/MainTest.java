@@ -49,7 +49,6 @@ public class MainTest {
 //
 //		System.out.println("Color: " + bartenderSue.getColor());
 
-		bouncerBob.breakUpFight(avatarJoe, partyGoerC, 10, 20);
 
 		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		dj.playMusic(); // Start playing all tracks in sequence
@@ -60,6 +59,8 @@ public class MainTest {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
+		// To play a specific track:
+		//dj.playSpecificMusic("Spice");
 
 		// Bartender bartenderSue = new Bartender(null, null, 0, 0);
 		// System.out.println("Color: " + bartenderSue.getColor());

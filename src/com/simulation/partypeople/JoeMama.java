@@ -22,8 +22,8 @@ public class JoeMama extends Avatar implements PartyGoer {
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed);
+	public JoeMama(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, isHit, timeoutTimeRemaining, isInTheParty);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,7 +40,7 @@ public class JoeMama extends Avatar implements PartyGoer {
 
 	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
 		// TODO
-		
+
 	}
 
 
@@ -73,10 +73,10 @@ public class JoeMama extends Avatar implements PartyGoer {
 	}
 
 
-	public Direction moveAvatar() {
-		// TODO
-		Direction dir = Direction.FORWARD;
-		return dir;
+	public void getWhatISee() {
+		// get function from simulation, returns array of Places enums. 2 places ahead
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void drink(BeverageType type) { // Ask bartender to drink and update alcohol levels
