@@ -26,9 +26,6 @@ public class MainTest {
 		bouncerBob.checkEntry(partyGoerC);
 
 		bouncerBob.breakUpFight(partyGoerJ, partyGoerC, 10, 20);
-		
-
-
 
 		DJ dj = new DJ(Shape.CIRCLE, Colors.BLUE, 5, 1);
 		// dj.playMusic(); // Start playing all tracks in sequence
@@ -40,6 +37,5 @@ public class MainTest {
 		}
 		// To play a specific track:
 		//dj.playSpecificMusic("Spice");
-
 	}
 }
