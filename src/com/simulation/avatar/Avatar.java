@@ -17,7 +17,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import java.util.Random;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
@@ -40,7 +39,7 @@ public abstract class Avatar {
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Colors color, int borderWidth, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty, String avatarName) {
+	public Avatar(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName) {
 		Id += Id;
 		this.avatarName = avatarName;
 		this.shape = shape;
@@ -48,10 +47,10 @@ public abstract class Avatar {
 		this.borderWidth = borderWidth;
 		this.avatarId = Id;
 		this.avatarAge = avatarAge;
-		this.drinksConsumed = drinksConsumed;
-		this.isHit = isHit;
-		this.timeoutTimeRemaining = timeoutTimeRemaining;
-		this.isInTheParty = isInTheParty;
+		this.drinksConsumed = 0;
+		this.isHit = false;
+		this.timeoutTimeRemaining = 0;
+		this.isInTheParty = false;
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************

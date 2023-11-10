@@ -13,7 +13,7 @@ public interface PartyGoer {
 	public void dancingAlgo();
 	public void drink(int consumptionNumber);	
 	public void fight(PartyGoer opponent);	
-	public void talk(PartyGoer person);	
+	public void talk();	//PartyGoer person
 	public void smoke();
 	public void toilet(int timeInToilet);
 	public void playPool();	
