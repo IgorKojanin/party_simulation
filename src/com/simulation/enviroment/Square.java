@@ -7,9 +7,9 @@ import com.simulation.enums.Places;
 public class Square extends java.awt.Rectangle {
     
 	private Color color;
-    private Color baseColor;
+    private final Color baseColor;
 	private Boolean isUsable;
-	private Places place;
+	private final Places place;
 
  
 

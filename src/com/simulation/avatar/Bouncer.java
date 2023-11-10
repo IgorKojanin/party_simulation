@@ -9,7 +9,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 
-import com.simulation.enums.Colors;
+
+import java.awt.Color;
+
 import com.simulation.enums.Shape;
 
 public class Bouncer extends Avatar {
@@ -27,7 +29,7 @@ public class Bouncer extends Avatar {
 	}
 
 	// ************** Constructor **************
-	public Bouncer(Shape shape, Colors color, int borderWidth, int avatarId) {
+	public Bouncer(Shape shape, Color color, int borderWidth, int avatarId) {
 		super(shape, color, borderWidth, avatarId);
 	}
 
