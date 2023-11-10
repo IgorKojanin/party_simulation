@@ -10,7 +10,7 @@
 
 package com.simulation.avatar;
 
-import java.awt.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 
 public class Bartender extends Avatar {
@@ -23,7 +23,7 @@ public class Bartender extends Avatar {
 	}
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Color color, int borderWidth, int avatarId) {
+	public Bartender(Shape shape, Colors color, int borderWidth, int avatarId) {
 		super(shape, color, borderWidth, avatarId);
 	}
 
