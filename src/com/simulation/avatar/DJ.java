@@ -45,7 +45,7 @@ public class DJ extends Avatar {
 		playWav(musicFile, () -> playNextTrack(trackIndex + 1));
 	}
 
-	private void playSpecificMusic(String musicName) {
+	void playSpecificMusic(String musicName) {
 		String musicFile = musicName + ".wav";
 		if (musicList.contains(musicFile)) {
 			stopMusic(); // Stop the current music if any

@@ -38,6 +38,7 @@ public class Bouncer extends Avatar {
 
 	public boolean checkEntry(Avatar person) {
 		// Check the person's age and if they are in timeout, then let them in or not
+		boolean personIsInParty;
 		int personAge = person.getAge();
 		int personTimeoutTimeRemaining = person.getTimeoutTimeRemaining();
 		boolean personIsOldEnough = checkAge(personAge);
@@ -45,12 +46,14 @@ public class Bouncer extends Avatar {
 			person.setIsInThePartyState(true);
 			peopleInParty.add(person);
 			peopleWhoAreOutside.remove(person);
-			return true;
+			personIsInParty = true;
 		}
 		else {
 			person.setIsInThePartyState(false);
-			return false;
+			personIsInParty = false;
 		}
+		System.out.println(person.getIsInThePartyState());
+		return personIsInParty;
 	}
 	public void hitPerson(Avatar person){
 		// The bouncer hits the person
@@ -80,6 +83,8 @@ public class Bouncer extends Avatar {
 		setTimeout(person, duration);
 		// Here, maybe the Environment keep track of how much time is remaining
 		person.setTimeoutTimeRemaining(duration);
+		System.out.println(person.getTimeoutTimeRemaining());
+
 		// Return the Avatar so that the Environment can work with it to keep track of how much time is remaining for
 		// this particular Avatar to be outside
 		return person;
