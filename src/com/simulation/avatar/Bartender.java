@@ -12,6 +12,7 @@ package com.simulation.avatar;
 
 import com.simulation.enums.BeverageType;
 import com.simulation.enums.Colors;
+import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
 public class Bartender extends Avatar {
@@ -49,8 +50,12 @@ private static final int ADD_VODKA_PERCENTAGE = 40;
 	
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Colors color, int borderWidth, int avatarId) {
-		super(shape, color, borderWidth, avatarId);
+	public Bartender(Shape shape, Colors color, int borderWidth) {
+		super(shape, color, borderWidth);
+	}
+
+	public Direction moveAvatar() {
+		return Direction.BACK;
 	}
 
 }
