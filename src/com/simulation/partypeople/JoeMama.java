@@ -40,12 +40,6 @@ public class JoeMama extends Avatar implements PartyGoer {
 		
 	}
 
-	
-	public void drink(int consumptionNumber) { // Ask bartender to drink and update alcohol levels
-				
-	}
-
-
 	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
 		// TODO
 		
@@ -118,15 +112,7 @@ public class JoeMama extends Avatar implements PartyGoer {
 		return dir;
 	}
 
-
-	public void asdfg() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void drink(BeverageType type) {
-		// TODO Auto-generated method stub
-		
+	public void drink(BeverageType type) { // Ask bartender to drink and update alcohol levels
+		// TODO
 	}
 }
