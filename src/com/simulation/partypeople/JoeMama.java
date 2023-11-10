@@ -11,6 +11,7 @@ package com.simulation.partypeople;
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.Colors;
+import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
 public class JoeMama extends Avatar implements PartyGoer {
@@ -20,71 +21,61 @@ public class JoeMama extends Avatar implements PartyGoer {
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed,boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, isHit, timeoutTimeRemaining, isInTheParty);
-		// TODO Auto-generated constructor stub
+	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarAge, int drinksConsumed,boolean isHit, int timeoutTimeRemaining, boolean isInTheParty, String avatarName) {
+		super(shape, color, borderWidth, avatarAge, drinksConsumed, isHit, timeoutTimeRemaining, isInTheParty, avatarName);
+		// TODO
 	}
 
 	public void dancingAlgo() {
-		// TODO Auto-generated method stub
+		// TODO
 		
 		
 	}
 
 	
-	public void drink() { // Ask bartender to drink and update alcohol levels
-		// TODO Auto-generated method stub
+	public void drink(int consumptionNumber) { // Ask bartender to drink and update alcohol levels
+				
+	}
+
+
+	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
+		// TODO
 		
 	}
 
 
-	public void fight() { // Call this function if other avatar starts a fight
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void talk() {
-		// TODO Auto-generated method stub
+	public void talk(PartyGoer person) {
+		// TODO
 		
 	}
 
 
 	public void smoke() {
-		// TODO Auto-generated method stub
-		
+		// TODO
 	}
 
 
-	public void toilet() {
-		// TODO Auto-generated method stub
+	public void toilet(int timeInToilet) {
+		// TODO
 		
 	}
 
 
 	public void playPool() {
-		// TODO Auto-generated method stub
+		// TODO
 		
 	}
 
 
-	public void playFußt() {
-		// TODO Auto-generated method stub
+	public void playFussball() {
+		// TODO
 		
 	}
 
 
-	public void getWhatISee() {
-		// get function from simulation, returns array of Places enums. 2 places ahead
-		// TODO Auto-generated method stub
-		
+	public Direction moveAvatar() {
+		// TODO
+		Direction dir = Direction.FORWARD;
+		return dir;
 	}
-
-
-	public void asdfg() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

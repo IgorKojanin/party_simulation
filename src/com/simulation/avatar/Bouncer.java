@@ -10,6 +10,7 @@
 package com.simulation.avatar;
 
 import com.simulation.enums.Colors;
+import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
 import java.util.ArrayList;
@@ -24,8 +25,8 @@ public class Bouncer extends Avatar {
 	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
 
 	// ************** Constructor **************
-	public Bouncer(Shape shape, Colors color, int borderWidth, int avatarId) {
-		super(shape, color, borderWidth, avatarId);
+	public Bouncer(Shape shape, Colors color, int borderWidth) {
+		super(shape, color, borderWidth);
 	}
 	public boolean checkAge(int avatarAge) {
 		boolean isOverAge = false;
@@ -87,5 +88,9 @@ public class Bouncer extends Avatar {
 		// Return the Avatar so that the Environment can work with it to keep track of how much time is remaining for
 		// this particular Avatar to be outside
 		return person;
+	}
+
+	public Direction moveAvatar() {
+		return Direction.BACK;
 	}
 }

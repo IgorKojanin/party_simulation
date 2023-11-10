@@ -10,6 +10,7 @@
 package com.simulation.avatar;
 
 import com.simulation.enums.Colors;
+import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 import javax.sound.sampled.*;
 import java.io.File;
@@ -22,7 +23,7 @@ public class DJ extends Avatar {
 	private Clip currentClip;
 
 	public DJ(Shape shape, Colors color, int borderWidth, int avatarId) {
-		super(shape, color, borderWidth, avatarId);
+		super(shape, color, borderWidth);
 		musicList = new ArrayList<>();
 		// Consider adding full paths to the music files
 		musicList.add("Music\\Latina.wav");
@@ -84,5 +85,8 @@ public class DJ extends Avatar {
 		}
 	}
 
+	public Direction moveAvatar() {
+		return Direction.BACK;
+	}
 
 }
