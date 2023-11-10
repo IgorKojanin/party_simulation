@@ -10,6 +10,7 @@
 package com.simulation.avatar;
 
 import com.simulation.enums.Colors;
+import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
 import java.util.ArrayList;
@@ -82,5 +83,9 @@ public class Bouncer extends Avatar {
 		// Return the Avatar so that the Environment can work with it to keep track of how much time is remaining for
 		// this particular Avatar to be outside
 		return person;
+	}
+
+	public Direction moveAvatar() {
+		return Direction.BACK;
 	}
 }

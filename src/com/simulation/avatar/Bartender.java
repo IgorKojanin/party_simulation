@@ -11,6 +11,7 @@
 package com.simulation.avatar;
 
 import com.simulation.enums.Colors;
+import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
 public class Bartender extends Avatar {
@@ -25,6 +26,10 @@ public class Bartender extends Avatar {
 	// ************** Constructor **************
 	public Bartender(Shape shape, Colors color, int borderWidth) {
 		super(shape, color, borderWidth);
+	}
+
+	public Direction moveAvatar() {
+		return Direction.BACK;
 	}
 
 }
