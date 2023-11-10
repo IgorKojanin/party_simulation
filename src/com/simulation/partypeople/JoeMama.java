@@ -10,7 +10,7 @@ package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
-import com.simulation.enums.Color;
+import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 
 public class JoeMama extends Avatar implements PartyGoer {
@@ -20,8 +20,8 @@ public class JoeMama extends Avatar implements PartyGoer {
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed);
+	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed,boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, isHit, timeoutTimeRemaining, isInTheParty);
 		// TODO Auto-generated constructor stub
 	}
 
