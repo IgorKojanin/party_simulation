@@ -31,7 +31,7 @@ public abstract class Avatar {
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
-	private int drinksConsumed = 0;
+	private int AlcoholPercentage = 0;
 	private boolean isDancing = false;
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
@@ -43,7 +43,7 @@ public abstract class Avatar {
 		this.borderWidth = borderWidth;
 		this.avatarId = avatarId;
 		this.avatarAge = avatarAge;
-		this.drinksConsumed = drinksConsumed;
+		this.AlcoholPercentage = drinksConsumed;
 		this.isHit = isHit;
 		this.timeoutTimeRemaining = timeoutTimeRemaining;
 		this.isInTheParty = isInTheParty;
@@ -78,8 +78,8 @@ public abstract class Avatar {
 		return this.avatarAge;
 	}
 	
-	public int getDrinksConsumed() {
-		return this.drinksConsumed;
+	public int getAlcoholPercentage() {
+		return this.AlcoholPercentage;
 	}
 	
 	public int getTimeoutTimeRemaining() {
@@ -104,8 +104,8 @@ public abstract class Avatar {
 		this.isDancing = newDancingState;
 	}
 	
-	public void setDrinksConsumed(int newDrinksConsumed) {
-		this.drinksConsumed = newDrinksConsumed;
+	public void setAlcoholPercentage(int newAlcoholPercentage) {
+		this.AlcoholPercentage = newAlcoholPercentage;
 	}
 	
 	public void setTimeoutTimeRemaining(int timeout) {

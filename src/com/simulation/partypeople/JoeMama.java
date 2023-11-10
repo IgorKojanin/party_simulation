@@ -10,6 +10,7 @@ package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
+import com.simulation.enums.BeverageType;
 import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 
@@ -81,6 +82,12 @@ public class JoeMama extends Avatar implements PartyGoer {
 
 
 	public void asdfg() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drink(BeverageType type) {
 		// TODO Auto-generated method stub
 		
 	}

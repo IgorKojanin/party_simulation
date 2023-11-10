@@ -7,10 +7,13 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
+
+import com.simulation.enums.BeverageType;
+
 public interface PartyGoer {
 	
 	public void dancingAlgo();
-	public void drink();	
+	public void drink(BeverageType type);	
 	public void fight();	
 	public void talk();	
 	public void smoke();
