@@ -52,10 +52,10 @@ public class MainTest {
 		
 		System.out.println("The Bouncer only lets CatherineC1 back into the party because they have 0 time in timeout remaining:");
 		System.out.println(bouncerBob.peopleInParty.toString());
-
+		System.out.println(bouncerBob.getListOfPeopleInParty());
 
 		DJ dj = new DJ(Shape.CIRCLE, Colors.BLUE, 5, 1);
-		dj.playMusic(); // Start playing all tracks in sequence
+		// dj.playMusic(); // Start playing all tracks in sequence
 
 		try {
 			Thread.sleep(Long.MAX_VALUE); // Keep the main thread asleep
