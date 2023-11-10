@@ -3,38 +3,20 @@
 // Date:         27/10/2023
 //
 // Class: PartyGoer.java
-// Description: Class extending avatar.java for the normal people
+// Description: Interface providing the basics functions to be implemented
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
-
-import java.util.HashMap;
-
-import com.simulation.enums.Colors;
-import com.simulation.enums.Shape;
-
-public class PartyGoer extends Avatar {
+public interface PartyGoer {
 	
-	private void startDancing(){
-		
-	}
-	private void stopDancing(){
-		
-	}
-	private void setTimeout(){
-		
-	}
-	private void drink(){
-		
-	}
-
-
-	// ************** Constructor **************
-	public PartyGoer(Shape shape, Colors color, int borderWidth, int avatarId, int avatarAge, 
-			int drinksConsumed, HashMap<String, Integer> placePriorities, 
-			HashMap<String[], String[]> questionsAnswersList) {
-		super(shape, color, borderWidth, avatarId, avatarAge, drinksConsumed, placePriorities, questionsAnswersList);
-		// TODO Auto-generated constructor stub
-	}
-
+	public void dancingAlgo();
+	public void drink();	
+	public void fight();	
+	public void talk();	
+	public void smoke();
+	public void toilet();
+	public void playPool();	
+	public void playFußt();
+	public void getWhatISee();
+	public void asdfg();	
 }
