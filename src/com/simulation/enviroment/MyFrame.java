@@ -145,6 +145,7 @@ public class MyFrame extends JFrame {
 
 		}
 		repaint();
+		}
 	}
 
 	public boolean isUsable(int x, int y) {
