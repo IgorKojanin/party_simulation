@@ -11,8 +11,8 @@ import com.simulation.enums.BeverageType;
 public interface PartyGoer {
 	
 	public void dancingAlgo();
-	public void drink(BeverageType type);	
-	public void fight(PartyGoer opponent);	
+	public void drink(BeverageType type);
+	public void fight(PartyGoer opponent);
 	public void talk(PartyGoer person);
 	public void smoke();
 	public void toilet(int timeInToilet);

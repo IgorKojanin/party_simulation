@@ -52,22 +52,22 @@ private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
 				System.out.println("Bartender: Sorry your'e too young");
 			break;
 		case RUM_AND_COKE:
-			if (checkAge(avatar) > LEGAL_STRONG_ALCOHOL_AGE) { 
+			if (checkAge(avatar) > LEGAL_STRONG_ALCOHOL_AGE) {
 				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()+ADD_RUM_AND_COKE_PERCENTAGE);
 			}
 			else
 				System.out.println("Bartender: Sorry your'e too young");
 			break;
-		case WATER: // drinking water lowers the Alcohol percentage 
+		case WATER: // drinking water lowers the Alcohol percentage
 			avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()-10);
 			break;
 		}
 	}
-	
+
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Color color, int borderWidth) {
-		super(shape, color, borderWidth);
+	public Bartender(Shape shape, Color color, int borderWidth, int avatarId) {
+		super(shape, color, borderWidth, avatarId);
 	}
 
 	public Direction moveAvatar() {
