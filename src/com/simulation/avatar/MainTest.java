@@ -19,14 +19,40 @@ public class MainTest {
 		//(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName)
 		
 		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Colors.RED, 1, 20, "Almudena");
-		Catherine2 partyGoerC = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 20, "Catherine");
+		Catherine2 partyGoerY = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 17, "Catherine-too-young");
+		Catherine2 partyGoerC1 = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 30, "CatherineC1");
+		Catherine2 partyGoerC2 = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 20, "CatherineC2");
 
 		Bouncer bouncerBob = new Bouncer(Shape.CIRCLE, Colors.BLUE, 5);
-		
-		bouncerBob.checkEntry(avatarJoe);
-		bouncerBob.checkEntry(partyGoerC);
 
-		bouncerBob.breakUpFight(avatarJoe, partyGoerC, 10, 20);
+		// The Bouncer checks if all 4 people can be let in
+		bouncerBob.checkEntry(avatarJoe);		
+		bouncerBob.checkEntry(partyGoerC1);		
+		bouncerBob.checkEntry(partyGoerC2);		
+		bouncerBob.checkEntry(partyGoerY);
+
+		System.out.println("The Bouncer lets Almudena, CatherineC1, and CatherineC2 into the party because they are overage:");
+		System.out.println(bouncerBob.peopleInParty.toString());
+		
+		// The Bouncer kicks out Almudena and partyGoerC 
+		bouncerBob.breakUpFight(partyGoerC1, partyGoerC2, 10, 20);
+		System.out.println("The Bouncer breaks up a fight between CatherineC1 and CatherineC2 and both get kicked out. Only Almudena remains in the party:");
+		System.out.println(bouncerBob.peopleInParty.toString());
+
+		// After 10 min go by, Set the timeout time of the people who were kicked out
+		partyGoerC1.setTimeoutTimeRemaining(0);
+		partyGoerC2.setTimeoutTimeRemaining(10);
+
+		
+		// The Bouncer checks if all 4 people can be let in
+		bouncerBob.checkEntry(avatarJoe);		
+		bouncerBob.checkEntry(partyGoerC1);		
+		bouncerBob.checkEntry(partyGoerC2);		
+		bouncerBob.checkEntry(partyGoerY);
+		
+		System.out.println("The Bouncer only lets CatherineC1 back into the party because they have 0 time in timeout remaining:");
+		System.out.println(bouncerBob.peopleInParty.toString());
+
 
 		DJ dj = new DJ(Shape.CIRCLE, Colors.BLUE, 5, 1);
 		// dj.playMusic(); // Start playing all tracks in sequence

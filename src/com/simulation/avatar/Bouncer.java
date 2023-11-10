@@ -21,8 +21,8 @@ public class Bouncer extends Avatar {
 	// I think the Simulation should be in charge of these lists of people in the party and people who are not outside:
 	// Everyone starts out outside. If they get granted entry, they get added to the peopleInParty list.
 	// If they get kicked out or the bouncer has to break up a fight with one of them, they get added to the peopleWhoAreOutside list.
-	List<Avatar> peopleInParty = new ArrayList<>();
-	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
+	List<String> peopleInParty = new ArrayList<>();
+	List<String> peopleWhoAreOutside = new ArrayList<>();
 
 	// ************** Constructor **************
 	public Bouncer(Shape shape, Colors color, int borderWidth) {
@@ -44,15 +44,20 @@ public class Bouncer extends Avatar {
 		boolean personIsOldEnough = checkAge(personAge);
 		if (personIsOldEnough == true && personTimeoutTimeRemaining == 0) {
 			person.setIsInThePartyState(true);
-			peopleInParty.add(person);
-			peopleWhoAreOutside.remove(person);
+			if (!peopleInParty.contains(person.getName())) {
+				peopleInParty.add(person.getName());
+			}
+			if (peopleWhoAreOutside.contains(person.getName())) {
+				peopleWhoAreOutside.remove(person.getName());
+			}
 			personIsInParty = true;
 		}
 		else {
 			person.setIsInThePartyState(false);
 			personIsInParty = false;
 		}
-		System.out.println(person.getIsInThePartyState());
+	
+
 		return personIsInParty;
 	}
 	public void hitPerson(Avatar person){
@@ -74,20 +79,31 @@ public class Bouncer extends Avatar {
 		// If timeoutOverride is > 0, then use that value.
 		int timeInTimeout = (timeoutOverride > 0) ? timeoutOverride : 10;
 		person.setTimeoutTimeRemaining(timeInTimeout);
+
 	}
+	
 	public Avatar kickOut(Avatar person, int duration) {
 		// kick the person out from the party
 		person.setIsInThePartyState(false);
-		peopleWhoAreOutside.add(person);
-		peopleInParty.remove(person);
+		if (!peopleWhoAreOutside.contains(person.getName())) {
+			peopleWhoAreOutside.add(person.getName());
+		}
+		if (peopleInParty.contains(person.getName())) {
+			peopleInParty.remove(person.getName());
+		}		
 		setTimeout(person, duration);
 		// Here, maybe the Environment keep track of how much time is remaining
 		person.setTimeoutTimeRemaining(duration);
-		System.out.println(person.getTimeoutTimeRemaining());
 
 		// Return the Avatar so that the Environment can work with it to keep track of how much time is remaining for
 		// this particular Avatar to be outside
 		return person;
+	}
+	
+	public String getListOfPeopleInParty() {
+		System.out.println(peopleInParty.toString());
+		return peopleInParty.toString();
+
 	}
 
 	public Direction moveAvatar() {
