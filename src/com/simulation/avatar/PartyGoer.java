@@ -7,6 +7,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
+
 public interface PartyGoer {
 	
 	public void dancingAlgo();
@@ -20,3 +21,5 @@ public interface PartyGoer {
 	public void getWhatISee();
 	public void asdfg();	
 }
+	
+

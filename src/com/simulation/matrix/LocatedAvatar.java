@@ -1,5 +1,7 @@
 package com.simulation.matrix;
 
+import java.awt.Color;
+
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.Colors;
 
@@ -62,7 +64,7 @@ public class LocatedAvatar {
 
 	}
 
-	public Colors getColor() {
+	public Color getColor() {
 		return avatar.getColor();
 	}
 }
