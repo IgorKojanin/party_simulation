@@ -20,6 +20,7 @@ package com.simulation.avatar;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
+
 import com.simulation.enums.Colors;
 
 
@@ -134,5 +135,4 @@ public abstract class Avatar {
 	}
 
 	public abstract Direction moveAvatar();  // To be specified on each personal class
-
 }
