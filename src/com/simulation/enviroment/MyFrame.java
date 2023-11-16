@@ -8,6 +8,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 public class MyFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	GridPanel panel;
 	private final int maxY = 23;
 	private final int maxX = 38;
@@ -110,14 +114,7 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-	public void wait(int ms) {
-		try {
-			Thread.sleep(ms);
-		} catch (InterruptedException ex) {
-			Thread.currentThread().interrupt();
-
-		}
-	}
+	
 
 	public boolean isWall(int fromX, int fromY, int toX, int toY) {
 		if ((fromX <= 32 && toX >= 33) || (fromX >= 33 && toX <= 32)) {
@@ -130,15 +127,31 @@ public class MyFrame extends JFrame {
 	}
 
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
-		wait(30);
-		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
+
+
+		if (toX < maxX && toY < maxY && toX >=0 && toY >= 0) {
 			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
 			squares[fromX][fromY].setIsUsable(true);
 			repaint();
 			squares[toX][toY].setColor(color); // Set the to-square to avatar color
 			squares[toX][toY].setIsUsable(false);
 			repaint();
+
+		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
+			boolean canMove = !this.isWall(fromX, fromY, toX, toY);
+			if(canMove) {
+				squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
+				squares[fromX][fromY].setIsUsable(true);
+				repaint();
+				squares[toX][toY].setColor(color); // Set the to-square to avatar color
+				squares[toX][toY].setIsUsable(false);
+				repaint();
+			}
+
 		}
+		repaint();
+		}
+
 	}
 
 	public boolean isUsable(int x, int y) {

@@ -10,20 +10,24 @@ package com.simulation.partypeople;
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
-import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
+
 import com.simulation.enums.Shape;
 
-public class JoeMama extends Avatar implements PartyGoer {
+import java.awt.*;
+
+public class JoeMama extends Avatar  {
 	
 	// store locally where u are
 	// check with that exactly what can u do?
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName) {
+
+	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
 		super(shape, color, borderWidth, avatarAge, avatarName);
 		// TODO
+
 	}
 
 	public void dancingAlgo() {

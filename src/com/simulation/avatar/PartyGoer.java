@@ -7,7 +7,9 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
+
 import com.simulation.enums.BeverageType;
+
 public interface PartyGoer {
 	
 	public void dancingAlgo();
@@ -19,3 +21,5 @@ public interface PartyGoer {
 	public void playPool();	
 	public void playFussball();
 }
+	
+

@@ -13,6 +13,7 @@ import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,11 @@ public class Bouncer extends Avatar {
 	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
 
 	// ************** Constructor **************
-	public Bouncer(Shape shape, Colors color, int borderWidth) {
+
+	public Bouncer(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
+
+
 	}
 	public boolean checkAge(int avatarAge) {
 		boolean isOverAge = false;
@@ -67,6 +71,7 @@ public class Bouncer extends Avatar {
 		kickOut(person1,person1DurationKickedOut);
 		kickOut(person2,person2DurationKickedOut);
 	}
+
 
 	// Here, maybe the Environment keeps track of if the timeout time has elapsed or not
 	public void setTimeout(Avatar person, int timeoutOverride) {

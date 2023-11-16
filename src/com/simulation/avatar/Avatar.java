@@ -18,10 +18,14 @@
 
 package com.simulation.avatar;
 
+import java.awt.Color;
+
+
+
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-import com.simulation.enums.Colors;
+
 
 
 public abstract class Avatar {
@@ -29,7 +33,7 @@ public abstract class Avatar {
 	private static int Id; 
 
 	private Shape shape;
-	private Colors color;
+	private Color color;
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
@@ -40,9 +44,11 @@ public abstract class Avatar {
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName) {
+
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
 		Id += Id;
 		this.avatarName = avatarName;
+
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
@@ -55,14 +61,18 @@ public abstract class Avatar {
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Colors color, int borderWidth) { 
+
+	public Avatar(Shape shape, Color color, int borderWidth) { 
+
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
+
 		this.avatarId = Id;
 	}	
 	
 	// ************** get functions **************
+
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -71,7 +81,7 @@ public abstract class Avatar {
 		return this.avatarName;
 	}
 	
-	public Colors getColor() {
+	public Color getColor() {
 		return this.color;
 	}
 	
