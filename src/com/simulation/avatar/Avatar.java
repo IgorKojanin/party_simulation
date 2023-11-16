@@ -4,64 +4,73 @@
 //
 // Class: Avatar.java
 // Description: Abstract class with basic functions for all the people
-
-/* @param shape            The shape of the avatar.
- * @param color            The color of the avatar.
- * @param borderWidth      The border width of the avatar.
- * @param avatarId         The unique ID of the avatar.
- * @param avatarAge        The age of the avatar.
- * @param drinksConsumed   The number of drinks consumed by the avatar.
- * @param isDancing        State of dancing avatar
- * @param timeOut          The time it should remain outside
- */
+///////////////////////////////////////////////////////////////////////////////
+// @param shape            The shape of the avatar.
+// @param color            The color of the avatar.
+// @param borderWidth      The border width of the avatar.
+// @param avatarId         The unique ID of the avatar.
+// @param avatarAge        The age of the avatar.
+// @param drinksConsumed   The number of drinks consumed by the avatar.
+// @param isDancing        State of dancing avatar
+// @param timeOut          The time it should remain outside
+// 
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import java.awt.Color;
-import java.util.Random;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-import com.simulation.enums.Colors;
+
+
+import java.awt.*;
+import java.util.Random;
 
 
 public abstract class Avatar {
-	
+
+	private static int Id; 
+
 	private Shape shape;
 	private Color color;
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
-	private int drinksConsumed = 0;
+	private int AlcoholPercentage = 0;
+	private String avatarName;
 	private boolean isDancing = false;
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, int drinksConsumed, boolean isHit, int timeoutTimeRemaining, boolean isInTheParty) {
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
+		Id += Id;
+		this.avatarName = avatarName;
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
-		this.avatarId = avatarId;
+		this.avatarId = Id;
 		this.avatarAge = avatarAge;
-		this.drinksConsumed = drinksConsumed;
-		this.isHit = isHit;
-		this.timeoutTimeRemaining = timeoutTimeRemaining;
-		this.isInTheParty = isInTheParty;
+		this.AlcoholPercentage = 0;
+		this.isHit = false;
+		this.timeoutTimeRemaining = 0;
+		this.isInTheParty = false;
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Color color2, int borderWidth, int avatarId) { 
+	public Avatar(Shape shape, Color color, int borderWidth) {
 		this.shape = shape;
-		this.color = color2;
+		this.color = color;
 		this.borderWidth = borderWidth;
-		this.avatarId = avatarId;
-	}
-
-
-    // ************** get functions **************
+		this.avatarId = Id;
+	}	
+	
+	// ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
+	}
+
+	public String getName() {
+		return this.avatarName;
 	}
 	
 	public Color getColor() {
@@ -80,8 +89,8 @@ public abstract class Avatar {
 		return this.avatarAge;
 	}
 	
-	public int getDrinksConsumed() {
-		return this.drinksConsumed;
+	public int getAlcoholPercentage() {
+		return this.AlcoholPercentage;
 	}
 	
 	public int getTimeoutTimeRemaining() {
@@ -106,8 +115,8 @@ public abstract class Avatar {
 		this.isDancing = newDancingState;
 	}
 	
-	public void setDrinksConsumed(int newDrinksConsumed) {
-		this.drinksConsumed = newDrinksConsumed;
+	public void setAlcoholPercentage(int newAlcoholPercentage) {
+		this.AlcoholPercentage = newAlcoholPercentage;
 	}
 	
 	public void setTimeoutTimeRemaining(int timeout) {
@@ -122,7 +131,12 @@ public abstract class Avatar {
 		this.isHit = newIsHitState;
 	}
 	
-	// ************** move functions **************
+	// ************** See function **************
+	public void getWhatISee(){ 		// get function from simulation, returns array of Places enums. 2 places ahead
+
+	}
+
+	// ************** move function **************
 	public Direction moveAvatar() {
 		Random rand = new Random();
 		int number = rand.nextInt(4);
@@ -141,6 +155,5 @@ public abstract class Avatar {
 			dir = Direction.LEFT;
 		}
 		return dir;
-	} 
-
+	}
 }
