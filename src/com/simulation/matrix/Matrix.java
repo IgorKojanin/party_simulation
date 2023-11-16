@@ -24,7 +24,7 @@ public class Matrix {
 		avatars = new ArrayList<LocatedAvatar>();
 
 
-		Bouncer bouncer = new Bouncer(Shape.CIRCLE, Color.RED, 0, 0);
+		Bouncer bouncer = new Bouncer(Shape.CIRCLE, Color.RED, 0);
 
 		LocatedAvatar locBouncer = new LocatedAvatar(bouncer, 0, 0);
 		avatars.add(locBouncer);
@@ -34,7 +34,7 @@ public class Matrix {
 			int b = (int)(Math.random() * 255) + 1;
 			int c = (int)(Math.random() * 255) + 1;
 			Color color = new Color(a, b, c);
-			avatars.add(new LocatedAvatar(new Bouncer(Shape.CIRCLE, color, i, i), i, i));
+			avatars.add(new LocatedAvatar(new Bouncer(Shape.CIRCLE, color, i), i, i));
 		}
 
 	}
@@ -92,7 +92,6 @@ public class Matrix {
 					break;
 
 				}
-				System.out.println("locAvatar.getColor()" + locAvatar.getColor());
 				env.moveTo(oldX, oldY, locAvatar.getX(), locAvatar.getY(), locAvatar.getColor());
 			}
 		}
