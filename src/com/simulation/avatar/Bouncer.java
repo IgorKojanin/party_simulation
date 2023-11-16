@@ -9,11 +9,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 
-import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +27,6 @@ public class Bouncer extends Avatar {
 
 	public Bouncer(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
-
-
 	}
 	public boolean checkAge(int avatarAge) {
 		boolean isOverAge = false;
@@ -72,7 +68,6 @@ public class Bouncer extends Avatar {
 		kickOut(person2,person2DurationKickedOut);
 	}
 
-
 	// Here, maybe the Environment keeps track of if the timeout time has elapsed or not
 	public void setTimeout(Avatar person, int timeoutOverride) {
 		// If timeoutOverride is 0, then use the default timeout value of 10.
@@ -98,4 +93,5 @@ public class Bouncer extends Avatar {
 	public Direction moveAvatar() {
 		return Direction.BACK;
 	}
+
 }

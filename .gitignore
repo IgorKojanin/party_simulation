@@ -24,5 +24,16 @@ hs_err_pid*
 replay_pid*
 /bin/
 
+<<<<<<< HEAD
 # Apple files
 *.DS_Store
+=======
+/.idea/*.xml
+src/com/simulation/.DS_store
+.DS_Store
+.idea/misc.xml
+.idea/vcs.xml
+src/.DS_Store
+src/com/.DS_Store
+src/com/simulation/.DS_Store
+>>>>>>> d50699afffa7c0aecc04f77c8ed9877d0deee9c3

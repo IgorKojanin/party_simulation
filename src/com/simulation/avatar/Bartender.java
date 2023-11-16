@@ -11,9 +11,10 @@
 package com.simulation.avatar;
 
 import com.simulation.enums.BeverageType;
-import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
+
+import java.awt.*;
 
 public class Bartender extends Avatar {
 private static final int LEGAL_STRONG_ALCOHOL_AGE = 18;
@@ -65,7 +66,7 @@ private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
 	
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Colors color, int borderWidth) {
+	public Bartender(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
 	}
 
