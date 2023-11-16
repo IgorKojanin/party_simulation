@@ -4,64 +4,73 @@
 //
 // Class: Avatar.java
 // Description: Abstract class with basic functions for all the people
-
-/* @param shape            The shape of the avatar.
- * @param color            The color of the avatar.
- * @param borderWidth      The border width of the avatar.
- * @param avatarId         The unique ID of the avatar.
- * @param avatarAge        The age of the avatar.
- * @param drinksConsumed   The number of drinks consumed by the avatar.
- * @param placePriorities  The priorities of places for the avatar.
- * @param questionsAnswersList  The list of questions and answers for the avatar.
- */
+///////////////////////////////////////////////////////////////////////////////
+// @param shape            The shape of the avatar.
+// @param color            The color of the avatar.
+// @param borderWidth      The border width of the avatar.
+// @param avatarId         The unique ID of the avatar.
+// @param avatarAge        The age of the avatar.
+// @param drinksConsumed   The number of drinks consumed by the avatar.
+// @param isDancing        State of dancing avatar
+// @param timeOut          The time it should remain outside
+// 
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import java.awt.Color;
-import java.util.HashMap;
-import java.util.Random;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
 
+import java.awt.*;
+import java.util.Random;
+
+
 public abstract class Avatar {
-	
+
+	private static int Id; 
+
 	private Shape shape;
 	private Color color;
 	private int borderWidth;
 	private int avatarId;
 	private int avatarAge;
-	private int drinksConsumed;
-	private HashMap<String, Integer> placePriorities = new HashMap<String, Integer>();
-	private HashMap<String[], String[]> questionsAnswersList = new HashMap<String[], String[]>();
-	private String[] hobbiesList = new String[3];
-	
-	
+	private int AlcoholPercentage = 0;
+	private String avatarName;
+	private boolean isDancing = false;
+	private boolean isHit = false;
+	private int timeoutTimeRemaining = 0;
+	private boolean isInTheParty;
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarId, int avatarAge, 
-			int drinksConsumed, HashMap<String, Integer> placePriorities, 
-			HashMap<String[], String[]> questionsAnswersList) {
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
+		Id += Id;
+		this.avatarName = avatarName;
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
-		this.avatarId = avatarId;
+		this.avatarId = Id;
 		this.avatarAge = avatarAge;
-		this.drinksConsumed = drinksConsumed;
-		this.placePriorities = placePriorities;
-		this.questionsAnswersList = questionsAnswersList;
+		this.AlcoholPercentage = 0;
+		this.isHit = false;
+		this.timeoutTimeRemaining = 0;
+		this.isInTheParty = false;
 	}
+	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarId) { 
+	public Avatar(Shape shape, Color color, int borderWidth) {
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
-		this.avatarId = avatarId;
+		this.avatarId = Id;
 	}	
 	
 	// ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
+	}
+
+	public String getName() {
+		return this.avatarName;
 	}
 	
 	public Color getColor() {
@@ -80,18 +89,53 @@ public abstract class Avatar {
 		return this.avatarAge;
 	}
 	
-	public int getDrinksConsumed() {
-		return this.drinksConsumed;
+	public int getAlcoholPercentage() {
+		return this.AlcoholPercentage;
 	}
 	
-	public HashMap<String, Integer> getPlacePriorities() {
-		return this.placePriorities;
+	public int getTimeoutTimeRemaining() {
+		return this.timeoutTimeRemaining;
 	}
 
-	public HashMap<String[], String[]> getQuestionsAnswersList() {
-		return this.questionsAnswersList;
+	public boolean getIsInThePartyState() {
+		return this.isInTheParty;
 	}
 	
+	public boolean getDancing() {
+		return this.isDancing;
+	}
+
+	public boolean getIsHitState() {
+		return this.isHit;
+	}
+	
+	// ************** set functions **************
+	
+	public void setDancing(boolean newDancingState) {
+		this.isDancing = newDancingState;
+	}
+	
+	public void setAlcoholPercentage(int newAlcoholPercentage) {
+		this.AlcoholPercentage = newAlcoholPercentage;
+	}
+	
+	public void setTimeoutTimeRemaining(int timeout) {
+		this.timeoutTimeRemaining = timeout;
+	}
+
+	public void setIsInThePartyState(boolean newInThePartyState) {
+		this.isInTheParty = newInThePartyState;
+	}
+
+	public void setIsHit(boolean newIsHitState) {
+		this.isHit = newIsHitState;
+	}
+	
+	// ************** See function **************
+	public void getWhatISee(){ 		// get function from simulation, returns array of Places enums. 2 places ahead
+
+	}
+
 	// ************** move function **************
 	public Direction moveAvatar() {
 		Random rand = new Random();
@@ -111,6 +155,5 @@ public abstract class Avatar {
 			dir = Direction.LEFT;
 		}
 		return dir;
-	} 
-	
+	}
 }
