@@ -63,15 +63,15 @@ private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
 			break;
 		}
 	}
-
+	private void checkID() {
+		
+	}
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Color color, int borderWidth, int avatarId) {
+	public Bartender(Shape shape, Colors color, int borderWidth, int avatarId) {
 		super(shape, color, borderWidth, avatarId);
 	}
 
 	public Direction moveAvatar() {
 		return Direction.BACK;
 	}
-
-}

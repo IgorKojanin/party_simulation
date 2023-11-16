@@ -52,7 +52,7 @@ public class Bouncer extends Avatar {
 		}
 		else {
 			person.setIsInThePartyState(false);
-			personIsInParty = false;
+			return false;
 		}
 		System.out.println(person.getIsInThePartyState());
 		return personIsInParty;
@@ -62,6 +62,13 @@ public class Bouncer extends Avatar {
 		person.setIsHit(true);
 	}
 
+	public void breakUpFight(Avatar person1, Avatar person2, int person1DurationKickedOut, int person2DurationKickedOut) {
+		// The bouncer breaks up a fight between two Avatars
+		hitPerson(person1);
+		hitPerson(person2);
+		kickOut(person1,person1DurationKickedOut);
+		kickOut(person2,person2DurationKickedOut);
+	}
 
 
 	// Here, maybe the Environment keeps track of if the timeout time has elapsed or not
