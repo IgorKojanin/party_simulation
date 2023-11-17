@@ -155,9 +155,84 @@ public class MyFrame extends JFrame {
 
 	// Set the letters to be displayed in the individual grids here
 	public void createText() {
-		squares[1][0].setDisplayLetter("B");
-		squares[1][1].setDisplayLetter("A");
-		squares[1][2].setDisplayLetter("R");
+		squares[0][15].setDisplayLetter("B");
+		squares[1][15].setDisplayLetter("A");
+		squares[2][15].setDisplayLetter("R");
+
+		squares[14][22].setDisplayLetter("P");
+		squares[15][22].setDisplayLetter("O");
+		squares[16][22].setDisplayLetter("O");
+		squares[17][22].setDisplayLetter("L");
+
+		squares[26][19].setDisplayLetter("T");
+		squares[27][19].setDisplayLetter("O");
+		squares[28][19].setDisplayLetter("I");
+		squares[29][19].setDisplayLetter("L");
+		squares[30][19].setDisplayLetter("E");
+		squares[31][19].setDisplayLetter("T");
+		squares[32][19].setDisplayLetter("S");
+
+		squares[12][16].setDisplayLetter("D");
+		squares[13][16].setDisplayLetter("A");
+		squares[14][16].setDisplayLetter("N");
+		squares[15][16].setDisplayLetter("C");
+		squares[16][16].setDisplayLetter("E");
+		squares[17][16].setDisplayLetter("F");
+		squares[18][16].setDisplayLetter("L");
+		squares[19][16].setDisplayLetter("O");
+		squares[20][16].setDisplayLetter("O");
+		squares[21][16].setDisplayLetter("R");
+
+		squares[26][14].setDisplayLetter("F");
+		squares[27][14].setDisplayLetter("O");
+		squares[28][14].setDisplayLetter("O");
+		squares[29][14].setDisplayLetter("S");
+		// following lines are a matter of taste
+		// squares[26][15].setDisplayLetter("B");
+		// squares[27][15].setDisplayLetter("A");
+		// squares[28][15].setDisplayLetter("L");
+		// squares[29][15].setDisplayLetter("L");
+
+		squares[14][2].setDisplayLetter("D");
+		squares[15][2].setDisplayLetter("J");
+
+		squares[28][3].setDisplayLetter("B");
+		squares[29][3].setDisplayLetter("O");
+		squares[30][3].setDisplayLetter("U");
+		squares[31][3].setDisplayLetter("N");
+		squares[32][3].setDisplayLetter("C");
+		squares[33][3].setDisplayLetter("E");
+		squares[34][3].setDisplayLetter("R");
+
+		squares[0][22].setDisplayLetter("S");
+		squares[1][22].setDisplayLetter("M");
+		squares[2][22].setDisplayLetter("O");
+		squares[3][22].setDisplayLetter("K");
+		squares[4][22].setDisplayLetter("I");
+		squares[5][22].setDisplayLetter("N");
+		squares[6][22].setDisplayLetter("G");
+
+		squares[22][0].setDisplayLetter("L");
+		squares[23][0].setDisplayLetter("O");
+		squares[24][0].setDisplayLetter("U");
+		squares[25][0].setDisplayLetter("N");
+		squares[26][0].setDisplayLetter("G");
+		squares[27][0].setDisplayLetter("E");
+		squares[22][2].setDisplayLetter("S");
+		squares[23][2].setDisplayLetter("M");
+		squares[24][2].setDisplayLetter("A");
+		squares[25][2].setDisplayLetter("L");
+		squares[26][2].setDisplayLetter("L");
+
+		squares[3][0].setDisplayLetter("L");
+		squares[4][0].setDisplayLetter("O");
+		squares[5][0].setDisplayLetter("U");
+		squares[6][0].setDisplayLetter("N");
+		squares[7][0].setDisplayLetter("G");
+		squares[8][0].setDisplayLetter("E");
+		squares[3][2].setDisplayLetter("B");
+		squares[4][2].setDisplayLetter("I");
+		squares[5][2].setDisplayLetter("G");
 	}
 	/**
 	 * This class represents the grid panel of the frame.
@@ -180,11 +255,11 @@ public class MyFrame extends JFrame {
 					g2d.setColor(Color.BLACK);
 					g2d.drawRect(square.x, square.y, square.width, square.height);
 					// these numbers ensure that the letters are displayed in the middle of the square
-					g2d.drawString(square.getDisplayLetter(), square.x + 12, square.y + 19);
 					if (square.getColor() != Color.WHITE) {
 						g2d.setColor(square.getColor());
 						g2d.fillRect(square.x + 1, square.y + 1, square.width, square.height);
 					}
+					g2d.drawString(square.getDisplayLetter(), square.x + 12, square.y + 19);
 				}
 			}
 
