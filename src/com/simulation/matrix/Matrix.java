@@ -5,18 +5,14 @@ import java.util.ArrayList;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.Bouncer;
-
-
+import com.simulation.avatar.Emmanuel;
 import com.simulation.enums.ChangeInXY;
-
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
+import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
-import com.simulation.partypeople.Catherine2;
 import com.simulation.partypeople.JoeMama;
-import com.simulation.partypeople.Emmanuel;
-
 
 public class Matrix {
 
@@ -180,7 +176,8 @@ public class Matrix {
 
 			}
 		}
-
+	
+	
 	public void run() {
 		while (true) {
 			moveAvatars();
@@ -220,6 +217,7 @@ public class Matrix {
 					locAvatar.setHeading(Heading.NORTH);
 				}
 				break;
+
 		}
 	}
 }
