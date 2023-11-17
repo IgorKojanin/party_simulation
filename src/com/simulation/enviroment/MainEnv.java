@@ -15,5 +15,6 @@ public class MainEnv {
         // DRAWING THE FLOORPLAN
         MyFrame frame = new MyFrame();
         frame.setVisible(true);
+        // Hello World!
     }
 }
