@@ -15,7 +15,6 @@ import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 import java.util.LinkedList;
-import java.awt.Color;
 
 public class Bartender extends Avatar {
 	private LinkedList<Avatar> servingQueue; // a queue for serving Avatars in order of arrival
