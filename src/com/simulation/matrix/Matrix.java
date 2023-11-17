@@ -27,15 +27,22 @@ public class Matrix {
 	private int queuelength;
 	private int initialWaitingTime;
 	private boolean avatarInQueue;
-
+	
 	public Matrix() {
 		env = new MyFrame();
 		env.setVisible(true);
 		avatars = new ArrayList<LocatedAvatar>();
+		
 
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel",0);
+		Emmanuel eliyas = new Emmanuel(Shape.CIRCLE, Color.MAGENTA, 0, 0, "Eliyas",0);
+		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine",0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
+		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
+		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
 		avatars.add(locEmmanuel);
+		avatars.add(locCelestine);
+		avatars.add(locEliyas);
 
 		// Implementing a queue at the entrance
 		queuelength = 14; // Defining the length of the queue, can increase to required number of avatars
@@ -64,8 +71,84 @@ public class Matrix {
 			System.out.println("Name: " + avatar.getAvatar().getName() + "\n Waiting Time: " + avatar.getAvatar().getWaitingTime());
 		}
 	}
+	
+	public void moveAvatars() {
+		for (LocatedAvatar locAvatar : avatars) {
+			wait(30);
+			int oldX = locAvatar.getX();
+			int oldY = locAvatar.getY();
+			Direction dir = locAvatar.getAvatar().moveAvatar();
+			switch (dir) {
+				case FORWARD:
+					switch (locAvatar.getHeading()) {
+						case WEST:
+							changeXY(locAvatar, ChangeInXY.DECX);
+							break;
+						case EAST:
+							changeXY(locAvatar, ChangeInXY.INCX);
+							break;
+						case NORTH:
+							changeXY(locAvatar, ChangeInXY.DECY);
+							break;
+						case SOUTH:
+							changeXY(locAvatar, ChangeInXY.INCY);
+							break;
+					}
+					break;
+				case BACK:
+					switch (locAvatar.getHeading()) {
+						case WEST:
+							changeXY(locAvatar, ChangeInXY.INCX);
+							break;
+						case EAST:
+							changeXY(locAvatar, ChangeInXY.DECX);
+							break;
+						case NORTH:
+							changeXY(locAvatar, ChangeInXY.INCY);
+							break;
+						case SOUTH:
+							changeXY(locAvatar, ChangeInXY.DECY);
+							break;
+					}
+					break;
+				case RIGHT:
+					switch (locAvatar.getHeading()) {
+						case WEST:
+							changeXY(locAvatar, ChangeInXY.DECY);
+							break;
+						case EAST:
+							changeXY(locAvatar, ChangeInXY.INCY);
+							break;
+						case NORTH:
+							changeXY(locAvatar, ChangeInXY.INCX);
+							break;
+						case SOUTH:
+							changeXY(locAvatar, ChangeInXY.DECX);
+							break;
+					}
+					break;
+				case LEFT:
+					switch (locAvatar.getHeading()) {
+						case WEST:
+							changeXY(locAvatar, ChangeInXY.INCY);
+							break;
+						case EAST:
+							changeXY(locAvatar, ChangeInXY.DECY);
+							break;
+						case NORTH:
+							changeXY(locAvatar, ChangeInXY.DECX);
+							break;
+						case SOUTH:
+							changeXY(locAvatar, ChangeInXY.INCX);
+							break;
+					}
+					break;
+			}
+			env.moveTo(oldX, oldY, locAvatar.getX(), locAvatar.getY(),locAvatar.getColor());
+		}
+	}
 
-	public void simulateQueue() {
+ 	public void simulateQueue() {
 		while(avatarInQueue == true){
             for(LocatedAvatar locAvatar : avatars) {
                 Avatar avatar = locAvatar.getAvatar();
@@ -100,81 +183,7 @@ public class Matrix {
 
 	public void run() {
 		while (true) {
-			for (LocatedAvatar locAvatar : avatars) {
-				wait(30);
-				int oldX = locAvatar.getX();
-				int oldY = locAvatar.getY();
-				Direction dir = locAvatar.getAvatar().moveAvatar();
-				switch (dir) {
-					case FORWARD:
-						switch (locAvatar.getHeading()) {
-							case WEST:
-								changeXY(locAvatar, ChangeInXY.DECX);
-								break;
-							case EAST:
-								changeXY(locAvatar, ChangeInXY.INCX);
-								break;
-							case NORTH:
-								changeXY(locAvatar, ChangeInXY.DECY);
-								break;
-							case SOUTH:
-								changeXY(locAvatar, ChangeInXY.INCY);
-								break;
-						}
-						break;
-
-					case BACK:
-						switch (locAvatar.getHeading()) {
-							case WEST:
-								changeXY(locAvatar, ChangeInXY.INCX);
-								break;
-							case EAST:
-								changeXY(locAvatar, ChangeInXY.DECX);
-								break;
-							case NORTH:
-								changeXY(locAvatar, ChangeInXY.INCY);
-								break;
-							case SOUTH:
-								changeXY(locAvatar, ChangeInXY.DECY);
-								break;
-						}
-						break;
-
-					case RIGHT:
-						switch (locAvatar.getHeading()) {
-							case WEST:
-								changeXY(locAvatar, ChangeInXY.DECY);
-								break;
-							case EAST:
-								changeXY(locAvatar, ChangeInXY.INCY);
-								break;
-							case NORTH:
-								changeXY(locAvatar, ChangeInXY.INCX);
-								break;
-							case SOUTH:
-								changeXY(locAvatar, ChangeInXY.DECX);
-								break;
-						}
-						break;
-					case LEFT:
-						switch (locAvatar.getHeading()) {
-							case WEST:
-								changeXY(locAvatar, ChangeInXY.INCY);
-								break;
-							case EAST:
-								changeXY(locAvatar, ChangeInXY.DECY);
-								break;
-							case NORTH:
-								changeXY(locAvatar, ChangeInXY.DECX);
-								break;
-							case SOUTH:
-								changeXY(locAvatar, ChangeInXY.INCX);
-								break;
-						}
-						break;
-				}
-				env.moveTo(oldX, oldY, locAvatar.getX(), locAvatar.getY(),locAvatar.getColor());
-			}
+			moveAvatars();
 		}
 	}
 
