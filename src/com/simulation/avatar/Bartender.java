@@ -14,16 +14,28 @@ import com.simulation.enums.BeverageType;
 import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
+import java.util.LinkedList;
+
 
 public class Bartender extends Avatar {
-private static final int LEGAL_STRONG_ALCOHOL_AGE = 18;
-private static final int LEGAL_WEAK_ALCOHOL_AGE = 16;
-private static final int ADD_BEER_PERCENTAGE = 10;
-private static final int ADD_VODKA_PERCENTAGE = 40;
-private static final int ADD_MOJITO_PERCENTAGE = 20;
-private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
-private static final int ADD_APEROL_SPRITZ_PERCENTAGE = 15;
-
+	private static final int LEGAL_STRONG_ALCOHOL_AGE = 18;
+	private static final int LEGAL_WEAK_ALCOHOL_AGE = 16;
+	private static final int ADD_BEER_PERCENTAGE = 10;
+	private static final int ADD_VODKA_PERCENTAGE = 40;
+	private static final int ADD_MOJITO_PERCENTAGE = 20;
+	private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
+	private static final int ADD_APEROL_SPRITZ_PERCENTAGE = 15;
+	
+	private LinkedList<Avatar> servingQueue; // a queue for serving Avatars in order of arrival
+	
+	public void addAvatarToOrderQueue(Avatar avatar) {
+		servingQueue.add(avatar);
+    }
+	
+    public void removeAvatarFromOrderQueue(Avatar avatar) {
+    	servingQueue.remove(avatar);
+    }
+    
 	private int checkAge(Avatar avatar) {
 		return avatar.getAge();
 	}
@@ -85,9 +97,11 @@ private static final int ADD_APEROL_SPRITZ_PERCENTAGE = 15;
 	// ************** Constructor **************
 	public Bartender(Shape shape, Colors color, int borderWidth) {
 		super(shape, color, borderWidth);
+		this.servingQueue = new LinkedList<>();
 	}
 
 	public Direction moveAvatar() {
+		
 		return Direction.BACK;
 	}
 
