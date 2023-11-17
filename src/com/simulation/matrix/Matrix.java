@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 import com.simulation.avatar.Bouncer;
 import java.awt.Color;
+
+import com.simulation.enums.ChangeInXY;
 import com.simulation.enums.Direction;
+import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 

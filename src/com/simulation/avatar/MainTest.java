@@ -54,7 +54,7 @@ public class MainTest {
 		System.out.println(bouncerBob.peopleInParty.toString());
 		System.out.println(bouncerBob.getListOfPeopleInParty());
 
-		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
+		// DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		// dj.playMusic(); // Start playing all tracks in sequence
 
 		try {

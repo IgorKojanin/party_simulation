@@ -39,6 +39,7 @@ public abstract class Avatar {
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
+	
 	// ************** Main constructor for PartyGoer **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
 		Id += Id;

@@ -4,12 +4,11 @@
 //
 // Class: PartyGoer.java
 // Description: Interface providing the basics functions to be implemented
-//
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 import com.simulation.enums.BeverageType;
+
 public interface PartyGoer {
-	
 	public void dancingAlgo();
 	public void drink(BeverageType type);	
 	public void fight(PartyGoer opponent);	
