@@ -1,8 +1,11 @@
 package com.simulation.matrix;
 
-import com.simulation.avatar.Avatar;
 import java.awt.Color;
 
+import com.simulation.avatar.Avatar;
+import com.simulation.enums.Heading;
+
+import java.awt.Color;
 
 public class LocatedAvatar {
 	private Avatar avatar;
