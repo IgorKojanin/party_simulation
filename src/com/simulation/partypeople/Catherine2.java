@@ -8,6 +8,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.partypeople;
 
+import java.awt.Color;
+
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
@@ -21,8 +23,8 @@ public class Catherine2 extends Avatar implements PartyGoer {
 	// check with that exactly what can u do?
 
 	// ************** Constructor **************
-	public Catherine2(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
-		super(shape, color, borderWidth, avatarAge, avatarName);
+	public Catherine2(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
+		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -30,8 +30,9 @@ public class JoeMama extends Avatar implements PartyGoer {
 	// - Develop skibidi toilet
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
-		super(shape, color, borderWidth, avatarAge, avatarName);
+	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
+		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
+		// TODO
 	}
 
 	// ************** Methods **************
