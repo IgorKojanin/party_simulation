@@ -13,7 +13,6 @@ import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 

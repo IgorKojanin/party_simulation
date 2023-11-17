@@ -140,6 +140,15 @@ public class MyFrame extends JFrame {
 	}
 
 	/**
+	 * This method checks the square's place.
+	 * @param x The x-coordinate of the square.
+	 * @param y The y-coordinate of the square.
+	 */
+	public Places getPlace(int x, int y) {
+		return squares[x][y].getPlace();
+	}
+
+	/**
 	 * This is the constructor of the MyFrame class.
 	 * It creates the grid panel and sets up the frame.
 	 */
