@@ -5,26 +5,30 @@
 // Class: Avatar.java
 // Description: Abstract class with basic functions for all the people
 ///////////////////////////////////////////////////////////////////////////////
-// @param shape            The shape of the avatar.
-// @param color            The color of the avatar.
-// @param borderWidth      The border width of the avatar.
-// @param avatarId         The unique ID of the avatar.
-// @param avatarAge        The age of the avatar.
-// @param drinksConsumed   The number of drinks consumed by the avatar.
-// @param isDancing        State of dancing avatar
-// @param timeOut          The time it should remain outside
-// 
+// @param shape             		The shape of the avatar.
+// @param color             		The color of the avatar.
+// @param borderWidth      			The border width of the avatar.
+// @param avatarId          		The unique ID of the avatar.
+// @param avatarAge         		The age of the avatar.
+// @param AlcoholPercentage 		The alcohol percentage of the avatar.
+// @param avatarName        		The name of the avatar.
+// @param isDancing         		State of the avatar dancing. 
+// @param isHit             		State of the avatar being hit. 
+// @param timeoutTimeRemaining      Amount of timeout time the avatar has left. 
+// @param isInTheParty      		If the avatar is in the party. 
+// @param waitingTime      			Amount of waiting time the avatar has. 
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
 
 import com.simulation.enums.Direction;
+import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 import java.awt.Color;
 
 public abstract class Avatar {
 
-	private static int Id; 
+	private static int Id;
 
 	private Shape shape;
 	private Color color;
@@ -38,8 +42,9 @@ public abstract class Avatar {
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 
-	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
-    private int waitingTime;
+	// Addition of waiting time variable for queing, or ordering drinks, or waiting
+	// to play a game etc
+	private int waitingTime;
 
 	// ************** Main constructor for PartyGoer **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -56,16 +61,20 @@ public abstract class Avatar {
 		this.isInTheParty = false;
 		this.waitingTime = waitingTime;
 	}
-	
-	// ************** Constructor for workers (DJ, bouncer & bartender) **************
+
+	// ************** Constructor for workers (DJ, bouncer & bartender)
+	// **************
 	public Avatar(Shape shape, Color color2, int borderWidth) {
+
 		this.shape = shape;
 		this.color = color2;
 		this.borderWidth = borderWidth;
 		this.avatarId = Id;
-	}	
 
-    // ************** get functions **************
+	}
+
+	// ************** get functions **************
+
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -73,27 +82,27 @@ public abstract class Avatar {
 	public String getName() {
 		return this.avatarName;
 	}
-	
+
 	public Color getColor() {
 		return this.color;
 	}
-	
+
 	public int getBorderWidth() {
 		return this.borderWidth;
 	}
-	
+
 	public int getId() {
 		return this.avatarId;
 	}
-	
+
 	public int getAge() {
 		return this.avatarAge;
 	}
-	
+
 	public int getAlcoholPercentage() {
 		return this.AlcoholPercentage;
 	}
-	
+
 	public int getTimeoutTimeRemaining() {
 		return this.timeoutTimeRemaining;
 	}
@@ -101,7 +110,7 @@ public abstract class Avatar {
 	public boolean getIsInThePartyState() {
 		return this.isInTheParty;
 	}
-	
+
 	public boolean getDancing() {
 		return this.isDancing;
 	}
@@ -111,19 +120,19 @@ public abstract class Avatar {
 	}
 
 	public int getWaitingTime() { // Waiting time getter
-        return waitingTime;
+		return waitingTime;
 	}
-	
+
 	// ************** set functions **************
-	
+
 	public void setDancing(boolean newDancingState) {
 		this.isDancing = newDancingState;
 	}
-	
+
 	public void setAlcoholPercentage(int newAlcoholPercentage) {
 		this.AlcoholPercentage = newAlcoholPercentage;
 	}
-	
+
 	public void setTimeoutTimeRemaining(int timeout) {
 		this.timeoutTimeRemaining = timeout;
 	}
@@ -137,13 +146,13 @@ public abstract class Avatar {
 	}
 
 	public void setWaitngTime(int newWaitingTime) { // Setter for waiting time
-        this.waitingTime = newWaitingTime;
+		this.waitingTime = newWaitingTime;
 	}
-	
+
 	// ************** See function **************
-	public void getWhatISee(){ 		// get function from simulation, returns array of Places enums. 2 places ahead
+	public void setWhatISee(Places[] places) { // set function from simulation, returns array of Places enums. 2 places ahead
 
 	}
 
-	public abstract Direction moveAvatar();  // To be specified on each personal class
+	public abstract Direction moveAvatar(); // To be specified on each personal class
 }

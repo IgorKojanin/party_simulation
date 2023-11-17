@@ -1,4 +1,4 @@
-package com.simulation.matrix;
+package com.simulation.enums;
 
 public enum Heading {
 	NORTH,
