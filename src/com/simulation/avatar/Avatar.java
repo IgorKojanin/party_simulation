@@ -136,7 +136,7 @@ public abstract class Avatar {
 	}
 	
 	public void drink(BeverageType type, Bartender bartender) {
-		//if (getWhatISee() == Area.BAR) { // can only call this function if youre at the area of the bar
+		//if (getWhatISee() == BAR AREA) { // can only call this function if you're at the area of the bar
             bartender.addOrderToQueue(this, type);
         //} else {
         //    System.out.println("You're not at the bar area.");
