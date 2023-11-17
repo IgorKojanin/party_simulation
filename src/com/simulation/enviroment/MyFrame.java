@@ -227,11 +227,11 @@ public class MyFrame extends JFrame {
 		squares[25][0].setDisplayLetter("N");
 		squares[26][0].setDisplayLetter("G");
 		squares[27][0].setDisplayLetter("E");
-		squares[22][2].setDisplayLetter("S");
-		squares[23][2].setDisplayLetter("M");
-		squares[24][2].setDisplayLetter("A");
-		squares[25][2].setDisplayLetter("L");
-		squares[26][2].setDisplayLetter("L");
+		// squares[22][2].setDisplayLetter("S");
+		// squares[23][2].setDisplayLetter("M");
+		// squares[24][2].setDisplayLetter("A");
+		// squares[25][2].setDisplayLetter("L");
+		// squares[26][2].setDisplayLetter("L");
 
 		squares[3][0].setDisplayLetter("L");
 		squares[4][0].setDisplayLetter("O");
@@ -239,9 +239,9 @@ public class MyFrame extends JFrame {
 		squares[6][0].setDisplayLetter("N");
 		squares[7][0].setDisplayLetter("G");
 		squares[8][0].setDisplayLetter("E");
-		squares[3][2].setDisplayLetter("B");
-		squares[4][2].setDisplayLetter("I");
-		squares[5][2].setDisplayLetter("G");
+		// squares[3][2].setDisplayLetter("B");
+		// squares[4][2].setDisplayLetter("I");
+		// squares[5][2].setDisplayLetter("G");
 	}
 	/**
 	 * This class represents the grid panel of the frame.
