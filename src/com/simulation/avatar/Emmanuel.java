@@ -8,8 +8,8 @@ import com.simulation.enums.Shape;
 
 public class Emmanuel extends Avatar {
 
-	public Emmanuel(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
-		super(shape, color, borderWidth, avatarAge, avatarName);
+	public Emmanuel(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitTime) {
+		super(shape, color, borderWidth, avatarAge, avatarName, waitTime);
 		// TODO Auto-generated constructor stub
 	}
 
