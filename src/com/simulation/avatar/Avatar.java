@@ -5,15 +5,18 @@
 // Class: Avatar.java
 // Description: Abstract class with basic functions for all the people
 ///////////////////////////////////////////////////////////////////////////////
-// @param shape            The shape of the avatar.
-// @param color            The color of the avatar.
-// @param borderWidth      The border width of the avatar.
-// @param avatarId         The unique ID of the avatar.
-// @param avatarAge        The age of the avatar.
-// @param drinksConsumed   The number of drinks consumed by the avatar.
-// @param isDancing        State of dancing avatar
-// @param timeOut          The time it should remain outside
-// 
+// @param shape             		The shape of the avatar.
+// @param color             		The color of the avatar.
+// @param borderWidth      			The border width of the avatar.
+// @param avatarId          		The unique ID of the avatar.
+// @param avatarAge         		The age of the avatar.
+// @param AlcoholPercentage 		The alcohol percentage of the avatar.
+// @param avatarName        		The name of the avatar.
+// @param isDancing         		State of the avatar dancing. 
+// @param isHit             		State of the avatar being hit. 
+// @param timeoutTimeRemaining      Amount of timeout time the avatar has left. 
+// @param isInTheParty      		If the avatar is in the party. 
+// @param waitingTime      			Amount of waiting time the avatar has. 
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
