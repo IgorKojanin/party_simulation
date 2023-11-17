@@ -11,11 +11,10 @@
 package com.simulation.avatar;
 
 import com.simulation.enums.BeverageType;
-import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 import java.util.LinkedList;
-
+import java.awt.Color;
 
 public class Bartender extends Avatar {
 	private static final int LEGAL_STRONG_ALCOHOL_AGE = 18;
@@ -95,14 +94,13 @@ public class Bartender extends Avatar {
 	}
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Colors color, int borderWidth) {
+	public Bartender(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
 		this.servingQueue = new LinkedList<>();
 	}
 
 	public Direction moveAvatar() {
-		
-		return Direction.BACK;
+		return Direction.IDLE;
 	}
 
 }

@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 
-import com.simulation.enums.Colors;
+import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
@@ -25,7 +25,7 @@ public class Bouncer extends Avatar {
 	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
 
 	// ************** Constructor **************
-	public Bouncer(Shape shape, Colors color, int borderWidth) {
+	public Bouncer(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
 	}
 	public boolean checkAge(int avatarAge) {
@@ -44,15 +44,20 @@ public class Bouncer extends Avatar {
 		boolean personIsOldEnough = checkAge(personAge);
 		if (personIsOldEnough == true && personTimeoutTimeRemaining == 0) {
 			person.setIsInThePartyState(true);
-			peopleInParty.add(person);
-			peopleWhoAreOutside.remove(person);
+			if (!peopleInParty.contains(person)) {
+				peopleInParty.add(person);
+			}
+			if (peopleWhoAreOutside.contains(person)) {
+				peopleWhoAreOutside.remove(person);
+			}
 			personIsInParty = true;
 		}
 		else {
 			person.setIsInThePartyState(false);
 			personIsInParty = false;
 		}
-		System.out.println(person.getIsInThePartyState());
+	
+
 		return personIsInParty;
 	}
 	public void hitPerson(Avatar person){
@@ -74,23 +79,36 @@ public class Bouncer extends Avatar {
 		// If timeoutOverride is > 0, then use that value.
 		int timeInTimeout = (timeoutOverride > 0) ? timeoutOverride : 10;
 		person.setTimeoutTimeRemaining(timeInTimeout);
+
 	}
+	
 	public Avatar kickOut(Avatar person, int duration) {
 		// kick the person out from the party
 		person.setIsInThePartyState(false);
-		peopleWhoAreOutside.add(person);
-		peopleInParty.remove(person);
+		if (!peopleWhoAreOutside.contains(person)) {
+			peopleWhoAreOutside.add(person);
+		}
+		if (peopleInParty.contains(person)) {
+			peopleInParty.remove(person);
+		}		
 		setTimeout(person, duration);
 		// Here, maybe the Environment keep track of how much time is remaining
 		person.setTimeoutTimeRemaining(duration);
-		System.out.println(person.getTimeoutTimeRemaining());
 
 		// Return the Avatar so that the Environment can work with it to keep track of how much time is remaining for
 		// this particular Avatar to be outside
 		return person;
 	}
+	
+	public List<Avatar> getListOfPeopleInParty() {
+		return peopleInParty;
+	}
+	
+	public String getListOfPeopleWhoAreOutside() {
+		return peopleWhoAreOutside.toString();
+	}
 
 	public Direction moveAvatar() {
-		return Direction.BACK;
+		return Direction.IDLE;
 	}
 }
