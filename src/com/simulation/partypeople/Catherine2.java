@@ -66,8 +66,4 @@ public class Catherine2 extends Avatar implements PartyGoer {
 		Direction dir = Direction.FORWARD;
 		return dir;
 	}
-
-	public void drink(BeverageType type) { // Ask bartender to drink and update alcohol levels
-		// TODO
-	}
 }
