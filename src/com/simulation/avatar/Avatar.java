@@ -58,7 +58,7 @@ public abstract class Avatar {
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Color color, int borderWidth) { 
+	public Avatar(Shape shape, Color color2, int borderWidth) {
 		this.shape = shape;
 		this.color = color2;
 		this.borderWidth = borderWidth;
