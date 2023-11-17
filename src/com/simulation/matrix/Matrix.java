@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.Bouncer;
+
+
+import com.simulation.enums.ChangeInXY;
 import com.simulation.avatar.Emmanuel;
 
-import java.awt.Color;
-
 import com.simulation.enums.Direction;
+import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.Catherine2;
@@ -119,6 +121,7 @@ public class Matrix {
 								break;
 						}
 						break;
+
 					case BACK:
 						switch (locAvatar.getHeading()) {
 							case WEST:
@@ -135,6 +138,7 @@ public class Matrix {
 								break;
 						}
 						break;
+
 					case RIGHT:
 						switch (locAvatar.getHeading()) {
 							case WEST:
@@ -206,7 +210,6 @@ public class Matrix {
 					locAvatar.setHeading(Heading.NORTH);
 				}
 				break;
-
 		}
 	}
 }

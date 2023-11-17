@@ -24,7 +24,7 @@ import java.awt.Color;
 
 public abstract class Avatar {
 
-	private static int Id; 
+	private static int Id;
 
 	private Shape shape;
 	private Color color;
@@ -56,16 +56,19 @@ public abstract class Avatar {
 		this.isInTheParty = false;
 		this.waitingTime = waitingTime;
 	}
-	
+  
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
 	public Avatar(Shape shape, Color color2, int borderWidth) {
+
 		this.shape = shape;
 		this.color = color2;
 		this.borderWidth = borderWidth;
 		this.avatarId = Id;
-	}	
 
-    // ************** get functions **************
+	}
+
+	// ************** get functions **************
+
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -73,27 +76,27 @@ public abstract class Avatar {
 	public String getName() {
 		return this.avatarName;
 	}
-	
+
 	public Color getColor() {
 		return this.color;
 	}
-	
+
 	public int getBorderWidth() {
 		return this.borderWidth;
 	}
-	
+
 	public int getId() {
 		return this.avatarId;
 	}
-	
+
 	public int getAge() {
 		return this.avatarAge;
 	}
-	
+
 	public int getAlcoholPercentage() {
 		return this.AlcoholPercentage;
 	}
-	
+
 	public int getTimeoutTimeRemaining() {
 		return this.timeoutTimeRemaining;
 	}
@@ -101,7 +104,7 @@ public abstract class Avatar {
 	public boolean getIsInThePartyState() {
 		return this.isInTheParty;
 	}
-	
+
 	public boolean getDancing() {
 		return this.isDancing;
 	}
@@ -110,20 +113,21 @@ public abstract class Avatar {
 		return this.isHit;
 	}
 
+
 	public int getWaitingTime() { // Waiting time getter
         return waitingTime;
 	}
-	
+
 	// ************** set functions **************
-	
+
 	public void setDancing(boolean newDancingState) {
 		this.isDancing = newDancingState;
 	}
-	
+
 	public void setAlcoholPercentage(int newAlcoholPercentage) {
 		this.AlcoholPercentage = newAlcoholPercentage;
 	}
-	
+
 	public void setTimeoutTimeRemaining(int timeout) {
 		this.timeoutTimeRemaining = timeout;
 	}
@@ -135,15 +139,15 @@ public abstract class Avatar {
 	public void setIsHit(boolean newIsHitState) {
 		this.isHit = newIsHitState;
 	}
-
+  
 	public void setWaitngTime(int newWaitingTime) { // Setter for waiting time
         this.waitingTime = newWaitingTime;
 	}
-	
+
 	// ************** See function **************
-	public void getWhatISee(){ 		// get function from simulation, returns array of Places enums. 2 places ahead
+	public void getWhatISee() { // get function from simulation, returns array of Places enums. 2 places ahead
 
 	}
 
-	public abstract Direction moveAvatar();  // To be specified on each personal class
+	public abstract Direction moveAvatar(); // To be specified on each personal class
 }
