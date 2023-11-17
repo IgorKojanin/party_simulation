@@ -12,14 +12,13 @@ package com.simulation.avatar;
 
 import java.awt.Color;
 
-import com.simulation.enums.BeverageType;
 import com.simulation.enums.Shape;
 import com.simulation.partypeople.Catherine2;
 import com.simulation.partypeople.JoeMama;
 
 public class MainTest {
 	public static void main(String[] args) {
-		
+
 		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Color.RED, 1, 20, "Almudena", 0);
 		Catherine2 partyGoerY = new Catherine2(Shape.CIRCLE, Color.RED, 1, 17, "Catherine-too-young", 0);
 		Catherine2 partyGoerC1 = new Catherine2(Shape.CIRCLE, Color.RED, 1, 30, "CatherineC1", 0);
@@ -56,14 +55,14 @@ public class MainTest {
 				"The Bouncer only lets CatherineC1 back into the party because they have 0 time in timeout remaining:");
 		System.out.println(bouncerBob.peopleInParty.toString());
 		System.out.println(bouncerBob.getListOfPeopleInParty());
-		
-//		Bartender bartender = new Bartender(Shape.CIRCLE, Color.lightGray, 0);
-//		System.out.println("Bartender part!");
-//		avatarJoe.drink(BeverageType.APEROL_SPRITZ, bartender);
-//		avatarJoe.drink(BeverageType.BEER, bartender);
-//		bartender.removeOrderFromQueue();
-//		bartender.removeOrderFromQueue();
-//		bartender.removeOrderFromQueue();
+
+		// Bartender bartender = new Bartender(Shape.CIRCLE, Color.lightGray, 0);
+		// System.out.println("Bartender part!");
+		// avatarJoe.drink(BeverageType.APEROL_SPRITZ, bartender);
+		// avatarJoe.drink(BeverageType.BEER, bartender);
+		// bartender.removeOrderFromQueue();
+		// bartender.removeOrderFromQueue();
+		// bartender.removeOrderFromQueue();
 
 		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		dj.playMusic(); // Start playing all tracks in sequence

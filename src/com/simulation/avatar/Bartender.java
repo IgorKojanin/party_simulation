@@ -13,53 +13,52 @@ package com.simulation.avatar;
 import java.awt.Color;
 
 import com.simulation.enums.BeverageType;
-import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
 //Class to hold Avatar and BeverageType together for serving each Avatar with its drink
 class AvatarOrder {
- private Avatar avatar;
- private BeverageType beverageType;
+	private Avatar avatar;
+	private BeverageType beverageType;
 
- public AvatarOrder(Avatar avatar, BeverageType beverageType) {
-     this.avatar = avatar;
-     this.beverageType = beverageType;
- }
+	public AvatarOrder(Avatar avatar, BeverageType beverageType) {
+		this.avatar = avatar;
+		this.beverageType = beverageType;
+	}
 
- public Avatar getAvatar() {
-     return avatar;
- }
+	public Avatar getAvatar() {
+		return avatar;
+	}
 
- public BeverageType getBeverageType() {
-     return beverageType;
- }
+	public BeverageType getBeverageType() {
+		return beverageType;
+	}
 }
 
 public class Bartender extends Avatar {
 	private LinkedList<AvatarOrder> orderQueue; // a queue for serving Avatars in order of arrival
-	
+
 	public void addOrderToQueue(Avatar avatar, BeverageType beverageType) {
-        AvatarOrder avatarOrder = new AvatarOrder(avatar, beverageType);
-        orderQueue.add(avatarOrder);
-        System.out.println("Added avatar and drink");
-    }
-	
+		AvatarOrder avatarOrder = new AvatarOrder(avatar, beverageType);
+		orderQueue.add(avatarOrder);
+		System.out.println("Added avatar and drink");
+	}
+
 	public void removeOrderFromQueue() {
-        AvatarOrder removedOrder = orderQueue.poll();
+		AvatarOrder removedOrder = orderQueue.poll();
 
-        if (removedOrder != null) {
-            Avatar removedAvatar = removedOrder.getAvatar();
-            BeverageType beverageType = removedOrder.getBeverageType();
+		if (removedOrder != null) {
+			Avatar removedAvatar = removedOrder.getAvatar();
+			BeverageType beverageType = removedOrder.getBeverageType();
 
-            System.out.println("Removed order from the queue: Avatar: " + removedAvatar.toString() + ", BeverageType: " + beverageType);
-        } else {
-            System.out.println("Order queue is empty.");
-        }
-    }
+			System.out.println("Removed order from the queue: Avatar: " + removedAvatar.toString() + ", BeverageType: "
+					+ beverageType);
+		} else {
+			System.out.println("Order queue is empty.");
+		}
+	}
 
 	private int checkAge(Avatar avatar) {
 		return avatar.getAge();
@@ -68,7 +67,7 @@ public class Bartender extends Avatar {
 	public void serveDrink(Avatar avatar, BeverageType type) {
 		final int LEGAL_STRONG_ALCOHOL_AGE = 18;
 		final int LEGAL_WEAK_ALCOHOL_AGE = 16;
-		
+
 		final int ADD_BEER_PERCENTAGE = 10;
 		final int ADD_VODKA_PERCENTAGE = 40;
 		final int ADD_MOJITO_PERCENTAGE = 20;
@@ -123,9 +122,7 @@ public class Bartender extends Avatar {
 		super(shape, color, borderWidth);
 		this.orderQueue = new LinkedList<>();
 	}
-	
-	
-	
+
 	public Direction moveAvatar() {
 		return Direction.IDLE;
 	}
