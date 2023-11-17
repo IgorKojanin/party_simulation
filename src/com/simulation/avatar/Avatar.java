@@ -19,6 +19,7 @@
 package com.simulation.avatar;
 
 import com.simulation.enums.Direction;
+import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 import java.awt.Color;
 
@@ -38,8 +39,9 @@ public abstract class Avatar {
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 
-	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
-    private int waitingTime;
+	// Addition of waiting time variable for queing, or ordering drinks, or waiting
+	// to play a game etc
+	private int waitingTime;
 
 	// ************** Main constructor for PartyGoer **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -56,8 +58,9 @@ public abstract class Avatar {
 		this.isInTheParty = false;
 		this.waitingTime = waitingTime;
 	}
-  
-	// ************** Constructor for workers (DJ, bouncer & bartender) **************
+
+	// ************** Constructor for workers (DJ, bouncer & bartender)
+	// **************
 	public Avatar(Shape shape, Color color2, int borderWidth) {
 
 		this.shape = shape;
@@ -113,9 +116,8 @@ public abstract class Avatar {
 		return this.isHit;
 	}
 
-
 	public int getWaitingTime() { // Waiting time getter
-        return waitingTime;
+		return waitingTime;
 	}
 
 	// ************** set functions **************
@@ -139,13 +141,13 @@ public abstract class Avatar {
 	public void setIsHit(boolean newIsHitState) {
 		this.isHit = newIsHitState;
 	}
-  
+
 	public void setWaitngTime(int newWaitingTime) { // Setter for waiting time
-        this.waitingTime = newWaitingTime;
+		this.waitingTime = newWaitingTime;
 	}
 
 	// ************** See function **************
-	public void getWhatISee() { // get function from simulation, returns array of Places enums. 2 places ahead
+	public void setWhatISee(Places[] places) { // set function from simulation, returns array of Places enums. 2 places ahead
 
 	}
 
