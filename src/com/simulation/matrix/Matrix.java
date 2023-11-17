@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import com.simulation.avatar.Bouncer;
-import com.simulation.enums.Colors;
+import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
@@ -18,7 +18,7 @@ public class Matrix {
 		env = new MyFrame();
 		env.setVisible(true);
 		avatars = new ArrayList<LocatedAvatar>();
-		Bouncer bouncer = new Bouncer(Shape.CIRCLE, Colors.RED, 0);
+		Bouncer bouncer = new Bouncer(Shape.CIRCLE, Color.RED, 0);
 		LocatedAvatar locBouncer = new LocatedAvatar(bouncer, 0, 0);
 		avatars.add(locBouncer);
 

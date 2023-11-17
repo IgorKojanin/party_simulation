@@ -10,7 +10,7 @@ package com.simulation.partypeople;
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
-import com.simulation.enums.Colors;
+import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
@@ -21,11 +21,12 @@ public class JoeMama extends Avatar implements PartyGoer {
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName) {
+	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
 		super(shape, color, borderWidth, avatarAge, avatarName);
 		// TODO
 	}
 
+	// ************** Methods **************
 	public void dancingAlgo() {
 		// TODO
 		
@@ -68,11 +69,11 @@ public class JoeMama extends Avatar implements PartyGoer {
 
 	public Direction moveAvatar() {
 		// TODO
-		Direction dir = Direction.FORWARD;
+		Direction dir = Direction.IDLE;
 		return dir;
 	}
 
-	public void drink(BeverageType type) { // Ask bartender to drink and update alcohol levels
+	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
 		// TODO
 	}
 }

@@ -9,6 +9,7 @@
 package com.simulation.enums;
 
 public enum Direction {
+	IDLE,
 	FORWARD,
 	LEFT,
 	RIGHT,
