@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
-import com.simulation.enums.Colors;
+import java.awt.Color;
 import com.simulation.enums.Shape;
 import com.simulation.partypeople.Catherine2;
 import com.simulation.partypeople.JoeMama;
@@ -18,12 +18,12 @@ public class MainTest {
 	public static void main(String[] args) {
 		//(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName)
 		
-		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Colors.RED, 1, 20, "Almudena");
-		Catherine2 partyGoerY = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 17, "Catherine-too-young");
-		Catherine2 partyGoerC1 = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 30, "CatherineC1");
-		Catherine2 partyGoerC2 = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 20, "CatherineC2");
+		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Color.RED, 1, 20, "Almudena");
+		Catherine2 partyGoerY = new Catherine2(Shape.CIRCLE, Color.RED, 1, 17, "Catherine-too-young");
+		Catherine2 partyGoerC1 = new Catherine2(Shape.CIRCLE, Color.RED, 1, 30, "CatherineC1");
+		Catherine2 partyGoerC2 = new Catherine2(Shape.CIRCLE, Color.RED, 1, 20, "CatherineC2");
 
-		Bouncer bouncerBob = new Bouncer(Shape.CIRCLE, Colors.BLUE, 5);
+		Bouncer bouncerBob = new Bouncer(Shape.CIRCLE, Color.BLUE, 5);
 
 		// The Bouncer checks if all 4 people can be let in
 		bouncerBob.checkEntry(avatarJoe);		
@@ -54,7 +54,7 @@ public class MainTest {
 		System.out.println(bouncerBob.peopleInParty.toString());
 		System.out.println(bouncerBob.getListOfPeopleInParty());
 
-		DJ dj = new DJ(Shape.CIRCLE, Colors.BLUE, 5, 1);
+		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		// dj.playMusic(); // Start playing all tracks in sequence
 
 		try {

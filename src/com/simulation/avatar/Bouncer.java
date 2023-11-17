@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.avatar;
 
-import com.simulation.enums.Colors;
+import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
@@ -25,7 +25,7 @@ public class Bouncer extends Avatar {
 	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
 
 	// ************** Constructor **************
-	public Bouncer(Shape shape, Colors color, int borderWidth) {
+	public Bouncer(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
 	}
 	public boolean checkAge(int avatarAge) {
