@@ -9,7 +9,7 @@ import com.simulation.avatar.Bouncer;
 
 import com.simulation.enums.ChangeInXY;
 import com.simulation.avatar.Emmanuel;
-
+import com.simulation.avatar.Thorvin;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
@@ -32,9 +32,14 @@ public class Matrix {
 		env.setVisible(true);
 		avatars = new ArrayList<LocatedAvatar>();
 
-		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel",0);
+		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.YELLOW, 0, 0, "Emmanuel",0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		avatars.add(locEmmanuel);
+
+		
+		Thorvin thorvin = new Thorvin(Shape.TRIANGLE, Color.PINK, 0, 0, "Thorvin",0);
+		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 1, 0);
+		avatars.add(locThorvin);
 
 		// Implementing a queue at the entrance
 		queuelength = 14; // Defining the length of the queue, can increase to required number of avatars
