@@ -5,13 +5,11 @@ import java.awt.*;
 import com.simulation.enums.Places;
 
 public class Square extends java.awt.Rectangle {
-    
-	private Color color;
-    private final Color baseColor;
-	private Boolean isUsable;
-	private final Places place;
 
- 
+    private Color color;
+    private final Color baseColor;
+    private Boolean isUsable;
+    private final Places place;
 
     public Square(int x, int y, int width, int height, Color baseColor, boolean isUsable, Places place) {
         super(x, y, width, height);
@@ -25,9 +23,9 @@ public class Square extends java.awt.Rectangle {
         return color;
     }
 
-   public Color getBaseColor(){
-    return baseColor;
-   }
+    public Color getBaseColor() {
+        return baseColor;
+    }
 
     public void setColor(Color color) {
         this.color = color;
@@ -41,14 +39,12 @@ public class Square extends java.awt.Rectangle {
         return place;
     }
 
-
     public Boolean getIsUsable() {
-    	return isUsable;
+        return isUsable;
     }
 
-    public void setIsUsable(boolean isUsable) { 
+    public void setIsUsable(boolean isUsable) {
         this.isUsable = isUsable;
     }
-
 
 }

@@ -20,13 +20,11 @@ package com.simulation.avatar;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-
 import java.awt.Color;
-
 
 public abstract class Avatar {
 
-	private static int Id; 
+	private static int Id;
 
 	private Shape shape;
 	private Color color;
@@ -39,7 +37,7 @@ public abstract class Avatar {
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
-	
+
 	// ************** Main constructor for PartyGoer **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
 		Id += Id;
@@ -54,15 +52,16 @@ public abstract class Avatar {
 		this.timeoutTimeRemaining = 0;
 		this.isInTheParty = false;
 	}
-	
-	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Color color, int borderWidth) { 
+
+	// ************** Constructor for workers (DJ, bouncer & bartender)
+	// **************
+	public Avatar(Shape shape, Color color, int borderWidth) {
 		this.shape = shape;
 		this.color = color;
 		this.borderWidth = borderWidth;
 		this.avatarId = Id;
-	}	
-	
+	}
+
 	// ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
@@ -71,27 +70,27 @@ public abstract class Avatar {
 	public String getName() {
 		return this.avatarName;
 	}
-	
+
 	public Color getColor() {
 		return this.color;
 	}
-	
+
 	public int getBorderWidth() {
 		return this.borderWidth;
 	}
-	
+
 	public int getId() {
 		return this.avatarId;
 	}
-	
+
 	public int getAge() {
 		return this.avatarAge;
 	}
-	
+
 	public int getAlcoholPercentage() {
 		return this.AlcoholPercentage;
 	}
-	
+
 	public int getTimeoutTimeRemaining() {
 		return this.timeoutTimeRemaining;
 	}
@@ -99,7 +98,7 @@ public abstract class Avatar {
 	public boolean getIsInThePartyState() {
 		return this.isInTheParty;
 	}
-	
+
 	public boolean getDancing() {
 		return this.isDancing;
 	}
@@ -107,17 +106,17 @@ public abstract class Avatar {
 	public boolean getIsHitState() {
 		return this.isHit;
 	}
-	
+
 	// ************** set functions **************
-	
+
 	public void setDancing(boolean newDancingState) {
 		this.isDancing = newDancingState;
 	}
-	
+
 	public void setAlcoholPercentage(int newAlcoholPercentage) {
 		this.AlcoholPercentage = newAlcoholPercentage;
 	}
-	
+
 	public void setTimeoutTimeRemaining(int timeout) {
 		this.timeoutTimeRemaining = timeout;
 	}
@@ -129,11 +128,11 @@ public abstract class Avatar {
 	public void setIsHit(boolean newIsHitState) {
 		this.isHit = newIsHitState;
 	}
-	
+
 	// ************** See function **************
-	public void getWhatISee(){ 		// get function from simulation, returns array of Places enums. 2 places ahead
+	public void getWhatISee() { // get function from simulation, returns array of Places enums. 2 places ahead
 
 	}
 
-	public abstract Direction moveAvatar();  // To be specified on each personal class
+	public abstract Direction moveAvatar(); // To be specified on each personal class
 }

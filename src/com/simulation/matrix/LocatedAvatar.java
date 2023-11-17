@@ -5,7 +5,6 @@ import com.simulation.enums.Heading;
 
 import java.awt.Color;
 
-
 public class LocatedAvatar {
 	private Avatar avatar;
 	private int x;
