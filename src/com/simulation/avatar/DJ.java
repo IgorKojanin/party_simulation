@@ -9,7 +9,7 @@
 
 package com.simulation.avatar;
 
-import com.simulation.enums.Colors;
+import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 import javax.sound.sampled.*;
@@ -87,7 +87,7 @@ public class DJ extends Avatar {
 	}
 
 	public Direction moveAvatar() {
-		return Direction.BACK;
+		return Direction.IDLE;
 	}
 
 }

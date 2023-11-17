@@ -20,11 +20,7 @@ package com.simulation.avatar;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-
 import java.awt.Color;
-
-import com.simulation.enums.Colors;
-
 
 public abstract class Avatar {
 
@@ -62,7 +58,7 @@ public abstract class Avatar {
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Color color2, int borderWidth) { 
+	public Avatar(Shape shape, Color color, int borderWidth) { 
 		this.shape = shape;
 		this.color = color2;
 		this.borderWidth = borderWidth;

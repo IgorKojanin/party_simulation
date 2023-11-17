@@ -13,7 +13,7 @@ import java.awt.Color;
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
-import com.simulation.enums.Colors;
+import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
