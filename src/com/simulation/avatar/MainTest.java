@@ -9,6 +9,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
+import java.awt.Color;
+
 import com.simulation.enums.Colors;
 import com.simulation.enums.Shape;
 import com.simulation.partypeople.Catherine2;
@@ -18,17 +20,17 @@ public class MainTest {
 	public static void main(String[] args) {
 		//(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName)
 		
-		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Colors.RED, 1, 20, "Almudena");
-		Catherine2 partyGoerC = new Catherine2(Shape.CIRCLE, Colors.RED, 1, 20, "Catherine");
+		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Color.RED, 1, 20, "Almudena", 0);
+		Catherine2 partyGoerC = new Catherine2(Shape.CIRCLE, Color.RED, 1, 20, "Catherine", 0);
 
-		Bouncer bouncerBob = new Bouncer(Shape.CIRCLE, Colors.BLUE, 5);
+		Bouncer bouncerBob = new Bouncer(Shape.CIRCLE, Color.BLUE, 5);
 		
 		bouncerBob.checkEntry(avatarJoe);
 		bouncerBob.checkEntry(partyGoerC);
 
 		bouncerBob.breakUpFight(avatarJoe, partyGoerC, 10, 20);
 
-		DJ dj = new DJ(Shape.CIRCLE, Colors.BLUE, 5, 1);
+		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		dj.playMusic(); // Start playing all tracks in sequence
 
 		try {

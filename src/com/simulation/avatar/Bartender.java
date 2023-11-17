@@ -10,6 +10,8 @@
 
 package com.simulation.avatar;
 
+import java.awt.Color;
+
 import com.simulation.enums.BeverageType;
 import com.simulation.enums.Colors;
 import com.simulation.enums.Direction;
@@ -65,7 +67,7 @@ private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
 	
 	
 	// ************** Constructor **************
-	public Bartender(Shape shape, Colors color, int borderWidth) {
+	public Bartender(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
 	}
 
