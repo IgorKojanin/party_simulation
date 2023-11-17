@@ -7,6 +7,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.partypeople;
+import java.awt.Color;
+
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
@@ -21,8 +23,9 @@ public class JoeMama extends Avatar implements PartyGoer {
 	
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
-		super(shape, color, borderWidth, avatarAge, avatarName);
+	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
+		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
+
 		// TODO
 	}
 

@@ -13,6 +13,7 @@ import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 import javax.sound.sampled.*;
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 

@@ -10,6 +10,8 @@
 
 package com.simulation.avatar;
 
+import java.awt.Color;
+
 import com.simulation.enums.BeverageType;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;

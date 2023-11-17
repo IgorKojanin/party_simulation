@@ -20,9 +20,7 @@ package com.simulation.avatar;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-
 import java.awt.Color;
-
 
 public abstract class Avatar {
 
@@ -39,8 +37,12 @@ public abstract class Avatar {
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
+
+	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
+    private int waitingTime;
+
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		Id += Id;
 		this.avatarName = avatarName;
 		this.shape = shape;
@@ -52,17 +54,18 @@ public abstract class Avatar {
 		this.isHit = false;
 		this.timeoutTimeRemaining = 0;
 		this.isInTheParty = false;
+		this.waitingTime = waitingTime;
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
 	public Avatar(Shape shape, Color color, int borderWidth) { 
 		this.shape = shape;
-		this.color = color;
+		this.color = color2;
 		this.borderWidth = borderWidth;
 		this.avatarId = Id;
 	}	
-	
-	// ************** get functions **************
+
+    // ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -106,6 +109,10 @@ public abstract class Avatar {
 	public boolean getIsHitState() {
 		return this.isHit;
 	}
+
+	public int getWaitingTime() { // Waiting time getter
+        return waitingTime;
+	}
 	
 	// ************** set functions **************
 	
@@ -127,6 +134,10 @@ public abstract class Avatar {
 
 	public void setIsHit(boolean newIsHitState) {
 		this.isHit = newIsHitState;
+	}
+
+	public void setWaitngTime(int newWaitingTime) { // Setter for waiting time
+        this.waitingTime = newWaitingTime;
 	}
 	
 	// ************** See function **************
