@@ -44,10 +44,11 @@ public class Bouncer extends Avatar {
 	public boolean checkEntry(Avatar person) {
 		// Check the person's age and if they are in timeout, then let them in or not
 		boolean personIsInParty;
+		int personAlc = person.getAlcoholPercentage();
 		int personAge = person.getAge();
 		int personTimeoutTimeRemaining = person.getTimeoutTimeRemaining();
 		boolean personIsOldEnough = checkAge(personAge);
-		if (personIsOldEnough == true && personTimeoutTimeRemaining == 0) {
+		if (personAlc == 0 && personIsOldEnough == true && personTimeoutTimeRemaining == 0) {
 			person.setIsInThePartyState(true);
 			if (!peopleInParty.contains(person)) {
 				peopleInParty.add(person);
