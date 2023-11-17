@@ -10,10 +10,6 @@ public class Square extends java.awt.Rectangle {
     private Boolean isUsable;
     private final Places place;
     private String displayletter;
-    private Color color;
-    private final Color baseColor;
-    private Boolean isUsable;
-    private final Places place;
 
     public Square(int x, int y, int width, int height, Color baseColor, boolean isUsable, Places place, String displayletter) {
         super(x, y, width, height);
