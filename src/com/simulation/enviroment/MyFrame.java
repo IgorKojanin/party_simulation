@@ -95,18 +95,14 @@ public class MyFrame extends JFrame {
 		}
 	}
 
-	/**
-	 * This method waits for a specified amount of time.
-	 * @param ms The amount of time to wait in milliseconds.
-	 */
-	public void wait(int ms) {
-		try {
-			Thread.sleep(ms);
-		} catch (InterruptedException ex) {
-			Thread.currentThread().interrupt();
+	//public void wait(int ms) {
+	//	try {
+	//		Thread.sleep(ms);
+	//	} catch (InterruptedException ex) {
+	//		Thread.currentThread().interrupt();
 
-		}
-	}
+	//	}
+	//}
 
 	public boolean isWall(int fromX, int fromY, int toX, int toY) {
 		if ((fromX <= 32 && toX >= 33) || (fromX >= 33 && toX <= 32)) {
@@ -119,7 +115,7 @@ public class MyFrame extends JFrame {
 	}
 
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
-		wait(30);
+		//wait(30);
 		if (toX < maxX && toY < maxY && toX >= 0 && toY >= 0) {
 			squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
 			squares[fromX][fromY].setIsUsable(true);
