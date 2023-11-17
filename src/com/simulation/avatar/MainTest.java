@@ -10,6 +10,8 @@
 
 package com.simulation.avatar;
 import java.awt.Color;
+
+import com.simulation.enums.BeverageType;
 import com.simulation.enums.Shape;
 import com.simulation.partypeople.Catherine2;
 import com.simulation.partypeople.JoeMama;
@@ -53,6 +55,14 @@ public class MainTest {
 		System.out.println("The Bouncer only lets CatherineC1 back into the party because they have 0 time in timeout remaining:");
 		System.out.println(bouncerBob.peopleInParty.toString());
 		System.out.println(bouncerBob.getListOfPeopleInParty());
+		
+//		Bartender bartender = new Bartender(Shape.CIRCLE, Color.lightGray, 0);
+//		System.out.println("Bartender part!");
+//		avatarJoe.drink(BeverageType.APEROL_SPRITZ, bartender);
+//		avatarJoe.drink(BeverageType.BEER, bartender);
+//		bartender.removeOrderFromQueue();
+//		bartender.removeOrderFromQueue();
+//		bartender.removeOrderFromQueue();
 
 		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		// dj.playMusic(); // Start playing all tracks in sequence
@@ -62,8 +72,6 @@ public class MainTest {
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
-
-		// Bartender bartenderSue = new Bartender(null, null, 0, 0);
 		// System.out.println("Color: " + bartenderSue.getColor());
 	}
 }

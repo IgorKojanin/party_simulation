@@ -18,6 +18,7 @@
 
 package com.simulation.avatar;
 
+import com.simulation.enums.BeverageType;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
@@ -132,6 +133,14 @@ public abstract class Avatar {
 	// ************** See function **************
 	public void getWhatISee(){ 		// get function from simulation, returns array of Places enums. 2 places ahead
 
+	}
+	
+	public void drink(BeverageType type, Bartender bartender) {
+		//if (getWhatISee() == Area.BAR) { // can only call this function if youre at the area of the bar
+            bartender.addOrderToQueue(this, type);
+        //} else {
+        //    System.out.println("You're not at the bar area.");
+        //}
 	}
 
 	public abstract Direction moveAvatar();  // To be specified on each personal class
