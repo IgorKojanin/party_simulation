@@ -14,68 +14,70 @@ import com.simulation.enums.BeverageType;
 import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
+import java.util.LinkedList;
+import java.awt.Color;
 
 public class Bartender extends Avatar {
-private static final int LEGAL_STRONG_ALCOHOL_AGE = 18;
-private static final int LEGAL_WEAK_ALCOHOL_AGE = 16;
-private static final int ADD_BEER_PERCENTAGE = 10;
-private static final int ADD_VODKA_PERCENTAGE = 40;
-private static final int ADD_MOJITO_PERCENTAGE = 20;
-private static final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
-private static final int ADD_APEROL_SPRITZ_PERCENTAGE = 15;
-
+	private LinkedList<Avatar> servingQueue; // a queue for serving Avatars in order of arrival
+	
+	public void addAvatarToOrderQueue(Avatar avatar) {
+		servingQueue.add(avatar);
+    }
+	
+    public void removeAvatarFromOrderQueue(Avatar avatar) {
+    	servingQueue.remove(avatar);
+    }
+    
 	private int checkAge(Avatar avatar) {
 		return avatar.getAge();
 	}
 
 	public void serveDrink(Avatar avatar, BeverageType type) {
-		switch (type) {
-		case BEER:
-			if (checkAge(avatar) > LEGAL_WEAK_ALCOHOL_AGE) { // Avatars can drink beer if they are above 16 years old
-				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()+ADD_BEER_PERCENTAGE);
-			}
-			else
-				System.out.println("Bartender: Sorry your'e too young");
-			break;
-		case VODKA:
-			if (checkAge(avatar) > LEGAL_STRONG_ALCOHOL_AGE) { // Avatars can drink Vodka if they are above 18 years old
-				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()+ADD_VODKA_PERCENTAGE);
-			}
-			else
-				System.out.println("Bartender: Sorry your'e too young");
-			break;
-		case MOJITO:
-			if (checkAge(avatar) > LEGAL_STRONG_ALCOHOL_AGE) {
-				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()+ADD_MOJITO_PERCENTAGE);
-			}
-			else
-				System.out.println("Bartender: Sorry your'e too young");
-			break;
-		case RUM_AND_COKE:
-			if (checkAge(avatar) > LEGAL_STRONG_ALCOHOL_AGE) { 
-				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()+ADD_RUM_AND_COKE_PERCENTAGE);
-			}
-			else
-				System.out.println("Bartender: Sorry your'e too young");
-			break;
-		case GIN_TONIC:
-			if (checkAge(avatar) > LEGAL_STRONG_ALCOHOL_AGE) { 
-				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()+ADD_RUM_AND_COKE_PERCENTAGE);
-			}
-			else
-				System.out.println("Bartender: Sorry your'e too young");
-			break;
-		case APEROL_SPRITZ:
-			if (checkAge(avatar) > LEGAL_STRONG_ALCOHOL_AGE) { 
-				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()+ADD_APEROL_SPRITZ_PERCENTAGE);
-			}
-			else
-				System.out.println("Bartender: Sorry your'e too young");
-			break;
-		case WATER: // drinking water lowers the Alcohol percentage 
-			avatar.setAlcoholPercentage(avatar.getAlcoholPercentage()-10);
-			break;
-		}
+		final int LEGAL_STRONG_ALCOHOL_AGE = 18;
+		final int LEGAL_WEAK_ALCOHOL_AGE = 16;
+		final int ADD_BEER_PERCENTAGE = 10;
+		final int ADD_VODKA_PERCENTAGE = 40;
+		final int ADD_MOJITO_PERCENTAGE = 20;
+		final int ADD_RUM_AND_COKE_PERCENTAGE = 25;
+		final int ADD_APEROL_SPRITZ_PERCENTAGE = 15;
+	    int legalAge = LEGAL_WEAK_ALCOHOL_AGE; // Default age for weak alcohol
+	    int addPercentage = 0;
+
+	    switch (type) {
+	        case BEER:
+	            legalAge = LEGAL_WEAK_ALCOHOL_AGE;
+	            addPercentage = ADD_BEER_PERCENTAGE;
+	            break;
+	        case VODKA:
+	            legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+	            addPercentage = ADD_VODKA_PERCENTAGE;
+	            break;
+	        case MOJITO:
+	            legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+	            addPercentage = ADD_MOJITO_PERCENTAGE;
+	            break;
+	        case RUM_AND_COKE:
+	            legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+	            addPercentage = ADD_RUM_AND_COKE_PERCENTAGE;
+	            break;
+	        case GIN_TONIC:
+	            legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+	            addPercentage = ADD_RUM_AND_COKE_PERCENTAGE;
+	            break;
+	        case APEROL_SPRITZ:
+	            legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+	            addPercentage = ADD_APEROL_SPRITZ_PERCENTAGE;
+	            break;
+	        case WATER:
+	            avatar.setAlcoholPercentage(avatar.getAlcoholPercentage() - 10);
+	            return; // No need for age check for water
+	    }
+
+	    if (checkAge(avatar) > legalAge) {
+	        avatar.setAlcoholPercentage(avatar.getAlcoholPercentage() + addPercentage);
+	    } else {
+	        System.out.println("Bartender: Sorry you're too young for " + type.toString());
+	    }
 	}
 	
 	public void chat() {
@@ -85,6 +87,7 @@ private static final int ADD_APEROL_SPRITZ_PERCENTAGE = 15;
 	// ************** Constructor **************
 	public Bartender(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
+		this.servingQueue = new LinkedList<>();
 	}
 
 	public Direction moveAvatar() {
