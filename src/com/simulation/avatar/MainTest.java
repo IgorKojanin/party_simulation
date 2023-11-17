@@ -26,43 +26,28 @@ public class MainTest {
 		Bouncer bouncerBob = new Bouncer(Shape.CIRCLE, Color.BLUE, 5);
 
 		// The Bouncer checks if all 4 people can be let in
-		bouncerBob.checkEntry(avatarJoe);
-		bouncerBob.checkEntry(partyGoerC1);
-		bouncerBob.checkEntry(partyGoerC2);
-		bouncerBob.checkEntry(partyGoerY);
+		bouncerBob.checkVibe(avatarJoe);
+		bouncerBob.checkVibe(partyGoerC1);
+		bouncerBob.checkVibe(partyGoerC2);
+		bouncerBob.checkVibe(partyGoerY);
 
-		System.out.println(
-				"The Bouncer lets Almudena, CatherineC1, and CatherineC2 into the party because they are overage:");
-		System.out.println(bouncerBob.peopleInParty.toString());
+	
 
 		// The Bouncer kicks out Almudena and partyGoerC
 		bouncerBob.breakUpFight(partyGoerC1, partyGoerC2, 10, 20);
-		System.out.println(
-				"The Bouncer breaks up a fight between CatherineC1 and CatherineC2 and both get kicked out. Only Almudena remains in the party:");
-		System.out.println(bouncerBob.peopleInParty.toString());
+		
 
 		// After 10 min go by, Set the timeout time of the people who were kicked out
 		partyGoerC1.setTimeoutTimeRemaining(0);
 		partyGoerC2.setTimeoutTimeRemaining(10);
 
 		// The Bouncer checks if all 4 people can be let in
-		bouncerBob.checkEntry(avatarJoe);
-		bouncerBob.checkEntry(partyGoerC1);
-		bouncerBob.checkEntry(partyGoerC2);
-		bouncerBob.checkEntry(partyGoerY);
+		bouncerBob.checkVibe(avatarJoe);
+		bouncerBob.checkVibe(partyGoerC1);
+		bouncerBob.checkVibe(partyGoerC2);
+		bouncerBob.checkVibe(partyGoerY);
 
-		System.out.println(
-				"The Bouncer only lets CatherineC1 back into the party because they have 0 time in timeout remaining:");
-		System.out.println(bouncerBob.peopleInParty.toString());
-		System.out.println(bouncerBob.getListOfPeopleInParty());
-
-		// Bartender bartender = new Bartender(Shape.CIRCLE, Color.lightGray, 0);
-		// System.out.println("Bartender part!");
-		// avatarJoe.drink(BeverageType.APEROL_SPRITZ, bartender);
-		// avatarJoe.drink(BeverageType.BEER, bartender);
-		// bartender.removeOrderFromQueue();
-		// bartender.removeOrderFromQueue();
-		// bartender.removeOrderFromQueue();
+	
 
 		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		dj.playMusic(); // Start playing all tracks in sequence
