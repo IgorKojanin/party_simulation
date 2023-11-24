@@ -14,7 +14,7 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.Catherine2;
-import com.simulation.partypeople.JoeMama;
+import com.simulation.partypeople.AvatarTemplate;
 import com.simulation.partypeople.Emmanuel;
 
 
@@ -56,7 +56,7 @@ public class Matrix {
 		Shape shape = Shape.SQUARE;
 		Color color = Color.BLUE;
 
-		return new JoeMama(shape, color, 0, 21, name, 20);
+		return new AvatarTemplate(shape, color, 0, 21, name, 20);
 	}
 
 	private void printAvatars() {

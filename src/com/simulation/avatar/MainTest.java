@@ -19,7 +19,7 @@ import com.simulation.partypeople.*;
 public class MainTest {
 	public static void main(String[] args) throws FileNotFoundException {
 
-		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Color.RED, 1, 20, "Almudena", 0);
+		AvatarTemplate avatarJoe = new AvatarTemplate(Shape.CIRCLE, Color.RED, 1, 20, "Almudena", 0);
 		Jose JoseLu = new Jose(Shape.CIRCLE, Color.RED, 1, 20, "JoseLu", 0);
 		Anatoly Toli = new Anatoly(Shape.CIRCLE, Color.BLACK, 1, 22, "Anatoly Cartman", 0);
 		Catherine2 partyGoerY = new Catherine2(Shape.CIRCLE, Color.RED, 1, 17, "Catherine-too-young", 0);
