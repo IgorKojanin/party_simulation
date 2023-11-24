@@ -29,13 +29,15 @@ public class Anatoly extends Avatar implements PartyGoer {
 	}
 
 	public void dancingAlgo() {
-		// TODO
-
+		// if while moving the dance_floor was detected and the priority is right
+        // start dancing animation 
+        // motions within the square itself?
 	}
 
 	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
-		// TODO
-
+		// if an interaction with another partyGoer has occured
+        // start dirty-talking 
+        // implement Wrestling moves: rko, f5, aa.
 	}
 
 	public void talk(PartyGoer person) {
@@ -44,6 +46,7 @@ public class Anatoly extends Avatar implements PartyGoer {
 
 	public void smoke() {
 		// TODO
+        // shall stay empty
 	}
 
 	public void toilet(int timeInToilet) {
@@ -65,5 +68,10 @@ public class Anatoly extends Avatar implements PartyGoer {
 		// TODO
 		Direction dir = Direction.FORWARD;
 		return dir;
-	}
+
+        // define a variable that would hold a list of priorities: sort places on a scale of 1-5
+        // check the map of places discovered, if it's empty randomly head to places until everything is discovered and stored
+        // if the whole map was discovered start applying the priority queue
+        // head first towards the higher-rated places on the list, stay there longer
+    }
 }
