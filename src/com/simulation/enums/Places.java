@@ -23,5 +23,6 @@ public enum Places {
 	PATH, // this is for all the white spaces
 	WALL,
 	OUTSIDE,
-	PERSON
+	PERSON,
+	QUEUE
 }
