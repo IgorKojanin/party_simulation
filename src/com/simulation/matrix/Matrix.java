@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.avatar.Bartender;
-import com.simulation.avatar.Bouncer;
-import com.simulation.avatar.Emmanuel;
 import com.simulation.enums.ChangeInXY;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
@@ -31,8 +28,8 @@ public class Matrix {
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
 
-		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
-		Emmanuel eliyas = new Emmanuel(Shape.CIRCLE, Color.MAGENTA, 0, 0, "Eliyas", 0);
+	  Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
@@ -99,7 +96,7 @@ public class Matrix {
 
 	private void moveAvatarInClub(LocatedAvatar avatar) {
 		wait(30);
-//		avatar.setWhatIsee(env);
+		avatar.setWhatIsee(env);
 		int oldX = avatar.getX();
 		int oldY = avatar.getY();
 		Direction dir = avatar.getAvatar().moveAvatar();
