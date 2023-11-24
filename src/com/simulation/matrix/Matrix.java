@@ -14,6 +14,7 @@ import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 
 import com.simulation.partypeople.*;
+import com.simulation.partypeople.Bernhard;
 
 public class Matrix {
 
@@ -40,6 +41,9 @@ public class Matrix {
 		//avatars.add(locEmmanuel);
 		//avatars.add(locCelestine);
 		avatars.add(locEliyas);
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
+		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
+		avatars.add(locBernhard);
 
 		// Implementing a queue at the entrance
 		queuelength = 14; // Defining the length of the queue, can increase to required number of avatars
@@ -217,10 +221,4 @@ public class Matrix {
 				if (env.isUsable(locAvatar.getX(), locAvatar.getY() - 1)
 						&& !env.isWall(locAvatar.getX(), locAvatar.getY(), locAvatar.getX(), locAvatar.getY() - 1)) {
 					locAvatar.decY();
-					locAvatar.setHeading(Heading.NORTH);
-				}
-				break;
-
-		}
-	}
-}
+					locAvatar.setHeading(Heading.N
