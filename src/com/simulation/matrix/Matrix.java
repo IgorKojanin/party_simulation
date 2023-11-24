@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import com.simulation.avatar.Avatar;
+import com.simulation.avatar.Bartender;
 import com.simulation.avatar.Bouncer;
 import com.simulation.avatar.Emmanuel;
 import com.simulation.enums.ChangeInXY;
@@ -34,12 +35,15 @@ public class Matrix {
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel",0);
 		Emmanuel eliyas = new Emmanuel(Shape.CIRCLE, Color.MAGENTA, 0, 0, "Eliyas",0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine",0);
+		Bartender bartender = new Bartender(Shape.CIRCLE, Color.BLACK, 0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 31, 5);
+		LocatedAvatar locBartender = new LocatedAvatar(bartender, 2, 11);
 		//avatars.add(locEmmanuel);
 		//avatars.add(locCelestine);
 		avatars.add(locEliyas);
+		avatars.add(locBartender);
 
 		// Implementing a queue at the entrance
 		queuelength = 14; // Defining the length of the queue, can increase to required number of avatars

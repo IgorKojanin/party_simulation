@@ -33,7 +33,12 @@ public class Anatoly extends Avatar{
         // motions within the square itself?
 	}
 
-	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
+	public void fight(Avatar opponent) { 
+        if(opponent.getName() == "JoseLu"){
+            System.out.println("You're time is up, Rolda!");
+        }
+
+        // Call this function if other avatar starts a fight
 		// if an interaction with another partyGoer has occured
         // start dirty-talking 
         // implement Wrestling moves: rko, f5, aa.
