@@ -20,6 +20,7 @@ public class Jose extends Avatar implements PartyGoer {
 
 	File file = new File("misc\\Shrek-Script_Jose.txt");
 	BufferedReader br = new BufferedReader(new FileReader(file));
+	private String shrek_movie;
 
 	// ToDo individually:
 	// - Store surroudings locally
@@ -34,7 +35,7 @@ public class Jose extends Avatar implements PartyGoer {
 	// - Develop skibidi toilet
 
 	// ************** Constructor **************
-	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
+	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) throws FileNotFoundException {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO
 	}
@@ -52,13 +53,18 @@ public class Jose extends Avatar implements PartyGoer {
 		// be very descriptive (user 2 is performing an F5 on user 3)
 	}
 
-	public void talk(PartyGoer person) {
-		// TODO
-		// create a list of answers and questions that you would like to exchange with
-		// the other users of Club Penguin
-		// create a primitive algorithm that would make picks from your answer list
-		// based on the questions asked
-		System.out.println("Finished playing all tracks. Restarting playlist.");
+	public void talk(PartyGoer person) {	// My avatar only speaks about shrek movie
+		String personName = person.getClass().getName();
+		try {
+			for (int i=0; i<5; i++){
+				if((shrek_movie = br.readLine()) != null){
+					System.out.printf("Jose says to %S: %s %n", personName,shrek_movie);
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void smoke() {

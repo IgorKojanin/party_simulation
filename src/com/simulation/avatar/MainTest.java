@@ -11,12 +11,13 @@
 package com.simulation.avatar;
 
 import java.awt.Color;
+import java.io.FileNotFoundException;
 
 import com.simulation.enums.Shape;
 import com.simulation.partypeople.*;
 
 public class MainTest {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Color.RED, 1, 20, "Almudena", 0);
 		Jose JoseLu = new Jose(Shape.CIRCLE, Color.RED, 1, 20, "JoseLu", 0);
@@ -32,6 +33,7 @@ public class MainTest {
 		bouncerBob.checkVibe(partyGoerY);
 		bouncerBob.checkVibe(JoseLu);
 
+		JoseLu.talk(avatarJoe);
 	
 
 		// The Bouncer kicks out Almudena and partyGoerC
