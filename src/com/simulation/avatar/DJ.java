@@ -28,6 +28,8 @@ public class DJ extends Avatar {
 		// Consider adding full paths to the music files
 		musicList.add("Music\\Latina.wav");
 		musicList.add("Music\\Spice.wav");
+		musicList.add("Music\\AllStar.wav");
+
 	}
 
 	public void playMusic() {
@@ -45,7 +47,7 @@ public class DJ extends Avatar {
 		playWav(musicFile, () -> playNextTrack(trackIndex + 1));
 	}
 
-	void playSpecificMusic(String musicName) {
+	public void playSpecificMusic(String musicName) {
 		String musicFile = musicName + ".wav";
 		if (musicList.contains(musicFile)) {
 			stopMusic(); // Stop the current music if any

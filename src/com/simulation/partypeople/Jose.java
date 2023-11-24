@@ -9,6 +9,8 @@
 package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
+import com.simulation.avatar.DJ;
+
 import java.awt.Color;
 import java.io.*;
 import java.util.Random;
@@ -53,11 +55,11 @@ public class Jose extends Avatar {
 	}
 
 	public void talk(Avatar person) {	// My avatar only speaks about shrek movie
-		String personName = person.getName();
 		try {
 			for (int i=0; i<5; i++){
+				//DJ.playSpecificMusic("AllStar");
 				if((shrek_movie = br.readLine()) != null){
-					System.out.printf("Jose says to %S: %s ", personName,shrek_movie);
+					System.out.printf("Jose says to %s: %s %n", person.getName(),shrek_movie);
 				}
 			}
 

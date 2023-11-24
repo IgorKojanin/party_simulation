@@ -77,33 +77,33 @@ public class Bartender extends Avatar {
 		int addPercentage = 0;
 
 		switch (type) {
-			case BEER:
-				legalAge = LEGAL_WEAK_ALCOHOL_AGE;
-				addPercentage = ADD_BEER_PERCENTAGE;
-				break;
-			case VODKA:
-				legalAge = LEGAL_STRONG_ALCOHOL_AGE;
-				addPercentage = ADD_VODKA_PERCENTAGE;
-				break;
-			case MOJITO:
-				legalAge = LEGAL_STRONG_ALCOHOL_AGE;
-				addPercentage = ADD_MOJITO_PERCENTAGE;
-				break;
-			case RUM_AND_COKE:
-				legalAge = LEGAL_STRONG_ALCOHOL_AGE;
-				addPercentage = ADD_RUM_AND_COKE_PERCENTAGE;
-				break;
-			case GIN_TONIC:
-				legalAge = LEGAL_STRONG_ALCOHOL_AGE;
-				addPercentage = ADD_RUM_AND_COKE_PERCENTAGE;
-				break;
-			case APEROL_SPRITZ:
-				legalAge = LEGAL_STRONG_ALCOHOL_AGE;
-				addPercentage = ADD_APEROL_SPRITZ_PERCENTAGE;
-				break;
-			case WATER:
-				avatar.setAlcoholPercentage(avatar.getAlcoholPercentage() - 10);
-				return; // No need for age check for water
+		case BEER:
+			legalAge = LEGAL_WEAK_ALCOHOL_AGE;
+			addPercentage = ADD_BEER_PERCENTAGE;
+			break;
+		case VODKA:
+			legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+			addPercentage = ADD_VODKA_PERCENTAGE;
+			break;
+		case MOJITO:
+			legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+			addPercentage = ADD_MOJITO_PERCENTAGE;
+			break;
+		case RUM_AND_COKE:
+			legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+			addPercentage = ADD_RUM_AND_COKE_PERCENTAGE;
+			break;
+		case GIN_TONIC:
+			legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+			addPercentage = ADD_RUM_AND_COKE_PERCENTAGE;
+			break;
+		case APEROL_SPRITZ:
+			legalAge = LEGAL_STRONG_ALCOHOL_AGE;
+			addPercentage = ADD_APEROL_SPRITZ_PERCENTAGE;
+			break;
+		case WATER:
+			avatar.setAlcoholPercentage(avatar.getAlcoholPercentage() - 10);
+			return; // No need for age check for water
 		}
 
 		if (checkAge(avatar) > legalAge) {
@@ -123,8 +123,62 @@ public class Bartender extends Avatar {
 		this.orderQueue = new LinkedList<>();
 	}
 
+	private int leftSteps = 0;
+	private int backSteps = 0;
+	private int frontSteps = 0;
+	private int rightSteps = 0;
+
 	public Direction moveAvatar() {
-		return Direction.IDLE;
+		// Move 1 step to the right
+		if (rightSteps < 1) {
+			rightSteps++;
+			return Direction.BACK;
+		}
+		// After moving 1 step right, move 2 steps forward
+		else if (frontSteps < 2) {
+			frontSteps++;
+			return Direction.FORWARD;
+		}
+		// After moving 2 steps forward, move 1 step right
+		else if (rightSteps < 2) {
+			rightSteps++;
+			return Direction.RIGHT;
+		}
+		// After moving 1 step right, move 3 steps forward
+		else if (frontSteps < 5) { // 2 + 3 = 5 (2 steps from the previous forward movement)
+			frontSteps++;
+			return Direction.FORWARD;
+		}
+		// After moving 3 steps forward, move 1 step back
+		else if (backSteps < 1) {
+			backSteps++;
+			return Direction.BACK;
+		}
+		// After moving 1 step back, move 3 steps forward
+		else if (frontSteps < 8) { // 5 + 3 = 8 (5 steps from the previous forward movement)
+			frontSteps++;
+			return Direction.FORWARD;
+		}
+		// After moving 3 steps forward, move 1 step left
+		else if (leftSteps < 1) {
+			leftSteps++;
+			return Direction.LEFT;
+		}
+		// After moving 1 step left, move 2 steps forward
+		else if (frontSteps < 10) { // 8 + 2 = 10 (8 steps from the previous forward movement)
+			frontSteps++;
+			return Direction.FORWARD;
+		} else {
+			// Reset step counts after completing the cycle
+			leftSteps = 0;
+			backSteps = 0;
+			frontSteps = 0;
+			rightSteps = 0;
+
+			// Start by moving 1 step to the right
+			rightSteps++;
+			return Direction.BACK;
+		}
 	}
 
 }
