@@ -122,13 +122,35 @@ public class Bernhard extends Avatar{
 		// 7 - toilet
 		// 8 - talk
 		// 9 - fight
+		// 10 - go to bar and get water
 		if (this.getAlcoholPercentage() > 60) {
-			desire = 7;
+			desire = 10;
 		}
+		// if alcoholpercentage is too high then start a fight
 		else if (this.getAlcoholPercentage() > 80) {
 			desire = 9;
+			// add code here to fight the next avatar that appears around you
 		}
-		return null;
+		// check what is in front of the avatar and interact with the place if the current desire can be met there
+
+		// The following lines make the avatar move randomly
+		Random rand = new Random();
+		int number = rand.nextInt(4);
+		// direction is set externally --> check with the simulation environment
+		Direction dir = Direction.FORWARD;
+		if (number == 0) {
+			dir = Direction.FORWARD;
+		}
+		else if (number == 1) {
+			dir = Direction.RIGHT;
+		}
+		else if (number == 2) {
+			dir = Direction.BACK;
+		}
+		else if (number == 3) {
+			dir = Direction.LEFT;
+		}
+		return dir;
 	}
 
 	private int decideDesire() {
