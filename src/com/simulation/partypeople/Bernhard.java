@@ -2,14 +2,13 @@
 //                   Party Simulator
 // Date:         27/10/2023
 //
-// Class: Bernhard.java
+// Class: AvatarTemplate.java
 // Description: Template for the people
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
 import java.awt.Color;
 import java.util.Random;
@@ -17,7 +16,7 @@ import java.util.Random;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-public class Bernhard extends Avatar implements PartyGoer {
+public class Bernhard extends Avatar{
 
 	// ToDo individually:
 	// - Store surroudings locally
@@ -30,9 +29,7 @@ public class Bernhard extends Avatar implements PartyGoer {
 	// - Develop spiels
 	// - Develop smoke area behaviour
 	// - Develop skibidi toilet
-	// ************** Attributes **************
-	public
-	
+
 	// ************** Constructor **************
 	public Bernhard(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
@@ -46,13 +43,13 @@ public class Bernhard extends Avatar implements PartyGoer {
 
 	}
 
-	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
+	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
 		// TODO
 		// develop different fighting moves
 		// be very descriptive (user 2 is performing an F5 on user 3)
 	}
 
-	public void talk(PartyGoer person) {
+	public void talk(Avatar person) {
 		// TODO
 		// create a list of answers and questions that you would like to exchange with
 		// the other users of Club Penguin
@@ -131,6 +128,7 @@ public class Bernhard extends Avatar implements PartyGoer {
 		else if (this.getAlcoholPercentage() > 80) {
 			desire = 9;
 		}
+		return null;
 	}
 
 	private int decideDesire() {
@@ -165,6 +163,7 @@ public class Bernhard extends Avatar implements PartyGoer {
 		}
 		return desire;
 	}
+
 	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
 		// TODO
 		// increase the drunkness level and subsequently make it lose coordination
