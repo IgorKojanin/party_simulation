@@ -128,7 +128,7 @@ public class Bernhard extends Avatar implements PartyGoer {
 		if (this.getAlcoholPercentage() > 60) {
 			desire = 7;
 		}
-		if (this.getAlcoholPercentage() > 80) {
+		else if (this.getAlcoholPercentage() > 80) {
 			desire = 9;
 		}
 	}
