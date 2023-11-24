@@ -10,8 +10,9 @@ import java.awt.*;
 
 public class MyFrame extends JFrame {
 	GridPanel panel;
-	private final int maxY = 23;
-	private final int maxX = 38;
+	private static final int maxY = 23;
+	private static final int entranceX = 32;
+	private static final int maxX = 38;
 	private final int squareSize = 30; // Adjust the size of each square as needed
 	private final int panelLength = squareSize * (maxX + 2); // + 2 for padding
 	private final int panelHeight = squareSize * (maxY + 2); // + 2 for padding
@@ -148,6 +149,14 @@ public class MyFrame extends JFrame {
 		return squares[x][y].getPlace();
 	}
 
+	public static int getEntranceX() {
+		return entranceX;
+	}
+	
+	public static int getMaxY() {
+		return maxY;
+	}
+	
 	/**
 	 * This is the constructor of the MyFrame class.
 	 * It creates the grid panel and sets up the frame.

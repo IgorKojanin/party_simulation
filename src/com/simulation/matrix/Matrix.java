@@ -35,9 +35,9 @@ public class Matrix {
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine",0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
-		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
-		avatars.add(locEmmanuel);
-		avatars.add(locCelestine);
+		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 31, 5);
+		//avatars.add(locEmmanuel);
+		//avatars.add(locCelestine);
 		avatars.add(locEliyas);
 
 		// Implementing a queue at the entrance
@@ -47,7 +47,7 @@ public class Matrix {
         for(int i = 1; i <= queuelength; i++) {
 			Avatar uniqueAvatar = createUniqueAvatar(i);
 			LocatedAvatar avatar = new LocatedAvatar(uniqueAvatar, 34, 5 + i); // Starting position in front of door
-			avatars.add(avatar);
+			//avatars.add(avatar);
 			initialWaitingTime += 5;
 		}
 		printAvatars();
@@ -71,6 +71,7 @@ public class Matrix {
 	public void moveAvatars() {
 		for (LocatedAvatar locAvatar : avatars) {
 			wait(30);
+			locAvatar.setWhatIsee(env);
 			int oldX = locAvatar.getX();
 			int oldY = locAvatar.getY();
 			Direction dir = locAvatar.getAvatar().moveAvatar();
@@ -140,6 +141,7 @@ public class Matrix {
 					}
 					break;
 			}
+			
 			env.moveTo(oldX, oldY, locAvatar.getX(), locAvatar.getY(),locAvatar.getColor());
 		}
 	}
