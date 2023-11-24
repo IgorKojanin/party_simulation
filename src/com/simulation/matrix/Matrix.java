@@ -3,7 +3,6 @@ package com.simulation.matrix;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import com.simulation.avatar.Avatar;
 import com.simulation.enums.ChangeInXY;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
@@ -28,7 +27,7 @@ public class Matrix {
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
 
-	  Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
+		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Eliyas eliyas = new Eliyas(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
@@ -70,7 +69,7 @@ public class Matrix {
 
 	private void moveAvatarInQueue(LocatedAvatar avatar) {
 		wait(30);
-//		avatar.setWhatIsee(env);
+		avatar.setWhatIsee(env);
 		int x = avatar.getX();
 		int y = avatar.getY();
 		if (x == 34 && y > 5) {
@@ -103,66 +102,34 @@ public class Matrix {
 		switch (dir) {
 			case FORWARD:
 				switch (avatar.getHeading()) {
-					case WEST:
-						changeXY(avatar, ChangeInXY.DECX);
-						break;
-					case EAST:
-						changeXY(avatar, ChangeInXY.INCX);
-						break;
-					case NORTH:
-						changeXY(avatar, ChangeInXY.DECY);
-						break;
-					case SOUTH:
-						changeXY(avatar, ChangeInXY.INCY);
-						break;
+					case WEST -> changeXY(avatar, ChangeInXY.DECX);
+					case EAST -> changeXY(avatar, ChangeInXY.INCX);
+					case NORTH -> changeXY(avatar, ChangeInXY.DECY);
+					case SOUTH -> changeXY(avatar, ChangeInXY.INCY);
 				}
 				break;
 			case BACK:
 				switch (avatar.getHeading()) {
-					case WEST:
-						changeXY(avatar, ChangeInXY.INCX);
-						break;
-					case EAST:
-						changeXY(avatar, ChangeInXY.DECX);
-						break;
-					case NORTH:
-						changeXY(avatar, ChangeInXY.INCY);
-						break;
-					case SOUTH:
-						changeXY(avatar, ChangeInXY.DECY);
-						break;
+					case WEST -> changeXY(avatar, ChangeInXY.INCX);
+					case EAST -> changeXY(avatar, ChangeInXY.DECX);
+					case NORTH -> changeXY(avatar, ChangeInXY.INCY);
+					case SOUTH -> changeXY(avatar, ChangeInXY.DECY);
 				}
 				break;
 			case RIGHT:
 				switch (avatar.getHeading()) {
-					case WEST:
-						changeXY(avatar, ChangeInXY.DECY);
-						break;
-					case EAST:
-						changeXY(avatar, ChangeInXY.INCY);
-						break;
-					case NORTH:
-						changeXY(avatar, ChangeInXY.INCX);
-						break;
-					case SOUTH:
-						changeXY(avatar, ChangeInXY.DECX);
-						break;
+					case WEST -> changeXY(avatar, ChangeInXY.DECY);
+					case EAST -> changeXY(avatar, ChangeInXY.INCY);
+					case NORTH -> changeXY(avatar, ChangeInXY.INCX);
+					case SOUTH -> changeXY(avatar, ChangeInXY.DECX);
 				}
 				break;
 			case LEFT:
 				switch (avatar.getHeading()) {
-					case WEST:
-						changeXY(avatar, ChangeInXY.INCY);
-						break;
-					case EAST:
-						changeXY(avatar, ChangeInXY.DECY);
-						break;
-					case NORTH:
-						changeXY(avatar, ChangeInXY.DECX);
-						break;
-					case SOUTH:
-						changeXY(avatar, ChangeInXY.INCX);
-						break;
+					case WEST -> changeXY(avatar, ChangeInXY.INCY);
+					case EAST -> changeXY(avatar, ChangeInXY.DECY);
+					case NORTH -> changeXY(avatar, ChangeInXY.DECX);
+					case SOUTH -> changeXY(avatar, ChangeInXY.INCX);
 				}
 				break;
 
