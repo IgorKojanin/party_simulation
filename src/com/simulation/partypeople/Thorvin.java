@@ -88,14 +88,12 @@ public class Thorvin extends Avatar implements PartyGoer {
 	}
 
 	public Direction moveAvatar() {
-		// TODO
-		// create an algorithm that determines the next step of your movement pattern
-		// based on a set of priorities.
-Direction dir = Direction.IDLE;
+		
+		Direction dir = Direction.IDLE;
 		Random rand = new Random();
 		int number = rand.nextInt(4);
-		// direction is set externally --> check with the simulation environment
-	if(doLeaf())	{ //wenn man den Platz verlssen möchte
+		
+	if(doLeaf())	{ 
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
@@ -135,9 +133,14 @@ Direction dir = Direction.IDLE;
 		else return Places.TOILET; //Toilette
 				
 	}
-private boolean doLeaf(){
+private boolean doLeaf(){ // decides if the avatar wants to stay or leafe
 
 	return true;
+}
+
+private Places doScout(){ //was ist um mich herrum
+Places first =Avatar.getWhatISee();
+
 }
 
 }
