@@ -86,9 +86,4 @@ public class AvatarTemplate extends Avatar{
 		Direction dir = Direction.IDLE;
 		return dir;
 	}
-
-	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
-		// TODO
-		// increase the drunkness level and subsequently make it lose coordination
-	}
 }
