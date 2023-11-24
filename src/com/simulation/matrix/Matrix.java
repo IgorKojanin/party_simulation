@@ -8,12 +8,7 @@ import com.simulation.avatar.Bouncer;
 
 
 import com.simulation.enums.ChangeInXY;
-<<<<<<< HEAD
 import com.simulation.avatar.Emmanuel;
-import com.simulation.avatar.Thorvin;
-=======
-
->>>>>>> c79260755de7156d5c2cf63d990daa54264b8440
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
@@ -21,6 +16,7 @@ import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.Catherine2;
 import com.simulation.partypeople.JoeMama;
 import com.simulation.partypeople.Emmanuel;
+import com.simulation.partypeople.Thorvin;
 
 
 public class Matrix {
@@ -49,10 +45,14 @@ public class Matrix {
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
 
+		//Thorvins Avatar ---------------------------
+Thorvin thorvin = new Thorvin(Shape.TRIANGLE, Color.darkGray, 0, 0, "Thorvin", 0);
+LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 3, 3);
+avatars.add(locThorvin);
+		//---------------------------------------------
+
 		
-		Thorvin thorvin = new Thorvin(Shape.TRIANGLE, Color.PINK, 0, 0, "Thorvin",0);
-		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 1, 0);
-		avatars.add(locThorvin);
+	
 
 		// Implementing a queue at the entrance
 		queuelength = 14; // Defining the length of the queue, can increase to required number of avatars
