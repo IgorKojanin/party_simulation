@@ -9,14 +9,13 @@
 package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.avatar.PartyGoer;
 import java.awt.Color;
 import java.io.*;
 import java.util.Random;
 
 import com.simulation.enums.*;
 
-public class Jose extends Avatar implements PartyGoer {
+public class Jose extends Avatar {
 
 	File file = new File("misc\\Shrek-Script_Jose.txt");
 	BufferedReader br = new BufferedReader(new FileReader(file));
@@ -47,18 +46,18 @@ public class Jose extends Avatar implements PartyGoer {
 
 	}
 
-	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
+	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
 		// TODO
 		// develop different fighting moves
 		// be very descriptive (user 2 is performing an F5 on user 3)
 	}
 
-	public void talk(PartyGoer person) {	// My avatar only speaks about shrek movie
-		String personName = person.getClass().getName();
+	public void talk(Avatar person) {	// My avatar only speaks about shrek movie
+		String personName = person.getName();
 		try {
 			for (int i=0; i<5; i++){
 				if((shrek_movie = br.readLine()) != null){
-					System.out.printf("Jose says to %S: %s %n", personName,shrek_movie);
+					System.out.printf("Jose says to %S: %s ", personName,shrek_movie);
 				}
 			}
 

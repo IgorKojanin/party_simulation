@@ -11,13 +11,12 @@ package com.simulation.partypeople;
 import java.awt.Color;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
 import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-public class Anatoly extends Avatar implements PartyGoer {
+public class Anatoly extends Avatar{
 
 	// store locally where u are
 	// check with that exactly what can u do?
@@ -34,13 +33,13 @@ public class Anatoly extends Avatar implements PartyGoer {
         // motions within the square itself?
 	}
 
-	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
+	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
 		// if an interaction with another partyGoer has occured
         // start dirty-talking 
         // implement Wrestling moves: rko, f5, aa.
 	}
 
-	public void talk(PartyGoer person) {
+	public void talk(Avatar person) {
 		// TODO
 	}
 
