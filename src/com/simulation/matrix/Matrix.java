@@ -12,7 +12,8 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
-import com.simulation.partypeople.JoeMama;
+
+import com.simulation.partypeople.*;
 import com.simulation.partypeople.Bernhard;
 
 public class Matrix {
@@ -63,7 +64,7 @@ public class Matrix {
 		Shape shape = Shape.SQUARE;
 		Color color = Color.BLUE;
 
-		return new JoeMama(shape, color, 0, 21, name, 20);
+		return new AvatarTemplate(shape, color, 0, 21, name, 20);
 	}
 
 	private void printAvatars() {
@@ -220,10 +221,4 @@ public class Matrix {
 				if (env.isUsable(locAvatar.getX(), locAvatar.getY() - 1)
 						&& !env.isWall(locAvatar.getX(), locAvatar.getY(), locAvatar.getX(), locAvatar.getY() - 1)) {
 					locAvatar.decY();
-					locAvatar.setHeading(Heading.NORTH);
-				}
-				break;
-
-		}
-	}
-}
+					locAvatar.setHeading(Heading.N
