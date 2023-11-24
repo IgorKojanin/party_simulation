@@ -39,7 +39,7 @@ public abstract class Avatar {
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
-	private Places whatISee;
+	private Places[] whatISee;
 
 	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
     private int waitingTime;
@@ -114,7 +114,12 @@ public abstract class Avatar {
 	}
 
 	public int getWaitingTime() { // Waiting time getter
-        return waitingTime;
+		return this.waitingTime;
+	}
+
+	public Places[] getWhatISee() { // Get whatISee
+		return this.whatISee;
+
 	}
 	
 	// ************** set functions **************
@@ -144,20 +149,40 @@ public abstract class Avatar {
 	}
 	
 	// ************** See function **************
-
-	public void setWhatISee(Places places) { // set function from simulation, returns array of Places enums. 2 places
+	public void setWhatISee(Places[] places) { // set function from simulation, returns array of Places enums. 2 places
 												// ahead
 		this.whatISee = places;
 	}
+	
+	private static Bartender bartender; // Static variable to hold the bartender instance
 
-	public void drink(BeverageType type, Bartender bartender) {
-		// if (getWhatISee() == BAR AREA) { // can only call this function if you're at
-		// the area of the bar
-		bartender.addOrderToQueue(this, type);
-		// } else {
-		// System.out.println("You're not at the bar area.");
-		// }
-	}
+    public static void setBartender(Bartender bartenderInstance) {
+        bartender = bartenderInstance;
+    }
+
+	public void drink(BeverageType type) {
+		boolean seesTheBar = false;
+		for (Places place : whatISee) {
+            if (place == Places.BAR) {
+            	seesTheBar = true; // Places.BAR is found in the array
+            	break;
+            }
+            else {
+            	seesTheBar = false;
+            }
+        }
+		setWhatISee(getWhatISee()); // to knwo if the avatar sees the bar
+        // Check if avatar is at the bar area (not implemented in this example)
+        // if (getWhatISee() == Places.BAR) {
+	        if (bartender != null) {
+	            bartender.addOrderToQueue(this, type);
+	        } else {
+	            System.out.println("Bartender instance not set.");
+	        }
+        // } else {
+        //     System.out.println("You're not at the bar area.");
+        // }
+    }
 
 	public abstract Direction moveAvatar();  // To be specified on each personal class
 }

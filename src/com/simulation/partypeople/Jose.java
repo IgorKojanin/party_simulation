@@ -9,6 +9,8 @@
 package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
+import com.simulation.avatar.DJ;
+
 import java.awt.Color;
 import java.io.*;
 import java.util.Random;
@@ -34,7 +36,8 @@ public class Jose extends Avatar {
 	// - Develop skibidi toilet
 
 	// ************** Constructor **************
-	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) throws FileNotFoundException {
+	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime)
+			throws FileNotFoundException {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO
 	}
@@ -47,17 +50,21 @@ public class Jose extends Avatar {
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
+		if (opponent.getName() == "Anatoly Cartman") {
+			// DJ.playSpecificMusic("Fighting_Love");
+			System.out.printf("Jose kicks %s %n", opponent.getName());
+		}
 		// TODO
 		// develop different fighting moves
 		// be very descriptive (user 2 is performing an F5 on user 3)
 	}
 
-	public void talk(Avatar person) {	// My avatar only speaks about shrek movie
-		String personName = person.getName();
+	public void talk(Avatar person) { // My avatar only speaks about shrek movie
 		try {
-			for (int i=0; i<5; i++){
-				if((shrek_movie = br.readLine()) != null){
-					System.out.printf("Jose says to %S: %s ", personName,shrek_movie);
+			for (int i = 0; i < 5; i++) {
+				// DJ.playSpecificMusic("AllStar");
+				if ((shrek_movie = br.readLine()) != null) {
+					System.out.printf("Jose says to %s: %s %n", person.getName(), shrek_movie);
 				}
 			}
 
@@ -90,7 +97,7 @@ public class Jose extends Avatar {
 
 	}
 
-	public Direction moveAvatar() { 	// First implementation random movement
+	public Direction moveAvatar() { // First implementation random movement
 		// TODO
 		// create an algorithm that determines the next step of your movement pattern
 		// based on a set of priorities.
@@ -100,14 +107,11 @@ public class Jose extends Avatar {
 		Direction dir = Direction.FORWARD;
 		if (number == 0) {
 			dir = Direction.FORWARD;
-		}
-		else if (number == 1) {
+		} else if (number == 1) {
 			dir = Direction.RIGHT;
-		}
-		else if (number == 2) {
+		} else if (number == 2) {
 			dir = Direction.BACK;
-		}
-		else if (number == 3) {
+		} else if (number == 3) {
 			dir = Direction.LEFT;
 		}
 		return dir;
