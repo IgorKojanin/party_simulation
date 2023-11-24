@@ -114,7 +114,12 @@ public abstract class Avatar {
 	}
 
 	public int getWaitingTime() { // Waiting time getter
-        return waitingTime;
+		return this.waitingTime;
+	}
+
+	public Places getWhatISee() { // Get whatISee
+		return this.whatISee;
+
 	}
 	
 	// ************** set functions **************
