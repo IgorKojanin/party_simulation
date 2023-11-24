@@ -126,6 +126,17 @@ public class MyFrame extends JFrame {
 			repaint();
 		}
 	}
+	
+	public void setPlaceOccupied(int x, int y) {
+		squares[x][y].setIsUsable(false);
+	}
+	
+	public void setPlaceFree(int x, int y) {
+		squares[x][y].setIsUsable(true);
+		//big if true
+	}
+	
+	
 
 	/**
 	 * This method checks if a square is usable.

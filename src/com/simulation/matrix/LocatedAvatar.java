@@ -76,9 +76,9 @@ public class LocatedAvatar {
 	public void setWhatIsee(MyFrame env) {
 		Places[] p = new Places[1];
 		p[0] = getFrontPlace(env);
-		avatar.setWhatISee( p );
+		avatar.setWhatISee( p[0] );
 		
-		System.out.println("\nHeading: "+heading+" "+p[0]);
+		System.out.println("\n"+avatar.getName()+"'s heading: "+heading+" "+p[0]);
 		Scanner inp = new Scanner(System.in);
 		inp.nextLine();
 		
@@ -93,26 +93,34 @@ public class LocatedAvatar {
 			if( x == 0 ) {
 				return Places.WALL;
 			}else {
-				return env.getPlace(x-1, y);
+				return getPlace(env, x-1, y);
 			}
 		case EAST:
 			if( x == MyFrame.getEntranceX() ) {
 				return Places.WALL;
 			} else {
-				return env.getPlace(x+1, y);
+				return getPlace(env, x+1, y);
 			}
 		case NORTH:
 			if ( y == 0 ) {
 				return Places.WALL;
 			} else {
-				return env.getPlace(x, y-1);
+				return getPlace(env, x, y-1);
 			}
 		default: // SOUTH:
 			if ( y == MyFrame.getMaxY() - 1 ) {
 				return Places.WALL;
 			} else {
-				return env.getPlace(x, y+1);
+				return getPlace(env, x, y+1);
 			}
+		}
+	}
+	
+	private Places getPlace(MyFrame env, int x, int y) {
+		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
+			return Places.PERSON;
+		} else {
+			return env.getPlace(x, y);
 		}
 	}
 	

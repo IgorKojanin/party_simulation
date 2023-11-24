@@ -38,8 +38,8 @@ public class Matrix {
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 31, 5);
-		//avatars.add(locEmmanuel);
-		//avatars.add(locCelestine);
+		avatars.add(locEmmanuel);
+		avatars.add(locCelestine);
 		avatars.add(locEliyas);
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
@@ -145,9 +145,11 @@ public class Matrix {
 							break;
 					}
 					break;
+					
 			}
-			
+			env.setPlaceFree(oldX, oldY);
 			env.moveTo(oldX, oldY, locAvatar.getX(), locAvatar.getY(),locAvatar.getColor());
+			env.setPlaceOccupied(locAvatar.getX(), locAvatar.getY());
 		}
 	}
 

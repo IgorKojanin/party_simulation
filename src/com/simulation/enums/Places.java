@@ -22,5 +22,6 @@ public enum Places {
 	BOUNCER,
 	PATH, // this is for all the white spaces
 	WALL,
-	OUTSIDE
+	OUTSIDE,
+	PERSON
 }
