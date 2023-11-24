@@ -12,6 +12,7 @@ package com.simulation.avatar;
 
 import java.awt.Color;
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
 
 import com.simulation.enums.Shape;
 import com.simulation.partypeople.*;
@@ -34,7 +35,9 @@ public class MainTest {
 		bouncerBob.checkVibe(partyGoerY);
 		bouncerBob.checkVibe(JoseLu);
 
-		JoseLu.talk(avatarJoe);
+
+		JoseLu.talk(Toli);
+		Toli.fight(JoseLu);
 	
 
 		// The Bouncer kicks out Almudena and partyGoerC
@@ -55,11 +58,12 @@ public class MainTest {
 
 		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
 		dj.playMusic(); // Start playing all tracks in sequence
-
+		
 		try {
 			Thread.sleep(Long.MAX_VALUE); // Keep the main thread asleep
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
+
 	}
 }
