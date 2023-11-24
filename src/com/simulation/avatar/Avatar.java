@@ -18,6 +18,7 @@
 
 package com.simulation.avatar;
 
+import com.simulation.enums.BeverageType;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
@@ -38,6 +39,7 @@ public abstract class Avatar {
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
+	private Places whatISee;
 
 	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
     private int waitingTime;
@@ -142,8 +144,19 @@ public abstract class Avatar {
 	}
 	
 	// ************** See function **************
-	public void setWhatISee(Places[] places){ 		// get function from simulation, returns array of Places enums. 2 places ahead
 
+	public void setWhatISee(Places places) { // set function from simulation, returns array of Places enums. 2 places
+												// ahead
+		this.whatISee = places;
+	}
+
+	public void drink(BeverageType type, Bartender bartender) {
+		// if (getWhatISee() == BAR AREA) { // can only call this function if you're at
+		// the area of the bar
+		bartender.addOrderToQueue(this, type);
+		// } else {
+		// System.out.println("You're not at the bar area.");
+		// }
 	}
 
 	public abstract Direction moveAvatar();  // To be specified on each personal class

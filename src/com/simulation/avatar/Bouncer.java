@@ -13,9 +13,6 @@ import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Bouncer extends Avatar {
 	private static final int AGELIMIT = 18;
 	// I think the Simulation should be in charge of these lists of people in the
@@ -24,8 +21,8 @@ public class Bouncer extends Avatar {
 	// peopleInParty list.
 	// If they get kicked out or the bouncer has to break up a fight with one of
 	// them, they get added to the peopleWhoAreOutside list.
-	List<Avatar> peopleInParty = new ArrayList<>();
-	List<Avatar> peopleWhoAreOutside = new ArrayList<>();
+	// List<Avatar> peopleInParty = new ArrayList<>();
+	// List<Avatar> peopleWhoAreOutside = new ArrayList<>();
 
 	// ************** Constructor **************
 	public Bouncer(Shape shape, Color color, int borderWidth) {
@@ -40,7 +37,7 @@ public class Bouncer extends Avatar {
 		return isOverAge;
 	}
 
-	public boolean checkEntry(Avatar person) {
+	public boolean checkVibe(Avatar person) {
 		// Check the person's age and if they are in timeout, then let them in or not
 		boolean personIsInParty;
 		int personAlc = person.getAlcoholPercentage();
@@ -49,18 +46,18 @@ public class Bouncer extends Avatar {
 		boolean personIsOldEnough = checkAge(personAge);
 		if (personAlc == 0 && personIsOldEnough == true && personTimeoutTimeRemaining == 0) {
 			person.setIsInThePartyState(true);
-			if (!peopleInParty.contains(person)) {
+			//The Environment should own the arrays for people in the party and people outside
+			/* if (!peopleInParty.contains(person)) {
 				peopleInParty.add(person);
 			}
 			if (peopleWhoAreOutside.contains(person)) {
 				peopleWhoAreOutside.remove(person);
-			}
+			} */
 			personIsInParty = true;
 		} else {
 			person.setIsInThePartyState(false);
 			personIsInParty = false;
 		}
-
 		return personIsInParty;
 	}
 
@@ -91,12 +88,13 @@ public class Bouncer extends Avatar {
 	public Avatar kickOut(Avatar person, int duration) {
 		// kick the person out from the party
 		person.setIsInThePartyState(false);
-		if (!peopleWhoAreOutside.contains(person)) {
+		//The Environment should own the arrays for people in the party and people outside
+		/* if (!peopleWhoAreOutside.contains(person)) {
 			peopleWhoAreOutside.add(person);
 		}
 		if (peopleInParty.contains(person)) {
 			peopleInParty.remove(person);
-		}
+		}*/ 
 		setTimeout(person, duration);
 		// Here, maybe the Environment keep track of how much time is remaining
 		person.setTimeoutTimeRemaining(duration);
@@ -107,13 +105,14 @@ public class Bouncer extends Avatar {
 		return person;
 	}
 
-	public List<Avatar> getListOfPeopleInParty() {
+	//The Environment should own the arrays for people in the party and people outside
+	/* public List<Avatar> getListOfPeopleInParty() {
 		return peopleInParty;
 	}
 
 	public String getListOfPeopleWhoAreOutside() {
 		return peopleWhoAreOutside.toString();
-	}
+	}*/
 
 	public Direction moveAvatar() {
 		return Direction.IDLE;
