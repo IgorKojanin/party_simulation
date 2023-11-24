@@ -39,7 +39,7 @@ public abstract class Avatar {
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
-	private Places whatISee;
+	private Places[] whatISee;
 
 	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
     private int waitingTime;
@@ -117,7 +117,7 @@ public abstract class Avatar {
 		return this.waitingTime;
 	}
 
-	public Places getWhatISee() { // Get whatISee
+	public Places[] getWhatISee() { // Get whatISee
 		return this.whatISee;
 
 	}
@@ -149,8 +149,7 @@ public abstract class Avatar {
 	}
 	
 	// ************** See function **************
-
-	public void setWhatISee(Places places) { // set function from simulation, returns array of Places enums. 2 places
+	public void setWhatISee(Places[] places) { // set function from simulation, returns array of Places enums. 2 places
 												// ahead
 		this.whatISee = places;
 	}
