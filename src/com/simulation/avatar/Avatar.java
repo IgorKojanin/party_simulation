@@ -18,11 +18,11 @@
 
 package com.simulation.avatar;
 
+import com.simulation.enums.BeverageType;
 import com.simulation.enums.Direction;
+import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
-
 import java.awt.Color;
-
 
 public abstract class Avatar {
 
@@ -39,8 +39,13 @@ public abstract class Avatar {
 	private boolean isHit = false;
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
+	private Places[] whatISee;
+
+	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
+    private int waitingTime;
+
 	// ************** Main constructor for PartyGoer **************
-	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName) {
+	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		Id += Id;
 		this.avatarName = avatarName;
 		this.shape = shape;
@@ -52,17 +57,18 @@ public abstract class Avatar {
 		this.isHit = false;
 		this.timeoutTimeRemaining = 0;
 		this.isInTheParty = false;
+		this.waitingTime = waitingTime;
 	}
 	
 	// ************** Constructor for workers (DJ, bouncer & bartender) **************
-	public Avatar(Shape shape, Color color, int borderWidth) { 
+	public Avatar(Shape shape, Color color2, int borderWidth) {
 		this.shape = shape;
-		this.color = color;
+		this.color = color2;
 		this.borderWidth = borderWidth;
 		this.avatarId = Id;
 	}	
-	
-	// ************** get functions **************
+
+    // ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -106,6 +112,15 @@ public abstract class Avatar {
 	public boolean getIsHitState() {
 		return this.isHit;
 	}
+
+	public int getWaitingTime() { // Waiting time getter
+		return this.waitingTime;
+	}
+
+	public Places[] getWhatISee() { // Get whatISee
+		return this.whatISee;
+
+	}
 	
 	// ************** set functions **************
 	
@@ -128,11 +143,46 @@ public abstract class Avatar {
 	public void setIsHit(boolean newIsHitState) {
 		this.isHit = newIsHitState;
 	}
+
+	public void setWaitngTime(int newWaitingTime) { // Setter for waiting time
+        this.waitingTime = newWaitingTime;
+	}
 	
 	// ************** See function **************
-	public void getWhatISee(){ 		// get function from simulation, returns array of Places enums. 2 places ahead
-
+	public void setWhatISee(Places[] places) { // set function from simulation, returns array of Places enums. 2 places
+												// ahead
+		this.whatISee = places;
 	}
+	
+	private static Bartender bartender; // Static variable to hold the bartender instance
+
+    public static void setBartender(Bartender bartenderInstance) {
+        bartender = bartenderInstance;
+    }
+
+	public void drink(BeverageType type) {
+		boolean seesTheBar = false;
+		for (Places place : whatISee) {
+            if (place == Places.BAR) {
+            	seesTheBar = true; // Places.BAR is found in the array
+            	break;
+            }
+            else {
+            	seesTheBar = false;
+            }
+        }
+		setWhatISee(getWhatISee()); // to knwo if the avatar sees the bar
+        // Check if avatar is at the bar area (not implemented in this example)
+        // if (getWhatISee() == Places.BAR) {
+	        if (bartender != null) {
+	            bartender.addOrderToQueue(this, type);
+	        } else {
+	            System.out.println("Bartender instance not set.");
+	        }
+        // } else {
+        //     System.out.println("You're not at the bar area.");
+        // }
+    }
 
 	public abstract Direction moveAvatar();  // To be specified on each personal class
 }

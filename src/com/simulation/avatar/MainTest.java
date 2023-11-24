@@ -9,61 +9,61 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 package com.simulation.avatar;
+
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
+
 import com.simulation.enums.Shape;
-import com.simulation.partypeople.Catherine2;
-import com.simulation.partypeople.JoeMama;
+import com.simulation.partypeople.*;
 
 public class MainTest {
-	public static void main(String[] args) {
-		//(Shape shape, Colors color, int borderWidth, int avatarAge, String avatarName)
-		
-		JoeMama avatarJoe = new JoeMama(Shape.CIRCLE, Color.RED, 1, 20, "Almudena");
-		Catherine2 partyGoerY = new Catherine2(Shape.CIRCLE, Color.RED, 1, 17, "Catherine-too-young");
-		Catherine2 partyGoerC1 = new Catherine2(Shape.CIRCLE, Color.RED, 1, 30, "CatherineC1");
-		Catherine2 partyGoerC2 = new Catherine2(Shape.CIRCLE, Color.RED, 1, 20, "CatherineC2");
+	public static void main(String[] args) throws FileNotFoundException {
 
+		AvatarTemplate avatarJoe = new AvatarTemplate(Shape.CIRCLE, Color.RED, 1, 20, "Almudena", 0);
+		Jose JoseLu = new Jose(Shape.CIRCLE, Color.RED, 1, 20, "JoseLu", 0);
+		Anatoly Toli = new Anatoly(Shape.CIRCLE, Color.BLACK, 1, 22, "Anatoly Cartman", 0);
+		Catherine2 partyGoerY = new Catherine2(Shape.CIRCLE, Color.RED, 1, 17, "Catherine-too-young", 0);
+		Catherine2 partyGoerC1 = new Catherine2(Shape.CIRCLE, Color.RED, 1, 30, "CatherineC1", 0);
+		Catherine2 partyGoerC2 = new Catherine2(Shape.CIRCLE, Color.RED, 1, 20, "CatherineC2", 0);
 		Bouncer bouncerBob = new Bouncer(Shape.CIRCLE, Color.BLUE, 5);
 
 		// The Bouncer checks if all 4 people can be let in
-		bouncerBob.checkEntry(avatarJoe);		
-		bouncerBob.checkEntry(partyGoerC1);		
-		bouncerBob.checkEntry(partyGoerC2);		
-		bouncerBob.checkEntry(partyGoerY);
+		bouncerBob.checkVibe(avatarJoe);
+		bouncerBob.checkVibe(partyGoerC1);
+		bouncerBob.checkVibe(partyGoerC2);
+		bouncerBob.checkVibe(partyGoerY);
+		bouncerBob.checkVibe(JoseLu);
 
-		System.out.println("The Bouncer lets Almudena, CatherineC1, and CatherineC2 into the party because they are overage:");
-		System.out.println(bouncerBob.peopleInParty.toString());
-		
-		// The Bouncer kicks out Almudena and partyGoerC 
+
+		JoseLu.talk(Toli);
+		Toli.fight(JoseLu);
+	
+
+		// The Bouncer kicks out Almudena and partyGoerC
 		bouncerBob.breakUpFight(partyGoerC1, partyGoerC2, 10, 20);
-		System.out.println("The Bouncer breaks up a fight between CatherineC1 and CatherineC2 and both get kicked out. Only Almudena remains in the party:");
-		System.out.println(bouncerBob.peopleInParty.toString());
+		
 
 		// After 10 min go by, Set the timeout time of the people who were kicked out
 		partyGoerC1.setTimeoutTimeRemaining(0);
 		partyGoerC2.setTimeoutTimeRemaining(10);
 
-		
 		// The Bouncer checks if all 4 people can be let in
-		bouncerBob.checkEntry(avatarJoe);		
-		bouncerBob.checkEntry(partyGoerC1);		
-		bouncerBob.checkEntry(partyGoerC2);		
-		bouncerBob.checkEntry(partyGoerY);
-		
-		System.out.println("The Bouncer only lets CatherineC1 back into the party because they have 0 time in timeout remaining:");
-		System.out.println(bouncerBob.peopleInParty.toString());
-		System.out.println(bouncerBob.getListOfPeopleInParty());
+		bouncerBob.checkVibe(avatarJoe);
+		bouncerBob.checkVibe(partyGoerC1);
+		bouncerBob.checkVibe(partyGoerC2);
+		bouncerBob.checkVibe(partyGoerY);
+
+	
 
 		DJ dj = new DJ(Shape.CIRCLE, Color.BLUE, 5, 1);
-		// dj.playMusic(); // Start playing all tracks in sequence
-
+		dj.playMusic(); // Start playing all tracks in sequence
+		
 		try {
 			Thread.sleep(Long.MAX_VALUE); // Keep the main thread asleep
 		} catch (InterruptedException e) {
 			Thread.currentThread().interrupt();
 		}
 
-		// Bartender bartenderSue = new Bartender(null, null, 0, 0);
-		// System.out.println("Color: " + bartenderSue.getColor());
 	}
 }

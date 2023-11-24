@@ -32,15 +32,11 @@ replay_pid*
 /.idea/modules.xml
 /PartySimulator.iml
 /.idea/vcs.xml
-/.idea/.gitignore
-/.idea/.name
-/.idea/misc.xml
-/.idea/modules.xml
-/PartySimulator.iml
-/.idea/vcs.xml
-/.idea/.gitignore
-/.idea/.name
-/.idea/misc.xml
-/.idea/modules.xml
-/PartySimulator.iml
-/.idea/vcs.xml
+
+
+# Ignore ID specific files
+.classpath
+.project
+/.vscode/
+/.settings/
+/.metadata/
