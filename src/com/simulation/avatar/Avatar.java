@@ -161,6 +161,17 @@ public abstract class Avatar {
     }
 
 	public void drink(BeverageType type) {
+		boolean seesTheBar = false;
+		for (Places place : whatISee) {
+            if (place == Places.BAR) {
+            	seesTheBar = true; // Places.BAR is found in the array
+            	break;
+            }
+            else {
+            	seesTheBar = false;
+            }
+        }
+		setWhatISee(getWhatISee()); // to knwo if the avatar sees the bar
         // Check if avatar is at the bar area (not implemented in this example)
         // if (getWhatISee() == Places.BAR) {
 	        if (bartender != null) {

@@ -40,6 +40,12 @@ class AvatarOrder {
 public class Bartender extends Avatar {
 	private LinkedList<AvatarOrder> orderQueue; // a queue for serving Avatars in order of arrival
 
+	// variables to move the bartender in the bar
+	private int leftSteps = 0;
+	private int backSteps = 0;
+	private int frontSteps = 0;
+	private int rightSteps = 0;
+
 	public void addOrderToQueue(Avatar avatar, BeverageType beverageType) {
 		AvatarOrder avatarOrder = new AvatarOrder(avatar, beverageType);
 		orderQueue.add(avatarOrder);
@@ -122,11 +128,6 @@ public class Bartender extends Avatar {
 		super(shape, color, borderWidth);
 		this.orderQueue = new LinkedList<>();
 	}
-
-	private int leftSteps = 0;
-	private int backSteps = 0;
-	private int frontSteps = 0;
-	private int rightSteps = 0;
 
 	public Direction moveAvatar() {
 		// Move 1 step to the right
