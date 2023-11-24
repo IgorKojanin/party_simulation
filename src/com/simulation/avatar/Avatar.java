@@ -154,7 +154,7 @@ public abstract class Avatar {
 		this.whatISee = places;
 	}
 	
-    private static Bartender bartender; // Static variable to hold the bartender instance
+	private static Bartender bartender; // Static variable to hold the bartender instance
 
     public static void setBartender(Bartender bartenderInstance) {
         bartender = bartenderInstance;
