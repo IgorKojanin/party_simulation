@@ -3,9 +3,13 @@ package com.simulation.matrix;
 import java.awt.Color;
 
 import com.simulation.avatar.Avatar;
+import com.simulation.enums.ChangeInXY;
 import com.simulation.enums.Heading;
+import com.simulation.enums.Places;
+import com.simulation.enviroment.MyFrame;
 
 import java.awt.Color;
+
 
 public class LocatedAvatar {
 	private Avatar avatar;
@@ -62,10 +66,30 @@ public class LocatedAvatar {
 
 	public void setHeading(Heading heading) {
 		this.heading = heading;
-
 	}
 
 	public Color getColor() {
 		return avatar.getColor();
 	}
+	
+	public void setWhatIsee(MyFrame env) {
+		Places[] p = new Places[1];
+		p[0] = getFrontPlace(env);
+		avatar.setWhatISee( p );
+		
+	}
+	
+	private Places getFrontPlace(MyFrame env) {
+		switch (getHeading()) {
+		case WEST:
+			return env.getPlace(x-1, y);
+		case EAST:
+			return env.getPlace(x+1, y);
+		case NORTH:
+			return env.getPlace(x, y-1);
+		default: // SOUTH:
+			return env.getPlace(x, y+1);
+		}
+	}
+	
 }

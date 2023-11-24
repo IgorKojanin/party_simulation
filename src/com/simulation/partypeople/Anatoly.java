@@ -17,13 +17,13 @@ import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-public class Catherine2 extends Avatar implements PartyGoer {
+public class Anatoly extends Avatar implements PartyGoer {
 
 	// store locally where u are
 	// check with that exactly what can u do?
 
 	// ************** Constructor **************
-	public Catherine2(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
+	public Anatoly(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO Auto-generated constructor stub
 	}
