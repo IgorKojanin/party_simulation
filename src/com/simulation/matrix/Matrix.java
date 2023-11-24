@@ -3,6 +3,9 @@ package com.simulation.matrix;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import com.simulation.avatar.Avatar;
+import com.simulation.avatar.Bartender;
+import com.simulation.avatar.Bouncer;
 import com.simulation.avatar.Emmanuel;
 import com.simulation.enums.ChangeInXY;
 import com.simulation.enums.Direction;
