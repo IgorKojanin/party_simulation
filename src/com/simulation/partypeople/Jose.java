@@ -3,18 +3,23 @@
 // Date:         27/10/2023
 //
 // Class: Joe.java
-// Description: Template for the people
+// Description: Avatar class for Jose Luis Roldan Rodriguez
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.enums.BeverageType;
 import java.awt.Color;
-import com.simulation.enums.Direction;
-import com.simulation.enums.Shape;
+import java.io.*;
+import java.util.Random;
 
-public class JoeMama extends Avatar{
+import com.simulation.enums.*;
+
+public class Jose extends Avatar {
+
+	File file = new File("misc\\Shrek-Script_Jose.txt");
+	BufferedReader br = new BufferedReader(new FileReader(file));
+	private String shrek_movie;
 
 	// ToDo individually:
 	// - Store surroudings locally
@@ -29,7 +34,7 @@ public class JoeMama extends Avatar{
 	// - Develop skibidi toilet
 
 	// ************** Constructor **************
-	public JoeMama(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
+	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) throws FileNotFoundException {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO
 	}
@@ -47,12 +52,18 @@ public class JoeMama extends Avatar{
 		// be very descriptive (user 2 is performing an F5 on user 3)
 	}
 
-	public void talk(Avatar person) {
-		// TODO
-		// create a list of answers and questions that you would like to exchange with
-		// the other users of Club Penguin
-		// create a primitive algorithm that would make picks from your answer list
-		// based on the questions asked
+	public void talk(Avatar person) {	// My avatar only speaks about shrek movie
+		String personName = person.getName();
+		try {
+			for (int i=0; i<5; i++){
+				if((shrek_movie = br.readLine()) != null){
+					System.out.printf("Jose says to %S: %s ", personName,shrek_movie);
+				}
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void smoke() {
@@ -79,11 +90,26 @@ public class JoeMama extends Avatar{
 
 	}
 
-	public Direction moveAvatar() {
+	public Direction moveAvatar() { 	// First implementation random movement
 		// TODO
 		// create an algorithm that determines the next step of your movement pattern
 		// based on a set of priorities.
-		Direction dir = Direction.IDLE;
+		Random rand = new Random();
+		int number = rand.nextInt(4);
+
+		Direction dir = Direction.FORWARD;
+		if (number == 0) {
+			dir = Direction.FORWARD;
+		}
+		else if (number == 1) {
+			dir = Direction.RIGHT;
+		}
+		else if (number == 2) {
+			dir = Direction.BACK;
+		}
+		else if (number == 3) {
+			dir = Direction.LEFT;
+		}
 		return dir;
 	}
 
