@@ -97,7 +97,7 @@ public class DJ extends Avatar {
 				if (event.getType() == LineEvent.Type.STOP) {
 					event.getLine().close();
 					if (runningMusic != null ) {
-						Matrix.stopButtonClicked = true;
+						//Matrix.stopButtonClicked = true;
 						// onEnd.run(); // Run the callback after the track has finished playing
 						runningMusic.run();
 					}
