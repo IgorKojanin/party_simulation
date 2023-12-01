@@ -8,10 +8,6 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Places;
 import com.simulation.enviroment.MyFrame;
 
-
-import java.util.Scanner;
-
-
 public class LocatedAvatar {
 	private Avatar avatar;
 	private int x;

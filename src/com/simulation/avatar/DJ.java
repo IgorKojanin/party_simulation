@@ -13,7 +13,6 @@ import java.awt.Color;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-import com.simulation.matrix.Matrix;
 
 import javax.sound.sampled.*;
 import javax.swing.JFrame;

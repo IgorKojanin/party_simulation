@@ -38,9 +38,11 @@ public class Jose extends Avatar {
 	// ************** Constructor **************
 	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
-
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-		} catch (IOException e) {
+		
+		try {
+			br = new BufferedReader(
+				new InputStreamReader(new FileInputStream(file),"UTF-8"));
+		} catch (UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -63,15 +65,14 @@ public class Jose extends Avatar {
 		// be very descriptive (user 2 is performing an F5 on user 3)
 	}
 
-	public void talk(Avatar person) { // My avatar only speaks about shrek movie
+	public void talk() { // My avatar only speaks about shrek movie
 		try {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 3; i++) {
 				// DJ.playSpecificMusic("AllStar");
 				if ((shrek_movie = br.readLine()) != null) {
-					System.out.printf("Jose says to %s: %s %n", person.getName(), shrek_movie);
+					System.out.printf("Jose: %n   %s %n", shrek_movie);
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,20 +106,25 @@ public class Jose extends Avatar {
 		// TODO
 		// create an algorithm that determines the next step of your movement pattern
 		// based on a set of priorities.
-		Random rand = new Random();
-		int number = rand.nextInt(4);
-
 		Direction dir = Direction.FORWARD;
-		if (number == 0) {
-			dir = Direction.FORWARD;
-		} else if (number == 1) {
-			dir = Direction.RIGHT;
-		} else if (number == 2) {
-			dir = Direction.FORWARD;
-		} else if (number == 3) {
-			dir = Direction.LEFT;
+
+		if (getWhatISee()[0] == Places.PERSON){
+			dir = Direction.IDLE;
+			talk();
+		} else {
+			Random rand = new Random();
+			int number = rand.nextInt(4);
+			if (number == 0) {
+				dir = Direction.FORWARD;
+			} else if (number == 1) {
+				dir = Direction.RIGHT;
+			} else if (number == 2) {
+				dir = Direction.FORWARD;
+			} else if (number == 3) {
+				dir = Direction.LEFT;
+			}
 		}
-		return dir;
+		return Direction.FORWARD;
 	}
 
 	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
