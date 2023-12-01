@@ -29,6 +29,7 @@ import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.Jose;
+import com.simulation.partypeople.Bernhard;
 
 public class Matrix {
 
@@ -53,7 +54,6 @@ public class Matrix {
 		env.setVisible(true);
 		avatars = new ArrayList<LocatedAvatar>();
 
-<<<<<<< HEAD
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.CIRCLE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
@@ -69,28 +69,8 @@ public class Matrix {
 		avatars.add(locEliyas);
 		avatars.add(locBernhard);
 		avatars.add(locAnatoly);
-	}
-=======
-		 try {
-			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
-		} catch (Exception e) {
-					e.printStackTrace();
-		}
-		
+	
 
-		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel",0);
-		Emmanuel eliyas = new Emmanuel(Shape.CIRCLE, Color.MAGENTA, 0, 0, "Eliyas",0);
-		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine",0);
-		dj = new DJ(Shape.CIRCLE, Color.WHITE,0,1);
-		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
-		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
-		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
-		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
-		avatars.add(locEmmanuel);
-		avatars.add(locCelestine);
-		avatars.add(locEliyas);
-		avatars.add(locDj);
->>>>>>> c52d92657b7b7e14aed02d51bc31e8915592c658
 
 
 		// Implementing a queue at the entrance
