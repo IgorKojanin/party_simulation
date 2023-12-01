@@ -7,6 +7,7 @@ import com.simulation.enums.ChangeInXY;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
+import com.simulation.avatar.Bouncer;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.*;
@@ -19,6 +20,7 @@ public class Matrix {
 	private ArrayList<LocatedAvatar> queueAvatars;  // Array list for tracking avatars in queue
 	private ArrayList<LocatedAvatar> clubAvatars;  // Array list for tracking avatars in club
 	private ArrayList<LocatedAvatar> unrenderedAvatars;  // Array list for tracking all avatars
+	private Bouncer bouncer ;
 
 	public Matrix() {
 		env = new MyFrame();
@@ -28,9 +30,9 @@ public class Matrix {
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
 
-		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
-		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 0,"Catherine", 0);
-		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
+		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 100,"Thorvin", 0);
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.BLACK, 0, 100,"Catherine", 0);
+		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 100, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
 		Emmanuel igor = new Emmanuel(Shape.CIRCLE, Color.CYAN, 0, 0, "Igor", 0);
@@ -40,6 +42,7 @@ public class Matrix {
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
 		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
+		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
 
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
@@ -54,19 +57,31 @@ public class Matrix {
 		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 
-		avatars.add(locEmmanuel);
+		avatars.add(locThorvin);
+		avatars.add(locCatherine);
+		avatars.add(locEmmanuel);		
+		avatars.add(locJose);
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
 		avatars.add(locKieran);
 		avatars.add(locBernhard);
 		avatars.add(locIgor);
 		avatars.add(locAnatoly);
-		avatars.add(locJose);
 		avatars.add(locAlisa);
 		avatars.add(locBjoern);
-		avatars.add(locThorvin);
-		avatars.add(locCatherine);
+		
+		for (LocatedAvatar element : avatars){
+			boolean allowed = bouncer.checkVibe(element.getAvatar());
+			System.out.print("avatar : "  + element.getAvatar().getName() + " is: ");
+			System.out.println(allowed);
+		}
+	}
 
+	private void checkAvatars(Bouncer bouncer, ArrayList<LocatedAvatar> avatars) {
+		for (LocatedAvatar i : avatars) {
+			bouncer.checkVibe(i.getAvatar());
+		
+		}
 	}
 
 	private void sortAvatar(LocatedAvatar avatar) {
@@ -111,8 +126,14 @@ public class Matrix {
 				if (env.isUsable(avatar.getX() - 1, avatar.getY())) {
 					env.moveInQueue(x, y, avatar.getColor());
 					if (x - 1 == 32) {
-						queueAvatars.remove(avatar);
-						clubAvatars.add(avatar);
+						if (bouncer.checkVibe(avatar.getAvatar()) ){
+							queueAvatars.remove(avatar);
+							clubAvatars.add(avatar);
+						}else{
+							//Celestine: reorder Avatars which are still in line
+							//queueAvatars.add(queueAvatars.remove(0));
+							//queueAvatars.get(0);
+						}
 					}
 					avatar.setX(x - 1);
 					avatar.setY(y);
