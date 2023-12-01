@@ -44,10 +44,14 @@ public class Matrix {
 		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
+		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
+
 		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
+		avatars.add(locKieran);
 		avatars.add(locBernhard);
+		avatars.add(locJose);
 		avatars.add(locAlisa);
 		avatars.add(locBjoern);
 	}
