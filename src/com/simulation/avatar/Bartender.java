@@ -122,13 +122,16 @@ public class Bartender extends Avatar {
 	public void chat() {
 		System.out.println("Bartender: Welcome to the party! What can I get you?");
 	}
-
+	
+	// 
+	
+	
 	// ************** Constructor **************
 	public Bartender(Shape shape, Color color, int borderWidth) {
 		super(shape, color, borderWidth);
 		this.orderQueue = new LinkedList<>();
 	}
-
+	
 	public Direction moveAvatar() {
 		// Move 1 step to the right
 		if (rightSteps < 1) {
