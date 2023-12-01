@@ -29,6 +29,7 @@ public class Matrix {
 		unrenderedAvatars = new ArrayList<>();
 
 		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 0,"Catherine", 0);
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
@@ -47,6 +48,7 @@ public class Matrix {
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
 		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
+		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
 
 		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
@@ -58,6 +60,8 @@ public class Matrix {
 		avatars.add(locAlisa);
 		avatars.add(locBjoern);
 		avatars.add(locThorvin);
+		avatars.add(locCatherine);
+
 	}
 
 	private void sortAvatar(LocatedAvatar avatar) {
