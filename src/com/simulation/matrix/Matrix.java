@@ -28,10 +28,10 @@ public class Matrix {
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
 
-		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0)
+		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);
 		avatars.add(locThorvin);
-		
+
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);

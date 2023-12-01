@@ -9,7 +9,7 @@
 package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.avatar.PartyGoer;
+//import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
 import java.awt.Color;
 import java.util.Random;
@@ -19,7 +19,7 @@ import com.simulation.enums.Shape;
 import com.simulation.enums.Places;
 
 
-public class Thorvin extends Avatar implements PartyGoer {
+public class Thorvin extends Avatar {
 
 	// ToDo individually:
 	// - Store surroudings locally
@@ -52,13 +52,13 @@ public class Thorvin extends Avatar implements PartyGoer {
 
 	}
 
-	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
+	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
 		// TODO
 		// develop different fighting moves
 		// be very descriptive (user 2 is performing an F5 on user 3)
 	}
 
-	public void talk(PartyGoer person) {
+	public void talk(Avatar person) {
 		// TODO
 		// create a list of answers and questions that you would like to exchange with
 		// the other users of Club Penguin
@@ -149,7 +149,7 @@ return false;
 
 private Places[] doScout(){ //was ist um mich herrum
 Places[] placesArroundMe =this.getWhatISee();
-
+return placesArroundMe;
 
 }
 
