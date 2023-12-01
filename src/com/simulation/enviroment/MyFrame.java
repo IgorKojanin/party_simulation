@@ -179,6 +179,9 @@ public class MyFrame extends JFrame {
 	public static int getMaxY() {
 		return maxY;
 	}
+	public static int getMaxX() {
+		return maxX;
+	}
 
 	/**
 	 * This is the constructor of the MyFrame class.
