@@ -26,6 +26,13 @@ replay_pid*
 
 # Apple files
 *.DS_Store
+/.idea/.gitignore
+/.idea/.name
+/.idea/misc.xml
+/.idea/modules.xml
+/PartySimulator.iml
+/.idea/vcs.xml
+
 
 # Ignore ID specific files
 .classpath

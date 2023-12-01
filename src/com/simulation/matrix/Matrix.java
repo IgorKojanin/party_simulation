@@ -1,10 +1,23 @@
 package com.simulation.matrix;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.avatar.Bouncer;
+import com.simulation.avatar.DJ;
 import com.simulation.avatar.Emmanuel;
 import com.simulation.enums.ChangeInXY;
 
@@ -26,7 +39,16 @@ public class Matrix {
 	private int queuelength;
 	private int initialWaitingTime;
 	private boolean avatarInQueue;
+
+	DJ dj;
+	public static JFrame frame;
 	
+	JButton changeMusicButton;
+	JComboBox<String> musicListDropdown;
+	JButton DJPlayButton;
+	JButton DJStopButton;
+	private JButton stopButton;
+	public static Boolean stopButtonClicked = true;
 	public Matrix() {
 		env = new MyFrame();
 		env.setVisible(true);
@@ -36,12 +58,16 @@ public class Matrix {
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel",0);
 		Emmanuel eliyas = new Emmanuel(Shape.CIRCLE, Color.MAGENTA, 0, 0, "Eliyas",0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine",0);
+		dj = new DJ(Shape.CIRCLE, Color.WHITE,0,1);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
+		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
 		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
+		avatars.add(locDj);
+
 
 		//Thorvins Avatar ---------------------------
 Thorvin thorvin = new Thorvin(Shape.TRIANGLE, Color.darkGray, 0, 0, "Thorvin", 0);
@@ -63,6 +89,50 @@ avatars.add(locThorvin);
 			initialWaitingTime += 5;
 		}
 		printAvatars();
+		frame = new JFrame("Music Matrix");
+        frame.setSize(200, 200);
+		frame.setResizable(false);
+		frame.setLocation(1000, 400);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        changeMusicButton = new JButton("Change Music");
+        changeMusicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleUserMusicRequest();
+            }
+        });
+
+		musicListDropdown = new JComboBox<>(dj.getMusicList().toArray(new String[0]));
+		musicListDropdown.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedMusic = (String) musicListDropdown.getSelectedItem();
+                dj.playSpecificMusic(selectedMusic);
+			}
+            
+        });
+
+		stopButton = new JButton("STOP");
+        stopButton.setBackground(Color.RED);
+        stopButton.setOpaque(true);
+        stopButton.setFocusPainted(false);
+        stopButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        stopButton.setPreferredSize(new Dimension(100, 40));
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dj.stopMusic();
+            }
+        });
+        JPanel panel = new JPanel();
+        panel.add(changeMusicButton);
+        panel.add(new JLabel("Available Musics:"));
+        panel.add(musicListDropdown);
+		panel.add(stopButton);
+        frame.add(panel);
+
+        frame.setVisible(false);
+    
 	}
     
 	// Instantiating a new avatar to be added to the queue, currently basic functiosn for testing
@@ -191,6 +261,8 @@ avatars.add(locThorvin);
 	
 	
 	public void run() {
+		playDJ();
+
 		while (true) {
 			moveAvatars();
 		}
@@ -232,4 +304,31 @@ avatars.add(locThorvin);
 
 		}
 	}
+
+	private void playDJ(){
+		dj.playMusic();
+	}
+
+	public void handleUserMusicRequest() {
+        String[] options = {"Randomly", "By specifying the music name"};
+        int choice = JOptionPane.showOptionDialog(frame,
+                "How do you want to change the music?",
+                "Change Music",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        switch (choice) {
+            case 0:
+                dj.changeRandomMusic();
+                break;
+            case 1:
+                dj.changeMusicByUserInput();
+                break;
+            default:
+                JOptionPane.showMessageDialog(frame, "Invalid choice. Music will not be changed.");
+        }
+    }
 }

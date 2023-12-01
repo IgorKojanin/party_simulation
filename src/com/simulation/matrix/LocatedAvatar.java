@@ -3,12 +3,13 @@ package com.simulation.matrix;
 import java.awt.Color;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.enums.ChangeInXY;
+
 import com.simulation.enums.Heading;
 import com.simulation.enums.Places;
 import com.simulation.enviroment.MyFrame;
 
-import java.awt.Color;
+
+import java.util.Scanner;
 
 
 public class LocatedAvatar {
@@ -71,24 +72,54 @@ public class LocatedAvatar {
 	public Color getColor() {
 		return avatar.getColor();
 	}
-	
+		
 	public void setWhatIsee(MyFrame env) {
 		Places[] p = new Places[1];
 		p[0] = getFrontPlace(env);
 		avatar.setWhatISee( p );
 		
+		System.out.println("\n"+avatar.getName()+"'s heading: "+heading+" "+p[0]);
+		Scanner inp = new Scanner(System.in);
+		inp.nextLine();
 	}
 	
 	private Places getFrontPlace(MyFrame env) {
+		if ( x > MyFrame.getEntranceX() ) {
+			return Places.OUTSIDE;
+		}
 		switch (getHeading()) {
 		case WEST:
-			return env.getPlace(x-1, y);
+			if( x == 0 ) {
+				return Places.WALL;
+			}else {
+				return getPlace(env, x-1, y);
+			}
 		case EAST:
-			return env.getPlace(x+1, y);
+			if( x == MyFrame.getEntranceX() ) {
+				return Places.WALL;
+			} else {
+				return getPlace(env, x+1, y);
+			}
 		case NORTH:
-			return env.getPlace(x, y-1);
+			if ( y == 0 ) {
+				return Places.WALL;
+			} else {
+				return getPlace(env, x, y-1);
+			}
 		default: // SOUTH:
-			return env.getPlace(x, y+1);
+			if ( y == MyFrame.getMaxY() - 1 ) {
+				return Places.WALL;
+			} else {
+				return getPlace(env, x, y+1);
+			}
+		}
+	}
+	
+	private Places getPlace(MyFrame env, int x, int y) {
+		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
+			return Places.PERSON;
+		} else {
+			return env.getPlace(x, y);
 		}
 	}
 	

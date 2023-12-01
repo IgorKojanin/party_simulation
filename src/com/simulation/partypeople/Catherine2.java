@@ -11,13 +11,12 @@ package com.simulation.partypeople;
 import java.awt.Color;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.avatar.PartyGoer;
 import com.simulation.enums.BeverageType;
 import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-public class Catherine2 extends Avatar implements PartyGoer {
+public class Catherine2 extends Avatar{
 
 	// store locally where u are
 	// check with that exactly what can u do?
@@ -33,12 +32,12 @@ public class Catherine2 extends Avatar implements PartyGoer {
 
 	}
 
-	public void fight(PartyGoer opponent) { // Call this function if other avatar starts a fight
+	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
 		// TODO
 
 	}
 
-	public void talk(PartyGoer person) {
+	public void talk(Avatar person) {
 		// TODO
 	}
 

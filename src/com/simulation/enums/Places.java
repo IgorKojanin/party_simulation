@@ -20,5 +20,9 @@ public enum Places {
 	LOUNGE_SMOKING,
 	DJ,
 	BOUNCER,
-	PATH // this is for all the white spaces
+	PATH, // this is for all the white spaces
+	WALL,
+	OUTSIDE,
+	PERSON,
+	QUEUE
 }
