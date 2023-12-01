@@ -14,9 +14,15 @@ import java.awt.Color;
 import java.util.Random;
 
 import com.simulation.enums.Direction;
+import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 
 public class Bernhard extends Avatar{
+	// this int is just a flag to do the first moves and scout the bar.
+	// When it is set to 1 it will never be reset to 0 and means that the avatar
+	// starts moving according to its desires after scouting the area
+	int firstmovesfinished = 0;
+	Places[] squaresinvision;
 
 	// ToDo individually:
 	// - Store surroudings locally
@@ -82,6 +88,11 @@ public class Bernhard extends Avatar{
 	}
 
 	public Direction moveAvatar() {
+		// only do this once at the beginning to scout the area
+		squaresinvision = this.getWhatISee();
+		if (this.firstmovesfinished == 0) {
+			
+		}
 		// setting desire to 0 means there is currently no desire
 		int desire = 0;
 		// TODO
@@ -134,10 +145,11 @@ public class Bernhard extends Avatar{
 		// check what is in front of the avatar and interact with the place if the current desire can be met there
 
 		// The following lines make the avatar move randomly
-		Random rand = new Random();
-		int number = rand.nextInt(4);
+		//Random rand = new Random();
+		//int number = rand.nextInt(4);
 		// direction is set externally --> check with the simulation environment
 		Direction dir = Direction.FORWARD;
+		int number = 0;
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
