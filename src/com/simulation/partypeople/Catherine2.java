@@ -9,10 +9,9 @@
 package com.simulation.partypeople;
 
 import java.awt.Color;
+import java.util.Random;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.enums.BeverageType;
-import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
@@ -28,41 +27,44 @@ public class Catherine2 extends Avatar{
 	}
 
 	public void dancingAlgo() {
-		// TODO
+		System.out.println("dance");
 
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
-		// TODO
-
+		System.out.println("Fight " + opponent.getName());
+		opponent.setIsHit(true);
 	}
 
 	public void talk(Avatar person) {
-		// TODO
-	}
-
-	public void smoke() {
-		// TODO
+		System.out.println("Hi " + person.getName());
 	}
 
 	public void toilet(int timeInToilet) {
-		// TODO
-
+		System.out.println("wc for " + timeInToilet);
 	}
 
 	public void playPool() {
-		// TODO
-
+		System.out.println("playing pool");
 	}
 
 	public void playFussball() {
-		// TODO
-
+		System.out.println("playing foosball");
 	}
 
 	public Direction moveAvatar() {
-		// TODO
-		Direction dir = Direction.FORWARD;
+		Random rand = new Random();		
+		int number = rand.nextInt(50);
+		Direction dir;	
+		if ((number % 2) == 0) {
+			dir = Direction.FORWARD;
+		} else if ((number % 3) == 0) {
+			dir = Direction.BACK;
+		} else if ((number % 4) == 0) {
+			dir = Direction.RIGHT;
+		} else {
+			dir = Direction.LEFT;
+		} 
 		return dir;
 	}
 }
