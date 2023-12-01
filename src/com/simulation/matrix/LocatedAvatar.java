@@ -76,7 +76,7 @@ public class LocatedAvatar {
 	public void setWhatIsee(MyFrame env) {
 		Places[] p = new Places[1];
 		p[0] = getFrontPlace(env);
-//		avatar.setWhatISee( p[0] );
+		avatar.setWhatISee( p );
 		
 		System.out.println("\n"+avatar.getName()+"'s heading: "+heading+" "+p[0]);
 		Scanner inp = new Scanner(System.in);

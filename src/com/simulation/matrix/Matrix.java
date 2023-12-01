@@ -70,7 +70,7 @@ public class Matrix {
 
 	private void moveAvatarInQueue(LocatedAvatar avatar) {
 		wait(30);
-//		avatar.setWhatIsee(env);
+		avatar.setWhatIsee(env);
 		int x = avatar.getX();
 		int y = avatar.getY();
 		if (x == 34 && y > 5) {
@@ -96,7 +96,7 @@ public class Matrix {
 
 	private void moveAvatarInClub(LocatedAvatar avatar) {
 		wait(30);
-//		avatar.setWhatIsee(env);
+		avatar.setWhatIsee(env);
 		int oldX = avatar.getX();
 		int oldY = avatar.getY();
 		Direction dir = avatar.getAvatar().moveAvatar();
