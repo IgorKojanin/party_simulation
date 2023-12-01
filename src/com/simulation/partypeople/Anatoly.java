@@ -9,6 +9,7 @@
 package com.simulation.partypeople;
 
 import java.awt.Color;
+import java.util.Random;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.BeverageType;
@@ -17,9 +18,6 @@ import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
 public class Anatoly extends Avatar{
-
-	// store locally where u are
-	// check with that exactly what can u do?
 
 	// ************** Constructor **************
 	public Anatoly(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -69,8 +67,19 @@ public class Anatoly extends Avatar{
 	}
 
 	public Direction moveAvatar() {
-		// TODO
+		Random rand = new Random();
+		int number = rand.nextInt(4);
+
 		Direction dir = Direction.FORWARD;
+		if (number == 0) {
+			dir = Direction.FORWARD;
+		} else if (number == 1) {
+			dir = Direction.RIGHT;
+		} else if (number == 2) {
+			dir = Direction.BACK;
+		} else if (number == 3) {
+			dir = Direction.LEFT;
+		}
 		return dir;
 
         // define a variable that would hold a list of priorities: sort places on a scale of 1-5
