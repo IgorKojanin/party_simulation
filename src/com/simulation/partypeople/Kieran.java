@@ -12,6 +12,8 @@ package com.simulation.partypeople;
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.BeverageType;
 import java.awt.Color;
+import java.util.Random;
+
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
@@ -81,10 +83,25 @@ public class Kieran extends Avatar{
 	}
 
 	public Direction moveAvatar() {
-		// TODO
-		// create an algorithm that determines the next step of your movement pattern
-		// based on a set of priorities.
-		Direction dir = Direction.IDLE;
-		return dir;
+       // TODO
+        // create an algorithm that determines the next step of your movement pattern
+        // based on a set of priorities.
+        Random rand = new Random();
+        int number = rand.nextInt(4);
+        // direction is set externally --> check with the simulation environment
+        Direction dir = Direction.FORWARD;
+        if (number == 0) {
+            dir = Direction.FORWARD;
+        }
+        else if (number == 1) {
+            dir = Direction.RIGHT;
+        }
+        else if (number == 2) {
+            dir = Direction.BACK;
+        }
+        else if (number == 3) {
+            dir = Direction.LEFT;
+        }
+        return dir;
 	}
 }
