@@ -35,15 +35,16 @@ public class Matrix {
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
-		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
-		Jose Jose = new Jose(Shape.CIRCLE, Color.PINK, 1, 20, "Jose", 0);
-        Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 0, "Alisa", 0);
-        Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 0, 0, "Kieran", 0);
+    		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 0, "Alisa", 0);
+		Bjoern bjoern = new Bjoern(Shape.SQUARE, Color.GREEN, 0, 0, "Björn", 0);        Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 0, 0, "Kieran", 0);
 
 
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
+		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
+		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
 		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
@@ -57,6 +58,7 @@ public class Matrix {
 		avatars.add(locBernhard);
 		avatars.add(locJose);
 		avatars.add(locAlisa);
+		avatars.add(locBjoern);
 	}
 
 	private void sortAvatar(LocatedAvatar avatar) {
