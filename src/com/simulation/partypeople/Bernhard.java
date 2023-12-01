@@ -90,6 +90,7 @@ public class Bernhard extends Avatar{
 	public Direction moveAvatar() {
 		// only do this once at the beginning to scout the area
 		squaresinvision = this.getWhatISee();
+		Direction dir = Direction.FORWARD;
 		if (this.firstmovesfinished == 0) {
 			
 		}
@@ -148,7 +149,6 @@ public class Bernhard extends Avatar{
 		//Random rand = new Random();
 		//int number = rand.nextInt(4);
 		// direction is set externally --> check with the simulation environment
-		Direction dir = Direction.FORWARD;
 		int number = 0;
 		if (number == 0) {
 			dir = Direction.FORWARD;
