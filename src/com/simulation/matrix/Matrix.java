@@ -29,6 +29,7 @@ import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.Jose;
+import com.simulation.partypeople.Bernhard;
 
 public class Matrix {
 
@@ -71,7 +72,6 @@ public class Matrix {
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
 		avatars.add(locDj);
-
 
 		// Implementing a queue at the entrance
 		queuelength = 14; // Defining the length of the queue, can increase to required number of avatars

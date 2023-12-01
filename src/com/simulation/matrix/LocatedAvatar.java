@@ -83,6 +83,7 @@ public class LocatedAvatar {
 		inp.nextLine();
 		
 	}
+	
 	private Places getFrontPlace(MyFrame env) {
 		switch (getHeading()) {
 		case WEST:
