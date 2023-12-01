@@ -52,25 +52,6 @@ public class Matrix {
 		env = new MyFrame();
 		env.setVisible(true);
 		avatars = new ArrayList<LocatedAvatar>();
-
-<<<<<<< HEAD
-		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
-		Emmanuel eliyas = new Emmanuel(Shape.CIRCLE, Color.MAGENTA, 0, 0, "Eliyas", 0);
-		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
-		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
-		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
-		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
-		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
-		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
-		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
-		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
-		avatars.add(locEmmanuel);
-		avatars.add(locCelestine);
-		avatars.add(locEliyas);
-		avatars.add(locBernhard);
-		avatars.add(locAnatoly);
-	}
-=======
 		 try {
 			UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
 		} catch (Exception e) {
@@ -90,7 +71,6 @@ public class Matrix {
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
 		avatars.add(locDj);
->>>>>>> c52d92657b7b7e14aed02d51bc31e8915592c658
 
 
 		// Implementing a queue at the entrance
