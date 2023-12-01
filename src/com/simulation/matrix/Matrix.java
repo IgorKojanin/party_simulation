@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import com.simulation.enums.ChangeInXY;
+
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
@@ -27,18 +28,25 @@ public class Matrix {
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
 
+		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
+		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);
+		avatars.add(locThorvin);
+
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
+		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 0, "Alisa", 0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
+		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
 		avatars.add(locBernhard);
+		avatars.add(locAlisa);
 	}
 
 	private void sortAvatar(LocatedAvatar avatar) {
