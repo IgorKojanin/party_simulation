@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import com.simulation.enums.ChangeInXY;
+
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
@@ -26,6 +27,10 @@ public class Matrix {
 		queueAvatars = new ArrayList<>();
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
+
+		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
+		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);
+		avatars.add(locThorvin);
 
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
