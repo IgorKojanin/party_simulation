@@ -145,10 +145,11 @@ public class Bernhard extends Avatar{
 		// check what is in front of the avatar and interact with the place if the current desire can be met there
 
 		// The following lines make the avatar move randomly
-		Random rand = new Random();
-		int number = rand.nextInt(4);
+		//Random rand = new Random();
+		//int number = rand.nextInt(4);
 		// direction is set externally --> check with the simulation environment
 		Direction dir = Direction.FORWARD;
+		int number = 0;
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
