@@ -9,7 +9,6 @@
 package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.avatar.DJ;
 
 import java.awt.Color;
 import java.io.*;
@@ -19,8 +18,9 @@ import com.simulation.enums.*;
 
 public class Jose extends Avatar {
 
-	File file = new File("misc\\Shrek-Script_Jose.txt");
-	BufferedReader br = new BufferedReader(new FileReader(file));
+	File file = new File("party_simulation\\misc\\Shrek-Script_Jose.txt");
+	BufferedReader br = null;
+
 	private String shrek_movie;
 
 	// ToDo individually:
@@ -36,10 +36,14 @@ public class Jose extends Avatar {
 	// - Develop skibidi toilet
 
 	// ************** Constructor **************
-	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime)
-			throws FileNotFoundException {
+	public Jose(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
-		// TODO
+
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	// ************** Methods **************
@@ -110,7 +114,7 @@ public class Jose extends Avatar {
 		} else if (number == 1) {
 			dir = Direction.RIGHT;
 		} else if (number == 2) {
-			dir = Direction.BACK;
+			dir = Direction.FORWARD;
 		} else if (number == 3) {
 			dir = Direction.LEFT;
 		}
