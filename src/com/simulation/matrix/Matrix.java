@@ -30,14 +30,17 @@ public class Matrix {
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
 		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
+		Emmanuel kieran = new Emmanuel(Shape.TRIANGLE, Color.GREEN, 0, 0, "Kieran", 0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
+		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0, 0);
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
+		avatars.add(locKieran);
 		avatars.add(locBernhard);
 	}
 
