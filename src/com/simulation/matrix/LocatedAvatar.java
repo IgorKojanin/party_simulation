@@ -83,38 +83,50 @@ public class LocatedAvatar {
 		inp.nextLine();
 		
 	}
-	
 	private Places getFrontPlace(MyFrame env) {
-		if ( x > MyFrame.getEntranceX() ) {
-			return Places.OUTSIDE;
-		}
 		switch (getHeading()) {
 		case WEST:
-			if( x == 0 ) {
-				return Places.WALL;
-			}else {
-				return getPlace(env, x-1, y);
-			}
+			return env.getPlace(x-1, y);
 		case EAST:
-			if( x == MyFrame.getEntranceX() ) {
-				return Places.WALL;
-			} else {
-				return getPlace(env, x+1, y);
-			}
+			return env.getPlace(x+1, y);
 		case NORTH:
-			if ( y == 0 ) {
-				return Places.WALL;
-			} else {
-				return getPlace(env, x, y-1);
-			}
+			return env.getPlace(x, y-1);
 		default: // SOUTH:
-			if ( y == MyFrame.getMaxY() - 1 ) {
-				return Places.WALL;
-			} else {
-				return getPlace(env, x, y+1);
-			}
+			return env.getPlace(x, y+1);
 		}
 	}
+	
+	// private Places getFrontPlace(MyFrame env) {
+	// 	if ( x > MyFrame.getEntranceX() ) {
+	// 		return Places.OUTSIDE;
+	// 	}
+	// 	switch (getHeading()) {
+	// 	case WEST:
+	// 		if( x == 0 ) {
+	// 			return Places.WALL;
+	// 		}else {
+	// 			return getPlace(env, x-1, y);
+	// 		}
+	// 	case EAST:
+	// 		if( x == MyFrame.getEntranceX() ) {
+	// 			return Places.WALL;
+	// 		} else {
+	// 			return getPlace(env, x+1, y);
+	// 		}
+	// 	case NORTH:
+	// 		if ( y == 0 ) {
+	// 			return Places.WALL;
+	// 		} else {
+	// 			return getPlace(env, x, y-1);
+	// 		}
+	// 	default: // SOUTH:
+	// 		if ( y == MyFrame.getMaxY() - 1 ) {
+	// 			return Places.WALL;
+	// 		} else {
+	// 			return getPlace(env, x, y+1);
+	// 		}
+	// 	}
+	// }
 	
 	private Places getPlace(MyFrame env, int x, int y) {
 		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
