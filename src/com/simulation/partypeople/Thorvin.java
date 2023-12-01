@@ -34,12 +34,14 @@ public class Thorvin extends Avatar implements PartyGoer {
 	// - Develop skibidi toilet
 
 	private Places goal;
+	private int timeToLeaf; 
 
 	// ************** Constructor **************
 	public Thorvin(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 
 		goal = getAction(); //ersten Plan schmieden
+		
 	}
 
 	// ************** Methods **************
@@ -117,9 +119,10 @@ public class Thorvin extends Avatar implements PartyGoer {
 		// increase the drunkness level and subsequently make it lose coordination
 	}
 
-	private Places getAction(){
+	private Places getAction(){ //what i want to do next 
 		Random rand = new Random();
 		int number = rand.nextInt(100);
+		timeToLeaf = number;
 
 		if(number<40){ // 40% warscheinlichkeit für Alkohol 
 			return Places.BAR;
@@ -137,9 +140,13 @@ private boolean doLeaf(){ // decides if the avatar wants to stay or leafe
 
 	return true;
 }
+else{
+return false;
+}
+}
 
-private Places doScout(){ //was ist um mich herrum
-Places first =Avatar.getWhatISee();
+private Places[] doScout(){ //was ist um mich herrum
+Places[] first =Avatar.getWhatISee();
 
 }
 
