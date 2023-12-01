@@ -34,7 +34,8 @@ public class Thorvin extends Avatar implements PartyGoer {
 	// - Develop skibidi toilet
 
 	private Places goal;
-	private int timeToLeaf; 
+	private int timeToLeave; 
+	private Places [] PlacesArroundMe;
 
 	// ************** Constructor **************
 	public Thorvin(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -95,7 +96,7 @@ public class Thorvin extends Avatar implements PartyGoer {
 		Random rand = new Random();
 		int number = rand.nextInt(4);
 		
-	if(doLeaf())	{ 
+	if(doLeave())	{ 
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
@@ -122,7 +123,7 @@ public class Thorvin extends Avatar implements PartyGoer {
 	private Places getAction(){ //what i want to do next 
 		Random rand = new Random();
 		int number = rand.nextInt(100);
-		timeToLeaf = number;
+		timeToLeave = number;
 
 		if(number<40){ // 40% warscheinlichkeit für Alkohol 
 			return Places.BAR;
@@ -136,8 +137,9 @@ public class Thorvin extends Avatar implements PartyGoer {
 		else return Places.TOILET; //Toilette
 				
 	}
-private boolean doLeaf(){ // decides if the avatar wants to stay or leafe
-
+private boolean doLeave(){ // decides if the avatar wants to stay or leafe
+timeToLeave = timeToLeave - 10;
+if (timeToLeave <=0) {
 	return true;
 }
 else{
@@ -146,7 +148,8 @@ return false;
 }
 
 private Places[] doScout(){ //was ist um mich herrum
-Places[] first =Avatar.getWhatISee();
+Places[] placesArroundMe =this.getWhatISee();
+
 
 }
 
