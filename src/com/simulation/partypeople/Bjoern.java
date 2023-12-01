@@ -1,70 +1,74 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                   Party Simulator
-// Date:         27/10/2023
+// Date:         01/12/2023
 //
-// Class: Joe.java
+// Class: Bjoern.java
 // Description: Template for the people
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.partypeople;
 
 import java.awt.Color;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
-public class Catherine2 extends Avatar{
+public class Bjoern extends Avatar{
 
 	// store locally where u are
 	// check with that exactly what can u do?
 
 	// ************** Constructor **************
-	public Catherine2(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
+	public Bjoern(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO Auto-generated constructor stub
 	}
 
 	public void dancingAlgo() {
-		System.out.println("dance");
+		// TODO
 
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
-		System.out.println("Fight " + opponent.getName());
-		opponent.setIsHit(true);
+		// TODO
+
 	}
 
 	public void talk(Avatar person) {
-		System.out.println("Hi " + person.getName());
+		// TODO
+	}
+
+	public void smoke() {
+		// TODO
 	}
 
 	public void toilet(int timeInToilet) {
-		System.out.println("wc for " + timeInToilet);
+		// TODO
+
 	}
 
 	public void playPool() {
-		System.out.println("playing pool");
+		// TODO
+
 	}
 
 	public void playFussball() {
-		System.out.println("playing foosball");
+		// TODO
+
 	}
 
 	public Direction moveAvatar() {
-		Random rand = new Random();		
-		int number = rand.nextInt(50);
-		Direction dir;	
-		if ((number % 2) == 0) {
-			dir = Direction.FORWARD;
-		} else if ((number % 3) == 0) {
-			dir = Direction.BACK;
-		} else if ((number % 4) == 0) {
-			dir = Direction.RIGHT;
-		} else {
-			dir = Direction.LEFT;
-		} 
-		return dir;
+		int r = ThreadLocalRandom.current().nextInt(0, 100); 
+		switch ((00 <= r && r < 40 ) ? 0 :
+				(40 <= r && r < 65) ? 1 :
+				(65 <= r && r < 90) ? 2 : 3){
+		case 0: return Direction.FORWARD;
+		case 1: return Direction.RIGHT;
+		case 2: return Direction.LEFT;
+		case 3: return Direction.BACK;
+		default: return Direction.IDLE;
+		}
 	}
 }
