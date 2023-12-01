@@ -38,6 +38,7 @@ public class Matrix {
 		Bjoern bjoern = new Bjoern(Shape.SQUARE, Color.GREEN, 0, 0, "Björn", 0);
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
 		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
+		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
 
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
@@ -49,6 +50,7 @@ public class Matrix {
 		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
 		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
 		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
+		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 
 		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
