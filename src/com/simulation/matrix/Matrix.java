@@ -28,7 +28,7 @@ public class Matrix {
 		unrenderedAvatars = new ArrayList<>();
 
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
-		Eliyas eliyas = new Eliyas(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 0, "Eliyas", 0);
 		Emmanuel celestine = new Emmanuel(Shape.CIRCLE, Color.BLUE, 0, 0, "Celestine", 0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);

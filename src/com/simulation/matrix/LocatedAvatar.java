@@ -111,15 +111,20 @@ public class LocatedAvatar {
 				} else {
 					left = getPlace(env, x, y + 1);
 				}
-				if (x == MyFrame.getEntranceX()) {
+				if (x == MyFrame.getEntranceX() && y > 3 && y < 7) {
+					back = Places.ENTRANCE;
+				}else if (x == MyFrame.getEntranceX()) {
 					back = Places.WALL;
-				} else {
+				} else  {
 					back = getPlace(env, x + 1, y);
 				}
+				break;
 			case EAST:
-				if (x == MyFrame.getEntranceX()) {
+				if (x == MyFrame.getEntranceX() && y > 3 && y < 7) {
+					front = Places.ENTRANCE;
+				}else if (x == MyFrame.getEntranceX()) {
 					front = Places.WALL;
-				} else {
+				} else  {
 					front = getPlace(env, x + 1, y);
 				}
 				if (y == 0) {
@@ -137,6 +142,8 @@ public class LocatedAvatar {
 				} else {
 					back = getPlace(env, x - 1, y);
 				}
+				System.out.println("you are in east case");
+				break;
 			case NORTH:
 				if (y == 0) {
 					front = Places.WALL;
@@ -148,9 +155,11 @@ public class LocatedAvatar {
 				} else {
 					left = getPlace(env, x - 1, y);
 				}
-				if (x == MyFrame.getEntranceX()) {
+				if (x == MyFrame.getEntranceX() && y > 3 && y < 7) {
+					right = Places.ENTRANCE;
+				}else if (x == MyFrame.getEntranceX()) {
 					right = Places.WALL;
-				} else {
+				} else  {
 					right = getPlace(env, x + 1, y);
 				}
 				if (y == MyFrame.getMaxY()) {
@@ -158,6 +167,8 @@ public class LocatedAvatar {
 				} else {
 					back = getPlace(env, x, y + 1);
 				}
+				System.out.println("you are in north case");
+				break;
 			default: // SOUTH:
 				if (y == MyFrame.getMaxY() - 1) {
 					front = Places.WALL;
@@ -169,9 +180,11 @@ public class LocatedAvatar {
 				} else {
 					right = getPlace(env, x - 1, y);
 				}
-				if (x == MyFrame.getEntranceX()) {
+				if (x == MyFrame.getEntranceX() && y > 3 && y < 7) {
+					left = Places.ENTRANCE;
+				}else if (x == MyFrame.getEntranceX()) {
 					left = Places.WALL;
-				} else {
+				} else  {
 					left = getPlace(env, x + 1, y);
 				}
 				if (y == 0) {
@@ -179,6 +192,8 @@ public class LocatedAvatar {
 				} else {
 					back = getPlace(env, x, y - 1);
 				}
+				System.out.println("you are in south case");
+				break;
 			}
 		}
 		places[0] = front;

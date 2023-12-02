@@ -24,5 +24,6 @@ public enum Places {
 	WALL,
 	OUTSIDE,
 	PERSON,
-	QUEUE
+	QUEUE, 
+	ENTRANCE
 }
