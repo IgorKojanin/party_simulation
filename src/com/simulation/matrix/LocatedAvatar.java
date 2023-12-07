@@ -79,6 +79,7 @@ public class LocatedAvatar {
 		//inp.nextLine();
 	}
 	
+	
 	private Places getFrontPlace(MyFrame env) {
 		if ( x > MyFrame.getEntranceX() ) {
 			return Places.OUTSIDE;

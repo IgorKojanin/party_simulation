@@ -1,8 +1,21 @@
 package com.simulation.matrix;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+
+import com.simulation.avatar.DJ;
 import com.simulation.enums.ChangeInXY;
 
 import com.simulation.enums.Direction;
@@ -10,6 +23,7 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.*;
+import com.simulation.partypeople.Mynul;
 
 
 public class Matrix {
@@ -19,6 +33,15 @@ public class Matrix {
 	private ArrayList<LocatedAvatar> queueAvatars;  // Array list for tracking avatars in queue
 	private ArrayList<LocatedAvatar> clubAvatars;  // Array list for tracking avatars in club
 	private ArrayList<LocatedAvatar> unrenderedAvatars;  // Array list for tracking all avatars
+
+	DJ dj;
+	public static JFrame frame;
+	
+	JButton changeMusicButton;
+	JComboBox<String> musicListDropdown;
+	JButton DJPlayButton;
+	JButton DJStopButton;
+	private JButton stopButton;
 
 	public Matrix() {
 		env = new MyFrame();
@@ -40,7 +63,8 @@ public class Matrix {
 		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
 		Celestine celestine  = new Celestine();
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
-
+		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
+		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
@@ -53,6 +77,8 @@ public class Matrix {
 		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
 		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
+		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
 
 		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
@@ -66,6 +92,54 @@ public class Matrix {
 		avatars.add(locBjoern);
 		avatars.add(locThorvin);
 		avatars.add(locCatherine);
+		avatars.add(locMynul);
+		avatars.add(locDj);
+
+		frame = new JFrame("Music Matrix");
+        frame.setSize(200, 200);
+		frame.setResizable(false);
+		frame.setLocation(1000, 400);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        changeMusicButton = new JButton("Change Music");
+        changeMusicButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dj.handleUserMusicRequest();
+            }
+        });
+
+		musicListDropdown = new JComboBox<>(dj.getMusicList().toArray(new String[0]));
+		musicListDropdown.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String selectedMusic = (String) musicListDropdown.getSelectedItem();
+                dj.playSpecificMusic(selectedMusic);
+			}
+            
+        });
+
+		stopButton = new JButton("STOP");
+        stopButton.setBackground(Color.RED);
+		stopButton.setOpaque(true);
+        // stopButton.setForeground(Color.WHITE);
+        stopButton.setFocusPainted(false);
+        stopButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        stopButton.setPreferredSize(new Dimension(100, 40));
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dj.stopMusic();
+            }
+        });
+        JPanel panel = new JPanel();
+        panel.add(changeMusicButton);
+        panel.add(new JLabel("Available Musics:"));
+        panel.add(musicListDropdown);
+		panel.add(stopButton);
+        frame.add(panel);
+
+        frame.setVisible(false);
+    
 
 	}
 
@@ -177,6 +251,7 @@ public class Matrix {
 
 
 	public void run() {
+		playDJ();
 		while (true) {
 			for (LocatedAvatar avatar : avatars) {
 				sortAvatar(avatar);
@@ -227,4 +302,10 @@ public class Matrix {
 				break;
 		}
 	}
+
+	private void playDJ(){
+		dj.playMusic();
+	}
+
+	
 }
