@@ -18,7 +18,7 @@ import com.simulation.enums.*;
 
 public class Jose extends Avatar {
 
-	File file = new File("party_simulation\\misc\\Shrek-Script_Jose.txt");
+	File file = new File("misc/Shrek-Script_Jose.txt");
 	BufferedReader br = null;
 
 	private String shrek_movie;
@@ -124,7 +124,7 @@ public class Jose extends Avatar {
 				dir = Direction.LEFT;
 			}
 		}
-		return Direction.FORWARD;
+		return dir;
 	}
 
 	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
