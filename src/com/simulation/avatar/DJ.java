@@ -13,7 +13,6 @@ import java.awt.Color;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
-import com.simulation.matrix.Matrix;
 
 import javax.sound.sampled.*;
 import javax.swing.JFrame;
@@ -155,6 +154,29 @@ public class DJ extends Avatar {
 
 		}
         return filenames;
+    }
+
+	public void handleUserMusicRequest() {
+        String[] options = {"Randomly", "By specifying the music name"};
+        int choice = JOptionPane.showOptionDialog(frame,
+                "How do you want to change the music?",
+                "Change Music",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]);
+
+        switch (choice) {
+            case 0:
+                changeRandomMusic();
+                break;
+            case 1:
+            	changeMusicByUserInput();
+                break;
+            default:
+                JOptionPane.showMessageDialog(frame, "Invalid choice. Music will not be changed.");
+        }
     }
 
 }

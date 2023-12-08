@@ -12,7 +12,6 @@ package com.simulation.avatar;
 
 import java.awt.Color;
 import java.io.FileNotFoundException;
-import java.util.concurrent.TimeUnit;
 
 import com.simulation.enums.Shape;
 import com.simulation.partypeople.*;
@@ -36,7 +35,7 @@ public class MainTest {
 		bouncerBob.checkVibe(JoseLu);
 
 
-		JoseLu.talk(Toli);
+		JoseLu.talk();
 		Toli.fight(JoseLu);
 	
 
