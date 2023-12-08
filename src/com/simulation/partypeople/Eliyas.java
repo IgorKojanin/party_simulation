@@ -5,9 +5,10 @@ import java.util.Random;
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.BeverageType;
 import com.simulation.enums.Direction;
+import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 
-public class Eliyas extends Avatar{
+public class Eliyas extends Avatar {
 
 	public Eliyas(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
@@ -53,18 +54,20 @@ public class Eliyas extends Avatar{
 	}
 
 	public Direction moveAvatar() {
-		Random rand = new Random();
-		int number = rand.nextInt(4);
-		Direction dir = Direction.FORWARD;
-		if (number == 0) {
+		//Places frontPlace = getWhatISee()[0];
+		Direction dir = Direction.IDLE;
+		if (getWhatISee()[0] == Places.PATH) {
 			dir = Direction.FORWARD;
-		} else if (number == 1) {
-			dir = Direction.RIGHT;
-		} else if (number == 2) {
-			dir = Direction.BACK;
-		} else if (number == 3) {
+		} else if (getWhatISee()[0] == Places.WALL) {
 			dir = Direction.LEFT;
+		}else if (getWhatISee()[0] == Places.BAR) {
+			dir = Direction.LEFT;
+		}else if (getWhatISee()[0] == Places.DANCEFLOOR) {
+			dir = Direction.RIGHT;	
+		}else if (getWhatISee()[0] == Places.TOILET) {
+			dir = Direction.RIGHT;
 		}
+
 		return dir;
 	}
 
