@@ -78,6 +78,8 @@ public class LocatedAvatar {
 		//Scanner inp = new Scanner(System.in);
 		//inp.nextLine();
 	}
+
+	
 	
 	
 	private Places getFrontPlace(MyFrame env) {
@@ -109,9 +111,9 @@ public class LocatedAvatar {
 			} else {
 				return getPlace(env, x, y+1);
 			}
-		}
-	}
-	
+			}
+}
+		
 	private Places getPlace(MyFrame env, int x, int y) {
 		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
 			return Places.PERSON;

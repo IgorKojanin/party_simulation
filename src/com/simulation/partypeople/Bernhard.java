@@ -155,7 +155,6 @@ public class Bernhard extends Avatar{
 		Direction dir = Direction.FORWARD;
 		Random rand = new Random();
 		int number = rand.nextInt(4);
->>>>>>> 707b54f073472c8ede368b166c4ccd5fac286e4a
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
