@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.util.Random;
 import com.simulation.enums.Places;
 import com.simulation.enums.Direction;
+import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enums.Places;
 
@@ -38,6 +39,10 @@ public class Thorvin extends Avatar {
 	private Places [] PlacesArroundMe;
 	private boolean isEntered = false;
 	private Places[][] myMap;
+	private int myY;
+	private int myX;
+	private Heading myHeading;
+	private int countTurn; 
 	
 
 	// ************** Constructor **************
@@ -45,7 +50,12 @@ public class Thorvin extends Avatar {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 
 		goal = getAction(); //ersten Plan schmieden
-		private myMap = new Places[80][60];
+		myMap = new Places[80][60];
+		myY =40;
+		myX=30;
+		myHeading = Heading.WEST;
+		PlacesArroundMe = new Places[1];
+		countTurn =0;
 	}
 
 	// ************** Methods **************
@@ -99,7 +109,7 @@ public class Thorvin extends Avatar {
 		Random rand = new Random();
 		int number = rand.nextInt(4);
 		
-	if(doLeave())	{ 
+	//if(doLeave())	{ 
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
@@ -112,9 +122,9 @@ public class Thorvin extends Avatar {
 		else if (number == 3) {
 			dir = Direction.LEFT;
 		}
-	}
-	else //Avatar bleibt an Ort stehen
-		dir = Direction.IDLE;
+	//}
+	//else //Avatar bleibt an Ort stehen
+		//dir = Direction.IDLE;
 		return dir;
 	}
 
@@ -150,17 +160,65 @@ return false;
 }
 }
 
-private Places[] doScout(){ //erkundender Karte
+private Direction doTurn(){ //erkunden der Karte	
+Direction dir = Direction.IDLE;
 Places[] placesArroundMe =this.getWhatISee();
-return placesArroundMe;
 
+if(myHeading == Heading.WEST){
+myMap[myX+1][myY] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
 }
-private Direction Enter(){// to enter the Bar
-	Places[] placesArroundMe =this.getWhatISee();
-	Direction dir = Direction.IDLE;
-
+else if (myHeading == Heading.SOUTH) {
+myMap[myX][myY-1] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+else if (myHeading == Heading.NORTH) {
+myMap[myX][myY+1] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+else if (myHeading == Heading.EAST) {
+myMap[myX][myY-1] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
+}
 return dir;
 }
+
+private Direction doMove(){
+Direction dir = Direction.IDLE;
+Places[] placesArroundMe =this.getWhatISee();
+if(myMap[myX+1][myY] == Places.PATH){
+return Direction.FORWARD;
+}
+else if (myMap[myX][myY-1]==Places.PATH) {
+	return Direction.LEFT;
+}
+else if (myMap[myX][myY+1] == Places.PATH) {
+	return Direction.RIGHT;
+}
+else if(myMap[myX-1][myY]==Places.PATH){
+	return Direction.BACK;
+}
+return dir;
+}
+
+private Direction doScout(){
+Direction dir = Direction.IDLE;
+Places[] placesArroundMe =this.getWhatISee();
+if(myHeading == Heading.WEST && countTurn < 4){
+dir = doTurn();
+countTurn++;
+}
+else if(countTurn == 4 && myHeading == Heading.WEST){
+countTurn =0;
+dir = doMove();
+}
+
+return dir;
+
+}
+
+
+
 
 }
 	
