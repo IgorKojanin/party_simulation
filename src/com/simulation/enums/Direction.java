@@ -13,5 +13,7 @@ public enum Direction {
 	FORWARD,
 	LEFT,
 	RIGHT,
-	BACK
+	BACK,
+	TURN_LEFT_ON_SPOT,
+	TURN_RIGHT_ON_SPOT
 }

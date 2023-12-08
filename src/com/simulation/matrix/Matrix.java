@@ -54,7 +54,7 @@ public class Matrix {
 		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
 		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 0,"Catherine", 0);
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
-		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 0, "Eliyas", 0);
 		Emmanuel igor = new Emmanuel(Shape.CIRCLE, Color.CYAN, 0, 0, "Igor", 0);
 		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
 		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 0, "Alisa", 0);
@@ -234,7 +234,22 @@ public class Matrix {
 					case SOUTH -> changeXY(avatar, ChangeInXY.INCX);
 				}
 				break;
-
+			case TURN_LEFT_ON_SPOT:
+				switch (avatar.getHeading()) {
+					case WEST -> avatar.setHeading(Heading.SOUTH);
+					case EAST -> avatar.setHeading(Heading.NORTH);
+					case NORTH -> avatar.setHeading(Heading.WEST);
+					case SOUTH -> avatar.setHeading(Heading.EAST);
+				}
+				break;
+			case TURN_RIGHT_ON_SPOT:
+				switch (avatar.getHeading()) {
+					case WEST -> avatar.setHeading(Heading.NORTH);
+					case EAST -> avatar.setHeading(Heading.SOUTH);
+					case NORTH -> avatar.setHeading(Heading.EAST);
+					case SOUTH -> avatar.setHeading(Heading.WEST);
+				}
+				break;				
 		}
 		env.setPlaceFree(oldX, oldY);
 		env.moveTo(oldX, oldY, avatar.getX(), avatar.getY(),avatar.getColor());
