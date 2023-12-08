@@ -11,10 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-
+import com.simulation.avatar.Bouncer;
 import com.simulation.avatar.DJ;
 import com.simulation.enums.ChangeInXY;
 
@@ -23,7 +21,6 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.*;
-import com.simulation.partypeople.Mynul;
 
 
 public class Matrix {
@@ -33,7 +30,7 @@ public class Matrix {
 	private ArrayList<LocatedAvatar> queueAvatars;  // Array list for tracking avatars in queue
 	private ArrayList<LocatedAvatar> clubAvatars;  // Array list for tracking avatars in club
 	private ArrayList<LocatedAvatar> unrenderedAvatars;  // Array list for tracking all avatars
-
+	private Bouncer bouncer;
 	DJ dj;
 	public static JFrame frame;
 	
@@ -65,6 +62,7 @@ public class Matrix {
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
 		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
+		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
@@ -139,8 +137,6 @@ public class Matrix {
         frame.add(panel);
 
         frame.setVisible(false);
-    
-
 	}
 
 	private void sortAvatar(LocatedAvatar avatar) {
@@ -184,12 +180,21 @@ public class Matrix {
 			if (queueAvatars.get(0).equals(avatar)) {
 				if (env.isUsable(avatar.getX() - 1, avatar.getY())) {
 					env.moveInQueue(x, y, avatar.getColor());
-					if (x - 1 == 32) {
-						queueAvatars.remove(avatar);
-						clubAvatars.add(avatar);
-					}
 					avatar.setX(x - 1);
 					avatar.setY(y);
+					if (x - 1 == 32) {
+						// the avatar is allowed in
+						if (bouncer.checkVibe(avatar.getAvatar())){
+							queueAvatars.remove(avatar);
+							clubAvatars.add(avatar);
+						}
+						// the avatar is not allowed in
+						else{
+							queueAvatars.remove(avatar);
+							env.removeAvatarFromMap(avatar.getX(), avatar.getY());
+						}
+					}
+					
 				}
 			}
 		}
