@@ -8,10 +8,6 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Places;
 import com.simulation.enviroment.MyFrame;
 
-
-import java.util.Scanner;
-
-
 public class LocatedAvatar {
 	private Avatar avatar;
 	private int x;
@@ -82,6 +78,8 @@ public class LocatedAvatar {
 		//Scanner inp = new Scanner(System.in);
 		//inp.nextLine();
 	}
+
+	
 	
 	private Places getFrontPlace(MyFrame env) {
 		if ( x > MyFrame.getEntranceX() ) {
@@ -112,9 +110,9 @@ public class LocatedAvatar {
 			} else {
 				return getPlace(env, x, y+1);
 			}
-		}
-	}
-	
+			}
+}
+		
 	private Places getPlace(MyFrame env, int x, int y) {
 		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
 			return Places.PERSON;
