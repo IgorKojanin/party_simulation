@@ -17,7 +17,7 @@ public class Emmanuel extends Avatar {
 	@Override
 	public Direction moveAvatar() {
 		Random rand = new Random();
-		int number = rand.nextInt(4);
+		int number = rand.nextInt(5);
 		// direction is set externally --> check with the simulation environment
 		Direction dir = Direction.FORWARD;
 		if (number == 0) {
@@ -31,6 +31,12 @@ public class Emmanuel extends Avatar {
 		}
 		else if (number == 3) {
 			dir = Direction.LEFT;
+		}
+		else if (number == 4) {
+			dir = Direction.TURN_LEFT_ON_SPOT;
+		}
+		else if (number == 5) {
+			dir = Direction.TURN_RIGHT_ON_SPOT;
 		}
 		return dir;
 	
