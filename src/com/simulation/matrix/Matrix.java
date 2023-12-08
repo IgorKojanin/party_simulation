@@ -132,7 +132,22 @@ public class Matrix {
 					case SOUTH -> changeXY(avatar, ChangeInXY.INCX);
 				}
 				break;
-
+			case TURN_LEFT_ON_SPOT:
+				switch (avatar.getHeading()) {
+					case WEST -> avatar.setHeading(Heading.SOUTH);
+					case EAST -> avatar.setHeading(Heading.NORTH);
+					case NORTH -> avatar.setHeading(Heading.WEST);
+					case SOUTH -> avatar.setHeading(Heading.EAST);
+				}
+				break;
+			case TURN_RIGHT_ON_SPOT:
+				switch (avatar.getHeading()) {
+					case WEST -> avatar.setHeading(Heading.NORTH);
+					case EAST -> avatar.setHeading(Heading.SOUTH);
+					case NORTH -> avatar.setHeading(Heading.EAST);
+					case SOUTH -> avatar.setHeading(Heading.WEST);
+				}
+				break;				
 		}
 		env.setPlaceFree(oldX, oldY);
 		env.moveTo(oldX, oldY, avatar.getX(), avatar.getY(),avatar.getColor());
