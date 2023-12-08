@@ -36,13 +36,16 @@ public class Thorvin extends Avatar {
 	private Places goal;
 	private int timeToLeave; 
 	private Places [] PlacesArroundMe;
+	private boolean isEntered = false;
+	private Places[][] myMap;
+	
 
 	// ************** Constructor **************
 	public Thorvin(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 
 		goal = getAction(); //ersten Plan schmieden
-		
+		private myMap = new Places[80][60];
 	}
 
 	// ************** Methods **************
@@ -147,10 +150,16 @@ return false;
 }
 }
 
-private Places[] doScout(){ //was ist um mich herrum
+private Places[] doScout(){ //erkundender Karte
 Places[] placesArroundMe =this.getWhatISee();
 return placesArroundMe;
 
+}
+private Direction Enter(){// to enter the Bar
+	Places[] placesArroundMe =this.getWhatISee();
+	Direction dir = Direction.IDLE;
+
+return dir;
 }
 
 }
