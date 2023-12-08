@@ -21,7 +21,6 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.*;
-import com.simulation.partypeople.Mynul;
 
 
 public class Matrix {
@@ -61,7 +60,7 @@ public class Matrix {
 		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
 		Celestine celestine  = new Celestine();
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
-		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 0, "Mynul", 0);
+		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
@@ -79,26 +78,20 @@ public class Matrix {
 		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
 		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
 
-		avatars.add(locThorvin);
-		avatars.add(locCatherine);
-		avatars.add(locEmmanuel); 		
-		avatars.add(locJose); 
+		avatars.add(locEmmanuel);
 		avatars.add(locCelestine);
 		avatars.add(locEliyas);
 		avatars.add(locKieran);
 		avatars.add(locBernhard);
 		avatars.add(locIgor);
 		avatars.add(locAnatoly);
+		avatars.add(locJose);
 		avatars.add(locAlisa);
 		avatars.add(locBjoern);
 		avatars.add(locThorvin);
 		avatars.add(locCatherine);
-		avatars.add(locMynul); 
+		avatars.add(locMynul);
 		avatars.add(locDj);
-
-		for (LocatedAvatar element : avatars){
-			boolean allowed = bouncer.checkVibe(element.getAvatar());
-		}
 
 		frame = new JFrame("Music Matrix");
         frame.setSize(200, 200);
@@ -263,7 +256,7 @@ public class Matrix {
 
 
 	public void run() {
-		// playDJ();
+		playDJ();
 		while (true) {
 			for (LocatedAvatar avatar : avatars) {
 				sortAvatar(avatar);

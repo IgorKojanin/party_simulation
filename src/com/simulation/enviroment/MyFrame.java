@@ -136,7 +136,6 @@ public class MyFrame extends JFrame {
 	}
 
 	public void removeAvatarFromMap(int x, int y) {
-		System.out.println("removing");
 		squares[x][y].setColor(squares[x][y].getBaseColor()); // Clear the from-square
 		squares[x][y].setIsUsable(true);
 		repaint();
