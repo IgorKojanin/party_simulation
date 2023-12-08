@@ -65,6 +65,7 @@ public class Matrix {
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
 		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
+
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
