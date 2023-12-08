@@ -4,9 +4,14 @@
 package com.simulation.enviroment;
 
 import com.simulation.enums.Places;
+import com.simulation.matrix.Matrix;
 
 import javax.swing.*;
+
+import java.awt.event.MouseEvent;
+
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 
 public class MyFrame extends JFrame {
 	GridPanel panel;
@@ -184,15 +189,44 @@ public class MyFrame extends JFrame {
 	 * This is the constructor of the MyFrame class.
 	 * It creates the grid panel and sets up the frame.
 	 */
-	public MyFrame(){
+	public MyFrame() {
 		createSquares();
 		panel = new GridPanel();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(panel);
+		this.setLayout(new BorderLayout()); // Set layout manager to BorderLayout
+		this.add(panel, BorderLayout.CENTER); // Add panel to the center
 		this.pack();
 		this.setLocationRelativeTo(null);
 		createText();
+
+		panel.addMouseListener(new MouseAdapter() {
+	
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            int mouseX = e.getX();
+			int mouseY = e.getY();
+
+			// Check if the mouse click is within the bounds of the DJ avatar
+			Rectangle djBounds = new Rectangle(squares[14][0].x, squares[14][0].y, 5 * 30, 30); 
+			Rectangle djBounds2 = new Rectangle(squares[14][1].x, squares[14][1].y, 5 * 30, 30); 
+		
+
+			if (djBounds.contains(mouseX, mouseY) || djBounds2.contains(mouseX,mouseY)) {
+				// Perform actions when DJ avatar is clicked
+				handleDJClick();
+			}
+        }
+    });
 	}
+
+	
+
+	private void handleDJClick() {
+       
+		System.out.println("DJ Clicked");
+      
+        Matrix.frame.setVisible(true);
+    }
 
 	// Set the letters to be displayed in the individual grids here
 	public void createText() {
@@ -233,6 +267,7 @@ public class MyFrame extends JFrame {
 		// squares[27][15].setDisplayLetter("A");
 		// squares[28][15].setDisplayLetter("L");
 		// squares[29][15].setDisplayLetter("L");
+		// squares[16][1].setDisplayLetter("DJ");
 
 		squares[14][2].setDisplayLetter("D");
 		squares[15][2].setDisplayLetter("J");

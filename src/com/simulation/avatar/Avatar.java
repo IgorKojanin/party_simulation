@@ -161,27 +161,16 @@ public abstract class Avatar {
     }
 
 	public void drink(BeverageType type) {
-		boolean seesTheBar = false;
-		for (Places place : whatISee) {
-            if (place == Places.BAR) {
-            	seesTheBar = true; // Places.BAR is found in the array
-            	break;
-            }
-            else {
-            	seesTheBar = false;
-            }
-        }
-		setWhatISee(getWhatISee()); // to knwo if the avatar sees the bar
         // Check if avatar is at the bar area (not implemented in this example)
-        // if (getWhatISee() == Places.BAR) {
+        if (getWhatISee()[0] == Places.BAR) {
 	        if (bartender != null) {
 	            bartender.addOrderToQueue(this, type);
 	        } else {
 	            System.out.println("Bartender instance not set.");
 	        }
-        // } else {
-        //     System.out.println("You're not at the bar area.");
-        // }
+        } else {
+            System.out.println("You're not at the bar area.");
+    	}
     }
 
 	public abstract Direction moveAvatar();  // To be specified on each personal class

@@ -149,7 +149,13 @@ public class Bernhard extends Avatar{
 		//Random rand = new Random();
 		//int number = rand.nextInt(4);
 		// direction is set externally --> check with the simulation environment
+<<<<<<< HEAD
 		int number = 0;
+=======
+		Direction dir = Direction.FORWARD;
+		Random rand = new Random();
+		int number = rand.nextInt(4);
+>>>>>>> 707b54f073472c8ede368b166c4ccd5fac286e4a
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		}
