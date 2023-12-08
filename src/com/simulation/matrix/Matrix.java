@@ -54,7 +54,7 @@ public class Matrix {
 		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
 		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 0,"Catherine", 0);
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
-		Emmanuel eliyas = new Emmanuel(Shape.SQUARE, Color.MAGENTA, 0, 0, "Eliyas", 0);
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 0, "Eliyas", 0);
 		Emmanuel igor = new Emmanuel(Shape.CIRCLE, Color.CYAN, 0, 0, "Igor", 0);
 		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
 		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 0, "Alisa", 0);
