@@ -70,6 +70,24 @@ public class Anatoly extends Avatar{
 	public void playFussball() {
 		// TODO
 	}
+	
+	public Direction randomDirection() {
+		
+		Random rand = new Random();
+		int number = rand.nextInt(4);
+		
+		Direction dir = Direction.FORWARD;
+		if (number == 0) {
+			dir = Direction.FORWARD;
+		} else if (number == 1) {
+			dir = Direction.RIGHT;
+		} else if (number == 2) {
+			dir = Direction.BACK;
+		} else if (number == 3) {
+			dir = Direction.LEFT;
+		}
+		return dir;
+	}
 
 	public Direction moveAvatar() {
  
@@ -78,6 +96,8 @@ public class Anatoly extends Avatar{
 		placesPriorities.put(Places.BOUNCER, 2);
 		placesPriorities.put(Places.DANCEFLOOR, 3);
 		placesPriorities.put(Places.DJ, 4);
+		
+		int waitingTime = 0;
 		
 		System.out.println(super.getWhatISee()[0]);
 		
@@ -108,6 +128,11 @@ public class Anatoly extends Avatar{
 		
 		
 		if(myCurrentPlace == Places.FUSSBALL) {
+			while(waitingTime != 1000) {
+				waitingTime++;
+			}
+			
+			
 			try {
 				TimeUnit.SECONDS.sleep(5);
 			} catch (InterruptedException e) {
@@ -119,7 +144,6 @@ public class Anatoly extends Avatar{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
 		}
 		
 		return dir;
