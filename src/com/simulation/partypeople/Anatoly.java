@@ -12,8 +12,6 @@ import java.awt.Color;
 import java.util.Random;
 
 import com.simulation.avatar.Avatar;
-import com.simulation.enums.BeverageType;
-import java.awt.Color;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
 
