@@ -70,14 +70,14 @@ public class DJ extends Avatar {
 		
 		String musicFile = musicList.get(trackIndex);
 
-		playWav(musicFile, () -> playNextTrack(trackIndex + 1));
+		// playWav(musicFile, () -> playNextTrack(trackIndex + 1));
 	}
 
 	public void playSpecificMusic(String musicName) {
 		String musicFile = "Music" + File.separator + musicName + ".wav";
 		if (musicList.contains(musicFile)) {
 			stopMusic(); // Stop the current music if any
-			playWav(musicFile, this::playMusic); // Play the specific music and set the callback to playMusic
+			// playWav(musicFile, this::playMusic); // Play the specific music and set the callback to playMusic
 		} else {
 			System.out.println("Music not found");
 		}
@@ -148,7 +148,7 @@ public class DJ extends Avatar {
             File file = new File(path);
             filenames.add(file.getName().replaceFirst("[.][^.]+$", ""));
         }
-		System.out.println("Filemames");
+		// System.out.println("Filemames");
 		for(String filename : filenames){
 			System.out.println(filename);
 
