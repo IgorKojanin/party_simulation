@@ -47,52 +47,77 @@ public class Matrix {
 		queueAvatars = new ArrayList<>();
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
+		
+		// Thorvin only to be touch by Thorvin
+		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 20,"Thorvin", 0);
+		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
+		avatars.add(locThorvin);
 
-//		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
-//		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 0,"Catherine", 0);
-//		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
-//		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 0, "Eliyas", 0);
-//		Emmanuel igor = new Emmanuel(Shape.CIRCLE, Color.CYAN, 0, 0, "Igor", 0);
-//		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
-//		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 0, "Alisa", 0);
-//		Bjoern bjoern = new Bjoern(Shape.SQUARE, Color.GREEN, 0, 0, "Björn", 0);
-//		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
- 		  Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
-//		Celestine celestine  = new Celestine();
-//		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
-//		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
-//		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
-//		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
-//
-//		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
-//		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
-//		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
-//		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
-//		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
-//		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-//		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
-//		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
-//		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
+		// catherine only to be touch by catherine
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 20,"Catherine", 0);
+		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
+		avatars.add(locCatherine);
+
+		// emmanuel only to be touch by emmanuel
+		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel", 0);
+		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
+		avatars.add(locEmmanuel);
+
+		// eliyas only to be touch by eliyas
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 20, "Eliyas", 0);
+		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
+		avatars.add(locEliyas);
+
+		// igor only to be touch by igor
+		Igor igor = new Igor(Shape.CIRCLE, new Color(0,153,153), 0, 20, "Igor", 0);
+		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+		avatars.add(locIgor);
+
+		// Anatoly only to be touch by Anatoly
+		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
+		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
+		avatars.add(locAnatoly);
+
+		// Alisa only to be touch by Alisa
+		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 20, "Alisa", 0);
+		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
+		avatars.add(locAlisa);
+
+		// Bjoern only to be touch by Bjoern
+		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246,204,255), 0, 22, "Björn", 0);
+		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
+		avatars.add(locBjoern);
+
+		// Bernhard only to be touch by Bernhard
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 24, "Bernhard",0);
+		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
+		avatars.add(locBernhard);
+
+		// Jose only to be touch by the great Jose
+		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
   		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
-//		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
-//		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
-//		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
-//		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
-//
-//		avatars.add(locEmmanuel);
-//		avatars.add(locCelestine);
-//		avatars.add(locEliyas);
-//		avatars.add(locKieran);
-//		avatars.add(locBernhard);
-//		avatars.add(locIgor);
-//		avatars.add(locAnatoly);
   		avatars.add(locJose);
-//		avatars.add(locAlisa);
-//		avatars.add(locBjoern);
-//		avatars.add(locThorvin);
-//		avatars.add(locCatherine);
-//		avatars.add(locMynul);
-//		avatars.add(locDj);
+
+		// Celestine only to be touch by Celestine
+		Celestine celestine  = new Celestine();
+		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
+		avatars.add(locCelestine);
+
+		// Kieran only to be touch by Kieran
+		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
+		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
+		avatars.add(locKieran);
+
+		// Mynul only to be touch by Mynul
+		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
+		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		avatars.add(locMynul);
+
+		// DJ & Bouncer
+		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
+		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
+		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
+		// avatars.add(locDj);
 
 		frame = new JFrame("Music Matrix");
         frame.setSize(200, 200);
