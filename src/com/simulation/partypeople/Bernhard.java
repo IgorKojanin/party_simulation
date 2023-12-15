@@ -21,9 +21,12 @@ public class Bernhard extends Avatar{
 	// this int is just a flag to do the first moves and scout the bar.
 	// When it is set to 1 it will never be reset to 0 and means that the avatar
 	// starts moving according to its desires after scouting the area
-	int firstmovesfinished = 0;
-	Places[] squaresinvision;
-
+	// int firstmovesfinished = 0;
+	int j = 0;
+	int i = 0;
+	int l = 0;
+	int k = 0;
+	int m = 0;
 	// ToDo individually:
 	// - Store surroudings locally
 	// - Develop an algorithm to determine your next destination
@@ -43,10 +46,31 @@ public class Bernhard extends Avatar{
 	}
 
 	// ************** Methods **************
-	public void dancingAlgo() {
+	public Direction dancingAlgo() {
 		// TODO
 		// develop the type of movement that would represent your dance pattern
-
+		Direction dir;
+		if (this.getWhatISee()[0] == Places.DANCEFLOOR) {
+			for (l++; l < 5;) {
+				dir = Direction.FORWARD;
+				return dir;
+			}
+			for (k++; k < 2;) {
+				dir = Direction.BACK;
+				return dir;
+			}
+			// for (m++; m < 5;) {
+			// 	dir = Direction.FORWARD;
+			// 	return dir;
+			// }
+			dir = Direction.IDLE;
+			l = 0;
+			m = 0;
+			k = 0;
+		} else {
+			dir = Direction.TURN_LEFT_ON_SPOT;
+		}
+		return dir;
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
@@ -89,13 +113,17 @@ public class Bernhard extends Avatar{
 
 	public Direction moveAvatar() {
 		// only do this once at the beginning to scout the area
-		squaresinvision = this.getWhatISee();
-		Direction dir = Direction.FORWARD;
-		if (this.firstmovesfinished == 0) {
+		// squaresinvision = this.getWhatISee();
+		// Direction dir = Direction.FORWARD;
+		// if (this.firstmovesfinished == 0) {
 			
-		}
+		// }
 		// setting desire to 0 means there is currently no desire
+		// setting desire to 6 for now to achieve dance floor challenge
 		int desire = 0;
+		this.setAlcoholPercentage(0);
+
+
 		// TODO
 		// create an algorithm that determines the next step of your movement pattern
 		// based on a set of priorities.
@@ -103,23 +131,40 @@ public class Bernhard extends Avatar{
 		// return dir;
 
 		//The following lines make the avatar move randomly
-		// Random rand = new Random();
-		// int number = rand.nextInt(4);
-		// // direction is set externally --> check with the simulation environment
-		// Direction dir = Direction.FORWARD;
-		// if (number == 0) {
-		// 	dir = Direction.FORWARD;
-		// }
-		// else if (number == 1) {
-		// 	dir = Direction.RIGHT;
-		// }
-		// else if (number == 2) {
-		// 	dir = Direction.BACK;
-		// }
-		// else if (number == 3) {
-		// 	dir = Direction.LEFT;
-		// }
+		/* Random rand = new Random();
+		int number = rand.nextInt(4);
+		// direction is set externally --> check with the simulation environment
+		Direction dir = Direction.FORWARD;
+		if (number == 0) {
+			dir = Direction.FORWARD;
+		}
+		else if (number == 1) {
+			dir = Direction.RIGHT;
+		}
+		else if (number == 2) {
+			dir = Direction.BACK;
+		}
+		else if (number == 3) {
+			dir = Direction.LEFT;
+		} */
 		// return dir;
+
+		if (this.getWhatISee()[0] == Places.DANCEFLOOR) {
+			Direction direction = dancingAlgo();
+			return direction;
+		}
+		Direction dir = Direction.FORWARD;
+		for (j++; j < 15;) {
+			dir = Direction.FORWARD;
+			return dir;
+		}
+		for (i++; i < 2;) {
+			dir = Direction.LEFT;
+			return dir;
+		}
+		dir = Direction.TURN_LEFT_ON_SPOT;
+
+
 		// End of code for random movement
 		// First check if any immediate desires need to be fulfilled
 		// Check if avatar needs toilet
@@ -150,23 +195,6 @@ public class Bernhard extends Avatar{
 		//int number = rand.nextInt(4);
 		// direction is set externally --> check with the simulation environment
 
-		int number = 0;
-		
-		Direction dir = Direction.FORWARD;
-		Random rand = new Random();
-		int number = rand.nextInt(4);
-		if (number == 0) {
-			dir = Direction.FORWARD;
-		}
-		else if (number == 1) {
-			dir = Direction.RIGHT;
-		}
-		else if (number == 2) {
-			dir = Direction.BACK;
-		}
-		else if (number == 3) {
-			dir = Direction.LEFT;
-		}
 		return dir;
 	}
 
