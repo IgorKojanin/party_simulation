@@ -10,20 +10,13 @@ import com.simulation.enums.Shape;
 
 public class Eliyas extends Avatar {
 
-	Direction dir = Direction.IDLE;
-
-
 	public Eliyas(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 
 	}
 
-	public Direction dancingAlgo() {
-		if (getWhatISee()[0] == Places.DANCEFLOOR) {
-			return Direction.FORWARD;
-		} else {
-			return  Direction.BACK;
-		}
+	public void dancingAlgo() {
+
 	}
 
 	public void drink(BeverageType type) {
@@ -61,54 +54,57 @@ public class Eliyas extends Avatar {
 	}
 
 	public Direction moveAvatar() {
-
-				
-		Random rand = new Random();
-		int number = rand.nextInt(100);
-		Places iSee = getWhatISee()[0];
-		switch(iSee) {
-		case WALL:
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			return dir;
-		case BAR:
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			return dir;
-		case POOL:
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			return dir;
-		case FUSSBALL:
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			return dir;
-		case TOILET:
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			return dir;	
-		case DANCEFLOOR:		
-			return dancingAlgo();
-		case BOUNCER:
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			return dir;
-		case DJ:
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			return dir;
-		default:
-			if (number <= 45) {
-				dir = Direction.FORWARD;
-			} else if (number > 45 && number < 55) {
-				dir = Direction.RIGHT;
-			} else if (number > 55 && number < 85) {
-				dir = Direction.BACK;
-			} else if (number >= 85) {
-				dir = Direction.LEFT;
+		Places iStandOn = getWhatISee()[0];
+		Places inFrontOfMe = getWhatISee()[1];
+		if (iStandOn != Places.DANCEFLOOR)
+			switch (inFrontOfMe) {
+			case WALL:
+				return Direction.TURN_LEFT_ON_SPOT;
+			case BAR:
+				return Direction.TURN_LEFT_ON_SPOT;
+			case POOL:
+				return Direction.TURN_LEFT_ON_SPOT;
+			case FUSSBALL:
+				return Direction.TURN_LEFT_ON_SPOT;
+			case TOILET:
+				return Direction.TURN_LEFT_ON_SPOT;
+			case DANCEFLOOR:
+				return Direction.FORWARD;
+			case BOUNCER:
+				return Direction.TURN_LEFT_ON_SPOT;
+			case DJ:
+				return Direction.TURN_LEFT_ON_SPOT;
+			case OUTSIDE:
+				return Direction.BACK;
+			default:
+				return randomMovement();
 			}
-			return dir;
+		else {
+			switch (inFrontOfMe) {
+			case PERSON:
+				return Direction.TURN_RIGHT_ON_SPOT;
+			case PATH:
+				return Direction.BACK;
+			default:
+				return randomMovement();
+			}
 		}
 	}
-	
-	
 
-	
-	
-	
-	
+	private Direction randomMovement() {
+		Random rand = new Random();
+		int number = rand.nextInt(100);
+		Direction dir = Direction.IDLE;
+		if (number <= 45) {
+			dir = Direction.FORWARD;
+		} else if (number > 45 && number < 65) {
+			dir = Direction.RIGHT;
+		} else if (number > 65 && number < 75) {
+			dir = Direction.BACK;
+		} else if (number >= 75) {
+			dir = Direction.LEFT;
+		}
+		return dir;
+	}
 
 }
