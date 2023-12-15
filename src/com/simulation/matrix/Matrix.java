@@ -89,7 +89,7 @@ public class Matrix {
 		avatars.add(locBjoern);
 
 		// Bernhard only to be touch by Bernhard
-		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 20, "Bernhard",0);
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 24, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		avatars.add(locBernhard);
 
