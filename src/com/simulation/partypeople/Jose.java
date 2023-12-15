@@ -18,7 +18,7 @@ import com.simulation.enums.*;
 
 public class Jose extends Avatar {
 
-	File file = new File("./misc/Shrek-Script_Jose.txt");
+	File file = new File("party_simulation/misc/Shrek-Script_Jose.txt");
 	BufferedReader br = null;
 
 	private int WAIT_TOILET = 10; // 10 loops * 30 ms
@@ -27,6 +27,7 @@ public class Jose extends Avatar {
 	private BeverageType myBeverageType; 
 	private int waitTime_toilet; 
 	private int waitTime_dance; 
+	private boolean is_dancing; 
 
 
 	// ToDo individually:
@@ -53,13 +54,31 @@ public class Jose extends Avatar {
 		} catch (UnsupportedEncodingException | FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		// Read first line
+		try {
+			shrek_movie = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// ************** Methods **************
-	public Direction dancingAlgo() {
+	public Direction dancingAlgo(Places place) {	// Implement how much time to be inside the dancing floor, for now stay inside
 		// TODO
 		// develop the type of movement that would represent your dance pattern
-		return Direction.IDLE;
+
+		Direction dancingDir = Direction.IDLE;
+
+		if (is_dancing == false){  // Step inside dancing floor
+			dancingDir = Direction.FORWARD;
+			is_dancing = true;
+			System.out.printf("Jose: Yeah dancing is fun! \n");
+		} else if (place != Places.DANCEFLOOR){
+			dancingDir = Direction.TURN_LEFT_ON_SPOT;
+		} else {
+			dancingDir = moveRand();  // Move random for now inside the dancing floor
+		}
+		return dancingDir;
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
@@ -94,7 +113,7 @@ public class Jose extends Avatar {
 		Direction dir = Direction.IDLE;
 		if(waitTime_toilet < WAIT_TOILET){
 			dir = Direction.IDLE;
-			System.out.printf("Jose: Im sitting on the toilet playing my recorder turururu tururururu");
+			System.out.printf("Jose: Im sitting on the toilet playing my recorder turururu tururururu \n");
 		} else{
 			if(waitTime_toilet == (WAIT_TOILET + 2)){
 				dir = Direction.FORWARD;
@@ -123,73 +142,81 @@ public class Jose extends Avatar {
 	public Direction moveAvatar() { // First implementation random movement
 		// TODO
 		// IF A WAIT TIME > 0, do that action skipping switch case
+		Direction dir = Direction.FORWARD; //Default
+		Places place = getWhatISee()[0];
+		// System.out.printf("Jose sees: %s \n", place); // FRO DEBBUGING
+		if (is_dancing == true) {
+			dir = this.dancingAlgo(place);
+		// } else if (){
 
-		Direction dir = Direction.IDLE; //Default
-        Places place = getWhatISee()[0];
-
-        switch (place) {
-            case BAR:
-				dir = Direction.IDLE;
+		} else {
+		switch (place) {
+			case BAR:
+				dir = Direction.TURN_LEFT_ON_SPOT;
 				this.drink(myBeverageType);		// Drink
-                break;
-            case POOL:
-				dir = Direction.IDLE;   // Play for x time
+				break;
+			case POOL:
+				dir = Direction.TURN_LEFT_ON_SPOT;   // Play for x time
 				this.playPool();
-                break;
-            case TOILET:
+				break;
+			case TOILET:
 				dir = toilet();  // Stay x time and then leave
-                break;
-            case DANCEFLOOR:
-				dir = this.dancingAlgo();
-                break;
+				break;
+			case DANCEFLOOR:
+				dir = this.dancingAlgo(place);
+				break;
 			case FUSSBALL:
-				dir = Direction.IDLE;
+				dir = Direction.TURN_LEFT_ON_SPOT;
 				this.playFussball();  // Play for x time
-                break;
+				break;
 			case LOUNGE_BIG:
-                System.out.println("You are in the lounge.");
-                break;
+				System.out.println("Jose is in the lounge.");
+				break;
 			case LOUNGE_SMALL:
-                System.out.println("You are in the lounge.");
-                break;
+				System.out.println("Jose is in the lounge.");
+				break;
 			case LOUNGE_SMOKING:
-                System.out.println("You are in the lounge.");
-                break;
-            case DJ:
+				System.out.println("Jose is in the lounge.");
+				break;
+			case DJ:
 				// Ask for song?
-				dir = Direction.IDLE;  // Stay x time and then leave
-                break;
+				dir = Direction.TURN_LEFT_ON_SPOT;  // Stay x time and then leave
+				break;
 			case BOUNCER:
-                System.out.println("Hi bouncer!");
-				dir = Direction.IDLE;  // Stay x time and then leave
-                break;
+				System.out.println("Jose: Hi bouncer!");
+				dir = Direction.TURN_LEFT_ON_SPOT;  // Stay x time and then leave
+				break;
 			case PATH:
-				dir = moveRand();  // KEEP WALKING WALKING WALKING WALK
-                break;
+				if (random() >=2){
+					dir = moveRand();  // KEEP WALKING WALKING WALKING WALK
+				}
+				break;
 			case WALL:
-				dir = Direction.TURN_RIGHT_ON_SPOT;  // Turn around
-                break;
-            case OUTSIDE:
-				// Look for the door
-				dir = moveRand();
+				dir = Direction.TURN_LEFT_ON_SPOT;  // Turn around
+				break;
+			case OUTSIDE:
+				// Turn around I dont want to leave hehe
+				dir = Direction.TURN_LEFT_ON_SPOT;
 				break;
 			case PERSON:
 				dir = Direction.IDLE;
 				talk();
-                break;
+				break;
 			case QUEUE:
-                System.out.println("You are in the lounge.");
-                break;
-            default:
+				System.out.println("Queque.");
+				break;
+			default:
 				dir = moveRand();
 				break;
 			}
+		} 
 		return dir;
 	}
 
 	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
 		// TODO
 		// increase the drunkness level and subsequently make it lose coordination
+		System.out.printf("Jose: bartender give me your strongest potion \n");
 	}
 
 	public Direction moveRand(){
@@ -199,13 +226,13 @@ public class Jose extends Avatar {
 				dir = Direction.FORWARD;
 				break;
 			case 1:
-				dir = Direction.RIGHT;
+				dir = Direction.TURN_RIGHT_ON_SPOT;
 				break;
 			case 2:
-				dir = Direction.BACK;
+				dir = Direction.FORWARD;
 				break;
 			case 3:
-				dir = Direction.LEFT;
+				dir = Direction.TURN_LEFT_ON_SPOT;
 				break;
 		}
 		return dir;
