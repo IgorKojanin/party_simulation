@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.util.Random;
 import com.simulation.enums.Places;
 import com.simulation.enums.Direction;
+import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enums.Places;
 
@@ -36,13 +37,27 @@ public class Thorvin extends Avatar {
 	private Places goal;
 	private int timeToLeave; 
 	private Places [] PlacesArroundMe;
+	private boolean isEntered = false;
+	private Places[][] myMap;
+	private int myY;
+	private int myX;
+	private Heading myHeading;
+	private int countTurn; 
+	private int danceCount;
+	
 
 	// ************** Constructor **************
 	public Thorvin(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 
 		goal = getAction(); //ersten Plan schmieden
-		
+		myMap = new Places[80][60];
+		myY =40;
+		myX=30;
+		myHeading = Heading.WEST;
+		PlacesArroundMe = new Places[1];
+		countTurn =0;
+		danceCount =0;
 	}
 
 	// ************** Methods **************
@@ -91,27 +106,24 @@ public class Thorvin extends Avatar {
 	}
 
 	public Direction moveAvatar() {
-		
-		Direction dir = Direction.IDLE;
 		Random rand = new Random();
 		int number = rand.nextInt(4);
-		
-	if(doLeave())	{ 
+		Direction dir= Direction.FORWARD;
+
+	if(this.getWhatISee()[0] == Places.DANCEFLOOR){
+		doDance(dir);
+	}
+	else{
 		if (number == 0) {
 			dir = Direction.FORWARD;
-		}
-		else if (number == 1) {
+		} else if (number == 1) {
 			dir = Direction.RIGHT;
-		}
-		else if (number == 2) {
+		} else if (number == 2) {
 			dir = Direction.BACK;
-		}
-		else if (number == 3) {
+		} else if (number == 3) {
 			dir = Direction.LEFT;
 		}
 	}
-	else //Avatar bleibt an Ort stehen
-		dir = Direction.IDLE;
 		return dir;
 	}
 
@@ -147,11 +159,81 @@ return false;
 }
 }
 
-private Places[] doScout(){ //was ist um mich herrum
+private Direction doTurn(){ //erkunden der Karte	
+Direction dir = Direction.IDLE;
 Places[] placesArroundMe =this.getWhatISee();
-return placesArroundMe;
+
+if(myHeading == Heading.WEST){
+myMap[myX+1][myY] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+else if (myHeading == Heading.SOUTH) {
+myMap[myX][myY-1] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+else if (myHeading == Heading.NORTH) {
+myMap[myX][myY+1] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+else if (myHeading == Heading.EAST) {
+myMap[myX][myY-1] = placesArroundMe[0];
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+return dir;
+}
+
+private Direction doMove(){
+Direction dir = Direction.IDLE;
+Places[] placesArroundMe =this.getWhatISee();
+if(myMap[myX+1][myY] == Places.PATH){
+return Direction.FORWARD;
+}
+else if (myMap[myX][myY-1]==Places.PATH) {
+	return Direction.LEFT;
+}
+else if (myMap[myX][myY+1] == Places.PATH) {
+	return Direction.RIGHT;
+}
+else if(myMap[myX-1][myY]==Places.PATH){
+	return Direction.BACK;
+}
+return dir;
+}
+
+private Direction doScout(){
+Direction dir = Direction.IDLE;
+Places[] placesArroundMe =this.getWhatISee();
+if(myHeading == Heading.WEST && countTurn < 4){
+dir = doTurn();
+countTurn++;
+}
+else if(countTurn == 4 && myHeading == Heading.WEST){
+countTurn =0;
+dir = doMove();
+}
+
+return dir;
 
 }
+
+
+private Direction doDance (Direction current_dir){
+	Direction dir = Direction.IDLE;
+	Direction start_dir = Direction.IDLE;
+	if(danceCount == 0){
+		dir = current_dir;
+		danceCount++;
+	}
+	else if(danceCount == 1){
+		dir= Direction.BACK;
+			  
+		  
+	}
+
+
+	return dir;
+}
+
 
 }
 	
