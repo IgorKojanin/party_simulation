@@ -71,6 +71,12 @@ public class Alisa extends Avatar {
 
     }
 
+    public Direction moveAvatarWip() {
+        Direction dir = null;
+
+        return dir;
+    }
+
     public Direction moveAvatar() {
         // TODO
         // create an algorithm that determines the next step of your movement pattern
@@ -78,19 +84,24 @@ public class Alisa extends Avatar {
         Random rand = new Random();
         int number = rand.nextInt(4);
         // direction is set externally --> check with the simulation environment
-        Direction dir = Direction.FORWARD;
-        if (number == 0) {
-            dir = Direction.FORWARD;
+        Direction dir = null;
+        switch (number) {
+            case 0:
+                dir = Direction.FORWARD;
+                break;
+            case 1:
+                dir = Direction.RIGHT;
+                break;
+            case 2:
+                dir = Direction.BACK;
+                break;
+            case 3:
+                dir = Direction.LEFT;
+                break;
+            default:
+                break;
         }
-        else if (number == 1) {
-            dir = Direction.RIGHT;
-        }
-        else if (number == 2) {
-            dir = Direction.BACK;
-        }
-        else if (number == 3) {
-            dir = Direction.LEFT;
-        }
+
         return dir;
     }
 }
