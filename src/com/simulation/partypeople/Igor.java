@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Igor extends Avatar{
+	boolean printTest = false;
 	// ToDo individually:
 		// - Store surroudings locally
 		// - Develop an algorithm to determine your next destination
@@ -75,7 +76,7 @@ public class Igor extends Avatar{
 		// A function for knowing if a place in the map is usable or not
 		private boolean isUsable(Places place) {
 			//if (place == Places.PATH || place == Places.PERSON)
-			if (place == Places.PATH)
+			if (place == Places.PATH || place == Places.DANCEFLOOR)
 				return true;
 			else
 				return false;
@@ -210,19 +211,24 @@ public class Igor extends Avatar{
 		boolean lookWest = false;
 		Heading lookingDirection = Heading.WEST; // 0 - north, 1 - east, 2 - south, 3 - west
 		boolean doneSettingRandomDir = false;
+		Places placeToFind = Places.DANCEFLOOR;
 		Places[][] map = { { Places.PATH } };
 		
+		boolean foundDanceFloor = false; // For testing to find the dance bar
+		
 	    public Direction moveAvatar() {
-	    	System.out.println("xPos: "+xPos+", yPos: "+yPos+", lookingDirection = "+lookingDirection);
-	    	Scanner scanner = new Scanner(System.in);
-	        scanner.nextLine();
+//	    	System.out.println("xPos: "+xPos+", yPos: "+yPos+", lookingDirection = "+lookingDirection);
+//	    	Scanner scanner = new Scanner(System.in);
+//	        scanner.nextLine();
 	        Places whatISee;
 	        Direction dir;
 	        if (!lookWest && lookingDirection == Heading.WEST) {
 	        	lookWest = true;
     			whatISee = getWhatISee()[0];
+    			if (printTest)
     			System.out.println(getWhatISee()[0]);
     			if (lookingDirection == Heading.WEST && xPos == 0) {
+    				if (printTest)
     				System.out.println("Adding new column to the left");
     				map = updateMapNewColumnLeft(map,whatISee,xPos,yPos);
     				xPos = xPos+1; // Added a new column left so xPos is updated +1
@@ -230,6 +236,11 @@ public class Igor extends Avatar{
 		        // Update the element that the avatar sees
 		        map[yPos][xPos-1] = whatISee;
 		        setHeadingTurnRight();
+		        if (whatISee == placeToFind) { // Found The Dance Floor
+		        	foundDanceFloor = true;
+		        	return Direction.FORWARD;
+		        }
+		        if (printTest)
 		        System.out.println("New Heading after west: "+lookingDirection);
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
@@ -237,14 +248,20 @@ public class Igor extends Avatar{
     			lookNorth = true;
     			whatISee = getWhatISee()[0];
     			usableOnTheRight = isUsable(whatISee);
+    			if (printTest)
     			System.out.println(getWhatISee()[0]);
     			if (lookingDirection == Heading.NORTH && yPos == 0) {
+    				if (printTest)
     				System.out.println("Adding new row up");
     				map = updateMapNewRowUp(map,whatISee,xPos,yPos);
     				yPos = yPos +1; // Added a new row up so yPox is updated +1
     			}
 		        // Update the element that the avatar sees
 		        map[yPos-1][xPos] = whatISee;
+		        if (whatISee == placeToFind) { // Found The Dance Floor
+		        	foundDanceFloor = true;
+		        	return Direction.FORWARD;
+		        }
 		        setHeadingTurnRight();
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
@@ -252,44 +269,62 @@ public class Igor extends Avatar{
     			
     			lookEast = true;
     			whatISee = getWhatISee()[0];
+    			if (printTest)
     			System.out.println(getWhatISee()[0]);
     			
     			if (lookingDirection == Heading.EAST && xPos+1 == map[0].length) {
+    				if (printTest)
     				System.out.println("Adding new column to the right");
     				map = updateMapNewColumnRight(map,whatISee,xPos,yPos);
     			}
 		        // Update the element that the avatar sees
-    			System.out.println("Hey");
 		        map[yPos][xPos+1] = whatISee;
+		        if (whatISee == placeToFind) { // Found The Dance Floor
+		        	foundDanceFloor = true;
+		        	return Direction.FORWARD;
+		        }
 		        setHeadingTurnRight();
-		        System.out.println("returning");
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
     		else if (!lookSouth && lookingDirection == Heading.SOUTH) {
     			lookSouth = true;
     			whatISee = getWhatISee()[0];
+    			if (printTest)
     			System.out.println(getWhatISee()[0]);
     			if (lookingDirection == Heading.SOUTH && yPos+1 == map.length) {
+    				if (printTest)
     				System.out.println("Adding new row down");
     				map = updateMapNewRowDown(map,whatISee,xPos,yPos);
     			}
     	        // Update the element that the avatar sees
     	        map[yPos+1][xPos] = whatISee;
+		        if (whatISee == placeToFind) { // Found The Dance Floor
+		        	foundDanceFloor = true;
+		        	return Direction.FORWARD;
+		        }
     	        setHeadingTurnRight();
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
     		else {
     			whatISee = getWhatISee()[0];
+    			if (printTest)
     			System.out.println(getWhatISee()[0]);
-    			if (doneSettingRandomDir) {
+    			if (foundDanceFloor) { // Dance
+    				if (whatISee == Places.DANCEFLOOR && whatISee != Places.PERSON) {
+    					dir = Direction.FORWARD; 
+    				}
+    				else
+    					dir = Direction.TURN_RIGHT_ON_SPOT; 
+    			}
+    			else if (doneSettingRandomDir) {
     				if (isUsable(whatISee)) {
     					doneSettingRandomDir = false;
     					lookWest = false;
     					lookSouth = false;
 	        			lookEast = false;
 	        			lookNorth = false;
-	    				System.out.println("Nothing in front of me -> go forward to: "+lookingDirection);
-	    				System.out.println();
+	        			if (printTest)
+	    				System.out.println("Nothing in front of me -> go forward to: "+lookingDirection);;
 	    				dir = Direction.FORWARD;
 	    				if (lookingDirection == Heading.WEST) // looks west
 	    					xPos--;
@@ -306,20 +341,22 @@ public class Igor extends Avatar{
 	    					yPos = 0;
     				}
     				else 
-    					dir = turnToRandomDir(); // turn again
+    					dir = turnToRandomDir(whatISee); // turn again
     			}
     			else {
-    				dir = turnToRandomDir();
+    				dir = turnToRandomDir(whatISee);
     				doneSettingRandomDir = true;
     			}
     		}
-	        
+	        if (printTest)
 	        displayMap(map);
 	        //return walkToCreateAMap();
+	        if (printTest)
 	        System.out.println("GOING TO: " + dir);
 	        return dir;
 	    }
 	    private void setHeadingTurnLeft() {
+	    	if (printTest)
 	    	System.out.println("Turning left");
 	    	if (lookingDirection == Heading.WEST) // looks west turn south
 				lookingDirection = Heading.SOUTH;
@@ -331,6 +368,7 @@ public class Igor extends Avatar{
 				lookingDirection = Heading.WEST;
 	    }
 	    private void setHeadingTurnRight() {
+	    	if (printTest)
 	    	System.out.println("Turning right");
 			if (lookingDirection == Heading.WEST) // looks west turn north
 				lookingDirection = Heading.NORTH;
@@ -341,20 +379,29 @@ public class Igor extends Avatar{
 			else if (lookingDirection == Heading.NORTH) // looks north turn east
 				lookingDirection = Heading.EAST;
 	    }
-	    private Direction turnToRandomDir() {
+	    private Direction turnToRandomDir(Places whatISee) {
 	    	Direction dir;
 	    	Random rand = new Random();
-			int number = rand.nextInt(2);
+			int number = rand.nextInt(5);
 			// direction is set externally --> check with the simulation environment
 			if (number == 0) {
 				dir = Direction.TURN_LEFT_ON_SPOT;
 				setHeadingTurnLeft();
 			}
 			//else if (number == 1) {
-			else {
+			else if (number == 1) {
 				dir = Direction.TURN_RIGHT_ON_SPOT;
 				setHeadingTurnRight();
 			}
+			else { // higher chance to go forward
+				if (isUsable(whatISee))
+					dir = Direction.FORWARD;
+				else {
+					dir = Direction.TURN_LEFT_ON_SPOT;
+					setHeadingTurnLeft();
+				}
+			}
+			if (printTest)
 			System.out.println("Turning random to: "+dir+" looking: "+lookingDirection);
 			return dir;
 	    }
@@ -362,7 +409,7 @@ public class Igor extends Avatar{
 	 // Function to update the map based on what the avatar sees
 	    public static Places[][] updateMapNewColumnRight(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-	        System.out.println(rows);
+//	        System.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
@@ -376,7 +423,8 @@ public class Igor extends Avatar{
 	    }
 	    public static Places[][] updateMapNewColumnLeft(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-	        System.out.println(rows);
+	        
+//	        System.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
@@ -390,7 +438,7 @@ public class Igor extends Avatar{
 	    }
 	    public static Places[][] updateMapNewRowDown(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-	        System.out.println(rows);
+//	        System.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
@@ -405,7 +453,7 @@ public class Igor extends Avatar{
 	    }
 	    public static Places[][] updateMapNewRowUp(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-	        System.out.println(rows);
+//	        System.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
