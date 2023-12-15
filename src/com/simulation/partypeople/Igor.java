@@ -29,10 +29,12 @@ public class Igor extends Avatar{
 		}
 
 		// ************** Methods **************
-		public void dancingAlgo() {
-			// TODO
-			// develop the type of movement that would represent your dance pattern
-
+		public Direction dancingAlgo(Places whatISee) {
+			if (whatISee == Places.DANCEFLOOR && whatISee != Places.PERSON) {
+				return Direction.FORWARD; 
+			}
+			else
+				return Direction.TURN_RIGHT_ON_SPOT;
 		}
 
 		public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
@@ -310,11 +312,7 @@ public class Igor extends Avatar{
     			if (printTest)
     			System.out.println(getWhatISee()[0]);
     			if (foundDanceFloor) { // Dance
-    				if (whatISee == Places.DANCEFLOOR && whatISee != Places.PERSON) {
-    					dir = Direction.FORWARD; 
-    				}
-    				else
-    					dir = Direction.TURN_RIGHT_ON_SPOT; 
+    				dir = dancingAlgo(whatISee);
     			}
     			else if (doneSettingRandomDir) {
     				if (isUsable(whatISee)) {

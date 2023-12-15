@@ -51,6 +51,8 @@ public class Matrix {
 		Igor igor = new Igor(Shape.CIRCLE, Color.CYAN, 0, 99, "Igor", 0);
 		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
 		avatars.add(locIgor);
+		
+		
 		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
 		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
 		avatars.add(locDj);
