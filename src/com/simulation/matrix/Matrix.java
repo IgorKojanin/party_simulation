@@ -52,9 +52,9 @@ public class Matrix {
 		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
 		avatars.add(locIgor);
 		
-		
 		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
 		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
+
 		avatars.add(locDj);
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
 //		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
@@ -70,7 +70,7 @@ public class Matrix {
 //		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 0, "Alisa", 0);
 //		Bjoern bjoern = new Bjoern(Shape.SQUARE, Color.GREEN, 0, 0, "Björn", 0);
 //		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 0, "Bernhard",0);
-//		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
+ 		  Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
 //		Celestine celestine  = new Celestine();
 //		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
 //		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
@@ -86,7 +86,7 @@ public class Matrix {
 //		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
 //		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 //		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
-//		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
+  		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
 //		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
 //		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 //		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
@@ -99,7 +99,7 @@ public class Matrix {
 //		avatars.add(locBernhard);
 //		avatars.add(locIgor);
 //		avatars.add(locAnatoly);
-//		avatars.add(locJose);
+  		avatars.add(locJose);
 //		avatars.add(locAlisa);
 //		avatars.add(locBjoern);
 //		avatars.add(locThorvin);
@@ -127,7 +127,6 @@ public class Matrix {
                 String selectedMusic = (String) musicListDropdown.getSelectedItem();
                 dj.playSpecificMusic(selectedMusic);
 			}
-            
         });
 
 		stopButton = new JButton("STOP");
