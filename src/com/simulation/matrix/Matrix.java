@@ -47,26 +47,7 @@ public class Matrix {
 		queueAvatars = new ArrayList<>();
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
-		
-		Igor igor = new Igor(Shape.CIRCLE, Color.CYAN, 0, 99, "Igor", 0);
-		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246, 204, 255), 0, 22, "Björn", 0);
-		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 24, "Bernhard",0);
-		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
-		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
-		avatars.add(locIgor);
-		avatars.add(locBernhard);
-		avatars.add(locBjoern);
-		
-		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
-		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
 
-		avatars.add(locDj);
-		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
-//		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
-//		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
-//		avatars.add(locThorvin);
-		
 //		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 0,"Thorvin", 0);
 //		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 0,"Catherine", 0);
 //		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 0, "Emmanuel", 0);
