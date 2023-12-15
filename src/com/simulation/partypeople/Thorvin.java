@@ -43,6 +43,7 @@ public class Thorvin extends Avatar {
 	private int myX;
 	private Heading myHeading;
 	private int countTurn; 
+	private int danceCount;
 	
 
 	// ************** Constructor **************
@@ -56,6 +57,7 @@ public class Thorvin extends Avatar {
 		myHeading = Heading.WEST;
 		PlacesArroundMe = new Places[1];
 		countTurn =0;
+		danceCount =0;
 	}
 
 	// ************** Methods **************
@@ -104,27 +106,24 @@ public class Thorvin extends Avatar {
 	}
 
 	public Direction moveAvatar() {
-		
-		Direction dir = Direction.IDLE;
 		Random rand = new Random();
 		int number = rand.nextInt(4);
-		
-	//if(doLeave())	{ 
+		Direction dir= Direction.FORWARD;
+
+	if(this.getWhatISee()[0] == Places.DANCEFLOOR){
+		doDance(dir);
+	}
+	else{
 		if (number == 0) {
 			dir = Direction.FORWARD;
-		}
-		else if (number == 1) {
+		} else if (number == 1) {
 			dir = Direction.RIGHT;
-		}
-		else if (number == 2) {
+		} else if (number == 2) {
 			dir = Direction.BACK;
-		}
-		else if (number == 3) {
+		} else if (number == 3) {
 			dir = Direction.LEFT;
 		}
-	//}
-	//else //Avatar bleibt an Ort stehen
-		//dir = Direction.IDLE;
+	}
 		return dir;
 	}
 
@@ -218,6 +217,22 @@ return dir;
 }
 
 
+private Direction doDance (Direction current_dir){
+	Direction dir = Direction.IDLE;
+	Direction start_dir = Direction.IDLE;
+	if(danceCount == 0){
+		dir = current_dir;
+		danceCount++;
+	}
+	else if(danceCount == 1){
+		dir= Direction.BACK;
+			  
+		  
+	}
+
+
+	return dir;
+}
 
 
 }
