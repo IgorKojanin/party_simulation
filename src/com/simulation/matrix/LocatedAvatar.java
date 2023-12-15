@@ -81,6 +81,7 @@ public class LocatedAvatar {
 
 	
 	
+	
 	private Places getFrontPlace(MyFrame env) {
 		if ( x > MyFrame.getEntranceX() ) {
 			return Places.OUTSIDE;

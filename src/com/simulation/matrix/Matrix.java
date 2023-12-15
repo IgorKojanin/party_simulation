@@ -49,8 +49,14 @@ public class Matrix {
 		unrenderedAvatars = new ArrayList<>();
 		
 		Igor igor = new Igor(Shape.CIRCLE, Color.CYAN, 0, 99, "Igor", 0);
+		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246, 204, 255), 0, 22, "Björn", 0);
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 24, "Bernhard",0);
 		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
+		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		avatars.add(locIgor);
+		avatars.add(locBernhard);
+		avatars.add(locBjoern);
 		
 		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
 		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
