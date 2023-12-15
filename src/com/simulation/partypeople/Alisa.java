@@ -2,9 +2,12 @@ package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.Direction;
+import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Alisa extends Avatar {
@@ -19,6 +22,10 @@ public class Alisa extends Avatar {
     // - Develop spiels
     // - Develop smoke area behaviour
     // - Develop skibidi toilet
+    Map<Integer, Movement> movementMap = new HashMap();
+    Integer movementIndex = 0;
+    Direction dir = Direction.FORWARD;
+    Integer dancingCounter = 0;
 
     // ************** Constructor **************
     public Alisa(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -26,11 +33,49 @@ public class Alisa extends Avatar {
         // TODO
     }
 
-    // ************** Methods **************
-    public void dancingAlgo() {
-        // TODO
-        // develop the type of movement that would represent your dance pattern
+    private static class Movement {
+        private Direction direction;
+        private Places place;
 
+        public Movement(Direction direction, Places place) {
+            this.direction = direction;
+            this.place = place;
+        }
+
+        public Direction getDirection() {
+            return direction;
+        }
+
+        public void setDirection(Direction direction) {
+            this.direction = direction;
+        }
+
+        public Places getPlace() {
+            return place;
+        }
+
+        public void setPlace(Places place) {
+            this.place = place;
+        }
+    }
+
+    // ************** Methods **************
+    public Direction dancingAlgo() {
+        Direction direction = dir;
+
+        if (dancingCounter < 3) {
+            direction = Direction.FORWARD;
+        } else {
+            if (getWhatISee()[0] != Places.DANCEFLOOR) {
+                direction = pickOppositeDirection(direction);
+            } else {
+                direction = Direction.LEFT;
+            }
+        }
+
+//        System.out.println(this.getName() + " is dancing");
+
+        return direction;
     }
 
     public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
@@ -71,16 +116,56 @@ public class Alisa extends Avatar {
 
     }
 
-    public Direction moveAvatarWip() {
-        Direction dir = null;
-        // test
+    public Direction moveAvatar() {
+        if(dir == Direction.LEFT || dir == Direction.RIGHT) {
+            dir = Direction.FORWARD;
+        }
+        if (getWhatISee()[1] == Places.OUTSIDE || getWhatISee()[1] == Places.WALL) {
+            dir = pickOppositeDirection(dir);
+            movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+        } else {
+            if (movementMap.isEmpty()) {
+                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+            } else if (movementIndex % 5 == 0 && movementMap.get(movementIndex-1).getPlace() != Places.DANCEFLOOR) {
+                dir = pickNewRandomDirection(dir);
+                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+            } else if (getWhatISee()[1] == Places.DANCEFLOOR && dancingCounter < 3) {
+                dir = Direction.FORWARD;
+                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                dancingCounter++;
+//                System.out.println("Dancing " + dancingCounter);
+            } else if (dancingCounter < 20 && dancingCounter >= 3) {
+                dir = dancingAlgo();
+                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                dancingCounter++;
+//                System.out.println("Dancing " + dancingCounter);
+            } else if (dancingCounter >= 20) {
+                dir = Direction.FORWARD;
+                if (getWhatISee()[0] != Places.DANCEFLOOR) {
+                    dancingCounter = 0;
+                }
+                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+            } else {
+                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+            }
+        }
+
+//        System.out.println(movementMap.get(movementIndex).getDirection() + " " + movementMap.get(movementIndex).getPlace());
+        movementIndex++;
         return dir;
     }
 
-    public Direction moveAvatar() {
-        // TODO
-        // create an algorithm that determines the next step of your movement pattern
-        // based on a set of priorities.
+    private Direction pickOppositeDirection(Direction direction) {
+        switch (direction) {
+            case BACK -> direction = Direction.FORWARD;
+            case FORWARD -> direction = Direction.BACK;
+            case LEFT -> direction = Direction.RIGHT;
+            case RIGHT -> direction = Direction.LEFT;
+        }
+        return direction;
+    }
+
+    private Direction pickNewRandomDirection(Direction oldDirection) {
         Random rand = new Random();
         int number = rand.nextInt(4);
         // direction is set externally --> check with the simulation environment
@@ -101,7 +186,9 @@ public class Alisa extends Avatar {
             default:
                 break;
         }
-
+        if (oldDirection == dir) {
+            pickNewRandomDirection(oldDirection);
+        }
         return dir;
     }
 }
