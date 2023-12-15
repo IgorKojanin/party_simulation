@@ -9,7 +9,9 @@ import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 
 public class Eliyas extends Avatar {
+
 	Direction dir = Direction.IDLE;
+
 
 	public Eliyas(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
@@ -59,6 +61,7 @@ public class Eliyas extends Avatar {
 	}
 
 	public Direction moveAvatar() {
+
 				
 		Random rand = new Random();
 		int number = rand.nextInt(100);
@@ -99,7 +102,6 @@ public class Eliyas extends Avatar {
 			}
 			return dir;
 		}
-
 	}
 	
 	
