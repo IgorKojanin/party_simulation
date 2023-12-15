@@ -110,7 +110,7 @@ public class Jose extends Avatar {
 
 		if (getWhatISee()[0] == Places.PERSON){
 			dir = Direction.IDLE;
-			talk();
+		//	talk();
 		} else {
 			Random rand = new Random();
 			int number = rand.nextInt(4);
