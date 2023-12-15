@@ -28,6 +28,7 @@ public class Jose extends Avatar {
 	private int waitTime_toilet; 
 	private int waitTime_dance; 
 	private boolean is_dancing; 
+	private boolean is_near_bar; 
 
 
 	// ToDo individually:
@@ -111,9 +112,12 @@ public class Jose extends Avatar {
 
 	public Direction toilet() { // Do only toilet things in the toilet
 		Direction dir = Direction.IDLE;
-		if(waitTime_toilet < WAIT_TOILET){
+		if(waitTime_toilet == 0){
 			dir = Direction.IDLE;
 			System.out.printf("Jose: Im sitting on the toilet playing my recorder turururu tururururu \n");
+		} else if (waitTime_toilet < WAIT_TOILET) {
+			dir = Direction.IDLE;
+			System.out.printf("Jose: Sitting on the toilet playing my recorder turururu tururururu \n");
 		} else{
 			if(waitTime_toilet == (WAIT_TOILET + 2)){
 				dir = Direction.FORWARD;
@@ -143,17 +147,25 @@ public class Jose extends Avatar {
 		// TODO
 		// IF A WAIT TIME > 0, do that action skipping switch case
 		Direction dir = Direction.FORWARD; //Default
-		Places place = getWhatISee()[0];
+		Places place_ahead = getWhatISee()[1];
+		Places place_standing = getWhatISee()[0];
 		// System.out.printf("Jose sees: %s \n", place); // FRO DEBBUGING
 		if (is_dancing == true) {
-			dir = this.dancingAlgo(place);
+			dir = this.dancingAlgo(place_ahead);
 		// } else if (){
 
 		} else {
-		switch (place) {
+		switch (place_ahead) {
 			case BAR:
-				dir = Direction.TURN_LEFT_ON_SPOT;
-				this.drink(myBeverageType);		// Drink
+				if (place_standing == Places.BAR) {
+					dir = Direction.TURN_LEFT_ON_SPOT;
+					this.drink(myBeverageType);		// Drink
+					is_near_bar = false;
+				} else {
+					dir = Direction.TURN_LEFT_ON_SPOT;
+					is_near_bar = true;
+				}
+				
 				break;
 			case POOL:
 				dir = Direction.TURN_LEFT_ON_SPOT;   // Play for x time
@@ -163,20 +175,20 @@ public class Jose extends Avatar {
 				dir = toilet();  // Stay x time and then leave
 				break;
 			case DANCEFLOOR:
-				dir = this.dancingAlgo(place);
+				dir = this.dancingAlgo(place_ahead);
 				break;
 			case FUSSBALL:
 				dir = Direction.TURN_LEFT_ON_SPOT;
 				this.playFussball();  // Play for x time
 				break;
-			case LOUNGE_BIG:
+			case LOUNGE_BIG: // stay for x time
 				System.out.println("Jose is in the lounge.");
 				break;
-			case LOUNGE_SMALL:
+			case LOUNGE_SMALL: // stay for x time
 				System.out.println("Jose is in the lounge.");
 				break;
 			case LOUNGE_SMOKING:
-				System.out.println("Jose is in the lounge.");
+				System.out.println("Sorry I don't smoke");
 				break;
 			case DJ:
 				// Ask for song?
