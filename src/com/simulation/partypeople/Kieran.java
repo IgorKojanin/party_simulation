@@ -194,7 +194,7 @@ public class Kieran extends Avatar{
 	// Cannot access x and y coordinates, need to use relative positions
 
 	// Algorithm to move randomly and create a mind map, eventually trying to find the bar
-	Places currentPlace = getWhatISee()[1];
+	// Places currentPlace = getWhatISee()[0];
 
 	public Places[] getPlaceAtCoordinate(int x, int y) {
 		String coordinates = x + "," + y;
