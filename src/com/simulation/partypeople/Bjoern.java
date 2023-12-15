@@ -20,57 +20,40 @@ public class Bjoern extends Avatar {
 	// store locally where u are
 	// check with that exactly what can u do?
 	private boolean onDanceFloor = false;
+	private int momentsIDidntMove = 0;
 
 	// ************** Constructor **************
 	public Bjoern(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 	}
 
-	@Override
-	public int getAge() {
-		return 22;
-	}
-	
 	public void dancingAlgo() {
-		// TODO
-
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
-		// TODO
-
 	}
 
 	public void talk(Avatar person) {
-		// TODO
 	}
 
 	public void smoke() {
-		// TODO
 	}
 
 	public void toilet(int timeInToilet) {
-		// TODO
-
 	}
 
 	public void playPool() {
-		// TODO
-
 	}
 
 	public void playFussball() {
-		// TODO
-
 	}
 
 	public Direction moveAvatar() {
-		Places inFrontOfMe = getWhatISee()[0];
-		System.out.println(inFrontOfMe);
+		Places inFrontOfMe = getWhatISee()[1];
 		if (!onDanceFloor) {
 			switch (inFrontOfMe) {
 			case PATH:
-				return Direction.FORWARD;
+				return determineMovementRandomly();
 			case PERSON:
 				return Direction.LEFT;
 			case DANCEFLOOR:
@@ -78,27 +61,37 @@ public class Bjoern extends Avatar {
 				return Direction.IDLE;
 			case OUTSIDE:
 				return Direction.BACK;
+			case TOILET:
+				return Direction.BACK;
 			default:
 				return determineMovementRandomly();
 			}
 		} else {
-			switch (inFrontOfMe) {
-			case PATH:
-				return Direction.BACK;
-			case PERSON:
-				return Direction.IDLE;
-			case DANCEFLOOR:
-				onDanceFloor = true;
-				return Direction.FORWARD;
-			default:
-				return determineMovementRandomly();
+			return moveAvatarOnDanceFloor(inFrontOfMe);
+		}
+	}
+	
+	private Direction moveAvatarOnDanceFloor(Places inFrontOfMe) {
+		switch (inFrontOfMe) {
+		case PATH:
+			return Direction.BACK;
+		case PERSON:
+			momentsIDidntMove++;
+			if ( momentsIDidntMove > 3) {
+				return Direction.TURN_RIGHT_ON_SPOT;
 			}
+			return Direction.IDLE;
+		case DANCEFLOOR:
+			onDanceFloor = true;
+			return Direction.FORWARD;
+		default:
+			return determineMovementRandomly();
 		}
 	}
 
 	private Direction determineMovementRandomly() {
-		int rand = ThreadLocalRandom.current().nextInt(0, 100);
-		switch ((00 <= rand && rand < 33) ? 0 : (33 <= rand && rand < 66) ? 1 : 2) {
+		int rand = ThreadLocalRandom.current().nextInt(0, 70);
+		switch ((00 <= rand && rand < 50) ? 0 : (50 <= rand && rand < 60) ? 1 : 2) {
 		case 0:
 			return Direction.FORWARD;
 		case 1:
