@@ -57,13 +57,14 @@ public class Bernhard extends Avatar{
 			}
 			for (k++; k < 2;) {
 				dir = Direction.BACK;
+				l = 0;
 				return dir;
 			}
 			// for (m++; m < 5;) {
 			// 	dir = Direction.FORWARD;
 			// 	return dir;
 			// }
-			dir = Direction.IDLE;
+			dir = Direction.TURN_LEFT_ON_SPOT;
 			l = 0;
 			m = 0;
 			k = 0;
