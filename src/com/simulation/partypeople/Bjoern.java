@@ -10,22 +10,27 @@ package com.simulation.partypeople;
 
 import java.awt.Color;
 import java.util.concurrent.ThreadLocalRandom;
-
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
+import com.simulation.enums.Places;
 
-public class Bjoern extends Avatar{
+public class Bjoern extends Avatar {
 
 	// store locally where u are
 	// check with that exactly what can u do?
+	private boolean onDanceFloor = false;
 
 	// ************** Constructor **************
 	public Bjoern(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
-		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public int getAge() {
+		return 22;
+	}
+	
 	public void dancingAlgo() {
 		// TODO
 
@@ -60,15 +65,46 @@ public class Bjoern extends Avatar{
 	}
 
 	public Direction moveAvatar() {
-		int r = ThreadLocalRandom.current().nextInt(0, 100); 
-		switch ((00 <= r && r < 40 ) ? 0 :
-				(40 <= r && r < 65) ? 1 :
-				(65 <= r && r < 90) ? 2 : 3){
-		case 0: return Direction.FORWARD;
-		case 1: return Direction.RIGHT;
-		case 2: return Direction.LEFT;
-		case 3: return Direction.BACK;
-		default: return Direction.IDLE;
+		Places inFrontOfMe = getWhatISee()[0];
+		System.out.println(inFrontOfMe);
+		if (!onDanceFloor) {
+			switch (inFrontOfMe) {
+			case PATH:
+				return Direction.FORWARD;
+			case PERSON:
+				return Direction.LEFT;
+			case DANCEFLOOR:
+				onDanceFloor = true;
+				return Direction.IDLE;
+			case OUTSIDE:
+				return Direction.BACK;
+			default:
+				return determineMovementRandomly();
+			}
+		} else {
+			switch (inFrontOfMe) {
+			case PATH:
+				return Direction.BACK;
+			case PERSON:
+				return Direction.IDLE;
+			case DANCEFLOOR:
+				onDanceFloor = true;
+				return Direction.FORWARD;
+			default:
+				return determineMovementRandomly();
+			}
+		}
+	}
+
+	private Direction determineMovementRandomly() {
+		int rand = ThreadLocalRandom.current().nextInt(0, 100);
+		switch ((00 <= rand && rand < 33) ? 0 : (33 <= rand && rand < 66) ? 1 : 2) {
+		case 0:
+			return Direction.FORWARD;
+		case 1:
+			return Direction.RIGHT;
+		default:
+			return Direction.LEFT;
 		}
 	}
 }
