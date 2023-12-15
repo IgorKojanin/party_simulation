@@ -18,7 +18,7 @@ import com.simulation.enums.*;
 
 public class Jose extends Avatar {
 
-	File file = new File("party_simulation/misc/Shrek-Script_Jose.txt");
+	File file = new File("misc/Shrek-Script_Jose.txt");
 	BufferedReader br = null;
 
 	private int WAIT_TOILET = 10; // 10 loops * 30 ms
@@ -96,7 +96,7 @@ public class Jose extends Avatar {
 			for (int i = 0; i < 2; i++) {
 				// DJ.playSpecificMusic("AllStar");
 				if ((shrek_movie = br.readLine()) != null) {
-					System.out.printf("Jose: %n   %s %n", shrek_movie);
+				    System.out.printf("Jose: %n   %s %n", shrek_movie);
 				}
 			}
 		} catch (IOException e) {

@@ -104,7 +104,7 @@ public class Matrix {
 		avatars.add(locCelestine);
 
 		// Kieran only to be touch by Kieran
-		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 0, "Kieran", 0);
+		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 21, "Kieran", 0);
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 		avatars.add(locKieran);
 
@@ -191,7 +191,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInQueue(LocatedAvatar avatar) {
-		wait(30);
+		wait(5);
 		avatar.setWhatIsee(env);
 		int x = avatar.getX();
 		int y = avatar.getY();
@@ -226,7 +226,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInClub(LocatedAvatar avatar) {
-		wait(30);
+		wait(10);
 		avatar.setWhatIsee(env);
 		int oldX = avatar.getX();
 		int oldY = avatar.getY();
