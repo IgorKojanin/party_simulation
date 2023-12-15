@@ -112,6 +112,7 @@ public class MyFrame extends JFrame {
 	}
 
 	public void moveInQueue(int fromX, int fromY, Color color) {
+		// the avatars enter the club
 		if (fromX <= 34 && fromY == 5) {
 			if (squares[fromX - 1][fromY].getIsUsable()) {
 				squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
@@ -121,6 +122,7 @@ public class MyFrame extends JFrame {
 				squares[fromX - 1][fromY].setIsUsable(false);
 			}
 			repaint();
+			// the avatars are in line
 		} else {
 			if (squares[fromX][fromY - 1].getIsUsable()) {
 				squares[fromX][fromY].setColor(squares[fromX][fromY].getBaseColor()); // Clear the from-square
@@ -131,6 +133,12 @@ public class MyFrame extends JFrame {
 				repaint();
 			}
 		}
+	}
+
+	public void removeAvatarFromMap(int x, int y) {
+		squares[x][y].setColor(squares[x][y].getBaseColor()); // Clear the from-square
+		squares[x][y].setIsUsable(true);
+		repaint();
 	}
 
 	public void moveTo(int fromX, int fromY, int toX, int toY, Color color) {
