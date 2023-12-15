@@ -148,7 +148,7 @@ public class DJ extends Avatar {
             File file = new File(path);
             filenames.add(file.getName().replaceFirst("[.][^.]+$", ""));
         }
-		System.out.println("Filemames");
+		// System.out.println("Filemames");
 		for(String filename : filenames){
 			System.out.println(filename);
 
