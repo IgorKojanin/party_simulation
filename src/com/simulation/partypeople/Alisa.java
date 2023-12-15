@@ -73,7 +73,7 @@ public class Alisa extends Avatar {
 
     public Direction moveAvatarWip() {
         Direction dir = null;
-
+        // test
         return dir;
     }
 
