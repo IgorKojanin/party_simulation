@@ -44,6 +44,8 @@ public class Thorvin extends Avatar {
 	private Heading myHeading;
 	private int countTurn; 
 	private int danceCount;
+	private int stand;
+	private int inFront;
 	
 
 	// ************** Constructor **************
@@ -58,6 +60,8 @@ public class Thorvin extends Avatar {
 		PlacesArroundMe = new Places[1];
 		countTurn =0;
 		danceCount =0;
+		 stand = 0;
+		inFront =1;
 	}
 
 	// ************** Methods **************
@@ -112,8 +116,10 @@ public class Thorvin extends Avatar {
 
 	if(this.getWhatISee()[0] == Places.DANCEFLOOR){
 		doDance(dir);
+		stand =1;
 	}
-	else{
+	else {
+		
 		if (number == 0) {
 			dir = Direction.FORWARD;
 		} else if (number == 1) {
@@ -164,19 +170,19 @@ Direction dir = Direction.IDLE;
 Places[] placesArroundMe =this.getWhatISee();
 
 if(myHeading == Heading.WEST){
-myMap[myX+1][myY] = placesArroundMe[0];
+myMap[myX+1][myY] = placesArroundMe[inFront];
 	return Direction.TURN_LEFT_ON_SPOT;
 }
 else if (myHeading == Heading.SOUTH) {
-myMap[myX][myY-1] = placesArroundMe[0];
+myMap[myX][myY-1] = placesArroundMe[inFront];
 	return Direction.TURN_LEFT_ON_SPOT;
 }
 else if (myHeading == Heading.NORTH) {
-myMap[myX][myY+1] = placesArroundMe[0];
+myMap[myX][myY+1] = placesArroundMe[inFront];
 	return Direction.TURN_LEFT_ON_SPOT;
 }
 else if (myHeading == Heading.EAST) {
-myMap[myX][myY-1] = placesArroundMe[0];
+myMap[myX][myY-1] = placesArroundMe[inFront];
 	return Direction.TURN_LEFT_ON_SPOT;
 }
 return dir;
@@ -225,7 +231,13 @@ private Direction doDance (Direction current_dir){
 		danceCount++;
 	}
 	else if(danceCount == 1){
-		dir= Direction.BACK;
+		
+		if(this.getWhatISee()[0]== Places.DANCEFLOOR){
+			dir = Direction.FORWARD;
+		}
+		else{
+			dir = Direction.TURN_LEFT_ON_SPOT;
+		}
 			  
 		  
 	}
