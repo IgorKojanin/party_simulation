@@ -97,7 +97,7 @@ public class Jose extends Avatar {
 			for (int i = 0; i < 2; i++) {
 				// DJ.playSpecificMusic("AllStar");
 				if ((shrek_movie = br.readLine()) != null) {
-				    System.out.printf("Jose: %n   %s %n", shrek_movie);
+						System.out.printf("Jose: %n   %s %n", shrek_movie);
 				}
 			}
 		} catch (IOException e) {
