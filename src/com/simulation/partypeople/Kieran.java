@@ -67,9 +67,9 @@ public class Kieran extends Avatar{
 		// Idea: move through club until encountering dancefloor, call dancingAlgo
 		//...needs to move avatar back and forth and stay within dance floor area
 		danceFloorShenanigans = true;
-		System.out.println("Let's DANCE!");
 		Places futureSpot = getWhatISee()[1];
 		Direction dancingMovement = Direction.FORWARD;
+		// System.out.println("Let's DANCE!");  // Print statement for testing, comment out to merge with main
 
 		// Switch case for dance floor scenarios
 		// Need to keep avatar on dancefloor for specified time
@@ -135,19 +135,19 @@ public class Kieran extends Avatar{
 		Direction randomMovementDir = Direction.IDLE;
 		if (number == 0) {
 			randomMovementDir = Direction.FORWARD;
-			System.out.println("Forward movement");
+			// System.out.println("Forward movement");
 		}
 		else if (number == 1) {
 			randomMovementDir = Direction.RIGHT;
-			System.out.println("Right movement");
+			// System.out.println("Right movement");
 		}
 		else if (number == 2) {
 			randomMovementDir = Direction.BACK;
-			System.out.println("Back movement");
+			// System.out.println("Back movement");
 		}
 		else if (number == 3) {
 			randomMovementDir = Direction.LEFT;
-			System.out.println("Left movement");
+			// System.out.println("Left movement");
 		}
 		return randomMovementDir;
 	}
@@ -200,7 +200,7 @@ public class Kieran extends Avatar{
 					movementDirection = Direction.FORWARD;
 					drink(cool_beverage);
 					setAlcoholPercentage(10);
-					System.out.println("I am drinking a cool beverage!");
+					// System.out.println("I am drinking a cool beverage!");
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
