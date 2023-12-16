@@ -1,6 +1,6 @@
 /**
 Party Simulation: Kieran Avatar
-Date: 15.12.2023
+Date: 16.12.2023
 Class: Kieran.java extending the Avatar.java class
 Description: Creating a unique avatar for Kieran
 Status: WIP
@@ -44,18 +44,22 @@ import com.simulation.matrix.Matrix;
 public class Kieran extends Avatar{
 
 	// Variables
+
 	private HashMap <String, Places[]> perceivedMap;  // Creating a variable to store discovered map coordinates
 	private BeverageType cool_beverage;
 	private Boolean danceFloorShenanigans;
-	// ************** Constructor **************
+
+	// Constructor
+
 	public Kieran(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
-		// TODO
+		// WIP
 		perceivedMap = new HashMap <>(); // Instantiating an instance of a Hashmap to store coordinates
 		danceFloorShenanigans = false;
 	}
 
-	// ************** Methods **************
+	// Methods
+
 	public Direction dancingAlgo() {
 		// TODO
 		// develop the type of movement that would represent your dance pattern
@@ -149,7 +153,7 @@ public class Kieran extends Avatar{
 	}
 
 	public Direction moveAvatar() {
-       // TODO
+        // TODO
         // create an algorithm that determines the next step of your movement pattern
         // based on a set of priorities.
 
@@ -159,7 +163,8 @@ public class Kieran extends Avatar{
         Places futureSpot = getWhatISee()[1];
 
 		if(danceFloorShenanigans == false) {
-					// Switch case for movement dependent on environment location
+
+			// Switch case for movement dependent on environment location
 			switch(futureSpot) {
 				case OUTSIDE:
 					movementDirection = Direction.BACK;
@@ -241,8 +246,9 @@ public class Kieran extends Avatar{
 	}
 
 	// WIP *****************************************************************************
+
 	// Implementing a mental map for the avatar to use relative positions to locate places in the environment
-	// Cannot access x and y coordinates, need to use relative positions
+	// Cannot access x and y coordinates, need to use relative positions!
 
 	// Algorithm to move randomly and create a mind map, eventually trying to find the bar
 	// Places currentPlace = getWhatISee()[0];
@@ -255,7 +261,7 @@ public class Kieran extends Avatar{
 	private void storeCoordinate(int x, int y, Places place) {
         String coordinates = x + "," + y;
         
-        // Check if coordinates exist in the map
+        // Checking if coordinates exist in the map
         if (perceivedMap.containsKey(coordinates)) {
             // If coordinates exist, append the new place to the existing array
             Places[] placesArray = perceivedMap.get(coordinates);
@@ -271,25 +277,21 @@ public class Kieran extends Avatar{
     }
 
 	public void updatePerceivedEnvironment(Places[] whatISee) {
-        // Assuming 'whatISee' contains the places observed by the avatar
-
         // Clear the existing perceived environment before updating
         perceivedMap.clear();
 
-        // Update the perceived environment using the information received
+        // Update the perceived environment
         for (int i = 0; i < whatISee.length; i++) {
             // Construct a unique key based on the relative position from the avatar
-            String relativePositionKey = generateRelativePositionKey(i); // Define your logic
-
+            String relativePositionKey = generateRelativePositionKey(i);
             // Update the perceived environment with the observed place at the relative position
-    //        perceivedMap.put(relativePositionKey, whatISee[i]);
+            // perceivedMap.put(relativePositionKey, whatISee[i]);
         }
     }
 
 	private String generateRelativePositionKey(int index) {
-        // Implement your logic to generate a unique key based on the index or other relative factors
         // This method should generate a key representing the position relative to the avatar
         // Example: return "relativeKey_" + index;
-        return Integer.toString(index); // Placeholder; replace with your logic
+        return Integer.toString(index); // Placeholder
     }
 }
