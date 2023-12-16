@@ -45,8 +45,8 @@ public class Kieran extends Avatar{
 
 	// Variables
 	private HashMap <String, Places[]> perceivedMap;  // Creating a variable to store discovered map coordinates
-	BeverageType cool_beverage;
-	Boolean danceFloorShenanigans;
+	private BeverageType cool_beverage;
+	private Boolean danceFloorShenanigans;
 	// ************** Constructor **************
 	public Kieran(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
@@ -56,22 +56,35 @@ public class Kieran extends Avatar{
 	}
 
 	// ************** Methods **************
-	public void dancingAlgo() {
+	public Direction dancingAlgo() {
 		// TODO
 		// develop the type of movement that would represent your dance pattern
 		// Task: develop moon walk dancing algorithm
 		// Idea: move through club until encountering dancefloor, call dancingAlgo
 		//...needs to move avatar back and forth and stay within dance floor area
+		danceFloorShenanigans = true;
 		System.out.println("Let's DANCE!");
-		Direction dancingDirection = Direction.IDLE;
+		Places futureSpot = getWhatISee()[1];
+		Direction dancingMovement = Direction.FORWARD;
 
-		if (danceFloorShenanigans = true) {
-			dancingDirection = Direction.FORWARD;
-			System.out.println("Going to do the moonwalk!");
-		} else {
-			dancingDirection = Direction.BACK;
-			System.out.println("Hehe!");
+		// Switch case for dance floor scenarios
+		// Need to keep avatar on dancefloor for specified time
+		switch(futureSpot) {
+			case DANCEFLOOR:
+				dancingMovement = Direction.FORWARD;
+				break;
+			case PATH:
+				dancingMovement = Direction.BACK;
+				break;
+			case PERSON:
+				dancingMovement = Direction.RIGHT; // Only turning right like Zoolander
+				dancingMovement = Direction.BACK;
+				break;
+			default:
+				dancingMovement = Direction.FORWARD;
+				break;
 		}
+		return dancingMovement;
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
@@ -112,81 +125,119 @@ public class Kieran extends Avatar{
 
 	}
 
-	public void moveAboutAimlessly() {
+	public Direction moveAboutAimlessly() {
 		Random rand = new Random();
         int number = rand.nextInt(4);
-		Direction dir = Direction.FORWARD;
+		Direction randomMovementDir = Direction.IDLE;
 		if (number == 0) {
-				dir = Direction.FORWARD;
-			//	System.out.println(getWhatISee()[1]);
+			randomMovementDir = Direction.FORWARD;
+			System.out.println("Forward movement");
 		}
 		else if (number == 1) {
-				dir = Direction.RIGHT;
-			//	System.out.println(getWhatISee()[1]);
+			randomMovementDir = Direction.RIGHT;
+			System.out.println("Right movement");
 		}
 		else if (number == 2) {
-				dir = Direction.BACK;
-			//	System.out.println(getWhatISee()[1]);
+			randomMovementDir = Direction.BACK;
+			System.out.println("Back movement");
 		}
 		else if (number == 3) {
-				dir = Direction.LEFT;
-			//	System.out.println(getWhatISee()[1]);
+			randomMovementDir = Direction.LEFT;
+			System.out.println("Left movement");
 		}
+		return randomMovementDir;
 	}
 
 	public Direction moveAvatar() {
        // TODO
         // create an algorithm that determines the next step of your movement pattern
         // based on a set of priorities.
-		Direction dir = Direction.IDLE;
-		Places currentSpot = getWhatISee()[1];
-		if(getWhatISee()[1] != Places.DANCEFLOOR){
-			switch(getWhatISee()[1]) {
+
+		// Variables for movement
+		Direction movementDirection = Direction.FORWARD;
+		Places currentSpot = getWhatISee()[0];
+        Places futureSpot = getWhatISee()[1];
+
+		if(danceFloorShenanigans == false) {
+					// Switch case for movement dependent on environment location
+			switch(futureSpot) {
 				case OUTSIDE:
-				    dir = Direction.BACK;
+					movementDirection = Direction.BACK;
+					break;
 				case PATH:
-					moveAboutAimlessly();
+					movementDirection = moveAboutAimlessly();
+					break;
+				case PERSON:
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;					
 				case LOUNGE_BIG:
-				//    talk();
+					movementDirection = Direction.FORWARD;
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					//    talk();
+					break;
 				case LOUNGE_SMALL:
-				//    talk();
+					movementDirection = Direction.FORWARD;
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					//    talk();
+					break;
 				case LOUNGE_SMOKING:
+					movementDirection = Direction.FORWARD;
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
 					smoke();
+					break;
 				case DANCEFLOOR:
-					dir = Direction.IDLE;
-					danceFloorShenanigans = true;
-					System.out.println("I am gonna dance!");
+					movementDirection = Direction.FORWARD;
+					movementDirection = dancingAlgo();
 				case BAR:
+					movementDirection = Direction.FORWARD;
 					drink(cool_beverage);
 					setAlcoholPercentage(10);
 					System.out.println("I am drinking a cool beverage!");
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
 				case DJ:
-				    // request music?
+					// request music?
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
 				case BOUNCER:
+					// talk();
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
 				case FUSSBALL:
-				    playFussball();
+					movementDirection = Direction.FORWARD;
+					playFussball();
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
 				case POOL:
-				    playPool();
+			   		movementDirection = Direction.FORWARD;
+					playPool();
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
 				case TOILET:
-				    //    toilet(int timeInToilet)
+					//    toilet(int timeInToilet)
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
+				case WALL:
+				movementDirection = Direction.RIGHT;
+			    	movementDirection = Direction.BACK;
+					break;
 				default:
-				    moveAboutAimlessly();
+					moveAboutAimlessly();
+					break;
 			}
- 		} else if(getWhatISee()[1] == Places.DANCEFLOOR) {
-				switch(getWhatISee()[1]) {
-					case DANCEFLOOR:
-					    dir = Direction.IDLE;
-					    danceFloorShenanigans = true;
-						dancingAlgo();
-					case PATH:
-					    dir = Direction.BACK;
-					case PERSON:
-					    dir = Direction.BACK;
-					default:
-					    moveAboutAimlessly();
-				}
-			}
-		return dir;
+		} else if (danceFloorShenanigans = true) {
+			movementDirection = dancingAlgo();
+		}
+		return movementDirection;
 	}
 
 	// WIP *****************************************************************************
