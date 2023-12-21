@@ -111,9 +111,9 @@ public class Matrix {
 		avatars.add(locKieran);
 
 		// igor only to be touch by igor
-				Igor igor = new Igor(Shape.CIRCLE, new Color(0,153,153), 0, 20, "Igor", 0);
-				LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-				avatars.add(locIgor);
+		Igor igor = new Igor(Shape.CIRCLE, new Color(0,153,153), 0, 20, "Igor", 0);
+		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+		avatars.add(locIgor);
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
