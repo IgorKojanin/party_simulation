@@ -170,7 +170,7 @@ public class Bernhard extends Avatar{
 	}
 
 	// this method adds the Place in front of the avatar to the mental map
-	public void updatementalmap (Places[] WhatISee, Heading currentHeading) {
+	public void updateMentalMap (Places[] WhatISee, Heading currentHeading) {
 		if (currentHeading == Heading.NORTH) {
 			mentalmap[mentalmapxlocation][mentalmapylocation - 1] = WhatISee[1];
 		}
@@ -188,7 +188,7 @@ public class Bernhard extends Avatar{
 	public Direction scoutmap(Heading currentHeading) {
 		// turn in all 3 other directions anti clockwise to build up mental map
 		if (scoutturn == true) {
-			updatementalmap(this.getWhatISee(), currentHeading);
+			updateMentalMap(this.getWhatISee(), currentHeading);
 			Direction dir = Direction.TURN_LEFT_ON_SPOT;
 			updateHeading(currentHeading, Direction.TURN_LEFT_ON_SPOT);
 		}
@@ -198,11 +198,11 @@ public class Bernhard extends Avatar{
 	public Direction moveAvatar() {
 		// new movement with local storage of surroundings
 		// at start of method set Direction to idle in case the other methods don't execute and update it
-		Direction dir = Direction.IDLE;
+		Direction dir = Direction.FORWARD;
 		// only once after entering bar
 		if (firstThingAfterEnteringBarDone == false) {
 			// the starting position is placed at position x = 100 and y = 100 in the mentalmap to account for future changes to map
-			mentalmap[mentalmapxlocation][mentalmapylocation] = this.getWhatISee()[1];
+			updateMentalMap(getWhatISee(), currentHeading);
 			// starting heading is west after entering the bar
 			currentHeading = Heading.WEST;
 			firstThingAfterEnteringBarDone = true;
