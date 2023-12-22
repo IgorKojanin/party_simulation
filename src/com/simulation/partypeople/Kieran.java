@@ -1,6 +1,6 @@
 /**
 Party Simulation: Kieran Avatar
-Date: 15.12.2023
+Date: 16.12.2023
 Class: Kieran.java extending the Avatar.java class
 Description: Creating a unique avatar for Kieran
 Status: WIP
@@ -44,38 +44,51 @@ import com.simulation.matrix.Matrix;
 public class Kieran extends Avatar{
 
 	// Variables
+
 	private HashMap <String, Places[]> perceivedMap;  // Creating a variable to store discovered map coordinates
-	BeverageType cool_beverage;
-	Boolean isMoonwalking;
-	// ************** Constructor **************
+	private BeverageType cool_beverage;
+	private Boolean danceFloorShenanigans;
+
+	// Constructor
+
 	public Kieran(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
-		// TODO
+		// WIP
 		perceivedMap = new HashMap <>(); // Instantiating an instance of a Hashmap to store coordinates
-		isMoonwalking = false;
+		danceFloorShenanigans = false;
 	}
 
-	// ************** Methods **************
-	public void dancingAlgo() {
+	// Methods
+
+	public Direction dancingAlgo() {
 		// TODO
 		// develop the type of movement that would represent your dance pattern
 		// Task: develop moon walk dancing algorithm
 		// Idea: move through club until encountering dancefloor, call dancingAlgo
 		//...needs to move avatar back and forth and stay within dance floor area
-		System.out.println("I want to dance!");
-		Direction dancingDirection = Direction.IDLE;
+		danceFloorShenanigans = true;
+		Places futureSpot = getWhatISee()[1];
+		Direction dancingMovement = Direction.FORWARD;
+		// System.out.println("Let's DANCE!");  // Print statement for testing, comment out to merge with main
 
-		if (isMoonwalking == false) {
-			dancingDirection = Direction.FORWARD;
-			isMoonwalking = true;
-			System.out.println("Going to do the moonwalk!");
-		} else if (getWhatISee()[0] != Places.DANCEFLOOR) {
-			dancingDirection = Direction.BACK;
-			System.out.println("I'm like Michael!");
-		} else {
-			dancingDirection = Direction.FORWARD;
-			System.out.println("Hehe!");
+		// Switch case for dance floor scenarios
+		// Need to keep avatar on dancefloor for specified time
+		switch(futureSpot) {
+			case DANCEFLOOR:
+				dancingMovement = Direction.FORWARD;
+				break;
+			case PATH:
+				dancingMovement = Direction.BACK;
+				break;
+			case PERSON:
+				dancingMovement = Direction.RIGHT; // Only turning right like Zoolander
+				dancingMovement = Direction.BACK;
+				break;
+			default:
+				dancingMovement = Direction.FORWARD;
+				break;
 		}
+		return dancingMovement;
 	}
 
 	public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
@@ -116,81 +129,129 @@ public class Kieran extends Avatar{
 
 	}
 
+	public Direction moveAboutAimlessly() {
+		Random rand = new Random();
+        int number = rand.nextInt(4);
+		Direction randomMovementDir = Direction.IDLE;
+		if (number == 0) {
+			randomMovementDir = Direction.FORWARD;
+			// System.out.println("Forward movement");
+		}
+		else if (number == 1) {
+			randomMovementDir = Direction.RIGHT;
+			// System.out.println("Right movement");
+		}
+		else if (number == 2) {
+			randomMovementDir = Direction.BACK;
+			// System.out.println("Back movement");
+		}
+		else if (number == 3) {
+			randomMovementDir = Direction.LEFT;
+			// System.out.println("Left movement");
+		}
+		return randomMovementDir;
+	}
+
 	public Direction moveAvatar() {
-       // TODO
+        // TODO
         // create an algorithm that determines the next step of your movement pattern
         // based on a set of priorities.
 
-		// Algorithm to move randomly and create a mind map, eventually trying to find the bar
-		Places[] currentPlace = getWhatISee();
-		// storeCoordinate(avatar.getX(), avatar.getY(), currentPlace); // Need to get x and y coordinates to be stored, but how it isn't available to Avata
+		// Variables for movement
+		Direction movementDirection = Direction.FORWARD;
+		Places currentSpot = getWhatISee()[0];
+        Places futureSpot = getWhatISee()[1];
 
-        Random rand = new Random();
-        int number = rand.nextInt(4);
-        // direction is set externally --> check with the simulation environment
-		// Manage direction with path and queue as well as other places below
-        Direction dir = Direction.FORWARD;
-		if (isMoonwalking == true) {
-			dancingAlgo();
-		} else {
-			if (number == 0) {
-				dir = Direction.FORWARD;
-			//	System.out.println(getWhatISee());
+		if(danceFloorShenanigans == false) {
+
+			// Switch case for movement dependent on environment location
+			switch(futureSpot) {
+				case OUTSIDE:
+					movementDirection = Direction.BACK;
+					break;
+				case PATH:
+					movementDirection = moveAboutAimlessly();
+					break;
+				case PERSON:
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;					
+				case LOUNGE_BIG:
+					movementDirection = Direction.FORWARD;
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					//    talk();
+					break;
+				case LOUNGE_SMALL:
+					movementDirection = Direction.FORWARD;
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					//    talk();
+					break;
+				case LOUNGE_SMOKING:
+					movementDirection = Direction.FORWARD;
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					smoke();
+					break;
+				case DANCEFLOOR:
+					movementDirection = Direction.FORWARD;
+					movementDirection = dancingAlgo();
+				case BAR:
+					movementDirection = Direction.FORWARD;
+					drink(cool_beverage);
+					setAlcoholPercentage(10);
+					// System.out.println("I am drinking a cool beverage!");
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
+				case DJ:
+					// request music?
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
+				case BOUNCER:
+					// talk();
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
+				case FUSSBALL:
+					movementDirection = Direction.FORWARD;
+					playFussball();
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
+				case POOL:
+			   		movementDirection = Direction.FORWARD;
+					playPool();
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
+				case TOILET:
+					//    toilet(int timeInToilet)
+					movementDirection = Direction.RIGHT;
+					movementDirection = Direction.BACK;
+					break;
+				case WALL:
+				movementDirection = Direction.RIGHT;
+			    	movementDirection = Direction.BACK;
+					break;
+				default:
+					moveAboutAimlessly();
+					break;
 			}
-			else if (number == 1) {
-				dir = Direction.RIGHT;
-			//	System.out.println(getWhatISee());
-			}
-			else if (number == 2) {
-				dir = Direction.BACK;
-			//	System.out.println(getWhatISee());
-			}
-			else if (number == 3) {
-				dir = Direction.LEFT;
-			//	System.out.println(getWhatISee());
-			}
-			// WIP ******************************************************************************
-			// Re-examine if an if else block is the best strat
-			if(getWhatISee()[0] == Places.BAR) {
-			//    dir = Direction.IDLE;
-				drink(cool_beverage);
-				setAlcoholPercentage(10);
-				System.out.println("I am drinking a cool beverage!");
-			} else if(getWhatISee()[0] == Places.DANCEFLOOR) {
-				dancingAlgo();
-				System.out.println("I am done dancing!");
-			}
-			else if(getWhatISee()[0] == Places.FUSSBALL) {
-				playFussball();
-			}
-			else if(getWhatISee()[0] == Places.POOL) {
-				playPool();
-			}
-			else if(getWhatISee()[0] == Places.LOUNGE_SMOKING) {
-				smoke();
-			}
-			else if(getWhatISee()[0] == Places.LOUNGE_BIG) {
-			//    talk();
-			}
-			else if(getWhatISee()[0] == Places.LOUNGE_SMALL) {
-			//    talk();
-			}		
-			else if(getWhatISee()[0] == Places.TOILET) {  // Toilet time can be influenced by how many drinks consumed
-			//    toilet(int timeInToilet)
-			}
-			else if(getWhatISee()[0] == Places.DJ) {
-			// request music?
-			}
-			else if(getWhatISee()[0] == Places.OUTSIDE) {
-				dir = Direction.BACK;
-			}
+		} else if (danceFloorShenanigans = true) {
+			movementDirection = dancingAlgo();
 		}
-        return dir;
+		return movementDirection;
 	}
 
 	// WIP *****************************************************************************
+
 	// Implementing a mental map for the avatar to use relative positions to locate places in the environment
-	// Cannot access x and y coordinates, need to use relative positions
+	// Cannot access x and y coordinates, need to use relative positions!
+
+	// Algorithm to move randomly and create a mind map, eventually trying to find the bar
+	// Places currentPlace = getWhatISee()[0];
 
 	public Places[] getPlaceAtCoordinate(int x, int y) {
 		String coordinates = x + "," + y;
@@ -200,7 +261,7 @@ public class Kieran extends Avatar{
 	private void storeCoordinate(int x, int y, Places place) {
         String coordinates = x + "," + y;
         
-        // Check if coordinates exist in the map
+        // Checking if coordinates exist in the map
         if (perceivedMap.containsKey(coordinates)) {
             // If coordinates exist, append the new place to the existing array
             Places[] placesArray = perceivedMap.get(coordinates);
@@ -216,25 +277,21 @@ public class Kieran extends Avatar{
     }
 
 	public void updatePerceivedEnvironment(Places[] whatISee) {
-        // Assuming 'whatISee' contains the places observed by the avatar
-
         // Clear the existing perceived environment before updating
         perceivedMap.clear();
 
-        // Update the perceived environment using the information received
+        // Update the perceived environment
         for (int i = 0; i < whatISee.length; i++) {
             // Construct a unique key based on the relative position from the avatar
-            String relativePositionKey = generateRelativePositionKey(i); // Define your logic
-
+            String relativePositionKey = generateRelativePositionKey(i);
             // Update the perceived environment with the observed place at the relative position
-    //        perceivedMap.put(relativePositionKey, whatISee[i]);
+            // perceivedMap.put(relativePositionKey, whatISee[i]);
         }
     }
 
 	private String generateRelativePositionKey(int index) {
-        // Implement your logic to generate a unique key based on the index or other relative factors
         // This method should generate a key representing the position relative to the avatar
         // Example: return "relativeKey_" + index;
-        return Integer.toString(index); // Placeholder; replace with your logic
+        return Integer.toString(index); // Placeholder
     }
 }
