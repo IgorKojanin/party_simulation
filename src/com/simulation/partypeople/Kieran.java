@@ -86,10 +86,12 @@ public class Kieran extends Avatar{
 			case PERSON:
 				if(getWhatISee()[1] == Places.PERSON){
 					dancingMovement = Direction.BACK;
+					// System.out.println("Person in front of me!");
 				}
 			default:
 				if(futureSpot != Places.DANCEFLOOR && futureSpot != Places.PATH) {
 					whenStuckMove(dancingMovement);
+					// System.out.println("Testing default case!");
 				} else {
 					dancingMovement = Direction.FORWARD;
 				}
@@ -290,16 +292,16 @@ public class Kieran extends Avatar{
 		switch(movementDirection) {
 			case FORWARD:
 				movementDirection = Direction.BACK;
-				System.out.println("Can't move forward, going backward!");
+				// System.out.println("Can't move forward, going backward!");
 			case BACK:
 				movementDirection = Direction.FORWARD;
-				System.out.println("Can't move backward, going forward!");
+				// System.out.println("Can't move backward, going forward!");
 			case RIGHT:
 				movementDirection = Direction.LEFT;
-				System.out.println("Can't move left, going right!");
+				// System.out.println("Can't move left, going right!");
 			case LEFT:
 				movementDirection = Direction.RIGHT;
-				System.out.println("Can't move right, going left!");
+				// System.out.println("Can't move right, going left!");
 		}
 		return movementDirection;
 	} 
