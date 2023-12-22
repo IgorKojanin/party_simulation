@@ -71,7 +71,7 @@ public class LocatedAvatar {
 		
 	public void setWhatIsee(MyFrame env) {
 		Places[] p = new Places[2];
-		p[0] = getPlace(env, x, y);
+		p[0] = getCurrentPlace(env, x, y);
 		p[1] = getFrontPlace(env);
 		avatar.setWhatISee( p );
 		
@@ -116,6 +116,14 @@ public class LocatedAvatar {
 }
 		
 	private Places getPlace(MyFrame env, int x, int y) {
+		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
+			return Places.PERSON;
+		} else {
+			return env.getPlace(x, y);
+		}
+	}
+
+	private Places getCurrentPlace(MyFrame env, int x, int y) {
 		return env.getPlace(x, y);
 	}
 	
