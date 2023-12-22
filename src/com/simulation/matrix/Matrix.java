@@ -81,7 +81,7 @@ public class Matrix {
 		avatars.add(locAnatoly);
 
 		// Alisa only to be touch by Alisa
-		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 20, "Alisa", 0);
+		Alisa alisa = new Alisa(Shape.SQUARE, new Color(140, 7, 134), 0, 20, "Alisa", 0);
 		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
 		avatars.add(locAlisa);
 
