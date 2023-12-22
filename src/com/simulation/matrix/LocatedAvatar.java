@@ -116,11 +116,7 @@ public class LocatedAvatar {
 }
 		
 	private Places getPlace(MyFrame env, int x, int y) {
-		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
-			return Places.PERSON;
-		} else {
-			return env.getPlace(x, y);
-		}
+		return env.getPlace(x, y);
 	}
 	
 }

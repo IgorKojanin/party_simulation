@@ -54,7 +54,7 @@ public class Matrix {
 		avatars.add(locThorvin);
 
 		// catherine only to be touch by catherine
-		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 20,"Catherine", 0);
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.BLACK, 0, 20,"Catherine", 0);
 		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
 		avatars.add(locCatherine);
 		
