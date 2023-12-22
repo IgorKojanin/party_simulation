@@ -53,7 +53,7 @@ public class Matrix {
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
 		avatars.add(locThorvin);
 
-		// catherine only to be touch by catherine
+		/* // catherine only to be touch by catherine
 		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 20,"Catherine", 0);
 		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
 		avatars.add(locCatherine);
@@ -111,7 +111,7 @@ public class Matrix {
 		// Mynul only to be touch by Mynul
 		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
-		avatars.add(locMynul);
+		avatars.add(locMynul); */
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);

@@ -114,9 +114,9 @@ public class Thorvin extends Avatar {
 		int number = rand.nextInt(4);
 		Direction dir= Direction.FORWARD;
 
-	if(this.getWhatISee()[0] == Places.DANCEFLOOR){
+	if(this.getWhatISee()[stand] == Places.DANCEFLOOR){
 		doDance(dir);
-		stand =1;
+		
 	}
 	else {
 		
