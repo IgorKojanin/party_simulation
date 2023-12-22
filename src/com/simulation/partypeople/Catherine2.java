@@ -32,28 +32,26 @@ public class Catherine2 extends Avatar{
 	}
 
 	public void dancingAlgo() {
-		System.out.println("dance");
+		// System.out.println("dance");
 		// replaced with private method moveOnDanceFloor(whatISee)
 
 	}
 
 	public void talk() {
-		System.out.println("Talking to myself...");
+		// System.out.println("Talking to myself...");
 	}
 
 	public void talkToPerson(Avatar person) {
-		System.out.println("Hi " + person.getName());
+		// System.out.println("Hi " + person.getName());
 	}
 
 	public Direction moveAvatar() {
 		Direction dir = Direction.IDLE;
 		if (amOnDanceFloor) {
 			moveOnDanceFloor();
-			//dir = Direction.IDLE;
 		}
 		else {
 			// Don't go into any place that isn't the dancefloor
-			
 			if (getWhatISee()[1] == Places.PATH) {
 				dir = getRandomMovement();
 			}
@@ -61,39 +59,30 @@ public class Catherine2 extends Avatar{
 				dir = Direction.BACK;
 			}
 			else if (getWhatISee()[1] == Places.DANCEFLOOR) {
-
 				dir = Direction.FORWARD;
 				amOnDanceFloor = true;
-				//moveOnDanceFloor();
 			}
 		}
 		return dir;
 	}
 
 	private Direction moveOnDanceFloor() {
-		
 		amOnDanceFloor = true;
-		System.out.println(getWhatISee()[1]);
 		Direction dir = Direction.IDLE;
-		/*if (getWhatISee()[1] == Places.PATH) {
-			// Move back onto dancefloor
-			dir = Direction.BACK;
-		}
-		else if (getWhatISee()[1] == Places.PERSON) {
-			// Talk to a person
-			durationStayingStill = 0;
-			while (durationStayingStill < 5) {		
-				dir = Direction.IDLE;
-				durationStayingStill = durationStayingStill + 1;
+
+		while (durationStayingStill < 100) {	
+			System.out.println(durationStayingStill);
+			System.out.println(dir);
+
+			if (durationStayingStill % 2 == 0) {
+				dir = Direction.FORWARD;
+			}	
+			else {
+				dir = Direction.BACK;
 			}
-			dir = Direction.IDLE;
+			durationStayingStill = durationStayingStill + 1;
 		}
-		else if (getWhatISee()[1] == Places.DANCEFLOOR) {
-			dir = Direction.IDLE;
-		}
-		else {
-			dir = Direction.IDLE;
-		}*/
+
 		return dir;
 	}
 	
