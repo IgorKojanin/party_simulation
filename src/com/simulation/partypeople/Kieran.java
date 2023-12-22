@@ -83,6 +83,10 @@ public class Kieran extends Avatar{
 			case PATH:
 				dancingMovement = Direction.BACK;
 				break;
+			case PERSON:
+				if(getWhatISee()[1] == Places.PERSON){
+					dancingMovement = Direction.BACK;
+				}
 			default:
 				if(futureSpot != Places.DANCEFLOOR && futureSpot != Places.PATH) {
 					whenStuckMove(dancingMovement);
