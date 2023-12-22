@@ -83,12 +83,12 @@ public class Kieran extends Avatar{
 			case PATH:
 				dancingMovement = Direction.BACK;
 				break;
-			case PERSON:
-				whenStuckMove(dancingMovement);
-				System.out.println("Person in the way, dancing elsewhere");
-				break;
 			default:
-				dancingMovement = Direction.FORWARD;
+				if(futureSpot != Places.DANCEFLOOR && futureSpot != Places.PATH) {
+					whenStuckMove(dancingMovement);
+				} else {
+					dancingMovement = Direction.FORWARD;
+				}
 				break;
 		}
 		return dancingMovement;
