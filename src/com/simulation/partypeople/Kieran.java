@@ -16,6 +16,7 @@ import java.awt.Color;
 import java.util.Random;
 import com.simulation.enums.Direction;
 import com.simulation.enums.Shape;
+import com.simulation.enviroment.Square;
 
 // Additional imports for avatar creating a "mind map"
 import java.util.HashMap;
@@ -48,6 +49,7 @@ public class Kieran extends Avatar{
 	private HashMap <String, Places[]> mindMap;  // Creating a variable to store discovered map coordinates
 	private BeverageType cool_beverage;
 	private Boolean danceFloorShenanigans;
+	private Direction movementDirection;
 
 	// Constructor
 
@@ -56,6 +58,7 @@ public class Kieran extends Avatar{
 		// WIP
 		mindMap = new HashMap <>(); // Instantiating an instance of a Hashmap to store coordinates
 		danceFloorShenanigans = false;
+		movementDirection = Direction.FORWARD;
 	}
 
 	// Methods
@@ -81,18 +84,8 @@ public class Kieran extends Avatar{
 				dancingMovement = Direction.BACK;
 				break;
 			case PERSON:
-				Random rand = new Random();
-                int number = rand.nextInt(2);
-				if (number == 0) {
-					dancingMovement = Direction.TURN_RIGHT_ON_SPOT; // Only turning right like Zoolander
-				    dancingMovement = Direction.FORWARD;
-					// System.out.println("Person in the way, variant 1");
-				}
-				else if (number == 1) {
-					dancingMovement = Direction.TURN_LEFT_ON_SPOT; // Only turning left
-				    dancingMovement = Direction.FORWARD;
-					// System.out.println("Person in the way, variant 1");
-				}
+				whenStuckMove(dancingMovement);
+				System.out.println("Person in the way, dancing elsewhere");
 				break;
 			default:
 				dancingMovement = Direction.FORWARD;
@@ -169,9 +162,9 @@ public class Kieran extends Avatar{
         // based on a set of priorities.
 
 		// Variables for movement
-		Direction movementDirection = Direction.FORWARD;
 		Places currentSpot = getWhatISee()[0];
         Places futureSpot = getWhatISee()[1];
+		int trappedCounter = 0;
 
 		// Variable for storing mindmap locations
 		Places[] surroundings = getWhatISee();
@@ -189,79 +182,78 @@ public class Kieran extends Avatar{
 					movementDirection = moveAboutAimlessly();
 					break;
 				case PERSON:
-					movementDirection = Direction.RIGHT;
-					movementDirection = Direction.BACK;	
+					if (getWhatISee()[1] == Places.PERSON) {
+						trappedCounter ++;
+						movementDirection = Direction.BACK;
+						// System.out.println("Incrementing trapped counter: " + trappedCounter);
+					}
+					if (trappedCounter > 3) {
+						// System.out.println("Trapped moving elsewhere!");
+						whenStuckMove(movementDirection);
+					}
 					break;				
 				case LOUNGE_BIG:
 					updateAvatarMindMap(surroundings);
-					movementDirection = Direction.FORWARD;
-					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					//    talk();
 					break;
 				case LOUNGE_SMALL:
 					updateAvatarMindMap(surroundings);
-					movementDirection = Direction.FORWARD;
-					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					//    talk();
 					break;
 				case LOUNGE_SMOKING:
 					updateAvatarMindMap(surroundings);
-					movementDirection = Direction.FORWARD;
-					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					smoke();
 					break;
 				case DANCEFLOOR:
 					updateAvatarMindMap(surroundings);
-					movementDirection = Direction.FORWARD;
+					// movementDirection = Direction.FORWARD;
 					movementDirection = dancingAlgo();
 				case BAR:
 					updateAvatarMindMap(surroundings);
-					movementDirection = Direction.FORWARD;
+					movementDirection = Direction.BACK;
 					drink(cool_beverage);
 					setAlcoholPercentage(10);
 					// System.out.println("I am drinking a cool beverage!");
-					movementDirection = Direction.RIGHT;
-					movementDirection = Direction.BACK;
 					break;
 				case DJ:
 					updateAvatarMindMap(surroundings);
 					// request music?
-					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
 				case BOUNCER:
 					updateAvatarMindMap(surroundings);
 					// talk();
-					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
 				case FUSSBALL:
 					updateAvatarMindMap(surroundings);
-					movementDirection = Direction.FORWARD;
-					playFussball();
-					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
+					playFussball();
 					break;
 				case POOL:
 					updateAvatarMindMap(surroundings);
-			   		movementDirection = Direction.FORWARD;
+			   		movementDirection = Direction.BACK;
 					playPool();
-					movementDirection = Direction.RIGHT;
-					movementDirection = Direction.BACK;
 					break;
 				case TOILET:
 					updateAvatarMindMap(surroundings);
-					//    toilet(int timeInToilet)
-					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
+					//    toilet(int timeInToilet)
 					break;
 				case WALL:
 					updateAvatarMindMap(surroundings);
-				movementDirection = Direction.RIGHT;
-			    	movementDirection = Direction.BACK;
+					movementDirection = Direction.BACK;
+					if(getWhatISee()[1] == Places.WALL) {
+						trappedCounter ++;
+						// System.out.println("Incrementing trapped counter: " + trappedCounter);
+					}
+					if(trappedCounter > 3) {
+						// System.out.println("Trapped moving elsewhere!");
+						whenStuckMove(movementDirection);
+					}
 					break;
 				default:
 					updateAvatarMindMap(surroundings);
@@ -281,6 +273,32 @@ public class Kieran extends Avatar{
 
 	// Algorithm to move randomly and create a mind map, eventually trying to find the bar
 	// Places currentPlace = getWhatISee()[0];
+
+	public boolean canIUseIt(Boolean isUsable) {
+		if(isUsable == true) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private Direction whenStuckMove(Direction movementDirection) {
+		switch(movementDirection) {
+			case FORWARD:
+				movementDirection = Direction.BACK;
+				System.out.println("Can't move forward, going backward!");
+			case BACK:
+				movementDirection = Direction.FORWARD;
+				System.out.println("Can't move backward, going forward!");
+			case RIGHT:
+				movementDirection = Direction.LEFT;
+				System.out.println("Can't move left, going right!");
+			case LEFT:
+				movementDirection = Direction.RIGHT;
+				System.out.println("Can't move right, going left!");
+		}
+		return movementDirection;
+	} 
 
 	private void updateAvatarMindMap(Places[] surroundings) {
 		Places currentSpot = surroundings[0];
