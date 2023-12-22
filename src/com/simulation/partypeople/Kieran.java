@@ -45,7 +45,7 @@ public class Kieran extends Avatar{
 
 	// Variables
 
-	private HashMap <String, Places[]> perceivedMap;  // Creating a variable to store discovered map coordinates
+	private HashMap <String, Places[]> mindMap;  // Creating a variable to store discovered map coordinates
 	private BeverageType cool_beverage;
 	private Boolean danceFloorShenanigans;
 
@@ -54,7 +54,7 @@ public class Kieran extends Avatar{
 	public Kieran(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// WIP
-		perceivedMap = new HashMap <>(); // Instantiating an instance of a Hashmap to store coordinates
+		mindMap = new HashMap <>(); // Instantiating an instance of a Hashmap to store coordinates
 		danceFloorShenanigans = false;
 	}
 
@@ -81,8 +81,18 @@ public class Kieran extends Avatar{
 				dancingMovement = Direction.BACK;
 				break;
 			case PERSON:
-				dancingMovement = Direction.RIGHT; // Only turning right like Zoolander
-				dancingMovement = Direction.BACK;
+				Random rand = new Random();
+                int number = rand.nextInt(2);
+				if (number == 0) {
+					dancingMovement = Direction.TURN_RIGHT_ON_SPOT; // Only turning right like Zoolander
+				    dancingMovement = Direction.FORWARD;
+					// System.out.println("Person in the way, variant 1");
+				}
+				else if (number == 1) {
+					dancingMovement = Direction.TURN_LEFT_ON_SPOT; // Only turning left
+				    dancingMovement = Direction.FORWARD;
+					// System.out.println("Person in the way, variant 1");
+				}
 				break;
 			default:
 				dancingMovement = Direction.FORWARD;
@@ -151,7 +161,8 @@ public class Kieran extends Avatar{
 		}
 		return randomMovementDir;
 	}
-
+    
+	@Override
 	public Direction moveAvatar() {
         // TODO
         // create an algorithm that determines the next step of your movement pattern
@@ -162,41 +173,52 @@ public class Kieran extends Avatar{
 		Places currentSpot = getWhatISee()[0];
         Places futureSpot = getWhatISee()[1];
 
+		// Variable for storing mindmap locations
+		Places[] surroundings = getWhatISee();
+
 		if(danceFloorShenanigans == false) {
 
 			// Switch case for movement dependent on environment location
 			switch(futureSpot) {
 				case OUTSIDE:
+					updateAvatarMindMap(surroundings);
 					movementDirection = Direction.BACK;
 					break;
 				case PATH:
+					updateAvatarMindMap(surroundings);
 					movementDirection = moveAboutAimlessly();
 					break;
 				case PERSON:
 					movementDirection = Direction.RIGHT;
-					movementDirection = Direction.BACK;					
+					movementDirection = Direction.BACK;	
+					break;				
 				case LOUNGE_BIG:
+					updateAvatarMindMap(surroundings);
 					movementDirection = Direction.FORWARD;
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					//    talk();
 					break;
 				case LOUNGE_SMALL:
+					updateAvatarMindMap(surroundings);
 					movementDirection = Direction.FORWARD;
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					//    talk();
 					break;
 				case LOUNGE_SMOKING:
+					updateAvatarMindMap(surroundings);
 					movementDirection = Direction.FORWARD;
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					smoke();
 					break;
 				case DANCEFLOOR:
+					updateAvatarMindMap(surroundings);
 					movementDirection = Direction.FORWARD;
 					movementDirection = dancingAlgo();
 				case BAR:
+					updateAvatarMindMap(surroundings);
 					movementDirection = Direction.FORWARD;
 					drink(cool_beverage);
 					setAlcoholPercentage(10);
@@ -205,37 +227,44 @@ public class Kieran extends Avatar{
 					movementDirection = Direction.BACK;
 					break;
 				case DJ:
+					updateAvatarMindMap(surroundings);
 					// request music?
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
 				case BOUNCER:
+					updateAvatarMindMap(surroundings);
 					// talk();
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
 				case FUSSBALL:
+					updateAvatarMindMap(surroundings);
 					movementDirection = Direction.FORWARD;
 					playFussball();
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
 				case POOL:
+					updateAvatarMindMap(surroundings);
 			   		movementDirection = Direction.FORWARD;
 					playPool();
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
 				case TOILET:
+					updateAvatarMindMap(surroundings);
 					//    toilet(int timeInToilet)
 					movementDirection = Direction.RIGHT;
 					movementDirection = Direction.BACK;
 					break;
 				case WALL:
+					updateAvatarMindMap(surroundings);
 				movementDirection = Direction.RIGHT;
 			    	movementDirection = Direction.BACK;
 					break;
 				default:
+					updateAvatarMindMap(surroundings);
 					moveAboutAimlessly();
 					break;
 			}
@@ -253,45 +282,21 @@ public class Kieran extends Avatar{
 	// Algorithm to move randomly and create a mind map, eventually trying to find the bar
 	// Places currentPlace = getWhatISee()[0];
 
-	public Places[] getPlaceAtCoordinate(int x, int y) {
-		String coordinates = x + "," + y;
-		return perceivedMap.getOrDefault(coordinates, new Places[0]);
+	private void updateAvatarMindMap(Places[] surroundings) {
+		Places currentSpot = surroundings[0];
+		mindMap.put(currentSpot.toString(), surroundings);
 	}
 
-	private void storeCoordinate(int x, int y, Places place) {
-        String coordinates = x + "," + y;
-        
-        // Checking if coordinates exist in the map
-        if (perceivedMap.containsKey(coordinates)) {
-            // If coordinates exist, append the new place to the existing array
-            Places[] placesArray = perceivedMap.get(coordinates);
-            Places[] updatedPlacesArray = new Places[placesArray.length + 1];
-            System.arraycopy(placesArray, 0, updatedPlacesArray, 0, placesArray.length);
-            updatedPlacesArray[placesArray.length] = place;
-            perceivedMap.put(coordinates, updatedPlacesArray);
-        } else {
-            // If coordinates don't exist, create a new array and store the place
-            Places[] newPlacesArray = { place };
-            perceivedMap.put(coordinates, newPlacesArray);
-        }
-    }
-
-	public void updatePerceivedEnvironment(Places[] whatISee) {
-        // Clear the existing perceived environment before updating
-        perceivedMap.clear();
-
-        // Update the perceived environment
-        for (int i = 0; i < whatISee.length; i++) {
-            // Construct a unique key based on the relative position from the avatar
-            String relativePositionKey = generateRelativePositionKey(i);
-            // Update the perceived environment with the observed place at the relative position
-            // perceivedMap.put(relativePositionKey, whatISee[i]);
-        }
-    }
-
-	private String generateRelativePositionKey(int index) {
-        // This method should generate a key representing the position relative to the avatar
-        // Example: return "relativeKey_" + index;
-        return Integer.toString(index); // Placeholder
-    }
+	public void printMindMap() {
+		System.out.println("Mind Map Contents: ");
+		for(Map.Entry<String, Places[]> entry : mindMap.entrySet()) {
+            String key = entry.getKey();
+			Places[] value = entry.getValue();
+			System.out.println(key + ": [");
+			for(Places place : value) {
+				System.out.println(place + ", ");
+			}
+			System.out.println("]");
+		}
+	}
 }
