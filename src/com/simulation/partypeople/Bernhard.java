@@ -14,8 +14,10 @@ import java.awt.Color;
 import java.util.Random;
 
 import com.simulation.enums.Direction;
+import com.simulation.enums.Heading;
 import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
+import com.simulation.enviroment.Square;
 
 public class Bernhard extends Avatar{
 	// this int is just a flag to do the first moves and scout the bar.
@@ -27,6 +29,23 @@ public class Bernhard extends Avatar{
 	int l = 0;
 	int k = 0;
 	int m = 0;
+	boolean scoutturn;
+	boolean firstThingAfterEnteringBarDone = false;
+
+	// starting coordinates in own mental map
+	// the current location in the mental map will be augmented with these
+	int mentalmapxlocation = 100;
+	int mentalmapylocation = 100;
+
+	// save current heading locally, start off facing WEST after entering bar
+	Heading currentHeading = Heading.WEST;
+
+	// save lastmove
+	Direction lastmoveDirection;
+
+	// this is the array in which the discovered surroundings are stored locally
+	Places[][] mentalmap;
+
 	// ToDo individually:
 	// - Store surroudings locally
 	// - Develop an algorithm to determine your next destination
@@ -112,7 +131,89 @@ public class Bernhard extends Avatar{
 
 	}
 
+	public void updateHeading(Heading currentHeading, Direction nextdir) {
+		if (currentHeading == Heading.NORTH) {
+			if (nextdir == Direction.TURN_LEFT_ON_SPOT) {
+				currentHeading = Heading.WEST;
+			}
+			else if (nextdir == Direction.TURN_RIGHT_ON_SPOT) {
+				currentHeading = Heading.EAST;
+			}
+		}
+
+		else if (currentHeading == Heading.EAST) {
+			if (nextdir == Direction.TURN_LEFT_ON_SPOT) {
+				currentHeading = Heading.NORTH;
+			}
+			else if (nextdir == Direction.TURN_RIGHT_ON_SPOT) {
+				currentHeading = Heading.SOUTH;
+			}
+		}
+
+		else if (currentHeading == Heading.SOUTH) {
+			if (nextdir == Direction.TURN_LEFT_ON_SPOT) {
+				currentHeading = Heading.EAST;
+			}
+			else if (nextdir == Direction.TURN_RIGHT_ON_SPOT) {
+				currentHeading = Heading.WEST;
+			}
+		}
+
+		else if (currentHeading == Heading.WEST) {
+			if (nextdir == Direction.TURN_LEFT_ON_SPOT) {
+				currentHeading = Heading.SOUTH;
+			}
+			else if (nextdir == Direction.TURN_RIGHT_ON_SPOT) {
+				currentHeading = Heading.NORTH;
+			}
+		}
+	}
+
+	// this method adds the Place in front of the avatar to the mental map
+	public void updatementalmap (Places[] WhatISee, Heading currentHeading) {
+		if (currentHeading == Heading.NORTH) {
+			mentalmap[mentalmapxlocation][mentalmapylocation - 1] = WhatISee[1];
+		}
+		else if (currentHeading == Heading.EAST) {
+			mentalmap[mentalmapxlocation + 1][mentalmapylocation] = WhatISee[1];
+		}
+		else if (currentHeading == Heading.SOUTH) {
+			mentalmap[mentalmapxlocation][mentalmapylocation + 1] = WhatISee[1];
+		}
+		else if (currentHeading == Heading.WEST) {
+			mentalmap[mentalmapxlocation - 1][mentalmapylocation] = WhatISee[1];
+		}
+	}
+
+	public Direction scoutmap(Heading currentHeading) {
+		// turn in all 3 other directions anti clockwise to build up mental map
+		if (scoutturn == true) {
+			updatementalmap(this.getWhatISee(), currentHeading);
+			Direction dir = Direction.TURN_LEFT_ON_SPOT;
+			updateHeading(currentHeading, Direction.TURN_LEFT_ON_SPOT);
+		}
+		return dir;
+	}
+
 	public Direction moveAvatar() {
+		// new movement with local storage of surroundings
+		// at start of method set Direction to idle in case the other methods don't execute and update it
+		Direction dir = Direction.IDLE;
+		// only once after entering bar
+		if (firstThingAfterEnteringBarDone == false) {
+			// the starting position is placed at position x = 100 and y = 100 in the mentalmap to account for future changes to map
+			mentalmap[mentalmapxlocation][mentalmapylocation] = this.getWhatISee()[1];
+			// starting heading is west after entering the bar
+			currentHeading = Heading.WEST;
+			firstThingAfterEnteringBarDone = true;
+		}
+
+		// only scout the map once at the start of the program
+		if (k == 0) {
+			dir = scoutmap(currentHeading);
+			return dir;
+		}		
+		
 		// only do this once at the beginning to scout the area
 		// squaresinvision = this.getWhatISee();
 		// Direction dir = Direction.FORWARD;
@@ -121,8 +222,8 @@ public class Bernhard extends Avatar{
 		// }
 		// setting desire to 0 means there is currently no desire
 		// setting desire to 6 for now to achieve dance floor challenge
-		int desire = 0;
-		this.setAlcoholPercentage(0);
+		// int desire = 0;
+		// this.setAlcoholPercentage(0);
 
 
 		// TODO
@@ -150,20 +251,27 @@ public class Bernhard extends Avatar{
 		} */
 		// return dir;
 
-		if (this.getWhatISee()[0] == Places.DANCEFLOOR) {
-			Direction direction = dancingAlgo();
-			return direction;
-		}
-		Direction dir = Direction.FORWARD;
-		for (j++; j < 15;) {
-			dir = Direction.FORWARD;
-			return dir;
-		}
-		for (i++; i < 2;) {
-			dir = Direction.LEFT;
-			return dir;
-		}
-		dir = Direction.TURN_LEFT_ON_SPOT;
+		// if (this.getWhatISee()[1] == Places.DANCEFLOOR) {
+		// 	Direction direction = dancingAlgo();
+		// 	return direction;
+		// }
+		// Direction dir = Direction.FORWARD;
+		// for (j++; j < 15;) {
+		// 	dir = Direction.FORWARD;
+		// 	return dir;
+		// }
+ 		
+		// if (i == 0) {
+		// 	dir = Direction.LEFT;
+		// 	i = 1;
+		// 	return dir;
+		// }
+		
+		// for (k++; k < 2;) {
+		// 	dir = Direction.FORWARD;
+		// 	return dir;
+		// }
+		// dir = Direction.TURN_LEFT_ON_SPOT;
 
 
 		// End of code for random movement
@@ -181,14 +289,14 @@ public class Bernhard extends Avatar{
 		// 8 - talk
 		// 9 - fight
 		// 10 - go to bar and get water
-		if (this.getAlcoholPercentage() > 60) {
-			desire = 10;
-		}
-		// if alcoholpercentage is too high then start a fight
-		else if (this.getAlcoholPercentage() > 80) {
-			desire = 9;
-			// add code here to fight the next avatar that appears around you
-		}
+		// if (this.getAlcoholPercentage() > 60) {
+		// 	desire = 10;
+		// }
+		// // if alcoholpercentage is too high then start a fight
+		// else if (this.getAlcoholPercentage() > 80) {
+		// 	desire = 9;
+		// 	// add code here to fight the next avatar that appears around you
+		// }
 		// check what is in front of the avatar and interact with the place if the current desire can be met there
 
 		// The following lines make the avatar move randomly
