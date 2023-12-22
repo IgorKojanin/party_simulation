@@ -54,9 +54,15 @@ public class Matrix {
 		avatars.add(locThorvin);
 
 		// catherine only to be touch by catherine
-		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.GRAY, 0, 20,"Catherine", 0);
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.BLACK, 0, 20,"Catherine", 0);
 		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
 		avatars.add(locCatherine);
+		
+		// Mynul only to be touch by Mynul
+		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
+		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		avatars.add(locMynul);
+						
 
 		// emmanuel only to be touch by emmanuel
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel", 0);
@@ -67,11 +73,7 @@ public class Matrix {
 		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 20, "Eliyas", 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
 		avatars.add(locEliyas);
-
-		// igor only to be touch by igor
-		Igor igor = new Igor(Shape.CIRCLE, new Color(0,153,153), 0, 20, "Igor", 0);
-		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-		avatars.add(locIgor);
+		
 
 		// Anatoly only to be touch by Anatoly
 		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
@@ -79,7 +81,7 @@ public class Matrix {
 		avatars.add(locAnatoly);
 
 		// Alisa only to be touch by Alisa
-		Alisa alisa = new Alisa(Shape.SQUARE, Color.PINK, 0, 20, "Alisa", 0);
+		Alisa alisa = new Alisa(Shape.SQUARE, new Color(140, 7, 134), 0, 20, "Alisa", 0);
 		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
 		avatars.add(locAlisa);
 
@@ -108,10 +110,10 @@ public class Matrix {
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 		avatars.add(locKieran);
 
-		// Mynul only to be touch by Mynul
-		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
-		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
-		avatars.add(locMynul);
+		// igor only to be touch by igor
+		Igor igor = new Igor(Shape.CIRCLE, new Color(0,153,153), 0, 20, "Igor", 0);
+		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+		avatars.add(locIgor);
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);

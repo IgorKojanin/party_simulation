@@ -117,9 +117,13 @@ public class Alisa extends Avatar {
     }
 
     public Direction moveAvatar() {
-        if(dir == Direction.LEFT || dir == Direction.RIGHT) {
+        if (dir == Direction.LEFT || dir == Direction.RIGHT) {
             dir = Direction.FORWARD;
         }
+
+
+
+
         if (getWhatISee()[1] == Places.OUTSIDE || getWhatISee()[1] == Places.WALL) {
             dir = pickOppositeDirection(dir);
             movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
@@ -168,7 +172,6 @@ public class Alisa extends Avatar {
     private Direction pickNewRandomDirection(Direction oldDirection) {
         Random rand = new Random();
         int number = rand.nextInt(4);
-        // direction is set externally --> check with the simulation environment
         Direction dir = null;
         switch (number) {
             case 0:
