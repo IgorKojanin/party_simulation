@@ -85,6 +85,8 @@ public class Eliyas extends Avatar {
 				return Direction.TURN_LEFT_ON_SPOT;
 			case FUSSBALL:
 				return Direction.TURN_RIGHT_ON_SPOT;
+			case PERSON:
+				return Direction.TURN_RIGHT_ON_SPOT;
 			case TOILET:
 				return Direction.BACK;
 			case DANCEFLOOR:
