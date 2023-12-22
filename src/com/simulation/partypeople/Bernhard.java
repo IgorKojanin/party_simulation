@@ -17,7 +17,6 @@ import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
 import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
-import com.simulation.enviroment.Square;
 
 public class Bernhard extends Avatar{
 	// this int is just a flag to do the first moves and scout the bar.
@@ -29,13 +28,13 @@ public class Bernhard extends Avatar{
 	int l = 0;
 	int k = 0;
 	int m = 0;
-	boolean scoutturn;
+	int scoutturn = 0;
 	boolean firstThingAfterEnteringBarDone = false;
 
 	// starting coordinates in own mental map
 	// the current location in the mental map will be augmented with these
-	int mentalmapxlocation = 100;
-	int mentalmapylocation = 100;
+	int mentalmapxlocation = 50;
+	int mentalmapylocation = 50;
 
 	// save current heading locally, start off facing WEST after entering bar
 	Heading currentHeading = Heading.WEST;
@@ -62,6 +61,7 @@ public class Bernhard extends Avatar{
 	public Bernhard(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO
+		mentalmap = new Places[100][100];
 	}
 
 	// ************** Methods **************
@@ -171,25 +171,28 @@ public class Bernhard extends Avatar{
 
 	// this method adds the Place in front of the avatar to the mental map
 	public void updateMentalMap (Places[] WhatISee, Heading currentHeading) {
-		if (currentHeading == Heading.NORTH) {
-			mentalmap[mentalmapxlocation][mentalmapylocation - 1] = WhatISee[1];
-		}
-		else if (currentHeading == Heading.EAST) {
-			mentalmap[mentalmapxlocation + 1][mentalmapylocation] = WhatISee[1];
-		}
-		else if (currentHeading == Heading.SOUTH) {
-			mentalmap[mentalmapxlocation][mentalmapylocation + 1] = WhatISee[1];
-		}
-		else if (currentHeading == Heading.WEST) {
-			mentalmap[mentalmapxlocation - 1][mentalmapylocation] = WhatISee[1];
+		if (WhatISee[1] != Places.PERSON) {
+			if (currentHeading == Heading.NORTH) {
+				mentalmap[mentalmapxlocation][mentalmapylocation - 1] = WhatISee[1];
+			}
+			else if (currentHeading == Heading.EAST) {
+				mentalmap[mentalmapxlocation + 1][mentalmapylocation] = WhatISee[1];
+			}
+			else if (currentHeading == Heading.SOUTH) {
+				mentalmap[mentalmapxlocation][mentalmapylocation + 1] = WhatISee[1];
+			}
+			else if (currentHeading == Heading.WEST) {
+				mentalmap[mentalmapxlocation - 1][mentalmapylocation] = WhatISee[1];
+			}
 		}
 	}
 
 	public Direction scoutmap(Heading currentHeading) {
 		// turn in all 3 other directions anti clockwise to build up mental map
-		if (scoutturn == true) {
+		Direction dir = Direction.FORWARD;
+		for (scoutturn++; scoutturn < 4;) {
 			updateMentalMap(this.getWhatISee(), currentHeading);
-			Direction dir = Direction.TURN_LEFT_ON_SPOT;
+			dir = Direction.TURN_LEFT_ON_SPOT;
 			updateHeading(currentHeading, Direction.TURN_LEFT_ON_SPOT);
 		}
 		return dir;
@@ -199,14 +202,6 @@ public class Bernhard extends Avatar{
 		// new movement with local storage of surroundings
 		// at start of method set Direction to idle in case the other methods don't execute and update it
 		Direction dir = Direction.FORWARD;
-		// only once after entering bar
-		if (firstThingAfterEnteringBarDone == false) {
-			// the starting position is placed at position x = 100 and y = 100 in the mentalmap to account for future changes to map
-			updateMentalMap(getWhatISee(), currentHeading);
-			// starting heading is west after entering the bar
-			currentHeading = Heading.WEST;
-			firstThingAfterEnteringBarDone = true;
-		}
 
 		// only scout the map once at the start of the program
 		if (k == 0) {
