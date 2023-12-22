@@ -110,10 +110,10 @@ public class Matrix {
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 		avatars.add(locKieran);
 
-		// igor only to be touch by igor
-		Igor igor = new Igor(Shape.CIRCLE, new Color(0,153,153), 0, 20, "Igor", 0);
-		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-		avatars.add(locIgor);
+		// Mynul only to be touch by Mynul
+		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
+		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		avatars.add(locMynul); */
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
