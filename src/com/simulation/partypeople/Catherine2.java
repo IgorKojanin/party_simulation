@@ -71,6 +71,7 @@ public class Catherine2 extends Avatar{
 	}
 
 	private Direction moveOnDanceFloor() {
+		
 		amOnDanceFloor = true;
 		System.out.println(getWhatISee()[1]);
 		Direction dir = Direction.IDLE;
