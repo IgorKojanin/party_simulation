@@ -18,7 +18,7 @@ import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enums.Places;
-
+import java.io.Console;
 
 public class Thorvin extends Avatar {
 
@@ -53,7 +53,7 @@ public class Thorvin extends Avatar {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 
 		goal = getAction(); //ersten Plan schmieden
-		myMap = new Places[80][60];
+		myMap = new Places[85][65];
 		myY =40;
 		myX=30;
 		myHeading = Heading.WEST;
@@ -114,11 +114,11 @@ public class Thorvin extends Avatar {
 		int number = rand.nextInt(4);
 		Direction dir= Direction.FORWARD;
 
-	if(this.getWhatISee()[stand] == Places.DANCEFLOOR){
-		doDance(dir);
+	//if(this.getWhatISee()[stand] == Places.DANCEFLOOR){
+		//dir = doDance(dir);
 		
-	}
-	else {
+	//}
+	/* else {
 		
 		if (number == 0) {
 			dir = Direction.FORWARD;
@@ -129,7 +129,8 @@ public class Thorvin extends Avatar {
 		} else if (number == 3) {
 			dir = Direction.LEFT;
 		}
-	}
+	} */
+	dir = doScout();
 		return dir;
 	}
 
@@ -171,18 +172,27 @@ Places[] placesArroundMe =this.getWhatISee();
 
 if(myHeading == Heading.WEST){
 myMap[myX+1][myY] = placesArroundMe[inFront];
-	return Direction.TURN_LEFT_ON_SPOT;
+dir = Direction.TURN_LEFT_ON_SPOT;
+myHeading = Heading.SOUTH;
+//System.out.println("West"myMap[myX+1][myY]);
+	return dir;
 }
 else if (myHeading == Heading.SOUTH) {
 myMap[myX][myY-1] = placesArroundMe[inFront];
+myHeading = Heading.EAST;
+//System.out.println("South"myMap[myX][myY-1]);
 	return Direction.TURN_LEFT_ON_SPOT;
 }
 else if (myHeading == Heading.NORTH) {
 myMap[myX][myY+1] = placesArroundMe[inFront];
+myHeading = Heading.WEST;
+//System.out.println("North"myMap[myX][myY+1]);
 	return Direction.TURN_LEFT_ON_SPOT;
 }
 else if (myHeading == Heading.EAST) {
-myMap[myX][myY-1] = placesArroundMe[inFront];
+myMap[myX-1][myY] = placesArroundMe[inFront];
+myHeading = Heading.NORTH;
+//System.out.println("East"myMap[myX-1][myY]);
 	return Direction.TURN_LEFT_ON_SPOT;
 }
 return dir;
@@ -191,32 +201,69 @@ return dir;
 private Direction doMove(){
 Direction dir = Direction.IDLE;
 Places[] placesArroundMe =this.getWhatISee();
+
 if(myMap[myX+1][myY] == Places.PATH){
+	myX = myX+1;
+	myHeading = Heading.WEST;
 return Direction.FORWARD;
 }
 else if (myMap[myX][myY-1]==Places.PATH) {
+	myY = myY-1;
+	myHeading = Heading.SOUTH;
 	return Direction.LEFT;
 }
 else if (myMap[myX][myY+1] == Places.PATH) {
+	myY = myY+1;
+	myHeading = Heading.NORTH;
 	return Direction.RIGHT;
 }
 else if(myMap[myX-1][myY]==Places.PATH){
+	myX=myX-1;
+	myHeading = Heading.EAST;
 	return Direction.BACK;
 }
 return dir;
 }
 
+private Direction findWest(){
+	Direction dir = Direction.IDLE;
+	if(myHeading == Heading.SOUTH){
+		dir = Direction.TURN_RIGHT_ON_SPOT;
+		myHeading = Heading.WEST;
+	}
+	else if(myHeading == Heading.NORTH){
+		dir = Direction.TURN_LEFT_ON_SPOT;
+		myHeading = Heading.WEST;
+	}
+	else if(myHeading == Heading.EAST){
+	dir = Direction.TURN_LEFT_ON_SPOT;
+	myHeading=Heading.NORTH;
+	}
+
+	return dir;
+}
+
 private Direction doScout(){
 Direction dir = Direction.IDLE;
 Places[] placesArroundMe =this.getWhatISee();
-if(myHeading == Heading.WEST && countTurn < 4){
+
+if(countTurn < 4 ){
 dir = doTurn();
 countTurn++;
+return dir;
 }
 else if(countTurn == 4 && myHeading == Heading.WEST){
-countTurn =0;
+countTurn =5;
 dir = doMove();
 }
+else if (countTurn > 4){
+	countTurn ++;
+	dir = findWest();
+	if(myHeading == Heading.WEST){
+		countTurn=0;
+	}
+}
+
 
 return dir;
 
@@ -231,15 +278,15 @@ private Direction doDance (Direction current_dir){
 		danceCount++;
 	}
 	else if(danceCount == 1){
-		
-		if(this.getWhatISee()[0]== Places.DANCEFLOOR){
-			dir = Direction.FORWARD;
-		}
-		else{
-			dir = Direction.TURN_LEFT_ON_SPOT;
-		}
-			  
-		  
+		dir = Direction.LEFT;
+			  danceCount++;	  
+	}
+	else if(danceCount == 2 || danceCount == 3){
+		dir = Direction.RIGHT;
+		danceCount++;
+	}
+	else if(danceCount==4){
+		dir = Direction.BACK;
 	}
 
 
@@ -247,6 +294,23 @@ private Direction doDance (Direction current_dir){
 }
 
 
+private Direction findDancefloor(){
+		Random rand = new Random();
+		int number = rand.nextInt(4);
+		Direction dir= Direction.IDLE;
+		
+		if (number == 0) {
+			dir = Direction.FORWARD;
+		} else if (number == 1) {
+			dir = Direction.RIGHT;
+		} else if (number == 2) {
+			dir = Direction.BACK;
+		} else if (number == 3) {
+			dir = Direction.LEFT;
+		}
+	return dir;
+
+
 }
-	
+}
 
