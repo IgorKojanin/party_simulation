@@ -37,7 +37,7 @@ public class Bernhard extends Avatar{
 	int mentalmapylocation = 50;
 
 	// save current heading locally, start off facing WEST after entering bar
-	Heading currentHeading = Heading.WEST;
+	public Heading currentHeading = Heading.WEST;
 
 	// save lastmove
 	Direction lastmoveDirection;
@@ -187,14 +187,31 @@ public class Bernhard extends Avatar{
 		}
 	}
 
-	public Direction scoutmap(Heading currentHeading) {
-		// turn in all 3 other directions anti clockwise to build up mental map
-		Direction dir = Direction.FORWARD;
-		for (scoutturn++; scoutturn < 4;) {
+	public Direction doscoutturn(Heading currentHeading) {
+		// set Direction to idle in case no other decision can be made here
+		Direction dir = Direction.LEFT;
+		while (scoutturn < 4) {
 			updateMentalMap(this.getWhatISee(), currentHeading);
 			dir = Direction.TURN_LEFT_ON_SPOT;
 			updateHeading(currentHeading, Direction.TURN_LEFT_ON_SPOT);
+			scoutturn++;
+			return dir;
 		}
+		scoutturn = 0;
+		return dir;
+	}
+
+	public Direction scoutmap(Heading currentHeading) {
+		// turn in all 3 other directions anti clockwise to build up mental map
+		Direction dir = doscoutturn(currentHeading);
+		// turn north
+		dir = Direction.RIGHT;
+		//update heading after every move
+		updateHeading(currentHeading, dir);
+		//scout turn after every move
+		dir = doscoutturn(currentHeading);
+		if (this.getWhatISee()[1] == ) {
+		} 
 		return dir;
 	}
 
