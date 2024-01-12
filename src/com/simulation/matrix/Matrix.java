@@ -49,7 +49,7 @@ public class Matrix {
 		unrenderedAvatars = new ArrayList<>();
 		
 		Igor igor = new Igor(Shape.CIRCLE, Color.CYAN, 0, 99, "Igor", 0);
-		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+		LocatedAvatar locIgor = new LocatedAvatar(igor, 10, 10);
 		avatars.add(locIgor);
 		
 		

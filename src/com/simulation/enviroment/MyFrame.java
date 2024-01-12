@@ -75,10 +75,10 @@ public class MyFrame extends JFrame {
 					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.DJ, " ");
 				} else if (ySquare == 6 && (xSquare == 1 || xSquare == 3)) {
 					// SEATS BAR TOP
-					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR, " ");
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR_CHAIR, " ");
 				} else if (xSquare == 6 && (ySquare == 9 || ySquare == 11 || ySquare == 13)) {
 					// SEATS BAR RIGHT
-					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR, " ");
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR_CHAIR, " ");
 				} else if (ySquare >= 7 && ySquare <= 15 && xSquare >= 12 && xSquare <= 20) {
 					// DANCEFLOOR
 					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.DANCEFLOOR, " ");
