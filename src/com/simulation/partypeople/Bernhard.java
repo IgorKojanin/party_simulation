@@ -206,12 +206,21 @@ public class Bernhard extends Avatar{
 		Direction dir = doscoutturn(currentHeading);
 		// turn north
 		dir = Direction.RIGHT;
-		//update heading after every move
+		// update heading after every move
 		updateHeading(currentHeading, dir);
-		//scout turn after every move
+		// scout turn after every move
 		dir = doscoutturn(currentHeading);
-		if (this.getWhatISee()[1] == ) {
-		} 
+		// check if Place in front of avatar is usable, unfortunately there is no way to do this that is more elegant in my opinion
+		if (this.getWhatISee()[1] != Places.BAR || this.getWhatISee()[1] != Places.POOL || this.getWhatISee()[1] != Places.TOILET || this.getWhatISee()[1] != Places.FUSSBALL || this.getWhatISee()[1] != Places.DJ || this.getWhatISee()[1] != Places.BOUNCER || this.getWhatISee()[1] != Places.WALL || this.getWhatISee()[1] != Places.OUTSIDE) {
+			// move forward
+			dir = Direction.FORWARD;
+		}
+		// if the way forward is blocked by a red square 
+		else {
+			dir = Direction.TURN_LEFT_ON_SPOT;
+			// 
+			updateHeading(currentHeading, dir);
+		}
 		return dir;
 	}
 
