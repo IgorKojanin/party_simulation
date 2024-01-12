@@ -47,7 +47,7 @@ public class Matrix {
 		queueAvatars = new ArrayList<>();
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
-		
+		/*
 		// Thorvin only to be touch by Thorvin
 		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 20,"Thorvin", 0);
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
@@ -110,11 +110,14 @@ public class Matrix {
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 		avatars.add(locKieran);
 
-		// Mynul only to be touch by Mynul
+		/ Mynul only to be touch by Mynul
 		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
 		avatars.add(locMynul); */
 
+		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel", 0);
+		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
+		avatars.add(locEmmanuel);
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
 		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
