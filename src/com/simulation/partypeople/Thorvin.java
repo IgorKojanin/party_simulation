@@ -225,8 +225,10 @@ else if(myMap[myX-1][myY]==Places.PATH){
 return dir;
 }
 
+//Turn in spot until the heading ist west
 private Direction findWest(){
 	Direction dir = Direction.IDLE;
+	do {
 	if(myHeading == Heading.SOUTH){
 		dir = Direction.TURN_RIGHT_ON_SPOT;
 		myHeading = Heading.WEST;
@@ -241,6 +243,7 @@ private Direction findWest(){
 	}
 
 	return dir;
+	}while(myHeading != Heading.WEST);
 }
 
 private Direction doScout(){
@@ -264,16 +267,15 @@ else if (countTurn > 4){
 	}
 }
 
-
 return dir;
-
 }
 
-
-private Direction doDance (Direction current_dir){
+// Function for doing a circle when on Danecfloor
+private Direction doDance (Direction current_dir){ 
 	Direction dir = Direction.IDLE;
-	Direction start_dir = Direction.IDLE;
+	
 	if(danceCount == 0){
+		Direction start_dir = current_dir;
 		dir = current_dir;
 		danceCount++;
 	}
@@ -281,19 +283,23 @@ private Direction doDance (Direction current_dir){
 		dir = Direction.LEFT;
 			  danceCount++;	  
 	}
-	else if(danceCount == 2 || danceCount == 3){
-		dir = Direction.RIGHT;
+	else if(danceCount == 2){
+		dir = Direction.LEFT;
 		danceCount++;
 	}
-	else if(danceCount==4){
-		dir = Direction.BACK;
+	else if(danceCount==3){
+		dir = Direction.LEFT;
+		danceCount++;
 	}
-
+	else if(danceCount==4){ //ausgangsposition nun genau gleich eingangsposition
+		dir = Direction.TURN_LEFT_ON_SPOT;
+		danceCount++;
+		}
 
 	return dir;
 }
 
-
+//Function for finding the Dancefloor
 private Direction findDancefloor(){
 		Random rand = new Random();
 		int number = rand.nextInt(4);
@@ -308,9 +314,24 @@ private Direction findDancefloor(){
 		} else if (number == 3) {
 			dir = Direction.LEFT;
 		}
+
 	return dir;
-
-
 }
+
+//Function for finding the Bar
+private Direction findBar(){
+Direction dir = Direction.IDLE;
+
+	return dir;
+}
+
+//Function for finding the Lounge
+private Direction findLounge(){
+	Direction dir = Direction.IDLE;
+
+	return dir;
+}
+
+
 }
 
