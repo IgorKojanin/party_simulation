@@ -11,6 +11,7 @@ package com.simulation.enums;
 
 public enum Places {
 	BAR,
+	BAR_CHAIR,
 	POOL,
 	TOILET,
 	DANCEFLOOR,

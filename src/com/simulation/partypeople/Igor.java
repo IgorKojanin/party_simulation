@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Igor extends Avatar{
 	private boolean printTest = true;
-	private boolean waitEachStep = false;
+	private boolean waitEachStep = true;
 	// ToDo individually:
 		// - Store surroudings locally
 		// - Develop an algorithm to determine your next destination
@@ -77,7 +77,7 @@ public class Igor extends Avatar{
 		// A function for knowing if a place in the map is usable or not
 		private boolean isUsable(Places place) {
 			//if (place == Places.PATH || place == Places.PERSON)
-			if (place == Places.PATH)
+			if (place == Places.PATH || place == Places.DANCEFLOOR)
 				return true;
 			else
 				return false;
@@ -204,7 +204,6 @@ public class Igor extends Avatar{
 		}
 		
 		
-		private int rowsCount = 0;
 		private int xPos = 0;
 		private int yPos = 0;
 		private boolean lookNorth = false;
@@ -215,7 +214,8 @@ public class Igor extends Avatar{
 		private boolean doneSettingRandomDir = false;
 		private Places[][] map = { { Places.PATH } };
 		
-		
+		// TODO: Instead of turning left/right on spot, Go Left and Right. I think that it will also make the code shorter
+		// Is there a way not to check what I see at the place I came from? 
 	    public Direction moveAvatar() {
 	    	if (printTest)
 	    		System.out.println("xPos: "+xPos+", yPos: "+yPos+", lookingDirection = "+lookingDirection);
@@ -314,6 +314,8 @@ public class Igor extends Avatar{
     					doneSettingRandomDir = true;
     				else { // else random dir is forward -> we go forward, and take care to set everything needed
     					updateAvatarsPos();
+    			        if (printTest)
+    			        	displayMap(map);
 	    				return dir;
     				}
     			}
@@ -326,30 +328,39 @@ public class Igor extends Avatar{
 	        return dir;
 	    }
 	    
+	    // TODO: inner class example:
+		//	    private class x {
+		//	    	private int y = 0;
+		//	    	public x() {
+		//	    		y = 3;
+		//	    	}
+		//	    	
+		//	    	public void sdlkfj() {
+		//	    		System.out.println(prevGetWhatISee);
+		//	    		
+		//	    	}
+		//	    }
+	    
 	    private void setHeadingTurnLeft() {
 	    	if (printTest)
 	    		System.out.println("Turning left");
-	    	if (lookingDirection == Heading.WEST) // looks west turn south
-				lookingDirection = Heading.SOUTH;
-	    	else if (lookingDirection == Heading.SOUTH) // looks south turn east
-				lookingDirection = Heading.EAST;
-	    	else if (lookingDirection == Heading.EAST) // looks east turn north 
-				lookingDirection = Heading.NORTH;
-	    	else if (lookingDirection == Heading.NORTH) // looks north turn west
-				lookingDirection = Heading.WEST;
+	    	switch (lookingDirection) {
+	    	case WEST -> lookingDirection = Heading.SOUTH; // looks west turn south
+	    	case SOUTH -> lookingDirection = Heading.EAST; // looks south turn east
+	    	case EAST -> lookingDirection = Heading.NORTH; // looks east turn north 
+	    	case NORTH -> lookingDirection = Heading.WEST; // looks north turn west
+	    	}
 	    }
 	    
 	    private void setHeadingTurnRight() {
-	    	if (printTest)
-	    		System.out.println("Turning right");
-			if (lookingDirection == Heading.WEST) // looks west turn north
-				lookingDirection = Heading.NORTH;
-			else if (lookingDirection == Heading.SOUTH) // looks south turn west
-				lookingDirection = Heading.WEST;
-			else if (lookingDirection == Heading.EAST) // looks east turn south 
-				lookingDirection = Heading.SOUTH;
-			else if (lookingDirection == Heading.NORTH) // looks north turn east
-				lookingDirection = Heading.EAST;
+	        if (printTest)
+	            System.out.println("Turning right");
+	        switch (lookingDirection) {
+	            case WEST -> lookingDirection = Heading.NORTH;
+	            case SOUTH -> lookingDirection = Heading.WEST;
+	            case EAST -> lookingDirection = Heading.SOUTH;
+	            case NORTH -> lookingDirection = Heading.EAST;
+	        }
 	    }
 	    
 	    private Direction turnToRandomDir(Places whatISee) {
@@ -361,7 +372,6 @@ public class Igor extends Avatar{
 				dir = Direction.TURN_LEFT_ON_SPOT;
 				setHeadingTurnLeft();
 			}
-			//else if (number == 1) {
 			else if (number == 1) {
 				dir = Direction.TURN_RIGHT_ON_SPOT;
 				setHeadingTurnRight();
@@ -439,27 +449,23 @@ public class Igor extends Avatar{
 	    }
 	    
 	    private void updateAvatarsPos() {
-	    	lookWest = false;
-			lookSouth = false;
-			lookEast = false;
-			lookNorth = false;
-			if (printTest) {
-				System.out.println("Nothing in front of me -> go forward to: "+lookingDirection);
-				System.out.println();
-			}
-			if (lookingDirection == Heading.WEST) // looks west
-				xPos--;
-			if (lookingDirection == Heading.SOUTH) // looks south
-				yPos++;
-			if (lookingDirection == Heading.EAST) // looks east
-				xPos++;
-			if (lookingDirection == Heading.NORTH) // looks north
-				yPos--;
-			
-			if (xPos < 0)
-				xPos = 0;
-			if (yPos < 0)
-				yPos = 0;
+	        lookWest = false;
+	        lookSouth = false;
+	        lookEast = false;
+	        lookNorth = false;
+
+	        if (printTest)
+	            System.out.println("Nothing in front of me -> go forward to: " + lookingDirection + "\n");
+
+	        switch (lookingDirection) {
+	            case WEST -> xPos--;
+	            case SOUTH -> yPos++;
+	            case EAST -> xPos++;
+	            case NORTH -> yPos--;
+	        }
+
+	        xPos = Math.max(0, xPos);
+	        yPos = Math.max(0, yPos);
 	    }
 
 	    // Function to display the map
