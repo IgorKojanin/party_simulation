@@ -61,6 +61,7 @@ public class Matrix {
 		// Mynul only to be touch by Mynul
 		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		mynul.setLocatedAvatar(locMynul);
 		avatars.add(locMynul);
 						
 
@@ -109,11 +110,6 @@ public class Matrix {
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 21, "Kieran", 0);
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 		avatars.add(locKieran);
-
-		// Mynul only to be touch by Mynul
-		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
-		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
-		avatars.add(locMynul); */
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
