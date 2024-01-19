@@ -70,15 +70,12 @@ public class LocatedAvatar {
 	}
 		
 	public void setWhatIsee(MyFrame env) {
-		Places[] p = new Places[1];
-		p[0] = getFrontPlace(env);
+		Places[] p = new Places[2];
+		p[0] = getCurrentPlace(env, x, y);
+		p[1] = getFrontPlace(env);
 		avatar.setWhatISee( p );
-		
-		//System.out.println("\n"+avatar.getName()+"'s heading: "+heading+" "+p[0]);
-		//Scanner inp = new Scanner(System.in);
-		//inp.nextLine();
 	}
-
+	
 	
 	
 	private Places getFrontPlace(MyFrame env) {
@@ -114,11 +111,19 @@ public class LocatedAvatar {
 }
 		
 	private Places getPlace(MyFrame env, int x, int y) {
-		if ( env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y) ) {
+		if ( (env.getPlace(x, y) == Places.PATH && !env.isUsable(x, y)) || (env.getPlace(x, y) == Places.DANCEFLOOR && !env.isUsable(x, y)) ) {
 			return Places.PERSON;
 		} else {
 			return env.getPlace(x, y);
 		}
 	}
-	
+
+	private Places getCurrentPlace(MyFrame env, int x, int y) {
+		return env.getPlace(x, y);
+	}
+
+	public void setIfActuallyMoved(int oldX, int oldY) {
+		avatar.setHasntMoved(!(oldX == getX() && oldY == getY()));
+		
+	}
 }
