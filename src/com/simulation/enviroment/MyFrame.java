@@ -57,7 +57,7 @@ public class MyFrame extends JFrame {
 						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.WHITE, true, Places.PATH, " ");
 					} else if (ySquare == 21 && (xSquare == 28 || xSquare == 31)) {
 						// USE
-						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.TOILET, " ");
+						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.TOILET_CHAIR, " ");
 					} else {
 						squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.PINK, false, Places.TOILET, " ");
 					}
@@ -75,19 +75,19 @@ public class MyFrame extends JFrame {
 					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.DJ, " ");
 				} else if (ySquare == 6 && (xSquare == 1 || xSquare == 3)) {
 					// SEATS BAR TOP
-					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR, " ");
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR_CHAIR, " ");
 				} else if (xSquare == 6 && (ySquare == 9 || ySquare == 11 || ySquare == 13)) {
 					// SEATS BAR RIGHT
-					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR, " ");
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.BAR_CHAIR, " ");
 				} else if (ySquare >= 7 && ySquare <= 15 && xSquare >= 12 && xSquare <= 20) {
 					// DANCEFLOOR
 					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.DANCEFLOOR, " ");
 				} else if (ySquare == 11 && (xSquare == 24 || xSquare == 30)) {
 					// FUSSBALL SEATS
-					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.FUSSBALL, " ");
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.FUSSBALL_CHAIR, " ");
 				} else if (ySquare == 20 && (xSquare == 12 || xSquare == 20)) {
 					// POOL SEATS
-					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.POOL, " ");
+					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.POOL_CHAIR, " ");
 				} else if (xSquare == 1 && (ySquare == 19 || ySquare == 21)) {
 					// SMOKING 1
 					squares[xSquare][ySquare] = new Square(xPixels, yPixels, squareSize, squareSize, Color.GREEN, true, Places.LOUNGE_SMOKING, " ");
