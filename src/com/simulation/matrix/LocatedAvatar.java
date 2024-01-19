@@ -75,7 +75,6 @@ public class LocatedAvatar {
 		p[1] = getFrontPlace(env);
 		avatar.setWhatISee( p );
 	}
-
 	
 	
 	
@@ -122,5 +121,9 @@ public class LocatedAvatar {
 	private Places getCurrentPlace(MyFrame env, int x, int y) {
 		return env.getPlace(x, y);
 	}
-	
+
+	public void setIfActuallyMoved(int oldX, int oldY) {
+		avatar.setHasntMoved(!(oldX == getX() && oldY == getY()));
+		
+	}
 }

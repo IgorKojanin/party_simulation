@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Igor extends Avatar{
-	private boolean printTest = true;
+	private boolean printTest = false;
 	private boolean waitEachStep = true;
 	// ToDo individually:
 		// - Store surroudings locally
@@ -217,6 +217,7 @@ public class Igor extends Avatar{
 		// TODO: Instead of turning left/right on spot, Go Left and Right. I think that it will also make the code shorter
 		// Is there a way not to check what I see at the place I came from? 
 	    public Direction moveAvatar() {
+	        System.out.println(isHasMoved());
 	    	if (printTest)
 	    		System.out.println("xPos: "+xPos+", yPos: "+yPos+", lookingDirection = "+lookingDirection);
 	    	if (waitEachStep) {
