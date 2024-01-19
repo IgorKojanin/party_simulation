@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Igor extends Avatar{
 	private boolean printTest = false;
-	private boolean waitEachStep = true;
+	private boolean waitEachStep = false;
 	// ToDo individually:
 		// - Store surroudings locally
 		// - Develop an algorithm to determine your next destination
