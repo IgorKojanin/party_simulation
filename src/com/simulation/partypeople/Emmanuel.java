@@ -28,6 +28,7 @@ public class Emmanuel extends Avatar {
 	private boolean initComplete = false;
 	private boolean hPlaneInitComplete = false;
 	private boolean mapInitialized = false;
+	private boolean stayPut =false;
 
 	private Direction prevRL;
 
@@ -62,8 +63,10 @@ public class Emmanuel extends Avatar {
 			}else{
 				dir =initVPlane();
 			}
-		}else if(mapInitialized){
+		}else if(mapInitialized && !stayPut){
 			dir = fillMap();
+		}else if(stayPut){
+			dir = Direction.IDLE;
 		}
 
 		/*Random rand = new Random();
@@ -150,7 +153,7 @@ public class Emmanuel extends Avatar {
 		return dir;
 	}
 	private Boolean isOtherWall(){
-		if(getWhatISee()[1]!= Places.WALL && getWhatISee()[1]!=Places.PERSON && getWhatISee()[1] != Places.PATH){
+		if(getWhatISee()[1]!= Places.WALL && getWhatISee()[1]!=Places.PERSON && getWhatISee()[1] != Places.PATH && getWhatISee()[1] !=Places.DANCEFLOOR){
 			return true;
 		}else{
 			return false;
@@ -198,6 +201,24 @@ public class Emmanuel extends Avatar {
 
 			}
 			case NORTH -> {
+				if (roundOver && !turnedRightForDivert) {
+					dir = Direction.TURN_RIGHT_ON_SPOT;
+					turnedRightForDivert = true;
+					roundOver= false;
+					System.out.println("step1 North divert");
+				} else if (getWhatISee()[1] == Places.PATH && turnedRightForDivert) {
+					dir = Direction.FORWARD;
+					turnedRightForDivert = false;
+					movedForwardForDivert =true;
+					if(hPos!=0)hPos--;
+					System.out.println("step2 North divert");
+				} else if (getWhatISee()[1] == Places.PATH && movedForwardForDivert) {
+					dir = Direction.TURN_LEFT_ON_SPOT;
+					roundOver = true;
+					divert = false;
+					movedForwardForDivert =false;
+					System.out.println("step3 North Divert");
+				}
 
 			}
 		}
@@ -211,7 +232,6 @@ public class Emmanuel extends Avatar {
 		System.out.println(hPos);
 		Direction dir = Direction.IDLE;
 		System.out.println(changedLevel(prevLevel));
-		System.out.println(getWhatISee()[1]);
 		if(changedLevel(prevLevel)){
 			System.out.println("visited : " + mentalMap[vPos][hPos].isVisited);
 			if(prevRL==Direction.RIGHT){
@@ -222,20 +242,26 @@ public class Emmanuel extends Avatar {
 				dir = Direction.TURN_RIGHT_ON_SPOT;
 			}
 			prevLevel =vPos;
-		}else if(getWhatISee()[1]!=Places.PERSON){
-			if(getWhatISee()[1]!=Places.WALL && getWhatISee()[1]==Places.PATH||getWhatISee()[1].name().matches(".*CHAIR$")){
+		}else if(getWhatISee()[1]!=Places.PERSON ){
+			if(((getWhatISee()[1]!=Places.WALL && !isOtherWall()) || (getWhatISee()[1]==Places.PATH||getWhatISee()[1].name().matches(".*CHAIR$")))&&!divert){
 				dir = Direction.FORWARD;
 				if(heading !=Heading.EAST && heading !=Heading.WEST){
 					prevLevel =vPos;
-					vPos = heading == Heading.NORTH ?vPos-1 :vPos+1;
+					if(heading==Heading.NORTH &&vPos!=0){
+						vPos--;
+					} else if (heading==Heading.SOUTH &&vPos!=vPlane-1) {
+						vPos++;
+					}
 				}
 				if(heading !=Heading.NORTH && heading != Heading.SOUTH){
-					hPos = heading ==Heading.EAST ?hPos-1 : hPos+1;
+					if(heading==Heading.EAST &&hPos!=0){
+						hPos--;
+					} else if (heading==Heading.WEST &&hPos!=hPlane-1) {
+						hPos++;
+					}
 				}
-			}else{
+			}else if((isOtherWall() ||getWhatISee()[1]==Places.WALL) &&(heading ==Heading.EAST||heading==Heading.WEST)){
 				Block b = new Block(getWhatISee()[1]);
-				//if(getWhatISee()[1]==Places.WALL)hPos=heading==Heading.EAST?hPos-1:hPos;
-
 				if(heading == Heading.EAST){
 					if(hPos-1 !=hPlane)mentalMap[vPos][hPos+1] =b;
 					if(vPos-1 >=0)dir = !mentalMap[vPos-1][hPos].isVisited ? Direction.TURN_LEFT_ON_SPOT :Direction.TURN_RIGHT_ON_SPOT;
@@ -246,8 +272,14 @@ public class Emmanuel extends Avatar {
 					prevRL =Direction.LEFT;
 				}
 				heading =Heading.NORTH;
+			} else if ((isOtherWall() ||getWhatISee()[1]==Places.WALL) &&(heading ==Heading.NORTH||heading==Heading.SOUTH) &&!divert) {
+				divert=true;
+				System.out.println("got here for divert");
 			}
-		}else {
+			if (divert) {
+				dir =divert(heading);
+			}
+		}else  {
 
 		}
 
