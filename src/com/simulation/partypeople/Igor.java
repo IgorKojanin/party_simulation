@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Igor extends Avatar{
-	boolean printTest = false;
+	private boolean printTest = false;
+	private boolean waitEachStep = false;
 	// ToDo individually:
 		// - Store surroudings locally
 		// - Develop an algorithm to determine your next destination
@@ -29,12 +30,10 @@ public class Igor extends Avatar{
 		}
 
 		// ************** Methods **************
-		public Direction dancingAlgo(Places whatISee) {
-			if (whatISee == Places.DANCEFLOOR && whatISee != Places.PERSON) {
-				return Direction.FORWARD; 
-			}
-			else
-				return Direction.TURN_RIGHT_ON_SPOT;
+		public void dancingAlgo() {
+			// TODO
+			// develop the type of movement that would represent your dance pattern
+
 		}
 
 		public void fight(Avatar opponent) { // Call this function if other avatar starts a fight
@@ -204,46 +203,45 @@ public class Igor extends Avatar{
 	        }
 		}
 		
-		int rowsCount = 0;
-		int xPos = 0;
-		int yPos = 0;
-		boolean lookNorth = false;
-		boolean lookEast = false;
-		boolean lookSouth = false;
-		boolean lookWest = false;
-		Heading lookingDirection = Heading.WEST; // 0 - north, 1 - east, 2 - south, 3 - west
-		boolean doneSettingRandomDir = false;
-		Places placeToFind = Places.DANCEFLOOR;
-		Places[][] map = { { Places.PATH } };
 		
-		boolean foundDanceFloor = false; // For testing to find the dance bar
+		private int xPos = 0;
+		private int yPos = 0;
+		private boolean lookNorth = false;
+		private boolean lookEast = false;
+		private boolean lookSouth = false;
+		private boolean lookWest = false;
+		private Heading lookingDirection = Heading.WEST; // 0 - north, 1 - east, 2 - south, 3 - west
+		private boolean doneSettingRandomDir = false;
+		private Places[][] map = { { Places.PATH } };
 		
+		// TODO: Instead of turning left/right on spot, Go Left and Right. I think that it will also make the code shorter
+		// Is there a way not to check what I see at the place I came from? 
 	    public Direction moveAvatar() {
-//	    	System.out.println("xPos: "+xPos+", yPos: "+yPos+", lookingDirection = "+lookingDirection);
-//	    	Scanner scanner = new Scanner(System.in);
-//	        scanner.nextLine();
+	        System.out.println(isHasMoved());
+	    	if (printTest)
+	    		System.out.println("xPos: "+xPos+", yPos: "+yPos+", lookingDirection = "+lookingDirection);
+	    	if (waitEachStep) {
+		    	Scanner scanner = new Scanner(System.in);
+		        scanner.nextLine();
+	    	}
 	        Places whatISee;
 	        Direction dir;
 	        if (!lookWest && lookingDirection == Heading.WEST) {
 	        	lookWest = true;
     			whatISee = getWhatISee()[0];
     			if (printTest)
-    			System.out.println(getWhatISee()[0]);
+    				System.out.println(getWhatISee()[0]);
     			if (lookingDirection == Heading.WEST && xPos == 0) {
     				if (printTest)
-    				System.out.println("Adding new column to the left");
+    					System.out.println("Adding new column to the left");
     				map = updateMapNewColumnLeft(map,whatISee,xPos,yPos);
     				xPos = xPos+1; // Added a new column left so xPos is updated +1
     			}
 		        // Update the element that the avatar sees
 		        map[yPos][xPos-1] = whatISee;
 		        setHeadingTurnRight();
-		        if (whatISee == placeToFind) { // Found The Dance Floor
-		        	foundDanceFloor = true;
-		        	return Direction.FORWARD;
-		        }
 		        if (printTest)
-		        System.out.println("New Heading after west: "+lookingDirection);
+		        	System.out.println("New Heading after west: "+lookingDirection);
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
     		else if (!lookNorth && lookingDirection == Heading.NORTH) {
@@ -251,19 +249,15 @@ public class Igor extends Avatar{
     			whatISee = getWhatISee()[0];
     			usableOnTheRight = isUsable(whatISee);
     			if (printTest)
-    			System.out.println(getWhatISee()[0]);
+    				System.out.println(getWhatISee()[0]);
     			if (lookingDirection == Heading.NORTH && yPos == 0) {
     				if (printTest)
-    				System.out.println("Adding new row up");
+    					System.out.println("Adding new row up");
     				map = updateMapNewRowUp(map,whatISee,xPos,yPos);
     				yPos = yPos +1; // Added a new row up so yPox is updated +1
     			}
 		        // Update the element that the avatar sees
 		        map[yPos-1][xPos] = whatISee;
-		        if (whatISee == placeToFind) { // Found The Dance Floor
-		        	foundDanceFloor = true;
-		        	return Direction.FORWARD;
-		        }
 		        setHeadingTurnRight();
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
@@ -272,111 +266,104 @@ public class Igor extends Avatar{
     			lookEast = true;
     			whatISee = getWhatISee()[0];
     			if (printTest)
-    			System.out.println(getWhatISee()[0]);
+    				System.out.println(getWhatISee()[0]);
     			
     			if (lookingDirection == Heading.EAST && xPos+1 == map[0].length) {
     				if (printTest)
-    				System.out.println("Adding new column to the right");
+    					System.out.println("Adding new column to the right");
     				map = updateMapNewColumnRight(map,whatISee,xPos,yPos);
     			}
 		        // Update the element that the avatar sees
 		        map[yPos][xPos+1] = whatISee;
-		        if (whatISee == placeToFind) { // Found The Dance Floor
-		        	foundDanceFloor = true;
-		        	return Direction.FORWARD;
-		        }
 		        setHeadingTurnRight();
+		        if (printTest)
+		        	System.out.println("returning");
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
     		else if (!lookSouth && lookingDirection == Heading.SOUTH) {
     			lookSouth = true;
     			whatISee = getWhatISee()[0];
     			if (printTest)
-    			System.out.println(getWhatISee()[0]);
+    				System.out.println(getWhatISee()[0]);
     			if (lookingDirection == Heading.SOUTH && yPos+1 == map.length) {
     				if (printTest)
-    				System.out.println("Adding new row down");
+    					System.out.println("Adding new row down");
     				map = updateMapNewRowDown(map,whatISee,xPos,yPos);
     			}
     	        // Update the element that the avatar sees
     	        map[yPos+1][xPos] = whatISee;
-		        if (whatISee == placeToFind) { // Found The Dance Floor
-		        	foundDanceFloor = true;
-		        	return Direction.FORWARD;
-		        }
     	        setHeadingTurnRight();
     			return Direction.TURN_RIGHT_ON_SPOT;
     		}
     		else {
     			whatISee = getWhatISee()[0];
     			if (printTest)
-    			System.out.println(getWhatISee()[0]);
-    			if (foundDanceFloor) { // Dance
-    				dir = dancingAlgo(whatISee);
-    			}
-    			else if (doneSettingRandomDir) {
+    				System.out.println(getWhatISee()[0]);
+    			if (doneSettingRandomDir) {
     				if (isUsable(whatISee)) {
     					doneSettingRandomDir = false;
-    					lookWest = false;
-    					lookSouth = false;
-	        			lookEast = false;
-	        			lookNorth = false;
-	        			if (printTest)
-	    				System.out.println("Nothing in front of me -> go forward to: "+lookingDirection);;
-	    				dir = Direction.FORWARD;
-	    				if (lookingDirection == Heading.WEST) // looks west
-	    					xPos--;
-	    				if (lookingDirection == Heading.SOUTH) // looks south
-	    					yPos++;
-	    				if (lookingDirection == Heading.EAST) // looks east
-	    					xPos++;
-	    				if (lookingDirection == Heading.NORTH) // looks north
-	    					yPos--;
-	    				
-	    				if (xPos < 0)
-	    					xPos = 0;
-	    				if (yPos < 0)
-	    					yPos = 0;
+    					dir = Direction.FORWARD;
+    					updateAvatarsPos();
     				}
     				else 
     					dir = turnToRandomDir(whatISee); // turn again
     			}
     			else {
+    				//dir = turnToRandomDir(whatISee);
     				dir = turnToRandomDir(whatISee);
-    				doneSettingRandomDir = true;
+    				if (dir != Direction.FORWARD) // If we dont go forward we need to check if in front of us there is an obstacle
+    					doneSettingRandomDir = true;
+    				else { // else random dir is forward -> we go forward, and take care to set everything needed
+    					updateAvatarsPos();
+    			        if (printTest)
+    			        	displayMap(map);
+	    				return dir;
+    				}
     			}
     		}
 	        if (printTest)
-	        displayMap(map);
+	        	displayMap(map);
 	        //return walkToCreateAMap();
 	        if (printTest)
-	        System.out.println("GOING TO: " + dir);
+	        	System.out.println("GOING TO: " + dir);
 	        return dir;
 	    }
+	    
+	    // TODO: inner class example:
+		//	    private class x {
+		//	    	private int y = 0;
+		//	    	public x() {
+		//	    		y = 3;
+		//	    	}
+		//	    	
+		//	    	public void sdlkfj() {
+		//	    		System.out.println(prevGetWhatISee);
+		//	    		
+		//	    	}
+		//	    }
+	    
 	    private void setHeadingTurnLeft() {
 	    	if (printTest)
-	    	System.out.println("Turning left");
-	    	if (lookingDirection == Heading.WEST) // looks west turn south
-				lookingDirection = Heading.SOUTH;
-	    	else if (lookingDirection == Heading.SOUTH) // looks south turn east
-				lookingDirection = Heading.EAST;
-	    	else if (lookingDirection == Heading.EAST) // looks east turn north 
-				lookingDirection = Heading.NORTH;
-	    	else if (lookingDirection == Heading.NORTH) // looks north turn west
-				lookingDirection = Heading.WEST;
+	    		System.out.println("Turning left");
+	    	switch (lookingDirection) {
+	    	case WEST -> lookingDirection = Heading.SOUTH; // looks west turn south
+	    	case SOUTH -> lookingDirection = Heading.EAST; // looks south turn east
+	    	case EAST -> lookingDirection = Heading.NORTH; // looks east turn north 
+	    	case NORTH -> lookingDirection = Heading.WEST; // looks north turn west
+	    	}
 	    }
+	    
 	    private void setHeadingTurnRight() {
-	    	if (printTest)
-	    	System.out.println("Turning right");
-			if (lookingDirection == Heading.WEST) // looks west turn north
-				lookingDirection = Heading.NORTH;
-			else if (lookingDirection == Heading.SOUTH) // looks south turn west
-				lookingDirection = Heading.WEST;
-			else if (lookingDirection == Heading.EAST) // looks east turn south 
-				lookingDirection = Heading.SOUTH;
-			else if (lookingDirection == Heading.NORTH) // looks north turn east
-				lookingDirection = Heading.EAST;
+	        if (printTest)
+	            System.out.println("Turning right");
+	        switch (lookingDirection) {
+	            case WEST -> lookingDirection = Heading.NORTH;
+	            case SOUTH -> lookingDirection = Heading.WEST;
+	            case EAST -> lookingDirection = Heading.SOUTH;
+	            case NORTH -> lookingDirection = Heading.EAST;
+	        }
 	    }
+	    
 	    private Direction turnToRandomDir(Places whatISee) {
 	    	Direction dir;
 	    	Random rand = new Random();
@@ -386,7 +373,6 @@ public class Igor extends Avatar{
 				dir = Direction.TURN_LEFT_ON_SPOT;
 				setHeadingTurnLeft();
 			}
-			//else if (number == 1) {
 			else if (number == 1) {
 				dir = Direction.TURN_RIGHT_ON_SPOT;
 				setHeadingTurnRight();
@@ -400,14 +386,14 @@ public class Igor extends Avatar{
 				}
 			}
 			if (printTest)
-			System.out.println("Turning random to: "+dir+" looking: "+lookingDirection);
+				System.out.println("Turning random to: "+dir+" looking: "+lookingDirection);
 			return dir;
 	    }
 	    
 	 // Function to update the map based on what the avatar sees
-	    public static Places[][] updateMapNewColumnRight(Places[][] oldMap, Places seen, int positionX, int positionY) {
+	    private static Places[][] updateMapNewColumnRight(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-//	        System.out.println(rows);
+	        // System.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
@@ -419,10 +405,9 @@ public class Igor extends Avatar{
 	        }	        
 	        return newMap;
 	    }
-	    public static Places[][] updateMapNewColumnLeft(Places[][] oldMap, Places seen, int positionX, int positionY) {
+	    private static Places[][] updateMapNewColumnLeft(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-	        
-//	        System.out.println(rows);
+	        // System.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
@@ -434,9 +419,9 @@ public class Igor extends Avatar{
 	        }
 	        return newMap;
 	    }
-	    public static Places[][] updateMapNewRowDown(Places[][] oldMap, Places seen, int positionX, int positionY) {
+	    private static Places[][] updateMapNewRowDown(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-//	        System.out.println(rows);
+	        // System.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
@@ -449,9 +434,9 @@ public class Igor extends Avatar{
 	        
 	        return newMap;
 	    }
-	    public static Places[][] updateMapNewRowUp(Places[][] oldMap, Places seen, int positionX, int positionY) {
+	    private static Places[][] updateMapNewRowUp(Places[][] oldMap, Places seen, int positionX, int positionY) {
 	        int rows = oldMap.length;
-//	        System.out.println(rows);
+	        // system.out.println(rows);
 	        int columns = oldMap[0].length;
 	        
 	        // Create a new map with increased size
@@ -463,9 +448,29 @@ public class Igor extends Avatar{
 	        }
 	        return newMap;
 	    }
+	    
+	    private void updateAvatarsPos() {
+	        lookWest = false;
+	        lookSouth = false;
+	        lookEast = false;
+	        lookNorth = false;
+
+	        if (printTest)
+	            System.out.println("Nothing in front of me -> go forward to: " + lookingDirection + "\n");
+
+	        switch (lookingDirection) {
+	            case WEST -> xPos--;
+	            case SOUTH -> yPos++;
+	            case EAST -> xPos++;
+	            case NORTH -> yPos--;
+	        }
+
+	        xPos = Math.max(0, xPos);
+	        yPos = Math.max(0, yPos);
+	    }
 
 	    // Function to display the map
-	    public static void displayMap(Places[][] map) {
+	    private static void displayMap(Places[][] map) {
 	        for (Places[] row : map) {
 	            System.out.println(Arrays.toString(row));
 	        }
