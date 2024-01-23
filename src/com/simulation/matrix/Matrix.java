@@ -285,6 +285,7 @@ public class Matrix {
 		}
 		env.setPlaceFree(oldX, oldY);
 		env.moveTo(oldX, oldY, avatar.getX(), avatar.getY(),avatar.getColor());
+		avatar.setIfActuallyMoved(oldX, oldY);
 		env.setPlaceOccupied(avatar.getX(), avatar.getY());
 	}
 
