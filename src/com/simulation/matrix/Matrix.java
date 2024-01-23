@@ -228,7 +228,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInClub(LocatedAvatar avatar) {
-		wait(500);
+		wait(100);
 		avatar.setWhatIsee(env);
 		int oldX = avatar.getX();
 		int oldY = avatar.getY();

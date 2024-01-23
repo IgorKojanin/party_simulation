@@ -10,13 +10,15 @@ package com.simulation.partypeople;
 
 import com.simulation.avatar.Avatar;
 import com.simulation.enums.BeverageType;
-import java.awt.Color;
+
 import java.util.Random;
 
 import com.simulation.enums.Direction;
 import com.simulation.enums.Heading;
 import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
+import javax.swing.*;
+import java.awt.*;
 
 public class Bernhard extends Avatar{
 	// this int is just a flag to do the first moves and scout the bar.
@@ -28,8 +30,17 @@ public class Bernhard extends Avatar{
 	int l = 0;
 	int k = 0;
 	int m = 0;
-	int scoutturn = 0;
+	boolean initialscoutturndone = false;
+	boolean arrayvisualised = false;
+	boolean havemovedforward = false;
+	boolean haveturnedright = false;
+	int scoutturncounter = 0;
 	boolean firstThingAfterEnteringBarDone = false;
+	boolean turnrightdone = false;
+	boolean movedlastturn = false;
+
+	// to visualise the mental map
+	public static JPanel[][] panels;
 
 	// starting coordinates in own mental map
 	// the current location in the mental map will be augmented with these
@@ -131,6 +142,58 @@ public class Bernhard extends Avatar{
 
 	}
 
+	public static void visualizeArray(Places[][] array) {
+        int rows = array.length;
+        int cols = array[0].length;
+
+        // Create a JFrame
+        JFrame frame = new JFrame("Mental Map Visualisation");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        frame.setLayout(new GridLayout(rows, cols));
+
+        panels = new JPanel[rows][cols];
+
+        // Initialize panels and add them to the frame
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                panels[i][j] = new JPanel();
+                panels[i][j].setBackground(getColorForValue(array[i][j]));
+                panels[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                frame.add(panels[i][j]);
+            }
+        }
+
+        // Set the frame to be visible
+        frame.setVisible(true);
+    }
+
+	private static Color getColorForValue(Places mentalmap) {
+        // Customize the color mapping based on your specific numbers
+    	// TODO write if to put a colour based on what type of place is stored there in mentalmap
+		if (mentalmap == Places.BAR || mentalmap == Places.POOL || mentalmap == Places.TOILET || mentalmap == Places. FUSSBALL || mentalmap == Places.DJ || mentalmap == Places.BOUNCER || mentalmap == Places.WALL || mentalmap == Places.OUTSIDE) {
+			return Color.RED;
+		}
+		else if (mentalmap == Places.BAR_CHAIR || mentalmap == Places.DANCEFLOOR || mentalmap == Places.FUSSBALL_CHAIR || mentalmap == Places.TOILET_CHAIR || mentalmap == Places.POOL_CHAIR || mentalmap == Places.LOUNGE_BIG || mentalmap == Places.LOUNGE_SMALL || mentalmap == Places.LOUNGE_SMOKING) {
+			return Color.GREEN;
+		}
+        else {
+			return Color.WHITE;
+		}
+    }
+
+	public static void updateArray(Places[][] array) {
+        int rows = array.length;
+        int cols = array[0].length;
+
+        // Update the panel backgrounds with the array values
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                panels[i][j].setBackground(getColorForValue(array[i][j]));
+            }
+        }
+    }
+
 	public void updateHeading(Heading currentHeading, Direction nextdir) {
 		if (currentHeading == Heading.NORTH) {
 			if (nextdir == Direction.TURN_LEFT_ON_SPOT) {
@@ -189,44 +252,236 @@ public class Bernhard extends Avatar{
 
 	public Direction doscoutturn(Heading currentHeading) {
 		// set Direction to idle in case no other decision can be made here
-		Direction dir = Direction.LEFT;
-		while (scoutturn < 4) {
-			updateMentalMap(this.getWhatISee(), currentHeading);
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			updateHeading(currentHeading, Direction.TURN_LEFT_ON_SPOT);
-			scoutturn++;
-			return dir;
+		// Direction dir = Direction.IDLE;
+		// while (scoutturn < 4) {
+		updateMentalMap(this.getWhatISee(), currentHeading);
+		Direction dir = Direction.TURN_LEFT_ON_SPOT;
+		updateHeading(currentHeading, Direction.TURN_LEFT_ON_SPOT);
+		//scoutturn++;
+		return dir;
+		// }
+		// scoutturn = 0;
+		// return dir;
+	}
+
+	public Places checksquareonright(Heading currentHeading) {
+		// Failsafe: set squareonright to WALL in case the function fails so it at least returns something. 
+		// WALL is the least critical thing to put in mental map as it only results in avoiding 
+		// some squares in the worst case instead of trying to use invalid squares if e.g. PATH
+		// had been saved as the failsafe option
+		Places squareonright = Places.WALL;
+		if (currentHeading == Heading.NORTH) {
+			squareonright = mentalmap[this.mentalmapxlocation + 1][this.mentalmapylocation];
 		}
-		scoutturn = 0;
+		else if (currentHeading == Heading.EAST) {
+			squareonright = mentalmap[this.mentalmapxlocation][this.mentalmapylocation + 1];
+		}
+		else if (currentHeading == Heading.SOUTH) {
+			squareonright = mentalmap[this.mentalmapxlocation - 1][this.mentalmapylocation];
+		}
+		else if (currentHeading == Heading.WEST) {
+			squareonright = mentalmap[this.mentalmapxlocation][this.mentalmapylocation - 1];
+		}
+		return squareonright;
+	}
+
+	public void updateMentalMapLocation (Heading currentHeading, Direction nextDirection) {
+		if (currentHeading == Heading.NORTH) {
+			if (nextDirection == Direction.FORWARD) {
+				mentalmapylocation--;
+			}
+			else if (nextDirection == Direction.RIGHT) {
+				mentalmapxlocation++;
+			}
+			else if (nextDirection == Direction.BACK) {
+				mentalmapylocation++;
+			}
+			else if (nextDirection == Direction.LEFT) {
+				mentalmapxlocation--;
+			}
+		}
+		else if (currentHeading == Heading.EAST) {
+			if (nextDirection == Direction.FORWARD) {
+				mentalmapxlocation++;
+			}
+			else if (nextDirection == Direction.RIGHT) {
+				mentalmapylocation++;
+			}
+			else if (nextDirection == Direction.BACK) {
+				mentalmapxlocation--;
+			}
+			else if (nextDirection == Direction.LEFT) {
+				mentalmapylocation--;
+			}
+		}
+		else if (currentHeading == Heading.SOUTH) {
+			if (nextDirection == Direction.FORWARD) {
+				mentalmapylocation++;
+			}
+			else if (nextDirection == Direction.RIGHT) {
+				mentalmapxlocation--;
+			}
+			else if (nextDirection == Direction.BACK) {
+				mentalmapylocation--;
+			}
+			else if (nextDirection == Direction.LEFT) {
+				mentalmapxlocation++;
+			}
+		}
+		else if (currentHeading == Heading.WEST) {
+			if (nextDirection == Direction.FORWARD) {
+				mentalmapxlocation--;
+			}
+			else if (nextDirection == Direction.RIGHT) {
+				mentalmapylocation--;
+			}
+			else if (nextDirection == Direction.BACK) {
+				mentalmapxlocation++;
+			}
+			else if (nextDirection == Direction.LEFT) {
+				mentalmapylocation++;
+			}
+		}
+	}
+
+	// public Direction scoutmap(Heading currentHeading) {
+	// 	Direction dir = Direction.IDLE;
+	// 	if (initialscoutturndone == false) {
+	// 		while (scoutturncounter < 4) {
+	// 			scoutturncounter++;
+	// 			return dir = doscoutturn(currentHeading);
+	// 		}
+	// 		scoutturncounter = 0;
+	// 		initialscoutturndone = true;
+	// 	}
+	// 	// if Place in front is usable, unfortunately there is no way to do this that is more elegant in my opinion
+	// 	if (checksquareinfrontusable(currentHeading) == true) {
+	// 		// check if Place on right side of avatar is unusable
+	// 		if (checksquareonright(currentHeading) == Places.BAR || checksquareonright(currentHeading) == Places.POOL || checksquareonright(currentHeading) == Places.TOILET || checksquareonright(currentHeading) == Places.FUSSBALL || checksquareonright(currentHeading) == Places.DJ || checksquareonright(currentHeading) == Places.BOUNCER || checksquareonright(currentHeading) == Places.WALL || checksquareonright(currentHeading) == Places.OUTSIDE) {
+	// 			// move forward if you have completed the scoutturn
+	// 			if (havemovedforward == false) {
+	// 				havemovedforward = true;
+	// 				dir = Direction.FORWARD;
+	// 				updateMentalMapLocation(currentHeading, dir);
+	// 				return dir;
+	// 			}
+	// 			else {
+	// 				while (scoutturncounter < 4) {
+	// 					scoutturncounter++;
+	// 					return dir = doscoutturn(currentHeading);
+	// 				}
+	// 				scoutturncounter = 0;
+	// 				havemovedforward = false;
+	// 			}
+	// 		}
+	// 		// if square on right is PATH, so usable
+	// 		else if ((checksquareonright(currentHeading) == Places.PATH || checksquareonright(currentHeading) == null) && turnrightdone == false) {
+	// 				dir = Direction.RIGHT;
+	// 				updateMentalMapLocation(currentHeading, dir);
+	// 				turnrightdone = true;
+	// 				return dir;
+	// 		}
+	// 		// if there is a person in front, wait a turn for them to leave
+	// 		else {
+	// 			return dir = Direction.IDLE;
+	// 		}
+	// 	}
+	// 	else if (this.getWhatISee()[1] == Places.PATH) {
+	// 		while (scoutturncounter < 4) {
+	// 			scoutturncounter++;
+	// 			return dir = doscoutturn(currentHeading);
+	// 		}
+	// 		scoutturncounter = 0;
+
+	// 	}
+	// 	return dir;
+	// }
+
+	public Direction scoutmap(Heading currentHeading) {
+		Direction dir = Direction.IDLE;
+		boolean squareinfrontusable = checksquareinfrontusable(currentHeading);
+		if (movedlastturn == true) {
+			scoutturncounter = 0;
+			movedlastturn = false;
+		}
+		if (squareinfrontusable == true) {
+			if (checksquareonrightusable(currentHeading) == true) {
+				if (turnrightdone == true) {
+					dir = Direction.FORWARD;
+					while (scoutturncounter < 4) {
+						scoutturncounter++;
+						Direction nextmove = doscoutturn(currentHeading);
+						return nextmove;
+					}
+					movedlastturn = true;
+				}
+				else {
+					dir = Direction.RIGHT;
+					while (scoutturncounter < 4) {
+						scoutturncounter++;
+						Direction nextmove = doscoutturn(currentHeading);
+						return nextmove;
+					}
+					turnrightdone = true;
+					movedlastturn = true;
+				}
+			}
+			else {
+				dir = Direction.FORWARD;
+				while (scoutturncounter < 4) {
+					scoutturncounter++;
+					Direction nextmove = doscoutturn(currentHeading);
+					return nextmove;
+				}
+				movedlastturn = true;
+			}
+		}
+		else {
+			dir = Direction.LEFT;
+			while (scoutturncounter < 4) {
+				scoutturncounter++;
+				Direction nextmove = doscoutturn(currentHeading);
+				return nextmove;
+			}
+			turnrightdone = false;
+			movedlastturn = true;
+		}
 		return dir;
 	}
 
-	public Direction scoutmap(Heading currentHeading) {
-		// turn in all 3 other directions anti clockwise to build up mental map
-		Direction dir = doscoutturn(currentHeading);
-		// turn north
-		dir = Direction.RIGHT;
-		// update heading after every move
-		updateHeading(currentHeading, dir);
-		// scout turn after every move
-		dir = doscoutturn(currentHeading);
-		// check if Place in front of avatar is usable, unfortunately there is no way to do this that is more elegant in my opinion
-		if (this.getWhatISee()[1] != Places.BAR || this.getWhatISee()[1] != Places.POOL || this.getWhatISee()[1] != Places.TOILET || this.getWhatISee()[1] != Places.FUSSBALL || this.getWhatISee()[1] != Places.DJ || this.getWhatISee()[1] != Places.BOUNCER || this.getWhatISee()[1] != Places.WALL || this.getWhatISee()[1] != Places.OUTSIDE) {
-			// move forward
-			dir = Direction.FORWARD;
+	public boolean checksquareonrightusable (Heading currentHeading) {
+		Places temp = checksquareonright(currentHeading);
+		if (temp == Places.PATH || temp == null) {
+			return true;
 		}
-		// if the way forward is blocked by a red square 
 		else {
-			dir = Direction.TURN_LEFT_ON_SPOT;
-			// 
-			updateHeading(currentHeading, dir);
+			return false;
 		}
-		return dir;
+	}
+
+
+	// this will check if the square in front is usable but will NOT check if there is a person there
+	public boolean checksquareinfrontusable(Heading currentHeading) {
+
+		if (this.getWhatISee()[1] == Places.BAR || this.getWhatISee()[1] == Places.POOL 
+		|| this.getWhatISee()[1] == Places.TOILET || this.getWhatISee()[1] == Places.FUSSBALL 
+		|| this.getWhatISee()[1] == Places.DJ || this.getWhatISee()[1] == Places.BOUNCER 
+		|| this.getWhatISee()[1] == Places.WALL || this.getWhatISee()[1] == Places.OUTSIDE) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	public Direction moveAvatar() {
 		// new movement with local storage of surroundings
 		// at start of method set Direction to idle in case the other methods don't execute and update it
+		if (arrayvisualised == false) {
+			arrayvisualised = true;
+			visualizeArray(mentalmap);
+		}
+		updateArray(mentalmap);
 		Direction dir = Direction.FORWARD;
 
 		// only scout the map once at the start of the program
