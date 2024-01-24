@@ -57,6 +57,8 @@ public class Thorvin extends Avatar  {
 	private int wallLeft;
 	private thorvinsFrame customJFrame;
 	private int bucketCheck;
+	private int waitNext;
+	private boolean goBarDone;
 
 	// ************** Constructor **************
 	public Thorvin(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -69,7 +71,7 @@ public class Thorvin extends Avatar  {
 		myHeading = Heading.WEST;
 		PlacesArroundMe = new Places[1];
 		countTurn =0;
-		danceCount =0;
+		danceCount =1;
 		 stand = 0;
 		inFront =1;
 		wallPong =0;
@@ -78,7 +80,8 @@ public class Thorvin extends Avatar  {
 		wallRight =100;
 		shift =0;
 		bucketCheck =0; //noch nix erreicht
-
+		goBarDone = false;
+waitNext =0;
 		for (int i = 0; i < myMap.length; i++) {
 			for (int j = 0; j < myMap[i].length; j++) {
 				myMap[i][j] = null;
@@ -140,13 +143,56 @@ public class Thorvin extends Avatar  {
 	}
 
 	public Direction moveAvatar() {
-		Random rand = new Random();
-		int number = rand.nextInt(4);
 		Direction dir= Direction.FORWARD;
-	dir = doScout();
 
-	customJFrame.updateMap(myMap);
+		 if(bucketCheck == 0){
+			dir = doScout();
+		}
+		else if(bucketCheck == 1){
+		System.out.println("tanzen");
+		waitNext++;
+		 dir = Direction.LEFT;
+		 if(waitNext == 4){
+			bucketCheck =2;
+		 }
+		}
+		else if(bucketCheck ==2 ){
+			System.out.println("scout2");
+			dir = doScout();
+		}
+		else if(bucketCheck ==3){
+			System.out.println("bar");
+			dir = goBar(lookForBar());
+			System.out.println(dir);
+				if(goBarDone == true){
+					findWest();
+					if(myHeading == Heading.WEST){
+					goBarDone = false;
+					bucketCheck = 4;
+					waitNext = 6;
+				}
+		}
+	}
+		else if(bucketCheck == 4){
+			
+			dir = doScout();
+			System.out.println(dir);
+		}
+//------------------------------------------------------------------
 
+		if(inTanzbereich()&& waitNext < 4){ //erste aufgabe abarbeiten
+			bucketCheck =1;
+		
+		}
+		else if(bucketCheck ==2 ){ //nun suche ich nach nem bar platz
+			if(lookForBar() != 42){
+				bucketCheck = 3;
+				}
+			}
+		
+
+	customJFrame.updateMap(myMap); //für anzeige Map
+//System.out.println(dir);
 		return dir;
 	}
 
@@ -394,7 +440,6 @@ private Direction findWest(){
 private Direction doScout(){
 Direction dir = Direction.IDLE;
 Places[] placesArroundMe =this.getWhatISee();
-
 if(myHeading != Heading.WEST && countTurn ==0){ //bevor was passiert immer nach westen orientieren
 	dir =findWest();
 }
@@ -411,32 +456,89 @@ return dir;
 }
 
 // Function for doing a circle when on Danecfloor
-private Direction doDance (Direction current_dir){ 
+private Direction doDance (){ 
 	Direction dir = Direction.IDLE;
 	
-	if(danceCount == 0){
-		Direction start_dir = current_dir;
-		dir = current_dir;
-		danceCount++;
-	}
-	else if(danceCount == 1){
-		dir = Direction.LEFT;
+	if(danceCount == 1){
+		dir = Direction.IDLE;
 			  danceCount++;	  
 	}
 	else if(danceCount == 2){
-		dir = Direction.LEFT;
+		dir = Direction.IDLE;
 		danceCount++;
 	}
 	else if(danceCount==3){
-		dir = Direction.LEFT;
+		dir = Direction.IDLE;
 		danceCount++;
 	}
 	else if(danceCount==4){ //ausgangsposition nun genau gleich eingangsposition
-		dir = Direction.TURN_LEFT_ON_SPOT;
-		danceCount++;
+		dir = Direction.IDLE;
+		danceCount = 1;
 		}
 
 	return dir;
+}
+
+private Direction goBar(int barPos){
+	Direction dir = Direction.IDLE;
+	
+	if(myHeading != Heading.WEST){ //bevor was passiert immer nach westen orientieren
+		return findWest();
+	}
+	else{
+		if (barPos ==0) {
+			return Direction.IDLE;
+		}
+		else if(barPos ==1){
+			myX = myX+1;
+			System.out.println("bar gefunden");
+			goBarDone = true;
+			myHeading = Heading.WEST;
+			return Direction.FORWARD;
+		}
+		else if(barPos ==2){
+			myY = myY+1;
+			System.out.println("bar gefunden");
+			goBarDone = true;
+			myHeading = Heading.NORTH;
+			return Direction.RIGHT;
+		}
+		else if(barPos ==3){
+			myX = myX-1;
+			System.out.println("bar gefunden");
+			goBarDone = true;
+			myHeading = Heading.EAST;
+			return Direction.BACK;
+		}
+		else if(barPos ==4){
+			myY = myY-1;
+			System.out.println("bar gefunden");
+			goBarDone = true;
+			myHeading = Heading.SOUTH;
+			return Direction.LEFT;
+			
+		}
+	}
+	return Direction.IDLE;
+}
+
+private int lookForBar(){ //0 bin drauf, 1 vormir, 2 rechts, 3 hinter mir, 4 links
+	if(myMap[myX][myY] == Places.BAR_CHAIR){
+		return 0;
+	}
+	else if(myMap[myX+1][myY] == Places.BAR_CHAIR){
+	return 1;
+	}
+	else if(myMap[myX-1][myY] == Places.BAR_CHAIR){
+		return 3;
+		}
+	else if(myMap[myX][myY+1] == Places.BAR_CHAIR){
+		return 2;
+		}
+	else if(myMap[myX][myY-1] == Places.BAR_CHAIR){
+		return 4;
+	}
+	else return 42;
 }
 
 
@@ -449,20 +551,6 @@ private Direction LeftWallDetected(){ //letzen schritt ruckgaengig machen..
 	return dir;
 }
 
-private Direction bucketList(){ //bucketliste Tanzen, Bar, Lounge
-	Direction dir = Direction.IDLE;
-if(bucketCheck ==0){//Tanzen
-
-}
-else if(bucketCheck ==1){//Bar besuchen
-
-}
-else if(bucketCheck ==2){//auf ne fluppe in der lounge
-
-}
-
-	return dir;
-}
 
 private Point myFind(Places suche) {
 
@@ -498,10 +586,64 @@ private Direction findMyWay(Places suche){
 Point suchRadius = deltaPos(suche);
 int sucheX = (int) suchRadius.getX();
 int sucheY = (int) suchRadius.getY();
+boolean xF =true;
+boolean yF = true;
+Point gegenstandOrt = myFind(suche);
+int xOrt = (int) gegenstandOrt.getX();
+int yOrt =(int) gegenstandOrt.getY();
 
-
+//suche von mein Stndort x und dann y
+if(sucheX < 0){ //dann muss ich nach rechts, also x muss kleiner werden
+for(int i =sucheX; i<=myX+sucheX; i--){
+if(isFree(i, myY)==false){
+	xF = false; //kein freier Weg
+break;
+}
+}
+}
+else if(sucheX > 0){// ich muss nach links, also x muss groesser werden
+	for(int i =sucheX; i<=myX+sucheX; i++){
+		if(isFree(i, myY)==false){
+			xF = false; //kein freier Weg
+		break;
+		}
+		}
+}
+else { //sucheX gleich 0, also keie x verschiebung noetig
+xF = true;
+}
+//----------------------------------------------------------
+if(sucheY <0){//ich muss nach unten, also weg von gegenstand hoch prüfen
+	for(int i =sucheY; i<=yOrt-sucheX; i++){
+		if(isFree(xOrt, i)==false){
+			yF = false; //kein freier Weg
+		break;
+		}
+		}
+}
+else if(sucheY > 0){//ich muss nach oben also suche nach unten
+	for(int i =sucheY; i<=yOrt-sucheX; i--){
+		if(isFree(xOrt, i)==false){
+			yF = false; //kein freier Weg
+		break;
+		}
+		}
+}
+else{ //kein y weg noetig aslo frei
+	yF = true;
+}
+// suche von mein standort y und dann x
 
 return Direction.IDLE;
+}
+
+private boolean inTanzbereich(){
+if(myMap[myX+1][myY] == Places.DANCEFLOOR && myMap[myX-1][myY] == Places.DANCEFLOOR && myMap[myX][myY+1] == Places.DANCEFLOOR &&myMap[myX][myY-1] == Places.DANCEFLOOR){
+	return true;
+}
+else{
+return false;
+}
 }
 
 }
