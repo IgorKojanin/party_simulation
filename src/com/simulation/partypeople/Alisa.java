@@ -24,7 +24,9 @@ public class Alisa extends Avatar {
     int[] lastPosition = new int[2];
     int stepsMade = 0;
     int testSteps = 0;
+    int countPickingDirection = 0;
     boolean printed = false;
+    int placesDiscovered = 0;
     String currentHeading = "DOWN";
     Places[][] mindmap;
     Places[] usableSpots = new Places[]{
@@ -220,86 +222,184 @@ public class Alisa extends Avatar {
         }
     }
 
+    private void setDirectionTurnLeftOnSpot() {
+        dir = Direction.TURN_LEFT_ON_SPOT;
+        switch (currentHeading) {
+            case "DOWN":
+                currentHeading = "RIGHT";
+                break;
+            case "UP":
+                currentHeading = "LEFT";
+                break;
+            case "LEFT":
+                currentHeading = "DOWN";
+                break;
+            case "RIGHT":
+                currentHeading = "UP";
+                break;
+        }
+    }
+
+    private void setDirectionTurnRightOnSpot() {
+        dir = Direction.TURN_RIGHT_ON_SPOT;
+        switch (currentHeading) {
+            case "DOWN":
+                currentHeading = "LEFT";
+                break;
+            case "UP":
+                currentHeading = "RIGHT";
+                break;
+            case "LEFT":
+                currentHeading = "UP";
+                break;
+            case "RIGHT":
+                currentHeading = "DOWN";
+                break;
+        }
+    }
+
+    private void setDirectionForward() {
+        dir = Direction.FORWARD;
+        lastPosition[0] = currentPosition[0];
+        lastPosition[1] = currentPosition[1];
+        switch (currentHeading) {
+            case "DOWN":
+                currentPosition[0]++;
+                break;
+            case "UP":
+                currentPosition[0]--;
+                break;
+            case "LEFT":
+                currentPosition[1]--;
+                break;
+            case "RIGHT":
+                currentPosition[1]++;
+                break;
+        }
+        stepsMade++;
+    }
+
     private void pickNewDirection() {
         Random random = new Random();
         int randomInt = random.nextInt(2);
         int result = (randomInt == 0) ? 0 : 1;
         if (result == 0) {
-            dir = Direction.TURN_LEFT_ON_SPOT;
-            switch (currentHeading) {
-                case "DOWN":
-                    currentHeading = "RIGHT";
-                    break;
-                case "UP":
-                    currentHeading = "LEFT";
-                    break;
-                case "LEFT":
-                    currentHeading = "DOWN";
-                    break;
-                case "RIGHT":
-                    currentHeading = "UP";
-                    break;
+            setDirectionTurnLeftOnSpot();
+        } else {
+            setDirectionTurnRightOnSpot();
+        }
+    }
+
+    private float shareOfUndiscoveredPlaces(int startRow, int endRow, int startCol, int endCol) {
+        float share = 0;
+        int subArraySize = (endRow - startRow + 1) * (endCol - startCol + 1);
+        int countNulls = 0;
+        for (int i = startRow; i <= endRow; i++) {
+            for (int j = startCol; j <= endCol; j++) {
+                if (mindmap[i][j] == null) {
+                    countNulls++;
+                }
+            }
+        }
+        share = (float) countNulls / subArraySize;
+
+        return share;
+    }
+
+    private void analyzeDirection() {
+        int startRow = currentPosition[0];
+        int endRow = currentPosition[0];
+        int startCol = currentPosition[1];
+        int endCol = currentPosition[1];
+
+        switch (currentHeading) {
+            case "DOWN":
+                startRow++;
+                endRow += 4;
+                break;
+            case "UP":
+                endRow--;
+                startRow -= 4;
+                break;
+            case "LEFT":
+                endCol--;
+                startCol -= 4;
+                break;
+            case "RIGHT":
+                startCol++;
+                endCol += 4;
+        }
+
+        if (startRow > 0 && startCol > 0 && endRow < rows && endCol < cols) {
+            float shareOfUndiscovered = shareOfUndiscoveredPlaces(startRow, endRow, startCol, endCol);
+            if (shareOfUndiscovered >= 0.5) {
+                setDirectionForward();
+                countPickingDirection = 0;
+            } else {
+                if (countPickingDirection <= 3) {
+                    if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
+                        setDirectionTurnLeftOnSpot();
+                    } else {
+                        setDirectionTurnRightOnSpot();
+                    }
+                    countPickingDirection++;
+                } else {
+                    setDirectionForward();
+                }
+
             }
         } else {
-            dir = Direction.TURN_RIGHT_ON_SPOT;
-            switch (currentHeading) {
-                case "DOWN":
-                    currentHeading = "LEFT";
-                    break;
-                case "UP":
-                    currentHeading = "RIGHT";
-                    break;
-                case "LEFT":
-                    currentHeading = "UP";
-                    break;
-                case "RIGHT":
-                    currentHeading = "DOWN";
-                    break;
+            if (countPickingDirection <= 3) {
+                if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
+                    setDirectionTurnLeftOnSpot();
+                } else {
+                    setDirectionTurnRightOnSpot();
+                }
+                countPickingDirection++;
+            } else {
+                setDirectionForward();
             }
         }
     }
 
     private void recordPlace() {
-//        System.out.println("entered function");
         if (mindmap[currentPosition[0]][currentPosition[1]] == null
                 || mindmap[currentPosition[0]][currentPosition[1]] == Places.PERSON) {
             mindmap[currentPosition[0]][currentPosition[1]] = getWhatISee()[0];
-//            System.out.println("assigned current: " + mindmap[currentPosition[0]][currentPosition[1]]);
+            placesDiscovered++;
         }
 
         int rowIncrease = currentPosition[0] - lastPosition[0];
         int colIncrease = currentPosition[1] - lastPosition[1];
-//        System.out.println(dir);
-//        System.out.println(getWhatISee()[1]);
-//        System.out.println("rowinc: " + rowIncrease + " colInc: " + colIncrease);
-        if (getWhatISee()[1] != Places.WALL) {
+
+        if (getWhatISee()[1] != Places.WALL && getWhatISee()[1] != Places.PERSON) {
             if (rowIncrease > 0) {
                 // moved down in map
                 if (mindmap[currentPosition[0] + 1][currentPosition[1]] == null
                         || mindmap[currentPosition[0] + 1][currentPosition[1]] == Places.PERSON) {
                     mindmap[currentPosition[0] + 1][currentPosition[1]] = getWhatISee()[1];
-//                    System.out.println("assigned next: " + mindmap[currentPosition[0] + 1][currentPosition[1]]);
+                    placesDiscovered++;
                 }
             } else if (rowIncrease < 0) {
                 // moved up in map
                 if (mindmap[currentPosition[0] - 1][currentPosition[1]] == null
                         || mindmap[currentPosition[0] - 1][currentPosition[1]] == Places.PERSON) {
                     mindmap[currentPosition[0] - 1][currentPosition[1]] = getWhatISee()[1];
-//                    System.out.println("assigned next: " + mindmap[currentPosition[0] - 1][currentPosition[1]]);
+                    placesDiscovered++;
                 }
             } else if (colIncrease > 0) {
                 // moved right in map
                 if (mindmap[currentPosition[0]][currentPosition[1] + 1] == null
                         || mindmap[currentPosition[0]][currentPosition[1] + 1] == Places.PERSON) {
                     mindmap[currentPosition[0]][currentPosition[1] + 1] = getWhatISee()[1];
-//                    System.out.println("assigned next: " + mindmap[currentPosition[0]][currentPosition[1] + 1]);
+                    placesDiscovered++;
                 }
             } else if (colIncrease < 0) {
                 // moved left in map
                 if (mindmap[currentPosition[0]][currentPosition[1] - 1] == null
                         || mindmap[currentPosition[0]][currentPosition[1] - 1] == Places.PERSON) {
                     mindmap[currentPosition[0]][currentPosition[1] - 1] = getWhatISee()[1];
-//                    System.out.println("assigned next: " + mindmap[currentPosition[0]][currentPosition[1] - 1]);
+                    placesDiscovered++;
                 }
             }
         }
@@ -308,30 +408,17 @@ public class Alisa extends Avatar {
 
     private void setMovement() {
         recordPlace();
-        if (stepsMade == 5 || !isNextSquareUsable()) {
+        if (stepsMade == 4 || !isNextSquareUsable()) {
             pickNewDirection();
             stepsMade = 0;
             lastPosition[0] = currentPosition[0];
             lastPosition[1] = currentPosition[1];
         } else {
-            dir = Direction.FORWARD;
-            lastPosition[0] = currentPosition[0];
-            lastPosition[1] = currentPosition[1];
-            switch (currentHeading) {
-                case "DOWN":
-                    currentPosition[0]++;
-                    break;
-                case "UP":
-                    currentPosition[0]--;
-                    break;
-                case "LEFT":
-                    currentPosition[1]--;
-                    break;
-                case "RIGHT":
-                    currentPosition[1]++;
-                    break;
+            if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT || lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
+                analyzeDirection();
+            } else {
+                setDirectionForward();
             }
-            stepsMade++;
         }
         updateLastTwoMoves();
     }
@@ -340,9 +427,11 @@ public class Alisa extends Avatar {
         if (!mindmapCreated) {
             findWalls();
         } else {
-            if (testSteps == 200) {
+            if (testSteps >= rows * cols / 2) {
                 if (!printed) {
                     printMindmap();
+                    System.out.println("Total squares: " + rows * cols);
+                    System.out.println("Found places: " + placesDiscovered);
                     printed = true;
                 }
                 dir = Direction.IDLE;
