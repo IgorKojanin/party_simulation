@@ -49,14 +49,14 @@ public class Matrix {
 		unrenderedAvatars = new ArrayList<>();
 		
 		// Thorvin only to be touch by Thorvin
-		//Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 20,"Thorvin", 0);
-		//LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
-		//avatars.add(locThorvin);
+		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 20,"Thorvin", 0);
+		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 0 ,0);	
+		avatars.add(locThorvin);
 
 		// catherine only to be touch by catherine
-		// Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.BLACK, 0, 20,"Catherine", 0);
-		// LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
-		// avatars.add(locCatherine);
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.BLACK, 0, 20,"Catherine", 0);
+		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
+		avatars.add(locCatherine);
 		
 		// Mynul only to be touch by Mynul
 		// Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
@@ -65,30 +65,30 @@ public class Matrix {
 						
 
 		// emmanuel only to be touch by emmanuel
-		// Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel", 0);
-		// LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
-		// avatars.add(locEmmanuel);
+		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel", 0);
+		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
+		avatars.add(locEmmanuel);
 
 		// eliyas only to be touch by eliyas
-		// Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 20, "Eliyas", 0);
-		// LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
-		// avatars.add(locEliyas);
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 20, "Eliyas", 0);
+		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
+		avatars.add(locEliyas);
 		
 
 		// Anatoly only to be touch by Anatoly
-		// Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
-		// LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
-		// avatars.add(locAnatoly);
+		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
+		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
+		avatars.add(locAnatoly);
 
 		// Alisa only to be touch by Alisa
-		// Alisa alisa = new Alisa(Shape.SQUARE, new Color(140, 7, 134), 0, 20, "Alisa", 0);
-		// LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
-		// avatars.add(locAlisa);
+		Alisa alisa = new Alisa(Shape.SQUARE, new Color(140, 7, 134), 0, 20, "Alisa", 0);
+		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
+		avatars.add(locAlisa);
 
 		// Bjoern only to be touch by Bjoern
-		// Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246,204,255), 0, 22, "Björn", 0);
-		// LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
-		// avatars.add(locBjoern);
+		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246,204,255), 0, 22, "Björn", 0);
+		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
+		avatars.add(locBjoern);
 
 		// Bernhard only to be touch by Bernhard
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, new Color(224, 240, 32), 0, 24, "Bernhard",0);
@@ -101,14 +101,14 @@ public class Matrix {
   		// avatars.add(locJose);
 
 		// Celestine only to be touch by Celestine
-		// Celestine celestine  = new Celestine();
-		// LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
-		// avatars.add(locCelestine);
+		Celestine celestine  = new Celestine();
+		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
+		avatars.add(locCelestine);
 
 		// Kieran only to be touch by Kieran
-		// Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 21, "Kieran", 0);
-		// LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
-		// avatars.add(locKieran);
+		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 21, "Kieran", 0);
+		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
+		avatars.add(locKieran);
 
 		// Mynul only to be touch by Mynul
 		// Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
@@ -193,7 +193,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInQueue(LocatedAvatar avatar) {
-		wait(3);
+		wait(1);
 		avatar.setWhatIsee(env);
 		int x = avatar.getX();
 		int y = avatar.getY();
@@ -228,7 +228,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInClub(LocatedAvatar avatar) {
-		wait(100);
+		wait(10);
 		avatar.setWhatIsee(env);
 		int oldX = avatar.getX();
 		int oldY = avatar.getY();
