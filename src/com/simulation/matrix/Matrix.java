@@ -61,6 +61,7 @@ public class Matrix {
 		// Mynul only to be touch by Mynul
 		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		mynul.setLocatedAvatar(locMynul);
 		avatars.add(locMynul);
 						
 
@@ -91,7 +92,7 @@ public class Matrix {
 		avatars.add(locBjoern);
 
 		// Bernhard only to be touch by Bernhard
-		Bernhard bernhard = new Bernhard(Shape.CIRCLE, Color.YELLOW, 0, 24, "Bernhard",0);
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, new Color(224, 240, 32), 0, 24, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		avatars.add(locBernhard);
 
@@ -104,16 +105,16 @@ public class Matrix {
 		Celestine celestine  = new Celestine();
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		avatars.add(locCelestine);
+		
+		// Igor only to be touch by Celestine
+		Igor igor  = new Igor(Shape.CIRCLE, Color.CYAN, 1, 20, "Igor", 0);
+		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+		avatars.add(locIgor);
 
 		// Kieran only to be touch by Kieran
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 21, "Kieran", 0);
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 		avatars.add(locKieran);
-
-		// igor only to be touch by igor
-		Igor igor = new Igor(Shape.CIRCLE, new Color(0,153,153), 0, 20, "Igor", 0);
-		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-		avatars.add(locIgor);
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
@@ -193,7 +194,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInQueue(LocatedAvatar avatar) {
-		wait(30);
+		wait(3);
 		avatar.setWhatIsee(env);
 		int x = avatar.getX();
 		int y = avatar.getY();
@@ -285,6 +286,7 @@ public class Matrix {
 		}
 		env.setPlaceFree(oldX, oldY);
 		env.moveTo(oldX, oldY, avatar.getX(), avatar.getY(),avatar.getColor());
+		avatar.setIfActuallyMoved(oldX, oldY);
 		env.setPlaceOccupied(avatar.getX(), avatar.getY());
 	}
 

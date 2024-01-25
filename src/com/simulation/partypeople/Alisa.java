@@ -6,6 +6,7 @@ import com.simulation.enums.Places;
 import com.simulation.enums.Shape;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -22,10 +23,21 @@ public class Alisa extends Avatar {
     // - Develop spiels
     // - Develop smoke area behaviour
     // - Develop skibidi toilet
-    Map<Integer, Movement> movementMap = new HashMap();
+    Map<Integer, Movement> movementMap = new HashMap<>();
+    Map<Integer, Direction> matrixMovement = new HashMap<>();
+    HashMap<Integer, Direction> wallSearch = new HashMap<>();
+    Integer matrixSearchIndex = 0;
     Integer movementIndex = 0;
-    Direction dir = Direction.FORWARD;
+    Direction nextDir = Direction.FORWARD;
+    Direction lastDir = Direction.FORWARD;
+    Direction secondLastDir = Direction.FORWARD;
     Integer dancingCounter = 0;
+    boolean foundLeftWall = false;
+    boolean foundTopWall = false;
+    boolean foundBottomWall = false;
+    Integer horizontalDimension = 0;
+    Integer verticalDimension = 0;
+    Places[] lastGWIS = new Places[2];
 
     // ************** Constructor **************
     public Alisa(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -61,7 +73,7 @@ public class Alisa extends Avatar {
 
     // ************** Methods **************
     public Direction dancingAlgo() {
-        Direction direction = dir;
+        Direction direction = nextDir;
 
         if (dancingCounter < 3) {
             direction = Direction.FORWARD;
@@ -116,47 +128,130 @@ public class Alisa extends Avatar {
 
     }
 
+    private Direction findLeftWall() {
+        if (getWhatISee()[1] == Places.WALL) {
+            foundLeftWall = true;
+//            nextDir = Direction.IDLE;
+//            System.out.println("found left wall");
+            int countLeft = Collections.frequency(wallSearch.values(), Direction.LEFT);
+            int countRight = Collections.frequency(wallSearch.values(), Direction.RIGHT);
+            int countIdle = Collections.frequency(wallSearch.values(), Direction.IDLE);
+            horizontalDimension = wallSearch.size() - (countLeft + countRight) / 2 - countIdle;
+//            System.out.println(horizontalDimension);
+            nextDir = Direction.LEFT;
+            wallSearch.clear();
+        } else {
+            if (lastGWIS[0] == getWhatISee()[0] && lastGWIS[1] == getWhatISee()[1] && getWhatISee()[1] != Places.PATH) {
+                // means we're stuck
+                nextDir = Direction.LEFT;
+            } else {
+                if (lastDir == Direction.FORWARD
+                        || (lastDir == Direction.LEFT && secondLastDir == Direction.RIGHT)
+                        || (lastDir == Direction.RIGHT && secondLastDir == Direction.LEFT))
+                {
+                    nextDir = Direction.FORWARD;
+                } else {
+                    if (lastDir == Direction.RIGHT) {
+                        nextDir = Direction.LEFT;
+                    } else if (lastDir == Direction.LEFT) {
+                        nextDir = Direction.RIGHT;
+                    }
+                }
+            }
+        }
+        wallSearch.put(movementIndex, nextDir);
+        movementIndex++;
+        return nextDir;
+    }
+
     public Direction moveAvatar() {
-        if (dir == Direction.LEFT || dir == Direction.RIGHT) {
-            dir = Direction.FORWARD;
+        secondLastDir = lastDir;
+        lastDir = nextDir;
+        if(!foundLeftWall) {
+            nextDir = findLeftWall();
+        } else if (!foundBottomWall) {
+            if (getWhatISee()[1] == Places.WALL) {
+                foundBottomWall = true;
+                nextDir = Direction.IDLE;
+                System.out.println("found bottom wall");
+                int countLeft = Collections.frequency(wallSearch.values(), Direction.LEFT);
+                int countRight = Collections.frequency(wallSearch.values(), Direction.RIGHT);
+                int countIdle = Collections.frequency(wallSearch.values(), Direction.IDLE);
+                verticalDimension = wallSearch.size() - (countLeft + countRight) / 2 - countIdle;
+//                System.out.println(horizontalDimension);
+                wallSearch.clear();
+            } else {
+                if (lastGWIS[0] == getWhatISee()[0] && lastGWIS[1] == getWhatISee()[1] && getWhatISee()[1] != Places.PATH) {
+                    // means we're stuck
+                    nextDir = Direction.LEFT;
+                } else {
+                    if (lastDir == Direction.FORWARD
+                            || (lastDir == Direction.LEFT && secondLastDir == Direction.RIGHT)
+                            || (lastDir == Direction.RIGHT && secondLastDir == Direction.LEFT))
+                    {
+                        nextDir = Direction.FORWARD;
+                    } else {
+                        if (lastDir == Direction.RIGHT) {
+                            nextDir = Direction.LEFT;
+                        } else if (lastDir == Direction.LEFT) {
+                            nextDir = Direction.RIGHT;
+                        }
+                    }
+                }
+            }
+            wallSearch.put(movementIndex, nextDir);
+            movementIndex++;
+        }
+        lastGWIS[0] = getWhatISee()[0];
+        lastGWIS[1] = getWhatISee()[1];
+//        System.out.println("second last dir " + secondLastDir);
+//        System.out.println("last dir " + lastDir);
+//        System.out.println("next dir " + nextDir);
+//        System.out.println(getWhatISee()[0] + " " + getWhatISee()[1]);
+        return nextDir;
+    }
+
+    public Direction moveAvatarWIP() {
+        if (nextDir == Direction.LEFT || nextDir == Direction.RIGHT) {
+            nextDir = Direction.FORWARD;
         }
 
 
 
 
         if (getWhatISee()[1] == Places.OUTSIDE || getWhatISee()[1] == Places.WALL) {
-            dir = pickOppositeDirection(dir);
-            movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+            nextDir = pickOppositeDirection(nextDir);
+            movementMap.put(movementIndex, new Movement(nextDir, getWhatISee()[0]));
         } else {
             if (movementMap.isEmpty()) {
-                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                movementMap.put(movementIndex, new Movement(nextDir, getWhatISee()[0]));
             } else if (movementIndex % 5 == 0 && movementMap.get(movementIndex-1).getPlace() != Places.DANCEFLOOR) {
-                dir = pickNewRandomDirection(dir);
-                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                nextDir = pickNewRandomDirection(nextDir);
+                movementMap.put(movementIndex, new Movement(nextDir, getWhatISee()[0]));
             } else if (getWhatISee()[1] == Places.DANCEFLOOR && dancingCounter < 3) {
-                dir = Direction.FORWARD;
-                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                nextDir = Direction.FORWARD;
+                movementMap.put(movementIndex, new Movement(nextDir, getWhatISee()[0]));
                 dancingCounter++;
 //                System.out.println("Dancing " + dancingCounter);
             } else if (dancingCounter < 20 && dancingCounter >= 3) {
-                dir = dancingAlgo();
-                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                nextDir = dancingAlgo();
+                movementMap.put(movementIndex, new Movement(nextDir, getWhatISee()[0]));
                 dancingCounter++;
 //                System.out.println("Dancing " + dancingCounter);
             } else if (dancingCounter >= 20) {
-                dir = Direction.FORWARD;
+                nextDir = Direction.FORWARD;
                 if (getWhatISee()[0] != Places.DANCEFLOOR) {
                     dancingCounter = 0;
                 }
-                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                movementMap.put(movementIndex, new Movement(nextDir, getWhatISee()[0]));
             } else {
-                movementMap.put(movementIndex, new Movement(dir, getWhatISee()[0]));
+                movementMap.put(movementIndex, new Movement(nextDir, getWhatISee()[0]));
             }
         }
 
 //        System.out.println(movementMap.get(movementIndex).getDirection() + " " + movementMap.get(movementIndex).getPlace());
         movementIndex++;
-        return dir;
+        return nextDir;
     }
 
     private Direction pickOppositeDirection(Direction direction) {
