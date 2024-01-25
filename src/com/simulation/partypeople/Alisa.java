@@ -463,10 +463,10 @@ public class Alisa extends Avatar {
             int colIncrease = targetPosition[1] - currentPosition[1];
             if (rowIncrease == 0 && (colIncrease == 1 || colIncrease == -1)
                     || colIncrease == 0 && (rowIncrease == 1 || rowIncrease == -1)) {
-                if (colIncrease == 1 && currentHeading == "RIGHT"
-                        || colIncrease == -1 && currentHeading == "LEFT"
-                        || rowIncrease == 1 && currentHeading == "DOWN"
-                        || rowIncrease == -1 && currentHeading == "UP") {
+                if (colIncrease == 1 && Objects.equals(currentHeading, "RIGHT")
+                        || colIncrease == -1 && Objects.equals(currentHeading, "LEFT")
+                        || rowIncrease == 1 && Objects.equals(currentHeading, "DOWN")
+                        || rowIncrease == -1 && Objects.equals(currentHeading, "UP")) {
                     checkIfSeatOccupied();
                 }
             } else {
@@ -738,35 +738,35 @@ public class Alisa extends Avatar {
     }
 
     private void dance() {
-        System.out.println("Alisa is dancing");
         if (getWhatISee()[1] == Places.PERSON) {
             dir = Direction.IDLE;
-            danceStep = 1;
+//            System.out.println("Alisa is waiting to bust a move");
+//            danceStep = 0;
         } else {
+            System.out.println("Alisa is dancing");
             switch (danceStep) {
-                case 0, 1:
+                case 0, 1, 3, 5:
                     setDirectionForward();
                     stepsMade = 0;
                     danceStep++;
                     break;
-                case 2:
-                    setDirectionRight();
+                case 2, 6:
+                    setDirectionTurnRightOnSpot();
                     danceStep++;
                     break;
-                case 3:
+                case 4:
                     if (getWhatISee()[0] == Places.DANCEFLOOR) {
-                        setDirectionRight();
+                        setDirectionTurnRightOnSpot();
                         danceStep++;
                     } else {
                         setDirectionBack();
                         danceStep = 1;
                     }
                     break;
-                case 4:
-                    setDirectionRight();
-                    danced = true;
+                case 7:
+                    setDirectionForward();
                     danceStep = 0;
-                    break;
+                    danced = true;
             }
         }
     }
