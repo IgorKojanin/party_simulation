@@ -156,8 +156,6 @@ public class Igor extends Avatar {
 	}
 
 	public Direction moveAvatar() {
-    	Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
 		// Finished The Path
 		if (doneBeingAtTheLounge) { // Reached Lounge -> chill here
 			return Direction.TURN_RIGHT_ON_SPOT;
