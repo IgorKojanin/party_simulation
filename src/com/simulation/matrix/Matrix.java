@@ -102,7 +102,7 @@ public class Matrix {
   		// avatars.add(locJose);
 		
 		// Igor only to be touch by the great Igor
-		 Igor igor = new Igor(Shape.CIRCLE, Color.CYAN, 1, 20, "Igor", 0);
+		 Igor igor = new Igor(Shape.CIRCLE, new Color(43,207,186), 1, 20, "Igor", 0);
   		 LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
   		 avatars.add(locIgor);
 

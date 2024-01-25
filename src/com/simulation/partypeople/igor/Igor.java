@@ -164,7 +164,15 @@ public class Igor extends Avatar {
 		// the position update
 		if (!isHasMoved() && lastMovingDirection != Direction.TURN_LEFT_ON_SPOT
 				&& lastMovingDirection != Direction.TURN_RIGHT_ON_SPOT && !firstTimeInCl) {
-			undoPositionUpdate();
+    		xPos = xPrevPos;
+    		yPos = yPrevPos;
+    		lookingDirection = prevLookingDirection;
+    		countCouldntMove++;
+    		if (countCouldntMove>2) {
+    			setHeadingTurnLeft();
+    			lastMovingDirection = Direction.TURN_LEFT_ON_SPOT;
+    			return Direction.TURN_LEFT_ON_SPOT;
+    		}
 		} else { // moved successfully
 			countCouldntMove = 0;
 			if (getWhatISee()[1] == Places.OUTSIDE) // Avatar is outside of the club
@@ -305,17 +313,6 @@ public class Igor extends Avatar {
 			doneBeingAtTheLounge = true;
 		}
 		finishedGoingToNewPlace = true;
-	}
-
-	private void undoPositionUpdate() {
-		xPos = xPrevPos;
-		yPos = yPrevPos;
-		lookingDirection = prevLookingDirection;
-		countCouldntMove++;
-		if (countCouldntMove > 2) {
-			setHeadingTurnLeft();
-			lastMovingDirection = Direction.TURN_LEFT_ON_SPOT;
-		}
 	}
 
 	// Create a new vertex for the place avatar currently stands on
