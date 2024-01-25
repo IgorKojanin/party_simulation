@@ -149,7 +149,6 @@ waitNext =0;
 			dir = doScout();
 		}
 		else if(bucketCheck == 1){
-		System.out.println("tanzen");
 		waitNext++;
 		 dir = Direction.LEFT;
 		 if(waitNext == 4){
@@ -157,27 +156,42 @@ waitNext =0;
 		 }
 		}
 		else if(bucketCheck ==2 ){
-			System.out.println("scout2");
 			dir = doScout();
 		}
-		else if(bucketCheck ==3){
-			System.out.println("bar");
+		else if(bucketCheck ==3|| bucketCheck == 4){
 			dir = goBar(lookForBar());
-			System.out.println(dir);
-				if(goBarDone == true){
-					findWest();
-					if(myHeading == Heading.WEST){
+				if(goBarDone && myHeading == Heading.WEST){				
+					countTurn =4;
 					goBarDone = false;
-					bucketCheck = 4;
-					waitNext = 6;
-				}
+					bucketCheck = 5;
+					waitNext = 6;				
 		}
 	}
-		else if(bucketCheck == 4){
-			
+		else if(bucketCheck == 5){			
 			dir = doScout();
-			System.out.println(dir);
 		}
+		else if(bucketCheck == 6|| bucketCheck ==7){
+			dir = goLounge(lookForLounge());
+			if(goBarDone && myHeading == Heading.WEST){				
+				countTurn =4;
+				goBarDone = false;
+				bucketCheck = 8;
+				waitNext = 7;
+		}
+	}
+	else if(bucketCheck == 6|| bucketCheck ==7){
+			dir = goLounge(lookForLounge());
+			if(goBarDone && myHeading == Heading.WEST){				
+				countTurn =4;
+				goBarDone = false;
+				bucketCheck = 8;
+				waitNext = 7;
+		}
+	}
+	else if(bucketCheck == 8){			
+		dir = doScout();
+		System.out.println("Fertig");
+	}
 //------------------------------------------------------------------
 
 		if(inTanzbereich()&& waitNext < 4){ //erste aufgabe abarbeiten
@@ -189,10 +203,16 @@ waitNext =0;
 				bucketCheck = 3;
 				}
 			}
+			else if(bucketCheck ==5){
+				if(lookForLounge() != 42){
+					bucketCheck =6;
+				}
+			}
 		
 
 	customJFrame.updateMap(myMap); //für anzeige Map
-//System.out.println(dir);
+	System.out.println(myHeading);
+System.out.println(dir);
 		return dir;
 	}
 
@@ -481,7 +501,7 @@ private Direction doDance (){
 
 private Direction goBar(int barPos){
 	Direction dir = Direction.IDLE;
-	
+	if(bucketCheck < 4){
 	if(myHeading != Heading.WEST){ //bevor was passiert immer nach westen orientieren
 		return findWest();
 	}
@@ -494,6 +514,7 @@ private Direction goBar(int barPos){
 			System.out.println("bar gefunden");
 			goBarDone = true;
 			myHeading = Heading.WEST;
+			bucketCheck = 4;
 			return Direction.FORWARD;
 		}
 		else if(barPos ==2){
@@ -501,6 +522,7 @@ private Direction goBar(int barPos){
 			System.out.println("bar gefunden");
 			goBarDone = true;
 			myHeading = Heading.NORTH;
+			bucketCheck = 4;
 			return Direction.RIGHT;
 		}
 		else if(barPos ==3){
@@ -508,6 +530,7 @@ private Direction goBar(int barPos){
 			System.out.println("bar gefunden");
 			goBarDone = true;
 			myHeading = Heading.EAST;
+			bucketCheck = 4;
 			return Direction.BACK;
 		}
 		else if(barPos ==4){
@@ -515,11 +538,95 @@ private Direction goBar(int barPos){
 			System.out.println("bar gefunden");
 			goBarDone = true;
 			myHeading = Heading.SOUTH;
+			bucketCheck = 4;
 			return Direction.LEFT;
 			
 		}
 	}
+}
+else if(myHeading == Heading.WEST){
 	return Direction.IDLE;
+}
+else if(myHeading == Heading.EAST){
+	myHeading = Heading.NORTH;
+return Direction.TURN_LEFT_ON_SPOT;
+}
+else if(myHeading == Heading.SOUTH){
+myHeading = Heading.WEST;
+return Direction.TURN_RIGHT_ON_SPOT;
+}
+else if (myHeading == Heading.NORTH){
+	myHeading = Heading.WEST;
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+
+return Direction.IDLE;
+
+}
+
+private Direction goLounge(int loungePos){
+	Direction dir = Direction.IDLE;
+	if(bucketCheck < 7){
+	if(myHeading != Heading.WEST){ //bevor was passiert immer nach westen orientieren
+		return findWest();
+	}
+	else{
+		if (loungePos ==0) {
+			return Direction.IDLE;
+		}
+		else if(loungePos ==1){
+			myX = myX+1;
+			System.out.println("lounge gefunden");
+			goBarDone = true;
+			myHeading = Heading.WEST;
+			bucketCheck = 7;
+			return Direction.FORWARD;
+		}
+		else if(loungePos ==2){
+			myY = myY+1;
+			System.out.println("bar gefunden");
+			goBarDone = true;
+			myHeading = Heading.NORTH;
+			bucketCheck = 7;
+			return Direction.RIGHT;
+		}
+		else if(loungePos ==3){
+			myX = myX-1;
+			System.out.println("bar gefunden");
+			goBarDone = true;
+			myHeading = Heading.EAST;
+			bucketCheck = 7;
+			return Direction.BACK;
+		}
+		else if(loungePos ==4){
+			myY = myY-1;
+			System.out.println("bar gefunden");
+			goBarDone = true;
+			myHeading = Heading.SOUTH;
+			bucketCheck = 7;
+			return Direction.LEFT;
+			
+		}
+	}
+}
+else if(myHeading == Heading.WEST){
+	return Direction.IDLE;
+}
+else if(myHeading == Heading.EAST){
+	myHeading = Heading.NORTH;
+return Direction.TURN_LEFT_ON_SPOT;
+}
+else if(myHeading == Heading.SOUTH){
+myHeading = Heading.WEST;
+return Direction.TURN_RIGHT_ON_SPOT;
+}
+else if (myHeading == Heading.NORTH){
+	myHeading = Heading.WEST;
+	return Direction.TURN_LEFT_ON_SPOT;
+}
+
+return Direction.IDLE;
+
 }
 
 private int lookForBar(){ //0 bin drauf, 1 vormir, 2 rechts, 3 hinter mir, 4 links
@@ -536,6 +643,25 @@ private int lookForBar(){ //0 bin drauf, 1 vormir, 2 rechts, 3 hinter mir, 4 lin
 		return 2;
 		}
 	else if(myMap[myX][myY-1] == Places.BAR_CHAIR){
+		return 4;
+	}
+	else return 42;
+}
+
+private int lookForLounge(){ //0 bin drauf, 1 vormir, 2 rechts, 3 hinter mir, 4 links
+	if(myMap[myX][myY] == Places.LOUNGE_BIG || myMap[myX][myY] == Places.LOUNGE_SMOKING || myMap[myX][myY] == Places.LOUNGE_SMALL){
+		return 0;
+	}
+	else if(myMap[myX+1][myY] == Places.LOUNGE_BIG || myMap[myX+1][myY] == Places.LOUNGE_SMOKING || myMap[myX+1][myY] == Places.LOUNGE_SMALL){
+	return 1;
+	}
+	else if(myMap[myX-1][myY] == Places.LOUNGE_BIG || myMap[myX-1][myY] == Places.LOUNGE_SMOKING || myMap[myX-1][myY] == Places.LOUNGE_SMALL){
+		return 3;
+		}
+	else if(myMap[myX][myY+1] == Places.LOUNGE_BIG || myMap[myX][myY+1] == Places.LOUNGE_SMOKING || myMap[myX][myY+1] == Places.LOUNGE_SMALL){
+		return 2;
+		}
+	else if(myMap[myX][myY-1] == Places.LOUNGE_BIG || myMap[myX][myY-1] == Places.LOUNGE_SMOKING || myMap[myX][myY-1] == Places.LOUNGE_SMALL){
 		return 4;
 	}
 	else return 42;
