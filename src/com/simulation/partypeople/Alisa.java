@@ -354,25 +354,29 @@ public class Alisa extends Avatar {
         int rowIncrease = currentPosition[0] - lastPosition[0];
         int colIncrease = currentPosition[1] - lastPosition[1];
 
-        if (getWhatISee()[1] != Places.WALL && getWhatISee()[1] != Places.PERSON) {
+        if (getWhatISee()[1] != Places.WALL) {
             if (rowIncrease > 0) {
                 // moved down in map
-                if (mindmap[currentPosition[0] + 1][currentPosition[1]] == null) {
+                if (mindmap[currentPosition[0] + 1][currentPosition[1]] == null
+                        || mindmap[currentPosition[0] + 1][currentPosition[1]] == Places.PERSON) {
                     mindmap[currentPosition[0] + 1][currentPosition[1]] = getWhatISee()[1];
                 }
             } else if (rowIncrease < 0) {
                 // moved up in map
-                if (mindmap[currentPosition[0] - 1][currentPosition[1]] == null) {
+                if (mindmap[currentPosition[0] - 1][currentPosition[1]] == null
+                        || mindmap[currentPosition[0] - 1][currentPosition[1]] == Places.PERSON) {
                     mindmap[currentPosition[0] - 1][currentPosition[1]] = getWhatISee()[1];
                 }
             } else if (colIncrease > 0) {
                 // moved right in map
-                if (mindmap[currentPosition[0]][currentPosition[1] + 1] == null) {
+                if (mindmap[currentPosition[0]][currentPosition[1] + 1] == null
+                        || mindmap[currentPosition[0]][currentPosition[1] + 1] == Places.PERSON) {
                     mindmap[currentPosition[0]][currentPosition[1] + 1] = getWhatISee()[1];
                 }
             } else if (colIncrease < 0) {
                 // moved left in map
-                if (mindmap[currentPosition[0]][currentPosition[1] - 1] == null) {
+                if (mindmap[currentPosition[0]][currentPosition[1] - 1] == null
+                        || mindmap[currentPosition[0]][currentPosition[1] - 1] == Places.PERSON) {
                     mindmap[currentPosition[0]][currentPosition[1] - 1] = getWhatISee()[1];
                 }
             }
@@ -413,6 +417,29 @@ public class Alisa extends Avatar {
         return (float) Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
+    private void checkIfSeatOccupied() {
+        System.out.println("checking occupants");
+        if (getWhatISee()[1] == Places.PERSON) {
+            int rowIncrease = currentPosition[0] - lastPosition[0];
+            int colIncrease = currentPosition[1] - lastPosition[1];
+
+            if (rowIncrease > 0) {
+                mindmap[currentPosition[0] + 1][currentPosition[1]] = getWhatISee()[1];
+            } else if (rowIncrease < 0) {
+                mindmap[currentPosition[0] - 1][currentPosition[1]] = getWhatISee()[1];
+            } else if (colIncrease > 0) {
+                mindmap[currentPosition[0]][currentPosition[1] + 1] = getWhatISee()[1];
+            } else if (colIncrease < 0) {
+                mindmap[currentPosition[0]][currentPosition[1] - 1] = getWhatISee()[1];
+            }
+            System.out.println("Gotta find a new spot");
+            setDirectionTurnLeftOnSpot();
+        } else {
+            System.out.println("Occupying");
+            setDirectionForward();
+        }
+    }
+
     private void headToTarget(Places target) {
         if (currentPosition[0] == targetPosition[0] && currentPosition[1] == targetPosition[1]) {
             targetPosition[0] = 0;
@@ -434,162 +461,171 @@ public class Alisa extends Avatar {
         } else {
             int rowIncrease = targetPosition[0] - currentPosition[0];
             int colIncrease = targetPosition[1] - currentPosition[1];
-
-            if (rowIncrease < 0) {
-                switch (currentHeading) {
-                    case "UP":
-                        if (isNextSquareUsable()) {
-                            setDirectionForward();
-                        } else {
-                            if (currentPosition[1] <= cols / 2) {
-                                setDirectionTurnRightOnSpot();
-                            } else {
-                                setDirectionTurnLeftOnSpot();
-                            }
-                        }
-                        break;
-                    case "DOWN":
-                        setDirectionBack();
-                        break;
-                    case "LEFT":
-                        if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnRightOnSpot();
-                        }
-                        break;
-                    case "RIGHT":
-                        if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnLeftOnSpot();
-                        }
-                        break;
+            if (rowIncrease == 0 && (colIncrease == 1 || colIncrease == -1)
+                    || colIncrease == 0 && (rowIncrease == 1 || rowIncrease == -1)) {
+                if (colIncrease == 1 && currentHeading == "RIGHT"
+                        || colIncrease == -1 && currentHeading == "LEFT"
+                        || rowIncrease == 1 && currentHeading == "DOWN"
+                        || rowIncrease == -1 && currentHeading == "UP") {
+                    checkIfSeatOccupied();
                 }
-            } else if (rowIncrease > 0) {
-                switch (currentHeading) {
-                    case "UP":
-                        setDirectionBack();
-                        break;
-                    case "DOWN":
-                        if (isNextSquareUsable()) {
-                            setDirectionForward();
-                        } else {
-                            if (currentPosition[1] <= cols / 2) {
-                                setDirectionTurnLeftOnSpot();
+            } else {
+                if (rowIncrease < 0) {
+                    switch (currentHeading) {
+                        case "UP":
+                            if (isNextSquareUsable()) {
+                                setDirectionForward();
+                            } else {
+                                if (currentPosition[1] <= cols / 2) {
+                                    setDirectionTurnRightOnSpot();
+                                } else {
+                                    setDirectionTurnLeftOnSpot();
+                                }
+                            }
+                            break;
+                        case "DOWN":
+                            setDirectionBack();
+                            break;
+                        case "LEFT":
+                            if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
                             } else {
                                 setDirectionTurnRightOnSpot();
                             }
-                        }
-                        break;
-                    case "LEFT":
-                        if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnLeftOnSpot();
-                        }
-                        break;
-                    case "RIGHT":
-                        if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnRightOnSpot();
-                        }
-                        break;
-                }
-            } else if (colIncrease < 0) {
-                switch (currentHeading) {
-                    case "UP":
-                        if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnLeftOnSpot();
-                        }
-                        break;
-                    case "DOWN":
-                        if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnRightOnSpot();
-                        }
-                        break;
-                    case "LEFT":
-                        if (isNextSquareUsable()) {
-                            setDirectionForward();
-                        } else {
-                            if (currentPosition[0] <= rows / 2) {
-                                setDirectionTurnLeftOnSpot();
-                            } else {
-                                setDirectionTurnRightOnSpot();
-                            }
-                        }
-                        break;
-                    case "RIGHT":
-                        setDirectionBack();
-                        break;
-                }
-            } else if (colIncrease > 0) {
-                switch (currentHeading) {
-                    case "UP":
-                        if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnRightOnSpot();
-                        }
-                        break;
-                    case "DOWN":
-                        if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
-                            if (isNextSquareUsable()) {
-                                setDirectionForward();
-                            } else {
-                                setDirectionBack();
-                            }
-                        } else {
-                            setDirectionTurnLeftOnSpot();
-                        }
-                        break;
-                    case "LEFT":
-                        setDirectionBack();
-                        break;
-                    case "RIGHT":
-                        if (isNextSquareUsable()) {
-                            setDirectionForward();
-                        } else {
-                            if (currentPosition[0] <= rows / 2) {
-                                setDirectionTurnRightOnSpot();
+                            break;
+                        case "RIGHT":
+                            if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
                             } else {
                                 setDirectionTurnLeftOnSpot();
                             }
-                        }
-                        break;
+                            break;
+                    }
+                } else if (rowIncrease > 0) {
+                    switch (currentHeading) {
+                        case "UP":
+                            setDirectionBack();
+                            break;
+                        case "DOWN":
+                            if (isNextSquareUsable()) {
+                                setDirectionForward();
+                            } else {
+                                if (currentPosition[1] <= cols / 2) {
+                                    setDirectionTurnLeftOnSpot();
+                                } else {
+                                    setDirectionTurnRightOnSpot();
+                                }
+                            }
+                            break;
+                        case "LEFT":
+                            if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
+                            } else {
+                                setDirectionTurnLeftOnSpot();
+                            }
+                            break;
+                        case "RIGHT":
+                            if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
+                            } else {
+                                setDirectionTurnRightOnSpot();
+                            }
+                            break;
+                    }
+                } else if (colIncrease < 0) {
+                    switch (currentHeading) {
+                        case "UP":
+                            if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
+                            } else {
+                                setDirectionTurnLeftOnSpot();
+                            }
+                            break;
+                        case "DOWN":
+                            if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
+                            } else {
+                                setDirectionTurnRightOnSpot();
+                            }
+                            break;
+                        case "LEFT":
+                            if (isNextSquareUsable()) {
+                                setDirectionForward();
+                            } else {
+                                if (currentPosition[0] <= rows / 2) {
+                                    setDirectionTurnLeftOnSpot();
+                                } else {
+                                    setDirectionTurnRightOnSpot();
+                                }
+                            }
+                            break;
+                        case "RIGHT":
+                            setDirectionBack();
+                            break;
+                    }
+                } else {
+                    switch (currentHeading) {
+                        case "UP":
+                            if (lastTwoMoves[0] == Direction.TURN_LEFT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
+                            } else {
+                                setDirectionTurnRightOnSpot();
+                            }
+                            break;
+                        case "DOWN":
+                            if (lastTwoMoves[0] == Direction.TURN_RIGHT_ON_SPOT) {
+                                if (isNextSquareUsable()) {
+                                    setDirectionForward();
+                                } else {
+                                    setDirectionBack();
+                                }
+                            } else {
+                                setDirectionTurnLeftOnSpot();
+                            }
+                            break;
+                        case "LEFT":
+                            setDirectionBack();
+                            break;
+                        case "RIGHT":
+                            if (isNextSquareUsable()) {
+                                setDirectionForward();
+                            } else {
+                                if (currentPosition[0] <= rows / 2) {
+                                    setDirectionTurnRightOnSpot();
+                                } else {
+                                    setDirectionTurnLeftOnSpot();
+                                }
+                            }
+                            break;
+                    }
                 }
             }
         }
@@ -616,7 +652,7 @@ public class Alisa extends Avatar {
     }
 
     private float shareOfUndiscoveredPlaces(int startRow, int endRow, int startCol, int endCol) {
-        float share = 0;
+        float share;
         int subArraySize = (endRow - startRow + 1) * (endCol - startCol + 1);
         int countNulls = 0;
         for (int i = startRow; i <= endRow; i++) {
@@ -837,11 +873,11 @@ public class Alisa extends Avatar {
     private void printMindmap() {
         System.out.println("Alisa's mindmap: ");
         int[] columnWidths = new int[mindmap[0].length];
-        for (int i = 0; i < mindmap.length; i++) {
-            for (int j = 0; j < mindmap[i].length; j++) {
+        for (Places[] places : mindmap) {
+            for (int j = 0; j < places.length; j++) {
                 int length = 0;
-                if (mindmap[i][j] != null) {
-                    length = mindmap[i][j].toString().length();
+                if (places[j] != null) {
+                    length = places[j].toString().length();
                 } else {
                     length = "null".length();
                 }
@@ -851,10 +887,10 @@ public class Alisa extends Avatar {
             }
         }
 
-        for (int i = 0; i < mindmap.length; i++) {
-            for (int j = 0; j < mindmap[i].length; j++) {
-                if (mindmap[i][j] != null) {
-                    System.out.printf("%-" + (columnWidths[j] + 2) + "s", mindmap[i][j]);
+        for (Places[] places : mindmap) {
+            for (int j = 0; j < places.length; j++) {
+                if (places[j] != null) {
+                    System.out.printf("%-" + (columnWidths[j] + 2) + "s", places[j]);
                 } else {
                     String bla = "null";
                     System.out.printf("%-" + (columnWidths[j] + 2) + "s", bla);
