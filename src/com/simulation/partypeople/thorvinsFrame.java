@@ -10,10 +10,10 @@ public class thorvinsFrame extends JFrame {
     private static final int ROWS = 85;
     private static final int COLS = 65;
 
-    private Places[][] placesArray;  // Das Array vom Typ Places
+    private Places[][] placesArray; // Das Array vom Typ Places
 
     public thorvinsFrame(Places[][] placesArray) {
-        this.placesArray = placesArray;  // Das übergebene Array initialisieren
+        this.placesArray = placesArray; // Das übergebene Array initialisieren
 
         setTitle("Grid JFrame");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,9 +35,9 @@ public class thorvinsFrame extends JFrame {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 if (placesArray[i][j] == null) {
-                    g.setColor(Color.GRAY);  // Graue Hintergrundfarbe für Null-Elemente
+                    g.setColor(Color.GRAY); // Graue Hintergrundfarbe für Null-Elemente
                 } else {
-                    // Zuordnung von Places zu Farben (ersetzen Sie dies durch Ihre eigene Logik)
+                    // Zuordnung von Places zu Farben
                     switch (placesArray[i][j]) {
                         case WALL:
                             g.setColor(Color.BLACK);
@@ -60,26 +60,31 @@ public class thorvinsFrame extends JFrame {
                         case BOUNCER:
                             g.setColor(Color.RED);
                             break;
-                            case POOL:
+                        case POOL:
                             g.setColor(Color.RED);
                             break;
-                            case FUSSBALL:
+                        case FUSSBALL:
                             g.setColor(Color.RED);
                             break;
-                            case TOILET:
+                        case TOILET:
                             g.setColor(Color.RED);
                             break;
-                            case LOUNGE_BIG:
+                        case LOUNGE_BIG:
                             g.setColor(Color.PINK);
                             break;
-                            case LOUNGE_SMALL:
+                        case LOUNGE_SMALL:
                             g.setColor(Color.PINK);
                             break;
-                            case LOUNGE_SMOKING:
+                        case LOUNGE_SMOKING:
                             g.setColor(Color.PINK);
                             break;
-                        
-                        
+                        case POOL_CHAIR:
+                            g.setColor(Color.PINK);
+                            break;
+                        case TOILET_CHAIR:
+                            g.setColor(Color.PINK);
+                            break;
+
                         default:
                             g.setColor(Color.GRAY);
                             break;
@@ -97,5 +102,4 @@ public class thorvinsFrame extends JFrame {
         repaint();
     }
 
-   
 }

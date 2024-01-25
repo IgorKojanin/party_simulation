@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                   Party Simulator
-// Date:         27/10/2023
+// Date:        25/01/2023
 //
-// Class: Joe.java
-// Description: Template for the people
+// Class: Thorvin.java
+// Description: Thorvins class for Party simulation
 //
 ///////////////////////////////////////////////////////////////////////////////
 package com.simulation.partypeople;
@@ -89,8 +89,6 @@ public class Thorvin extends Avatar {
 		}
 
 		SwingUtilities.invokeLater(() -> {
-			// Hier können Sie Ihr Places-Array initialisieren und an die Klasse übergeben
-
 			customJFrame = new thorvinsFrame(myMap);
 			customJFrame.setVisible(true);
 		});
@@ -149,8 +147,10 @@ public class Thorvin extends Avatar {
 		} else if (bucketCheck == 1) {
 			waitNext++;
 			dir = Direction.LEFT;
+			// System.out.println(dir);
 			if (waitNext == 4) {
 				bucketCheck = 2;
+				System.out.println("Thorvin tanz fertig");
 			}
 		} else if (bucketCheck == 2) {
 			dir = doScout();
@@ -179,10 +179,11 @@ public class Thorvin extends Avatar {
 				goBarDone = false;
 				bucketCheck = 8;
 				waitNext = 7;
+				System.out.println("Thorvin Fertig");
 			}
 		} else if (bucketCheck == 8) {
 			dir = doScout();
-			System.out.println("Fertig");
+
 		}
 		// ------------------------------------------------------------------
 
@@ -200,8 +201,8 @@ public class Thorvin extends Avatar {
 		}
 
 		customJFrame.updateMap(myMap); // für anzeige Map
-		System.out.println(myHeading);
-		System.out.println(dir);
+		// System.out.println(myHeading);
+		// System.out.println(dir);
 		return dir;
 	}
 
@@ -359,6 +360,7 @@ public class Thorvin extends Avatar {
 					hinderniss = true;
 				}
 			}
+			// suche vertikal
 			// ------------------------------------------------------------------------------------------------------
 		} else if (shift > 1) {
 			if (myMap[myX + 1][myY] != Places.WALL && shift == 2) {
@@ -451,7 +453,7 @@ public class Thorvin extends Avatar {
 		return dir;
 	}
 
-	// Turn in spot until the heading ist west
+	// Turn on spot until the heading ist west
 	private Direction findWest() {
 		Direction dir = Direction.IDLE;
 
@@ -470,7 +472,7 @@ public class Thorvin extends Avatar {
 
 	}
 
-	private Direction doScout() {
+	private Direction doScout() {// erkunden der map
 		Direction dir = Direction.IDLE;
 		Places[] placesArroundMe = this.getWhatISee();
 		if (myHeading != Heading.WEST && countTurn == 0) { // bevor was passiert immer nach westen orientieren
@@ -502,6 +504,7 @@ public class Thorvin extends Avatar {
 		} else if (danceCount == 4) { // ausgangsposition nun genau gleich eingangsposition
 			dir = Direction.IDLE;
 			danceCount = 1;
+
 		}
 
 		return dir;
@@ -517,28 +520,28 @@ public class Thorvin extends Avatar {
 					return Direction.IDLE;
 				} else if (barPos == 1) {
 					myX = myX + 1;
-					System.out.println("bar gefunden");
+					System.out.println("Thorvin bar gefunden");
 					goBarDone = true;
 					myHeading = Heading.WEST;
 					bucketCheck = 4;
 					return Direction.FORWARD;
 				} else if (barPos == 2) {
 					myY = myY + 1;
-					System.out.println("bar gefunden");
+					System.out.println("Thorvin bar gefunden");
 					goBarDone = true;
 					myHeading = Heading.NORTH;
 					bucketCheck = 4;
 					return Direction.RIGHT;
 				} else if (barPos == 3) {
 					myX = myX - 1;
-					System.out.println("bar gefunden");
+					System.out.println("Thorvin bar gefunden");
 					goBarDone = true;
 					myHeading = Heading.EAST;
 					bucketCheck = 4;
 					return Direction.BACK;
 				} else if (barPos == 4) {
 					myY = myY - 1;
-					System.out.println("bar gefunden");
+					System.out.println("Thorvin bar gefunden");
 					goBarDone = true;
 					myHeading = Heading.SOUTH;
 					bucketCheck = 4;
@@ -573,28 +576,28 @@ public class Thorvin extends Avatar {
 					return Direction.IDLE;
 				} else if (loungePos == 1) {
 					myX = myX + 1;
-					System.out.println("lounge gefunden");
+					System.out.println("Thorvin lounge gefunden");
 					goBarDone = true;
 					myHeading = Heading.WEST;
 					bucketCheck = 7;
 					return Direction.FORWARD;
 				} else if (loungePos == 2) {
 					myY = myY + 1;
-					System.out.println("bar gefunden");
+					System.out.println("Thorvin lounge gefunden");
 					goBarDone = true;
 					myHeading = Heading.NORTH;
 					bucketCheck = 7;
 					return Direction.RIGHT;
 				} else if (loungePos == 3) {
 					myX = myX - 1;
-					System.out.println("bar gefunden");
+					System.out.println("Thorvin lounge gefunden");
 					goBarDone = true;
 					myHeading = Heading.EAST;
 					bucketCheck = 7;
 					return Direction.BACK;
 				} else if (loungePos == 4) {
 					myY = myY - 1;
-					System.out.println("bar gefunden");
+					System.out.println("Thorvin lounge gefunden");
 					goBarDone = true;
 					myHeading = Heading.SOUTH;
 					bucketCheck = 7;
@@ -668,7 +671,7 @@ public class Thorvin extends Avatar {
 		return null;
 	}
 
-	private boolean isFree(int myx, int myy) {
+	private boolean isFree(int myx, int myy) { // checken ob platz nutzbar ist
 		if (myMap[myx][myy] == Places.PATH || myMap[myx][myy] == Places.DANCEFLOOR
 				|| myMap[myx][myy] == Places.BAR_CHAIR || myMap[myx][myy] == Places.FUSSBALL_CHAIR
 				|| myMap[myx][myy] == Places.LOUNGE_BIG || myMap[myx][myy] == Places.LOUNGE_SMALL
@@ -737,7 +740,7 @@ public class Thorvin extends Avatar {
 		return Direction.IDLE;
 	}
 
-	private boolean inTanzbereich() {
+	private boolean inTanzbereich() { // wenn ich mitten in Tanzbereich stehe
 		if (myMap[myX + 1][myY] == Places.DANCEFLOOR && myMap[myX - 1][myY] == Places.DANCEFLOOR
 				&& myMap[myX][myY + 1] == Places.DANCEFLOOR && myMap[myX][myY - 1] == Places.DANCEFLOOR) {
 			return true;
