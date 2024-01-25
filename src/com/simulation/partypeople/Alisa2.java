@@ -35,6 +35,9 @@ public class Alisa2 extends Avatar {
     int countPickingDirection = 0;
     boolean danced = false;
     boolean foundDancefloor = false;
+    int danceStep = 0;
+    boolean orderedDrink = false;
+    boolean foundBar = false;
     boolean printed = false;
 
     public Alisa2(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -295,6 +298,7 @@ public class Alisa2 extends Avatar {
                     rows = findWallStep;
                     dir = Direction.BACK;
                     currentHeading = "DOWN";
+                    stepsMade = 0;
                     mindmap = new Places[rows][cols];
                     mindmap[0][distanceFromLeftWall] = getWhatISee()[0];
                     lastPosition[0] = 0;
@@ -690,17 +694,54 @@ public class Alisa2 extends Avatar {
         }
     }
 
+    private void dance() {
+        if (getWhatISee()[1] == Places.PERSON) {
+            dir = Direction.IDLE;
+            danceStep = 1;
+        } else {
+            switch (danceStep) {
+                case 0, 1:
+                    setDirectionForward();
+                    stepsMade = 0;
+                    danceStep++;
+                    break;
+                case 2:
+                    setDirectionRight();
+                    danceStep++;
+                    break;
+                case 3:
+                    if (getWhatISee()[0] == Places.DANCEFLOOR) {
+                        setDirectionRight();
+                        danceStep++;
+                    } else {
+                        setDirectionBack();
+                        danceStep = 1;
+                    }
+                    break;
+                case 4:
+                    setDirectionRight();
+                    danced = true;
+                    danceStep = 0;
+                    break;
+            }
+        }
+    }
+
     private void findDancefloor() {
         if (foundDancefloor || getWhatISee()[0] == Places.DANCEFLOOR) {
             foundDancefloor = true;
-            danced = true;
+            dance();
         } else {
             List<Coordinates> existingCoordinates = findExistingCoordinates(new Places[]{Places.DANCEFLOOR});
             if (!existingCoordinates.isEmpty()) {
                 findClosestCoordinate(existingCoordinates, currentPosition[0], currentPosition[1]);
                 headToTarget(Places.DANCEFLOOR);
             } else {
-                setMovement();
+                if (getWhatISee()[1] != Places.DANCEFLOOR && danceStep == 0) {
+                    setMovement();
+                } else {
+                    dance();
+                }
             }
         }
     }
@@ -717,6 +758,8 @@ public class Alisa2 extends Avatar {
                 addPlaceToMindmap();
                 if (!danced) {
                     findDancefloor();
+                } else if (!orderedDrink) {
+                    dir = Direction.IDLE;
                 } else {
                     dir = Direction.IDLE;
                     if (!printed) {
