@@ -35,6 +35,7 @@ public class Emmanuel extends Avatar {
 	private boolean roundOver =true;
 
 	private Block[][] mentalMap;
+	private final DanceMove dancer;
 
 	private boolean divert =false;
 	private Heading heading;
@@ -42,6 +43,7 @@ public class Emmanuel extends Avatar {
 	public Emmanuel(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitTime);
 		this.heading =Heading.WEST;
+		dancer = new DanceMove(3);
 	}
 
 	@Override
@@ -227,60 +229,71 @@ public class Emmanuel extends Avatar {
 	}
 
 	private Direction fillMap(){
-		mentalMap[vPos][hPos].isVisited=true;
-		System.out.println("---filling map");
-		System.out.println(hPos);
 		Direction dir = Direction.IDLE;
-		System.out.println(changedLevel(prevLevel));
-		if(changedLevel(prevLevel)){
-			System.out.println("visited : " + mentalMap[vPos][hPos].isVisited);
-			if(prevRL==Direction.RIGHT){
-				heading =Heading.WEST;
-				dir = Direction.TURN_LEFT_ON_SPOT;
-			}else{
-				heading = Heading.EAST;
-				dir = Direction.TURN_RIGHT_ON_SPOT;
-			}
-			prevLevel =vPos;
-		}else if(getWhatISee()[1]!=Places.PERSON ){
-			if(((getWhatISee()[1]!=Places.WALL && !isOtherWall()) || (getWhatISee()[1]==Places.PATH||getWhatISee()[1].name().matches(".*CHAIR$")))&&!divert){
-				dir = Direction.FORWARD;
-				if(heading !=Heading.EAST && heading !=Heading.WEST){
-					prevLevel =vPos;
-					if(heading==Heading.NORTH &&vPos!=0){
-						vPos--;
-					} else if (heading==Heading.SOUTH &&vPos!=vPlane-1) {
-						vPos++;
+		if ((getWhatISee()[0] !=Places.DANCEFLOOR && !dancer.danceComplete && !dancer.dancingStarted) ||dancer.danceComplete){
+			mentalMap[vPos][hPos].isVisited = true;
+			System.out.println("---filling map");
+			System.out.println(hPos);
+			System.out.println(changedLevel(prevLevel));
+			if (changedLevel(prevLevel)) {
+				System.out.println("visited : " + mentalMap[vPos][hPos].isVisited);
+				if (prevRL == Direction.RIGHT) {
+					heading = Heading.WEST;
+					dir = Direction.TURN_LEFT_ON_SPOT;
+				} else {
+					heading = Heading.EAST;
+					dir = Direction.TURN_RIGHT_ON_SPOT;
+				}
+				prevLevel = vPos;
+			} else if (getWhatISee()[1] != Places.PERSON) {
+				if (((getWhatISee()[1] != Places.WALL && !isOtherWall()) || (getWhatISee()[1] == Places.PATH || getWhatISee()[1].name().matches(".*CHAIR$"))) && !divert) {
+					dir = Direction.FORWARD;
+					if (heading != Heading.EAST && heading != Heading.WEST) {
+						prevLevel = vPos;
+						if (heading == Heading.NORTH && vPos != 0) {
+							vPos--;
+						} else if (heading == Heading.SOUTH && vPos != vPlane - 1) {
+							vPos++;
+						}
 					}
-				}
-				if(heading !=Heading.NORTH && heading != Heading.SOUTH){
-					if(heading==Heading.EAST &&hPos!=0){
-						hPos--;
-					} else if (heading==Heading.WEST &&hPos!=hPlane-1) {
-						hPos++;
+					if (heading != Heading.NORTH && heading != Heading.SOUTH) {
+						if (heading == Heading.EAST && hPos != 0) {
+							hPos--;
+						} else if (heading == Heading.WEST && hPos != hPlane - 1) {
+							hPos++;
+						}
 					}
+				} else if ((isOtherWall() || getWhatISee()[1] == Places.WALL) && (heading == Heading.EAST || heading == Heading.WEST)) {
+					Block b = new Block(getWhatISee()[1]);
+					if (heading == Heading.EAST) {
+						if (hPos - 1 != hPlane) mentalMap[vPos][hPos + 1] = b;
+						if (vPos - 1 >= 0)
+							dir = !mentalMap[vPos - 1][hPos].isVisited ? Direction.TURN_LEFT_ON_SPOT : Direction.TURN_RIGHT_ON_SPOT;
+						prevRL = Direction.RIGHT;
+					} else if (heading == Heading.WEST) {
+						if (hPos + 1 < hPlane) mentalMap[vPos][hPos - 1] = b;
+						if (vPos - 1 >= 0)
+							dir = !mentalMap[vPos - 1][hPos].isVisited ? Direction.TURN_RIGHT_ON_SPOT : Direction.TURN_LEFT_ON_SPOT;
+						prevRL = Direction.LEFT;
+					}
+					heading = Heading.NORTH;
+				} else if ((isOtherWall() || getWhatISee()[1] == Places.WALL) && (heading == Heading.NORTH || heading == Heading.SOUTH) && !divert) {
+					divert = true;
+					System.out.println("got here for divert");
 				}
-			}else if((isOtherWall() ||getWhatISee()[1]==Places.WALL) &&(heading ==Heading.EAST||heading==Heading.WEST)){
-				Block b = new Block(getWhatISee()[1]);
-				if(heading == Heading.EAST){
-					if(hPos-1 !=hPlane)mentalMap[vPos][hPos+1] =b;
-					if(vPos-1 >=0)dir = !mentalMap[vPos-1][hPos].isVisited ? Direction.TURN_LEFT_ON_SPOT :Direction.TURN_RIGHT_ON_SPOT;
-					prevRL =Direction.RIGHT;
-				}else if(heading == Heading.WEST){
-					if(hPos+1<hPlane)mentalMap[vPos][hPos-1] =b;
-					if(vPos-1 >=0)dir = !mentalMap[vPos-1][hPos].isVisited ? Direction.TURN_RIGHT_ON_SPOT :Direction.TURN_LEFT_ON_SPOT;
-					prevRL =Direction.LEFT;
+				if (divert) {
+					dir = divert(heading);
 				}
-				heading =Heading.NORTH;
-			} else if ((isOtherWall() ||getWhatISee()[1]==Places.WALL) &&(heading ==Heading.NORTH||heading==Heading.SOUTH) &&!divert) {
-				divert=true;
-				System.out.println("got here for divert");
-			}
-			if (divert) {
-				dir =divert(heading);
-			}
-		}else  {
+			} else {
 
+			}
+		}else {
+			dancer.initialDancingHeading = dancer.dancingStarted ? dancer.initialDancingHeading : heading;
+			if(getWhatISee()[0]==Places.DANCEFLOOR && dancer.danceRound<4){
+				dir =dance();
+			}else{
+				dancer.danceComplete =true;
+			}
 		}
 
 		return dir;
@@ -290,6 +303,22 @@ public class Emmanuel extends Avatar {
 		return vPos!=vPosition && isHasMoved();
 	}
 
+
+	private Direction dance(){
+		Direction dir = Direction.IDLE;
+		System.out.println(dancer.danceStep);
+		System.out.println("---");
+		System.out.println(dancer.danceSpace);
+		if(dancer.danceStep !=dancer.danceSpace){
+			dir =Direction.FORWARD;
+			dancer.danceStep++;
+		}else{
+			dancer.danceStep =0;
+			dancer.danceRound++;
+			dir =dancer.initialDancingHeading == Heading.EAST ? Direction.TURN_LEFT_ON_SPOT :Direction.TURN_RIGHT_ON_SPOT;
+		}
+		return dir;
+	}
 	private class Block {
 		Places place;
 		boolean isVisited;
@@ -297,6 +326,23 @@ public class Emmanuel extends Avatar {
 		private Block(Places p){
 			place = p;
 		}
+	}
+
+	private class DanceMove{
+		 boolean danceComplete =false;
+		 boolean leftMoveDone = false;
+		 boolean rightMoveDone = false;
+		 boolean upMoveDone =false;
+		 boolean downMovedDone =false;
+		boolean dancingStarted =false;
+		 int danceStep=0;
+		 int danceSpace;
+		 int danceRound =0;
+
+		 Heading initialDancingHeading;
+		 private DanceMove(int spaceSize){
+			 danceSpace =spaceSize;
+		 }
 	}
 
 }
