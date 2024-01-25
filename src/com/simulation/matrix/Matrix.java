@@ -21,6 +21,7 @@ import com.simulation.enums.Heading;
 import com.simulation.enums.Shape;
 import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.*;
+import com.simulation.partypeople.igor.Igor;
 
 
 public class Matrix {
@@ -99,6 +100,11 @@ public class Matrix {
 		// Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
   		// LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
   		// avatars.add(locJose);
+		
+		// Igor only to be touch by the great Igor
+		 Igor igor = new Igor(Shape.CIRCLE, new Color(43,207,186), 1, 20, "Igor", 0);
+  		 LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+  		 avatars.add(locIgor);
 
 		// Celestine only to be touch by Celestine
 		Celestine celestine  = new Celestine();
