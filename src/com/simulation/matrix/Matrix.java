@@ -59,10 +59,9 @@ public class Matrix {
 		avatars.add(locCatherine);
 		
 		// Mynul only to be touch by Mynul
-		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
-		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
-		mynul.setLocatedAvatar(locMynul);
-		avatars.add(locMynul);
+		// Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
+		// LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		// avatars.add(locMynul);
 						
 
 		// emmanuel only to be touch by emmanuel
@@ -97,24 +96,24 @@ public class Matrix {
 		avatars.add(locBernhard);
 
 		// Jose only to be touch by the great Jose
-		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
-  		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
-  		avatars.add(locJose);
+		// Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
+  		// LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
+  		// avatars.add(locJose);
 
 		// Celestine only to be touch by Celestine
 		Celestine celestine  = new Celestine();
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		avatars.add(locCelestine);
-		
-		// Igor only to be touch by Celestine
-		Igor igor  = new Igor(Shape.CIRCLE, Color.CYAN, 1, 20, "Igor", 0);
-		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-		avatars.add(locIgor);
 
 		// Kieran only to be touch by Kieran
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 21, "Kieran", 0);
 		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
 		avatars.add(locKieran);
+
+		// Mynul only to be touch by Mynul
+		// Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
+		// LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
+		// avatars.add(locMynul);
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
@@ -194,7 +193,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInQueue(LocatedAvatar avatar) {
-		wait(3);
+		wait(1);
 		avatar.setWhatIsee(env);
 		int x = avatar.getX();
 		int y = avatar.getY();
@@ -229,7 +228,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInClub(LocatedAvatar avatar) {
-		wait(30);
+		wait(10);
 		avatar.setWhatIsee(env);
 		int oldX = avatar.getX();
 		int oldY = avatar.getY();
