@@ -173,15 +173,34 @@ public class Alisa extends Avatar {
             if (getWhatISee()[1] == Places.WALL) {
                 foundBottomWall = true;
                 nextDir = Direction.IDLE;
-//                System.out.println("found left wall");
+                System.out.println("found bottom wall");
                 int countLeft = Collections.frequency(wallSearch.values(), Direction.LEFT);
                 int countRight = Collections.frequency(wallSearch.values(), Direction.RIGHT);
                 int countIdle = Collections.frequency(wallSearch.values(), Direction.IDLE);
-                horizontalDimension = wallSearch.size() - (countLeft + countRight) / 2 - countIdle;
+                verticalDimension = wallSearch.size() - (countLeft + countRight) / 2 - countIdle;
 //                System.out.println(horizontalDimension);
-                nextDir = Direction.LEFT;
                 wallSearch.clear();
+            } else {
+                if (lastGWIS[0] == getWhatISee()[0] && lastGWIS[1] == getWhatISee()[1] && getWhatISee()[1] != Places.PATH) {
+                    // means we're stuck
+                    nextDir = Direction.LEFT;
+                } else {
+                    if (lastDir == Direction.FORWARD
+                            || (lastDir == Direction.LEFT && secondLastDir == Direction.RIGHT)
+                            || (lastDir == Direction.RIGHT && secondLastDir == Direction.LEFT))
+                    {
+                        nextDir = Direction.FORWARD;
+                    } else {
+                        if (lastDir == Direction.RIGHT) {
+                            nextDir = Direction.LEFT;
+                        } else if (lastDir == Direction.LEFT) {
+                            nextDir = Direction.RIGHT;
+                        }
+                    }
+                }
             }
+            wallSearch.put(movementIndex, nextDir);
+            movementIndex++;
         }
         lastGWIS[0] = getWhatISee()[0];
         lastGWIS[1] = getWhatISee()[1];
