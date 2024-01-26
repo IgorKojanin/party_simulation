@@ -167,7 +167,7 @@ public abstract class Avatar {
 
 	public void drink(BeverageType type) {
         // Check if avatar is at the bar area (not implemented in this example)
-        if (getWhatISee()[0] == Places.BAR) {
+        if (getWhatISee()[1] == Places.BAR || getWhatISee()[0] == Places.BAR_CHAIR) {
 	        if (bartender != null) {
 	            bartender.addOrderToQueue(this, type);
 	        } else {
