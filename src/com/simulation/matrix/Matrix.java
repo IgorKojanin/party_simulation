@@ -23,18 +23,17 @@ import com.simulation.enviroment.MyFrame;
 import com.simulation.partypeople.*;
 import com.simulation.partypeople.igor.Igor;
 
-
 public class Matrix {
 
 	private MyFrame env;
-	private ArrayList<LocatedAvatar> avatars;       // Array list for all avatars
-	private ArrayList<LocatedAvatar> queueAvatars;  // Array list for tracking avatars in queue
-	private ArrayList<LocatedAvatar> clubAvatars;  // Array list for tracking avatars in club
-	private ArrayList<LocatedAvatar> unrenderedAvatars;  // Array list for tracking all avatars
+	private ArrayList<LocatedAvatar> avatars; // Array list for all avatars
+	private ArrayList<LocatedAvatar> queueAvatars; // Array list for tracking avatars in queue
+	private ArrayList<LocatedAvatar> clubAvatars; // Array list for tracking avatars in club
+	private ArrayList<LocatedAvatar> unrenderedAvatars; // Array list for tracking all avatars
 	private Bouncer bouncer;
 	DJ dj;
 	public static JFrame frame;
-	
+
 	JButton changeMusicButton;
 	JComboBox<String> musicListDropdown;
 	JButton DJPlayButton;
@@ -51,26 +50,25 @@ public class Matrix {
 
 		// Jose only to be touch by the great Jose
 		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
-  		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
-  		avatars.add(locJose);
+		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
+		avatars.add(locJose);
 
 		// Thorvin only to be touch by Thorvin
+
 		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 20,"Thorvin", 0);
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 20 ,0);
 		avatars.add(locThorvin);
 
 		// catherine only to be touch by catherine
-		Catherine2 catherine = new Catherine2(Shape.CIRCLE,Color.BLACK, 0, 20,"Catherine", 0);
-		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0 ,0);
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE, Color.BLACK, 0, 20, "Catherine", 0);
+		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0, 0);
 		avatars.add(locCatherine);
-		
+
 		// Mynul only to be touch by Mynul
 		Mynul mynul = new Mynul(Shape.CIRCLE, Color.BLUE, 1, 20, "Mynul", 0);
 		LocatedAvatar locMynul = new LocatedAvatar(mynul, 0, 0);
 		mynul.setLocatedAvatar(locMynul);
 		avatars.add(locMynul);
-
-						
 
 		// emmanuel only to be touch by emmanuel
 		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel", 0);
@@ -78,10 +76,9 @@ public class Matrix {
 		avatars.add(locEmmanuel);
 
 		// eliyas only to be touch by eliyas
-		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160,32,240), 0, 20, "Eliyas", 0);
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160, 32, 240), 0, 20, "Eliyas", 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
 		avatars.add(locEliyas);
-		
 
 		// Anatoly only to be touch by Anatoly
 		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
@@ -94,79 +91,79 @@ public class Matrix {
 		avatars.add(locAlisa);
 
 		// Bjoern only to be touch by Bjoern
-		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246,204,255), 0, 22, "Björn", 0);
+		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246, 204, 255), 0, 22, "Björn", 0);
 		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
 		avatars.add(locBjoern);
 
 		// Bernhard only to be touch by Bernhard
-		Bernhard bernhard = new Bernhard(Shape.CIRCLE, new Color(224, 240, 32), 0, 24, "Bernhard",0);
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, new Color(224, 240, 32), 0, 24, "Bernhard", 0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		avatars.add(locBernhard);
 
 		// Igor only to be touch by the great Igor
-		 Igor igor = new Igor(Shape.CIRCLE, new Color(43,207,186), 1, 20, "Igor", 0);
-  		 LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
-  		 avatars.add(locIgor);
+		Igor igor = new Igor(Shape.CIRCLE, new Color(43, 207, 186), 1, 20, "Igor", 0);
+		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
+		avatars.add(locIgor);
 
 		// Celestine only to be touch by Celestine
-		Celestine celestine  = new Celestine();
+		Celestine celestine = new Celestine();
 		LocatedAvatar locCelestine = new LocatedAvatar(celestine, 0, 0);
 		avatars.add(locCelestine);
 
 		// Kieran only to be touch by Kieran
 		Kieran kieran = new Kieran(Shape.TRIANGLE, Color.ORANGE, 1, 21, "Kieran", 0);
-		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0 ,0);
+		LocatedAvatar locKieran = new LocatedAvatar(kieran, 0, 0);
 		avatars.add(locKieran);
 
 		// DJ & Bouncer
 		this.bouncer = new Bouncer(Shape.CIRCLE, Color.BLACK, 0);
-		dj = new DJ(Shape.CIRCLE,Color.WHITE,0,1);
+		dj = new DJ(Shape.CIRCLE, Color.WHITE, 0, 1);
 		LocatedAvatar locDj = new LocatedAvatar(dj, 16, 1);
 		// avatars.add(locDj);
 
 		frame = new JFrame("Music Matrix");
-        frame.setSize(200, 200);
+		frame.setSize(200, 200);
 		frame.setResizable(false);
 		frame.setLocation(1000, 400);
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        changeMusicButton = new JButton("Change Music");
-        changeMusicButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dj.handleUserMusicRequest();
-            }
-        });
+		changeMusicButton = new JButton("Change Music");
+		changeMusicButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dj.handleUserMusicRequest();
+			}
+		});
 
 		musicListDropdown = new JComboBox<>(dj.getMusicList().toArray(new String[0]));
 		musicListDropdown.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String selectedMusic = (String) musicListDropdown.getSelectedItem();
-                dj.playSpecificMusic(selectedMusic);
+			public void actionPerformed(ActionEvent e) {
+				String selectedMusic = (String) musicListDropdown.getSelectedItem();
+				dj.playSpecificMusic(selectedMusic);
 			}
-        });
+		});
 
 		stopButton = new JButton("STOP");
-        stopButton.setBackground(Color.RED);
+		stopButton.setBackground(Color.RED);
 		stopButton.setOpaque(true);
-        // stopButton.setForeground(Color.WHITE);
-        stopButton.setFocusPainted(false);
-        stopButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        stopButton.setPreferredSize(new Dimension(100, 40));
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dj.stopMusic();
-            }
-        });
-        JPanel panel = new JPanel();
-        panel.add(changeMusicButton);
-        panel.add(new JLabel("Available Musics:"));
-        panel.add(musicListDropdown);
+		// stopButton.setForeground(Color.WHITE);
+		stopButton.setFocusPainted(false);
+		stopButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		stopButton.setPreferredSize(new Dimension(100, 40));
+		stopButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dj.stopMusic();
+			}
+		});
+		JPanel panel = new JPanel();
+		panel.add(changeMusicButton);
+		panel.add(new JLabel("Available Musics:"));
+		panel.add(musicListDropdown);
 		panel.add(stopButton);
-        frame.add(panel);
+		frame.add(panel);
 
-        frame.setVisible(false);
+		frame.setVisible(false);
 	}
 
 	private void sortAvatar(LocatedAvatar avatar) {
@@ -214,17 +211,17 @@ public class Matrix {
 					avatar.setY(y);
 					if (x - 1 == 32) {
 						// the avatar is allowed in
-						if (bouncer.checkVibe(avatar.getAvatar())){
+						if (bouncer.checkVibe(avatar.getAvatar())) {
 							queueAvatars.remove(avatar);
 							clubAvatars.add(avatar);
 						}
 						// the avatar is not allowed in
-						else{
+						else {
 							queueAvatars.remove(avatar);
-							//env.removeAvatarFromMap(avatar.getX(), avatar.getY());
+							// env.removeAvatarFromMap(avatar.getX(), avatar.getY());
 						}
 					}
-					
+
 				}
 			}
 		}
@@ -284,10 +281,10 @@ public class Matrix {
 					case NORTH -> avatar.setHeading(Heading.EAST);
 					case SOUTH -> avatar.setHeading(Heading.WEST);
 				}
-				break;				
+				break;
 		}
 		env.setPlaceFree(oldX, oldY);
-		env.moveTo(oldX, oldY, avatar.getX(), avatar.getY(),avatar.getColor());
+		env.moveTo(oldX, oldY, avatar.getX(), avatar.getY(), avatar.getColor());
 		avatar.setIfActuallyMoved(oldX, oldY);
 		env.setPlaceOccupied(avatar.getX(), avatar.getY());
 	}
@@ -300,9 +297,8 @@ public class Matrix {
 		}
 	}
 
-
 	public void run() {
-		//playDJ();
+		// playDJ();
 		while (true) {
 			for (LocatedAvatar avatar : avatars) {
 				sortAvatar(avatar);
@@ -354,9 +350,9 @@ public class Matrix {
 		}
 	}
 
-	private void playDJ(){
+	private void playDJ() {
 		dj.playMusic();
 	}
 
-	
+}
 }

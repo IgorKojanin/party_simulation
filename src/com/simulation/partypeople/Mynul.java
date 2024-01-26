@@ -45,7 +45,7 @@ public class Mynul extends Avatar {
     private boolean reachedAtLounge = false;
     private Heading currentHeading = Heading.NORTH;
     private HashMap<String, Places> surroundingsMap = new HashMap<>();
-    private String[][] mentalMap = new String[24][39];
+    private String[][] mentalMap = new String[50][50];
     private PrettyPrintMindMap printer = new PrettyPrintMindMap();
     private LocatedAvatar myLocation = null;
 
