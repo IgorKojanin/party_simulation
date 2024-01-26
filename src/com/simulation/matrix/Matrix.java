@@ -54,8 +54,9 @@ public class Matrix {
 		avatars.add(locJose);
 
 		// Thorvin only to be touch by Thorvin
-		Thorvin thorvin = new Thorvin(Shape.CIRCLE, Color.gray, 0, 20, "Thorvin", 0);
-		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 20, 0);
+
+		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 20,"Thorvin", 0);
+		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 20 ,0);
 		avatars.add(locThorvin);
 
 		// catherine only to be touch by catherine
@@ -353,4 +354,5 @@ public class Matrix {
 		dj.playMusic();
 	}
 
+}
 }
