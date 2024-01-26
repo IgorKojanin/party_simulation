@@ -1,19 +1,30 @@
-///////////////////////////////////////////////////////////////////////////////
-//                   Party Simulator
-// Date:         27/10/2023
+/*
+//               Party Simulator
+// Date:         01/26/2024
 //
 // Class: Catherine2.java
 // Description: Template for the people
 //
 // - my code
+See comments on each function.
 // - my strategy
+Make three arrays of places based on the Places enums: 
+- available places (places that I can pass or walk through (the dancefloor, chairs))
+- bar places (the bar and bar chairs)
+- lounge places (the three lounges)
+
+Make three maps containing the overall map, the map of lounges, and the map of bar places. Each map is 
+comprised of Coordinate objects and Places enums. 
+
+Start my coordinate system at (0,0) and my Heading as West since I know I'm starting from the right-hand 
+wall or the entrance which is on the right side. My Direction starts out as Forward, so I'm moving to the 
+West. As I move Forward or turn left or right, incremenet or decrement my coordinate position x or y. 
+
+First, only look for the dancefloor. Then, only look for a bar place. Lastly, only look for a Lounge, 
+and then stay still. 
 // - my overall impressions of the simulation
 // - my map
-/* 
 */
-
-///////////////////////////////////////////////////////////////////////////////
-
 
 package com.simulation.partypeople;
 
@@ -35,8 +46,10 @@ public class Catherine2 extends Avatar{
 	
 	public int x;
 	public int y;
+	// In order to create coordinates, I started out wherever I begin (on the right-side wall) as being (0,0). 
 	Coordinate currentCoordinate = new Coordinate(0, 0);
 
+	// The Heading started out being West because the first thing I do is go Forward. 
 	public Heading heading = Heading.WEST;
 	public Direction[] directions = new Direction[]{Direction.TURN_RIGHT_ON_SPOT, Direction.TURN_LEFT_ON_SPOT, Direction.FORWARD};
 	public int headingIndex = 3;
@@ -58,6 +71,8 @@ public class Catherine2 extends Avatar{
 	// Arrays of places. 
 	private Places loungePlaces[] = {Places.LOUNGE_BIG, Places.LOUNGE_SMALL, Places.LOUNGE_SMOKING};
 	private Places barPlaces[] = {Places.BAR, Places.BAR_CHAIR};
+	// Places I can move into or through (chairs except for toilet since I'd have to go into the bathroom area first and I am avoidint that,
+	// dancefloor, lounges)
 	private Places availablePlacesToMove[] = {Places.LOUNGE_BIG, Places.LOUNGE_SMALL, Places.LOUNGE_SMOKING, Places.PATH, Places.FUSSBALL_CHAIR, Places.BAR_CHAIR, Places.POOL_CHAIR, Places.DANCEFLOOR};
 	
 	// Map containing key-value pairs of coordinates and places. I made a Coordinate class to store the x and y coordinates. If my 
@@ -104,9 +119,9 @@ public class Catherine2 extends Avatar{
 		} 
 	}
 
-	// In order to create coordinates, I started out wherever I begin (on the right-side wall) as being (0,0). The Heading started out being
-	// East becaus the first thing I do is go Forward. Then I either incremented or decremented the x or y value of Coordinate depending on the 
-	// Heading value.
+	// Either increment or decrement the x or y value of Coordinate depending on the Heading value.
+	// This simplified my Heading code because I only had to check for Heading with regards to one direction, 
+	// "Forward". If Heading is North, then decrement y by 1 because I know I'm going forward. 
 	private Coordinate updateCurrentPosition(Heading heading, Coordinate currCoordinate) {
 		int currX = currCoordinate.getXCoord();
 		int currY = currCoordinate.getYCoord();
@@ -202,15 +217,15 @@ public class Catherine2 extends Avatar{
 	}
 
 
-	private int containsCoordinate(String typeOfCoord, int coord, HashMap<Coordinate, Places> coordinateMap) {
+	private int containsCoordinate(Coordinate myCoordinate, HashMap<Coordinate, Places> coordinateMap) {
 		for (Coordinate coordinate : coordinateMap.keySet()) {
 			int x = coordinate.getXCoord();
 			int y = coordinate.getYCoord();
-			if (typeOfCoord == "x" && coord == x) {
-				return (coord - x);
+			if (myCoordinate.getXCoord() == x) {
+				return (myCoordinate.getYCoord() - y);
 			}
-			else if (typeOfCoord == "y" && coord == y) {
-				return (coord - y);
+			else if (myCoordinate.getYCoord() == y) {
+				return (myCoordinate.getXCoord() - x);
 			}
 		}
 		return -1;
@@ -279,9 +294,19 @@ public class Catherine2 extends Avatar{
 			if (randInt == 1) {
 				direction = moveRandomDirection(); 
 			}
-		} 			
+		} 		
+		
+		// if (goToBar && !mentalMapBar.isEmpty() && containsCoordinate(currentCoordinate, mentalMapBar) != -1) {
+		// 	// Look at the return value, and turn left or right to go towards the coordinate
+		// }
+		// if (goToLounge && !mentalMapLounges.isEmpty() && containsCoordinate(currentCoordinate, mentalMapLounges) != -1) {
+		// 	// Look at the return value, and turn left or right to go towards the coordinate
+		// }
+		
 		// Only update my coordinates and thus the mental map if I have actually moved forward to a new place.
 		if (direction == Direction.FORWARD && isIncludedInArray(mySurroundings[1], availablePlacesToMove)) {
+			// Update the current position to the new position (+- 1) since I know that the place I see 
+			// (where I'd move forward is available)
 			currentCoordinate = updateCurrentPosition(heading, currentCoordinate);
 			updateMentalMap("Map    ", mentalMapFuturePlaces, currentCoordinate, mySurroundings);
 			if (isIncludedInArray(mySurroundings[1], loungePlaces)) {
@@ -295,9 +320,8 @@ public class Catherine2 extends Avatar{
 		return direction;
 	}
 
-	// I realized it was easier if the avatar always was going in the same direction, so I had my avatar only going in Direction.FORWARD, and 
-	// just turned left or right on the spot in order to change direction. This simplified my Heading code because I only had to check for 
-	// Heading with regards to one direction, "Forward". If Heading is North, then decrement y by 1 because I know I'm going forward. 
+	// I realized it was easier if the avatar always was going in the same direction, so I had my avatar only 
+	// going in Direction.FORWARD, and just turned left or right on the spot in order to change direction. 
 	private Direction moveRandomDirection() {
 		Random randomNumber = new Random();
 		int randInt;
