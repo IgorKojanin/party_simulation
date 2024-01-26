@@ -58,8 +58,14 @@ public class Matrix {
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 20, 0);
 		avatars.add(locThorvin);
 
+		// Anatoly only to be touch by Anatoly
+		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.RED, 0, 49, "Celestine", 0);
+		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
+		avatars.add(locAnatoly);
+
 		// catherine only to be touch by catherine
-		Catherine2 catherine = new Catherine2(Shape.CIRCLE, Color.BLACK, 0, 20, "Catherine", 0);
+		Catherine2 catherine = new Catherine2(Shape.CIRCLE, Color.BLACK, 0, 20,
+				"Catherine", 0);
 		LocatedAvatar locCatherine = new LocatedAvatar(catherine, 0, 0);
 		avatars.add(locCatherine);
 
@@ -70,37 +76,38 @@ public class Matrix {
 		avatars.add(locMynul);
 
 		// emmanuel only to be touch by emmanuel
-		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel", 0);
+		Emmanuel emmanuel = new Emmanuel(Shape.CIRCLE, Color.RED, 0, 20, "Emmanuel",
+				0);
 		LocatedAvatar locEmmanuel = new LocatedAvatar(emmanuel, 0, 0);
 		avatars.add(locEmmanuel);
 
 		// eliyas only to be touch by eliyas
-		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160, 32, 240), 0, 20, "Eliyas", 0);
+		Eliyas eliyas = new Eliyas(Shape.SQUARE, new Color(160, 32, 240), 0, 20,
+				"Eliyas", 0);
 		LocatedAvatar locEliyas = new LocatedAvatar(eliyas, 0, 0);
 		avatars.add(locEliyas);
 
-		// Anatoly only to be touch by Anatoly
-		Anatoly toly = new Anatoly(Shape.CIRCLE, Color.darkGray, 0, 49, "Celestine", 0);
-		LocatedAvatar locAnatoly = new LocatedAvatar(toly, 0, 0);
-		avatars.add(locAnatoly);
+		// Bernhard only to be touch by Bernhard
+		Bernhard bernhard = new Bernhard(Shape.CIRCLE, new Color(224, 240, 32), 0,
+				24, "Bernhard", 0);
+		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
+		avatars.add(locBernhard);
 
 		// Alisa only to be touch by Alisa
-		Alisa alisa = new Alisa(Shape.SQUARE, new Color(140, 7, 134), 0, 20, "Alisa", 0);
+		Alisa alisa = new Alisa(Shape.SQUARE, new Color(140, 7, 134), 0, 20, "Alisa",
+				0);
 		LocatedAvatar locAlisa = new LocatedAvatar(alisa, 0, 0);
 		avatars.add(locAlisa);
 
 		// Bjoern only to be touch by Bjoern
-		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246, 204, 255), 0, 22, "Björn", 0);
+		Bjoern bjoern = new Bjoern(Shape.SQUARE, new Color(246, 204, 255), 0, 22,
+				"Björn", 0);
 		LocatedAvatar locBjoern = new LocatedAvatar(bjoern, 0, 0);
 		avatars.add(locBjoern);
 
-		// Bernhard only to be touch by Bernhard
-		Bernhard bernhard = new Bernhard(Shape.CIRCLE, new Color(224, 240, 32), 0, 24, "Bernhard", 0);
-		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
-		avatars.add(locBernhard);
-
 		// Igor only to be touch by the great Igor
-		Igor igor = new Igor(Shape.CIRCLE, new Color(43, 207, 186), 1, 20, "Igor", 0);
+		Igor igor = new Igor(Shape.CIRCLE, new Color(43, 207, 186), 1, 20, "Igor",
+				0);
 		LocatedAvatar locIgor = new LocatedAvatar(igor, 0, 0);
 		avatars.add(locIgor);
 
@@ -192,7 +199,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInQueue(LocatedAvatar avatar) {
-		wait(1);
+		wait(3);
 		avatar.setWhatIsee(env);
 		int x = avatar.getX();
 		int y = avatar.getY();
@@ -227,7 +234,7 @@ public class Matrix {
 	}
 
 	private void moveAvatarInClub(LocatedAvatar avatar) {
-		wait(10);
+		wait(50);
 		avatar.setWhatIsee(env);
 		int oldX = avatar.getX();
 		int oldY = avatar.getY();
