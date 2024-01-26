@@ -1,6 +1,7 @@
 package com.simulation.partypeople;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -16,24 +17,19 @@ import com.simulation.enums.Shape;
 
 public class Eliyas extends Avatar {
 
-	private int rows = 100;
-	private int columns = 2;
-	// Create a 2D array to store x, y coordinates
-	private int[][] xyPosition = new int[rows][columns];
-	private HashMap<Places, int[][]> mindMap = new HashMap<>();
+	
+	private HashMap<Places, XYPosition> hashMindMap = new HashMap<>();
 	private int x = 40;
 	private int y = 30;
-	private Places[][] mindmap = new Places[45][50];
+	private Places[][] mindmap = new Places[100][100];
 	private boolean headingWest = false;
 	private boolean headingEast = false;
 	private boolean headingNorth = false;
 	private boolean headingSouth = false;
-	private boolean printFlag = true;
+	private boolean print = false;
 	private boolean danceFloorFound = false;
 	private boolean barFound = false;
 	private boolean loungeFound = false;
-
-	
 
 	public Eliyas(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
@@ -110,7 +106,7 @@ public class Eliyas extends Avatar {
 	private Direction findDanceFloor() {
 		if (getWhatISee()[0] == Places.DANCEFLOOR && getWhatISee()[1] == Places.PATH && !danceFloorFound) {
 			count += 1;
-			if (count < 4) {
+			if (count < 5) {
 				return Direction.TURN_RIGHT_ON_SPOT;
 			} else {
 				danceFloorFound = true;
@@ -124,7 +120,7 @@ public class Eliyas extends Avatar {
 	private Direction findBar() {
 		if (getWhatISee()[1] == Places.BAR && !barFound) {
 			countBarStay += 1;
-			if (countBarStay < 4) {
+			if (countBarStay < 10) {
 				return Direction.IDLE;
 			} else {
 				barFound = true;
@@ -137,13 +133,14 @@ public class Eliyas extends Avatar {
 
 	private Direction findLounge() {
 		if ((getWhatISee()[0] == Places.LOUNGE_BIG || getWhatISee()[0] == Places.LOUNGE_SMALL) && !loungeFound) {
-			countLoungeStay += 1;
-			if (countLoungeStay < 4) {
-				return Direction.IDLE;
-			} else {
-				loungeFound = true;
-				return Direction.BACK;
-			}
+//			countLoungeStay += 1;
+//			if (countLoungeStay < 10) {
+//				return Direction.IDLE;
+//			} else {
+//				loungeFound = true;
+//				return Direction.BACK;
+//			}
+			return Direction.IDLE;
 		} else {
 			return moveRandomly();
 		}
@@ -151,16 +148,24 @@ public class Eliyas extends Avatar {
 
 	private Direction findPlacesRandomly() {
 		if (!danceFloorFound) {
-			System.out.println("I'm looking for dance floor");
+			if(print) {
+				System.out.println("I'm looking for dance floor");
+			}
 			return findDanceFloor();
 		} else if (danceFloorFound && !barFound) {
-			System.out.println("I'm looking for bar");
+			if(print) {
+				System.out.println("I'm looking for bar");
+			}
 			return findBar();
 		} else if (danceFloorFound && barFound && !loungeFound) {
-			System.out.println("I'm looking for Lounge");
+			if(print) {
+				System.out.println("I'm looking for Lounge");
+			}
 			return findLounge();
 		} else {
-			System.out.println("All three places are found");
+			if(print) {
+				System.out.println("All three places are found");
+			}
 			return randomDirection();
 		}
 	}
@@ -176,7 +181,7 @@ public class Eliyas extends Avatar {
 		case FUSSBALL:
 			return Direction.TURN_RIGHT_ON_SPOT;
 		case PERSON:
-			return Direction.IDLE;
+			return Direction.TURN_RIGHT_ON_SPOT;
 		case TOILET:
 			return randomDirection();
 		case DANCEFLOOR:
@@ -192,15 +197,6 @@ public class Eliyas extends Avatar {
 		default:
 			return randomDirection();
 		}
-	}
-
-	public Direction moveAvatar() {
-//		Scanner scanner = new Scanner(System.in);
-//		scanner.nextLine();
-		// System.out.println(getWhatISee()[1]);
-		// return findPlacesRandomly();
-		return moveAvatarToDrawMap();
-
 	}
 
 	private Direction randomDirection() {
@@ -236,27 +232,28 @@ public class Eliyas extends Avatar {
 
 	}
 
+	public Direction moveAvatar() {
+		if(print) {
+		Scanner scanner = new Scanner(System.in);
+		scanner.nextLine();
+		}
+		 return findPlacesRandomly();
+
+		
+		//return drawMindMap();
+
+	}
+
 	private Direction moveAvatarToDrawMap() {
-		int i = 0;
 		Heading heading = Heading.WEST;
 		Places iStandOn = getWhatISee()[0];
 		Places inFrontOfMe = getWhatISee()[1];
-		if (printFlag) {
-			for (Entry<Places, int[][]> entry : mindMap.entrySet()) {
-				int[][] values = entry.getValue();
-				System.out.println(entry.getKey() + ": " + values[i][0] + ", " + values[i][1]);
-			}
-		}
+		addPlacesToArray();
+		printMindMap();
 		if (!headingWest && heading == Heading.WEST) {
 			headingWest = true;
-			inFrontOfMe = getWhatISee()[1];
-
-			if (heading == Heading.WEST && isUsable(inFrontOfMe)) {
-				x--;
-				xyPosition[i][0] = x;
-				xyPosition[i][1] = y;
-				mindMap.put(inFrontOfMe, xyPosition);
-				i++;
+			if (heading == Heading.WEST && isUsable(getWhatISee()[1])) {
+				updateMindMap(getWhatISee()[1],heading);
 				return Direction.FORWARD;
 			}
 
@@ -271,11 +268,7 @@ public class Eliyas extends Avatar {
 			inFrontOfMe = getWhatISee()[1];
 
 			if (heading == Heading.NORTH && isUsable(inFrontOfMe)) {
-				y--;
-				xyPosition[i][0] = x;
-				xyPosition[i][1] = y;
-				mindMap.put(inFrontOfMe, xyPosition);
-				i++;
+				updateMindMap(getWhatISee()[1],heading);
 				return Direction.FORWARD;
 			}
 
@@ -291,11 +284,7 @@ public class Eliyas extends Avatar {
 			inFrontOfMe = getWhatISee()[1];
 
 			if (heading == Heading.EAST && isUsable(inFrontOfMe)) {
-				x++;
-				xyPosition[i][0] = x;
-				xyPosition[i][1] = y;
-				mindMap.put(inFrontOfMe, xyPosition);
-				i++;
+				updateMindMap(getWhatISee()[1],heading);
 				return Direction.FORWARD;
 			}
 
@@ -310,11 +299,7 @@ public class Eliyas extends Avatar {
 			inFrontOfMe = getWhatISee()[1];
 
 			if (heading == Heading.SOUTH && isUsable(inFrontOfMe)) {
-				y++;
-				xyPosition[i][0] = x;
-				xyPosition[i][1] = y;
-				mindMap.put(inFrontOfMe, xyPosition);
-				i++;
+				updateMindMap(getWhatISee()[1],heading);
 				return Direction.FORWARD;
 			}
 
@@ -352,5 +337,242 @@ public class Eliyas extends Avatar {
 
 		}
 
+	}
+
+	Heading heading = Heading.WEST;
+
+	// Direction dir = Direction.FORWARD;
+	private Direction drawMindMap() {
+		addPlacesToArray();
+		//printMindMap();
+
+		if (isUsable(getWhatISee()[1])) {
+			switch (heading) {
+			case WEST:
+				heading = Heading.WEST;
+				updateMindMap(getWhatISee()[1], heading);
+				return Direction.FORWARD;
+			case EAST:
+				heading = Heading.EAST;
+				updateMindMap(getWhatISee()[1], heading);
+				return Direction.FORWARD;
+			case NORTH:
+				heading = Heading.NORTH;
+				updateMindMap(getWhatISee()[1], heading);
+				return Direction.FORWARD;
+			default:// south
+				heading = Heading.SOUTH;
+				updateMindMap(getWhatISee()[1], heading);
+				return Direction.FORWARD;
+			}
+		} else {
+			switch (heading) {
+			case WEST:
+				heading = Heading.NORTH;
+				updateMindMap(getWhatISee()[1], heading);
+				return Direction.TURN_RIGHT_ON_SPOT;
+			case EAST:
+				heading = Heading.SOUTH;
+				updateMindMap(getWhatISee()[1], heading);
+				return Direction.TURN_RIGHT_ON_SPOT;
+			case NORTH:
+				heading = Heading.EAST;
+				updateMindMap(getWhatISee()[1], heading);
+				return Direction.TURN_RIGHT_ON_SPOT;
+			default:
+				heading = Heading.WEST;
+				dir = Direction.TURN_RIGHT_ON_SPOT;
+				updateHeading(dir,heading);
+				return Direction.TURN_RIGHT_ON_SPOT;
+			}
+
+		}
+
+	}
+
+	private void updateHeading(Direction dir, Heading heading) {
+		if (dir == Direction.TURN_LEFT_ON_SPOT) {
+			switch (heading) {
+			case WEST:
+				heading = Heading.SOUTH;
+				break;
+			case EAST:
+				heading = Heading.NORTH;
+				break;
+			case NORTH:
+				heading = Heading.WEST;
+				break;
+			case SOUTH:
+				heading = Heading.EAST;
+				break;
+			}
+		}
+		if (dir == Direction.TURN_RIGHT_ON_SPOT) {
+			switch (heading) {
+			case WEST:
+				heading = Heading.NORTH;
+				break;
+			case EAST:
+				heading = Heading.SOUTH;
+				break;
+			case NORTH:
+				heading = Heading.EAST;
+				break;
+			case SOUTH:
+				heading = Heading.WEST;
+				break;
+			}
+		}
+
+	}
+Direction dir = Direction.FORWARD;
+	private void updateMindMap(Places inFrontOfMe, Heading heading) {
+		if (getWhatISee()[1] != Places.PERSON) {
+			switch (heading) {
+			case WEST:
+				if (dir == Direction.FORWARD) {
+					x--;
+					heading = Heading.WEST;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.RIGHT) {
+					y++;
+					heading = Heading.SOUTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}else if (dir == Direction.LEFT) {
+					y--;
+					heading = Heading.NORTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.BACK) {
+					x++;
+					heading = Heading.EAST;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				break;
+			case EAST:
+				if (dir == Direction.FORWARD) {
+					x++;
+					heading = Heading.EAST;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.RIGHT) {
+					y--;
+					heading = Heading.NORTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}else if (dir == Direction.LEFT) {
+					y++;
+					heading = Heading.SOUTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.BACK) {
+					x--;
+					heading = Heading.WEST;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				x++;
+				mindmap[x][y] = getWhatISee()[1];
+				break;
+			case NORTH:
+				if (dir == Direction.FORWARD) {
+					y--;
+					heading = Heading.NORTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.RIGHT) {
+					x++;
+					heading = Heading.EAST;
+					mindmap[x][y] = getWhatISee()[1];
+				}else if (dir == Direction.LEFT) {
+					x--;
+					heading = Heading.WEST;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.BACK) {
+					y++;
+					heading = Heading.SOUTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				break;
+			case SOUTH:
+				if (dir == Direction.FORWARD) {
+					y++;
+					heading = Heading.SOUTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.RIGHT) {
+					x--;
+					heading = Heading.WEST;
+					mindmap[x][y] = getWhatISee()[1];
+				}else if (dir == Direction.LEFT) {
+					x++;
+					heading = Heading.EAST;
+				mindmap[x][y] = getWhatISee()[1];
+				}
+				else if (dir == Direction.BACK) {
+					y--;
+					heading = Heading.NORTH;
+					mindmap[x][y] = getWhatISee()[1];
+				}
+				break;
+			}
+		}
+	}
+	
+	
+	 private XYPosition xyPosition = new XYPosition();
+	private ArrayList<Places> places = new ArrayList<>();
+	private void addPlacesToArray() {
+		for (int i = 0; i < mindmap.length; i++) {
+			for (int j = 0; j < mindmap.length; j++) {
+				if (mindmap[i][j] != null) {
+					if (!places.contains(mindmap[i][j])) {
+						xyPosition.setXPosition(i);
+						xyPosition.setYPosition(j);
+						places.add(mindmap[i][j]);
+						hashMindMap.put(mindmap[i][j], xyPosition);
+					}
+				}
+			}
+		}
+		if (print) {
+			for (Entry<Places, XYPosition> entry : hashMindMap.entrySet()) {
+				XYPosition values = entry.getValue();
+				System.out.println(entry.getKey() + ": " + values.getXPosition() + ", " + values.getYPosition());
+			}
+
+			 System.out.println(places);
+		}
+		
+	}
+	
+	private void printMindMap() {
+	
+	}
+	
+
+	private class XYPosition {
+		private int xPosition;
+		private int yPosition;
+
+		private XYPosition() {
+
+		}
+
+		public int getXPosition() {
+			return xPosition;
+		}
+
+		public int getYPosition() {
+			return yPosition;
+		}
+
+		public void setXPosition(int x) {
+			this.xPosition = x;
+		}
+
+		public void setYPosition(int y) {
+			this.yPosition = y;
+		}
 	}
 }
