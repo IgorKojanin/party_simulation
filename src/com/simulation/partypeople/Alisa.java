@@ -42,11 +42,13 @@ public class Alisa extends Avatar {
     boolean visitedLounge = false;
     boolean foundLounge = false;
     boolean printed = false;
+    boolean failed = true;
 
     public Alisa(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
         super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
     }
 
+    // the few methods below are for updating the avatar's position and heading according to the chosen direction
     private void setDirectionTurnLeftOnSpot() {
         dir = Direction.TURN_LEFT_ON_SPOT;
         switch (currentHeading) {
@@ -205,29 +207,35 @@ public class Alisa extends Avatar {
         stepsMade--;
     }
 
+    // memorize last two moves
     private void updateLastTwoMoves() {
         lastTwoMoves[1] = lastTwoMoves[0];
         lastTwoMoves[0] = dir;
     }
 
+    // memorize last position
     private void updateLastPosition() {
         lastPosition[0] = currentPosition[0];
         lastPosition[1] = currentPosition[1];
     }
 
+    // check if next square is usable
     private boolean isNextSquareUsable() {
         return usableSpots.contains(getWhatISee()[1]);
     }
 
+    // check if next square is unusable
     private boolean isNextSquareUnusable() {
         return unusableSpots.contains(getWhatISee()[1]);
     }
 
+    // memorize last seen squares
     private void recordLastSeenSquares() {
         lastSeenSquares[0] = getWhatISee()[0];
         lastSeenSquares[1] = getWhatISee()[1];
     }
 
+    // check if the square in front is usable or not
     private void investigateSquare() {
         if (!investigating) {
             investigating = true;
@@ -247,6 +255,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // algorithm for performing turns during wall search
     private void turnDuringWallSearch(Direction firstTurn, Direction secondTurn) {
         if (!isTurning) {
             dir = firstTurn;
@@ -281,6 +290,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // algorithm for finding walls
     private void findWall(int wall) {
         if (getWhatISee()[1] == Places.WALL && !isTurning) {
             switch (wall) {
@@ -325,6 +335,8 @@ public class Alisa extends Avatar {
         }
     }
 
+
+    // wrapper method to find walls
     private void findWalls() {
         if (!foundLeftWall) {
             findWall(0);
@@ -335,10 +347,12 @@ public class Alisa extends Avatar {
         }
     }
 
+    // recording spot avatar is standing on as usable
     private void addCurrentSpotToUsable() {
         usableSpots.add(getWhatISee()[0]);
     }
 
+    // introduce yourself when there is a person in front of you
     private void bePolite() {
         if (getWhatISee()[1] == Places.PERSON) {
             unusableSpots.add(getWhatISee()[1]);
@@ -346,6 +360,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // recording the new place in the mindmap
     private void addPlaceToMindmap() {
         if (mindmap[currentPosition[0]][currentPosition[1]] == null) {
             mindmap[currentPosition[0]][currentPosition[1]] = getWhatISee()[0];
@@ -383,6 +398,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // find all existing coordinates for a target place
     private List<Coordinates> findExistingCoordinates(Places[] targetPlaces) {
         List<Coordinates> coordinates = new ArrayList<>();
         for (int i = 0; i < mindmap.length; i++) {
@@ -395,6 +411,7 @@ public class Alisa extends Avatar {
         return coordinates;
     }
 
+    // finding the closest target coordinate from the map
     private void findClosestCoordinate(List<Coordinates> coordinatesList, int myRow, int myColumn) {
         float minDistance = rows * cols;
         Coordinates closestCoordinate = null;
@@ -413,10 +430,12 @@ public class Alisa extends Avatar {
         targetPosition[1] = closestCoordinate.col;
     }
 
+    // helper method to calculate distance to target square
     static float calculateDistance(int x1, int y1, int x2, int y2) {
         return (float) Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
+    // check if the seat the avatar picked as target is occupied
     private void checkIfSeatOccupied() {
 //        System.out.println("checking occupants");
         if (getWhatISee()[1] == Places.PERSON) {
@@ -440,6 +459,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // algorithm for heading to target square
     private void headToTarget(Places target) {
         if (currentPosition[0] == targetPosition[0] && currentPosition[1] == targetPosition[1]) {
             targetPosition[0] = 0;
@@ -631,6 +651,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // randomizer for picking next direction
     private void pickNewDirection() {
         Random random = new Random();
         int randomInt = random.nextInt(3);
@@ -651,6 +672,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // calculating share of undiscovered places in the picked direction
     private float shareOfUndiscoveredPlaces(int startRow, int endRow, int startCol, int endCol) {
         float share;
         int subArraySize = (endRow - startRow + 1) * (endCol - startCol + 1);
@@ -667,6 +689,7 @@ public class Alisa extends Avatar {
         return share;
     }
 
+    // analysis of the picked direction
     private void analyzeDirection() {
         int startRow = currentPosition[0];
         int endRow = currentPosition[0];
@@ -691,7 +714,7 @@ public class Alisa extends Avatar {
                 endCol += maxSteps;
         }
 
-        if (startRow > 0 && startCol > 0 && endRow < rows && endCol < cols) {
+        if ((endRow < rows || endRow >= 0) && (endCol < cols || endCol >= 0)) {
             float shareOfUndiscovered = shareOfUndiscoveredPlaces(startRow, endRow, startCol, endCol);
             if (shareOfUndiscovered >= 0.5) {
                 setDirectionForward();
@@ -723,6 +746,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // assign next move when moving randomly
     private void setMovement() {
         if (stepsMade == maxSteps || isNextSquareUnusable()) {
             pickNewDirection();
@@ -737,6 +761,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // dancing algorithm
     private void dance() {
         if (getWhatISee()[1] == Places.PERSON) {
             dir = Direction.IDLE;
@@ -771,6 +796,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // logic to find dancefloor
     private void findDancefloor() {
         if (foundDancefloor || getWhatISee()[0] == Places.DANCEFLOOR) {
             foundDancefloor = true;
@@ -790,6 +816,8 @@ public class Alisa extends Avatar {
         }
     }
 
+
+    // logic to find bar
     private void findBar() {
         if (foundBar || getWhatISee()[0] == Places.BAR_CHAIR || getWhatISee()[1] == Places.BAR) {
             System.out.println("Alisa is ordering a drink");
@@ -813,6 +841,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // logic to find lounge
     private void findLounge() {
         Places[] lounge = new Places[]{Places.LOUNGE_SMALL, Places.LOUNGE_BIG, Places.LOUNGE_SMOKING};
         if (foundLounge || Arrays.asList(lounge).contains(getWhatISee()[0])) {
@@ -835,6 +864,7 @@ public class Alisa extends Avatar {
         }
     }
 
+    // main class for moving avatar
     public Direction moveAvatar() {
         try {
             addCurrentSpotToUsable();
@@ -854,18 +884,18 @@ public class Alisa extends Avatar {
                         findLounge();
                     } else {
                         dir = Direction.IDLE;
-//                        if (!printed) {
-//                            printMindmap();
-//                            System.out.println("Total squares: " + rows * cols);
-//                            printed = true;
-//                        }
+                        if (!printed) {
+                            printMindmap();
+                            System.out.println("Total squares: " + rows * cols);
+                            printed = true;
+                        }
                     }
                 }
             }
         } catch (Exception e) {
-            if(!printed) {
+            if(!failed) {
                 System.out.println("Alisa failed T_T");
-                printed = true;
+                failed = true;
             }
             dir = Direction.IDLE;
         }
@@ -873,6 +903,7 @@ public class Alisa extends Avatar {
         return dir;
     }
 
+    // Method to print the created map
     private void printMindmap() {
         System.out.println("Alisa's mindmap: ");
         int[] columnWidths = new int[mindmap[0].length];
@@ -903,6 +934,8 @@ public class Alisa extends Avatar {
         }
     }
 
+
+    // helper class to store coordinates
     static class Coordinates {
         int row;
         int col;
