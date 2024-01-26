@@ -40,6 +40,7 @@ public abstract class Avatar {
 	private int timeoutTimeRemaining = 0;
 	private boolean isInTheParty;
 	private Places[] whatISee;
+	private boolean hasMoved;
 
 	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
     private int waitingTime;
@@ -154,6 +155,10 @@ public abstract class Avatar {
 		this.whatISee = places;
 	}
 	
+	public void setHasntMoved(boolean hasMoved) {
+		this.hasMoved = hasMoved;
+	}
+	
 	private static Bartender bartender; // Static variable to hold the bartender instance
 
     public static void setBartender(Bartender bartenderInstance) {
@@ -162,7 +167,7 @@ public abstract class Avatar {
 
 	public void drink(BeverageType type) {
         // Check if avatar is at the bar area (not implemented in this example)
-        if (getWhatISee()[0] == Places.BAR) {
+        if (getWhatISee()[1] == Places.BAR || getWhatISee()[0] == Places.BAR_CHAIR) {
 	        if (bartender != null) {
 	            bartender.addOrderToQueue(this, type);
 	        } else {
@@ -174,4 +179,8 @@ public abstract class Avatar {
     }
 
 	public abstract Direction moveAvatar();  // To be specified on each personal class
+
+	public boolean isHasMoved() {
+		return hasMoved;
+	}
 }
