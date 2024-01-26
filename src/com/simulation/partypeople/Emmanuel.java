@@ -24,11 +24,14 @@ public class Emmanuel extends Avatar {
 	private boolean turnedRightForDivert =false;
 	private boolean turnedLeftForDivert =false;
 
+	private boolean barFound =false;
 	private boolean movedForwardForDivert =false;
 	private boolean initComplete = false;
 	private boolean hPlaneInitComplete = false;
 	private boolean mapInitialized = false;
 	private boolean stayPut =false;
+	private boolean loungeFound =false;
+	private boolean mapFilled =false;
 
 	private Direction prevRL;
 
@@ -65,9 +68,9 @@ public class Emmanuel extends Avatar {
 			}else{
 				dir =initVPlane();
 			}
-		}else if(mapInitialized && !stayPut){
+		}else if(!mapFilled && !stayPut){
 			dir = fillMap();
-		}else if(stayPut){
+		}else if(stayPut && loungeFound){
 			dir = Direction.IDLE;
 		}
 
@@ -179,6 +182,15 @@ public class Emmanuel extends Avatar {
 	private Direction fillMap(){
 		Direction dir = Direction.IDLE;
 		if ((getWhatISee()[0] !=Places.DANCEFLOOR && !dancer.danceComplete && !dancer.dancingStarted) ||dancer.danceComplete){
+			if(dancer.danceComplete && !barFound){
+				if(getWhatISee()[1]==Places.BAR){
+					barFound = true;
+				}
+			}
+			if(dancer.danceComplete && barFound && (getWhatISee()[0]==Places.LOUNGE_BIG ||getWhatISee()[0]==Places.LOUNGE_SMALL)){
+				stayPut =true;
+				loungeFound =true;
+			}
 			mentalMap[vPos][hPos].isVisited = true;
 			System.out.println("---filling map");
 			if (changedLevel(prevLevel)) {
@@ -270,10 +282,6 @@ public class Emmanuel extends Avatar {
 
 	private class DanceMove{
 		 boolean danceComplete =false;
-		 boolean leftMoveDone = false;
-		 boolean rightMoveDone = false;
-		 boolean upMoveDone =false;
-		 boolean downMovedDone =false;
 		boolean dancingStarted =false;
 		 int danceStep=0;
 		 int danceSpace;
