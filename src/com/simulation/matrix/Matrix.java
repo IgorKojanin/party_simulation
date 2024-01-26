@@ -49,6 +49,11 @@ public class Matrix {
 		clubAvatars = new ArrayList<>();
 		unrenderedAvatars = new ArrayList<>();
 		
+		// Jose only to be touch by the great Jose
+		Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
+  		LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
+  		avatars.add(locJose);
+
 		// Thorvin only to be touch by Thorvin
 		Thorvin thorvin = new Thorvin(Shape.CIRCLE,Color.gray, 0, 20,"Thorvin", 0);
 		LocatedAvatar locThorvin = new LocatedAvatar(thorvin, 20 ,0);	
@@ -95,11 +100,6 @@ public class Matrix {
 		Bernhard bernhard = new Bernhard(Shape.CIRCLE, new Color(224, 240, 32), 0, 24, "Bernhard",0);
 		LocatedAvatar locBernhard = new LocatedAvatar(bernhard, 0, 0);
 		avatars.add(locBernhard);
-
-		// Jose only to be touch by the great Jose
-		// Jose Jose = new Jose(Shape.CIRCLE, Color.LIGHT_GRAY, 1, 20, "JoseLu", 0);
-  		// LocatedAvatar locJose = new LocatedAvatar(Jose, 0, 0);
-  		// avatars.add(locJose);
 		
 		// Igor only to be touch by the great Igor
 		 Igor igor = new Igor(Shape.CIRCLE, new Color(43,207,186), 1, 20, "Igor", 0);
