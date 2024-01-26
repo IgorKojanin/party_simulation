@@ -48,7 +48,8 @@ public class Alisa extends Avatar {
         super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
     }
 
-    // the few methods below are for updating the avatar's position and heading according to the chosen direction
+    // the few methods below are for updating the avatar's position and heading
+    // according to the chosen direction
     private void setDirectionTurnLeftOnSpot() {
         dir = Direction.TURN_LEFT_ON_SPOT;
         switch (currentHeading) {
@@ -335,7 +336,6 @@ public class Alisa extends Avatar {
         }
     }
 
-
     // wrapper method to find walls
     private void findWalls() {
         if (!foundLeftWall) {
@@ -356,7 +356,7 @@ public class Alisa extends Avatar {
     private void bePolite() {
         if (getWhatISee()[1] == Places.PERSON) {
             unusableSpots.add(getWhatISee()[1]);
-            System.out.println("Hi! I'm Alisa!");
+            // System.out.println("Hi! I'm Alisa!");
         }
     }
 
@@ -437,7 +437,7 @@ public class Alisa extends Avatar {
 
     // check if the seat the avatar picked as target is occupied
     private void checkIfSeatOccupied() {
-//        System.out.println("checking occupants");
+        // System.out.println("checking occupants");
         if (getWhatISee()[1] == Places.PERSON) {
             int rowIncrease = currentPosition[0] - lastPosition[0];
             int colIncrease = currentPosition[1] - lastPosition[1];
@@ -451,10 +451,10 @@ public class Alisa extends Avatar {
             } else if (colIncrease < 0) {
                 mindmap[currentPosition[0]][currentPosition[1] - 1] = getWhatISee()[1];
             }
-//            System.out.println("Gotta find a new spot");
+            // System.out.println("Gotta find a new spot");
             setDirectionTurnLeftOnSpot();
         } else {
-//            System.out.println("Occupying");
+            // System.out.println("Occupying");
             setDirectionForward();
         }
     }
@@ -765,8 +765,8 @@ public class Alisa extends Avatar {
     private void dance() {
         if (getWhatISee()[1] == Places.PERSON) {
             dir = Direction.IDLE;
-//            System.out.println("Alisa is waiting to bust a move");
-//            danceStep = 0;
+            // System.out.println("Alisa is waiting to bust a move");
+            // danceStep = 0;
         } else {
             System.out.println("Alisa is dancing");
             switch (danceStep) {
@@ -802,7 +802,7 @@ public class Alisa extends Avatar {
             foundDancefloor = true;
             dance();
         } else {
-            List<Coordinates> existingCoordinates = findExistingCoordinates(new Places[]{Places.DANCEFLOOR});
+            List<Coordinates> existingCoordinates = findExistingCoordinates(new Places[] { Places.DANCEFLOOR });
             if (!existingCoordinates.isEmpty()) {
                 findClosestCoordinate(existingCoordinates, currentPosition[0], currentPosition[1]);
                 headToTarget(Places.DANCEFLOOR);
@@ -816,7 +816,6 @@ public class Alisa extends Avatar {
         }
     }
 
-
     // logic to find bar
     private void findBar() {
         if (foundBar || getWhatISee()[0] == Places.BAR_CHAIR || getWhatISee()[1] == Places.BAR) {
@@ -825,7 +824,7 @@ public class Alisa extends Avatar {
             orderedDrink = true;
             foundBar = true;
         } else {
-            Places[] bar = new Places[]{Places.BAR, Places.BAR_CHAIR};
+            Places[] bar = new Places[] { Places.BAR, Places.BAR_CHAIR };
             List<Coordinates> existingCoordinates = findExistingCoordinates(bar);
             if (!existingCoordinates.isEmpty()) {
                 findClosestCoordinate(existingCoordinates, currentPosition[0], currentPosition[1]);
@@ -843,7 +842,7 @@ public class Alisa extends Avatar {
 
     // logic to find lounge
     private void findLounge() {
-        Places[] lounge = new Places[]{Places.LOUNGE_SMALL, Places.LOUNGE_BIG, Places.LOUNGE_SMOKING};
+        Places[] lounge = new Places[] { Places.LOUNGE_SMALL, Places.LOUNGE_BIG, Places.LOUNGE_SMOKING };
         if (foundLounge || Arrays.asList(lounge).contains(getWhatISee()[0])) {
             System.out.println("Alisa is chilling in the lounge");
             dir = Direction.IDLE;
@@ -893,7 +892,7 @@ public class Alisa extends Avatar {
                 }
             }
         } catch (Exception e) {
-            if(!failed) {
+            if (!failed) {
                 System.out.println("Alisa failed T_T");
                 failed = true;
             }
@@ -933,7 +932,6 @@ public class Alisa extends Avatar {
             System.out.println();
         }
     }
-
 
     // helper class to store coordinates
     static class Coordinates {
