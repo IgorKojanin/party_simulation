@@ -26,7 +26,7 @@ import java.awt.Color;
 
 public abstract class Avatar {
 
-	private static int Id;
+	private static int Id; 
 
 	private Shape shape;
 	private Color color;
@@ -42,9 +42,8 @@ public abstract class Avatar {
 	private Places[] whatISee;
 	private boolean hasMoved;
 
-	// Addition of waiting time variable for queing, or ordering drinks, or waiting
-	// to play a game etc
-	private int waitingTime;
+	// Addition of waiting time variable for queing, or ordering drinks, or waiting to play a game etc
+    private int waitingTime;
 
 	// ************** Main constructor for PartyGoer **************
 	public Avatar(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
@@ -61,17 +60,16 @@ public abstract class Avatar {
 		this.isInTheParty = false;
 		this.waitingTime = waitingTime;
 	}
-
-	// ************** Constructor for workers (DJ, bouncer & bartender)
-	// **************
+	
+	// ************** Constructor for workers (DJ, bouncer & bartender) **************
 	public Avatar(Shape shape, Color color2, int borderWidth) {
 		this.shape = shape;
 		this.color = color2;
 		this.borderWidth = borderWidth;
 		this.avatarId = Id;
-	}
+	}	
 
-	// ************** get functions **************
+    // ************** get functions **************
 	public Shape getShape() {
 		return this.shape;
 	}
@@ -79,27 +77,27 @@ public abstract class Avatar {
 	public String getName() {
 		return this.avatarName;
 	}
-
+	
 	public Color getColor() {
 		return this.color;
 	}
-
+	
 	public int getBorderWidth() {
 		return this.borderWidth;
 	}
-
+	
 	public int getId() {
 		return this.avatarId;
 	}
-
+	
 	public int getAge() {
 		return this.avatarAge;
 	}
-
+	
 	public int getAlcoholPercentage() {
 		return this.AlcoholPercentage;
 	}
-
+	
 	public int getTimeoutTimeRemaining() {
 		return this.timeoutTimeRemaining;
 	}
@@ -107,7 +105,7 @@ public abstract class Avatar {
 	public boolean getIsInThePartyState() {
 		return this.isInTheParty;
 	}
-
+	
 	public boolean getDancing() {
 		return this.isDancing;
 	}
@@ -124,17 +122,17 @@ public abstract class Avatar {
 		return this.whatISee;
 
 	}
-
+	
 	// ************** set functions **************
-
+	
 	public void setDancing(boolean newDancingState) {
 		this.isDancing = newDancingState;
 	}
-
+	
 	public void setAlcoholPercentage(int newAlcoholPercentage) {
 		this.AlcoholPercentage = newAlcoholPercentage;
 	}
-
+	
 	public void setTimeoutTimeRemaining(int timeout) {
 		this.timeoutTimeRemaining = timeout;
 	}
@@ -148,39 +146,39 @@ public abstract class Avatar {
 	}
 
 	public void setWaitngTime(int newWaitingTime) { // Setter for waiting time
-		this.waitingTime = newWaitingTime;
+        this.waitingTime = newWaitingTime;
 	}
-
+	
 	// ************** See function **************
 	public void setWhatISee(Places[] places) { // set function from simulation, returns array of Places enums. 2 places
 												// ahead
 		this.whatISee = places;
 	}
-
+	
 	public void setHasntMoved(boolean hasMoved) {
 		this.hasMoved = hasMoved;
 	}
-
+	
 	private static Bartender bartender; // Static variable to hold the bartender instance
 
-	public static void setBartender(Bartender bartenderInstance) {
-		bartender = bartenderInstance;
-	}
+    public static void setBartender(Bartender bartenderInstance) {
+        bartender = bartenderInstance;
+    }
 
 	public void drink(BeverageType type) {
-		// Check if avatar is at the bar area (not implemented in this example)
-		if (getWhatISee()[1] == Places.BAR || getWhatISee()[0] == Places.BAR_CHAIR) {
-			if (bartender != null) {
-				bartender.addOrderToQueue(this, type);
-			} else {
-				System.out.println("Bartender instance not set.");
-			}
-		} else {
-			System.out.println("You're not at the bar area.");
-		}
-	}
+        // Check if avatar is at the bar area (not implemented in this example)
+        if (getWhatISee()[0] == Places.BAR) {
+	        if (bartender != null) {
+	            bartender.addOrderToQueue(this, type);
+	        } else {
+	            System.out.println("Bartender instance not set.");
+	        }
+        } else {
+            System.out.println("You're not at the bar area.");
+    	}
+    }
 
-	public abstract Direction moveAvatar(); // To be specified on each personal class
+	public abstract Direction moveAvatar();  // To be specified on each personal class
 
 	public boolean isHasMoved() {
 		return hasMoved;

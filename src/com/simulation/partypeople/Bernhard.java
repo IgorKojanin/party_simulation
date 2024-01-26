@@ -58,9 +58,9 @@ public class Bernhard extends Avatar{
 	// starting coordinates in own mental map
 	// the current location in the mental map will be augmented with these
 	int mentalmapxlocation = 50;
-	int mentalmapylocation = 25;
+	int mentalmapylocation = 50;
 	int mentalmapxlocationstart = 50;
-	int mentalmapylocationstart = 25;
+	int mentalmapylocationstart = 50;
 
 	// save current heading locally, start off facing WEST after entering bar
 	Heading currentHeading = Heading.WEST;
@@ -87,11 +87,11 @@ public class Bernhard extends Avatar{
 	public Bernhard(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		// TODO
-		mentalmap = new Places[60][60];
+		mentalmap = new Places[100][100];
 	}
 
 	// ************** Methods **************
-	private Direction dancingAlgo(Heading heading) {
+	public Direction dancingAlgo(Heading heading) {
 		// TODO
 		// develop the type of movement that would represent your dance pattern
 		Direction dir = Direction.IDLE;
@@ -139,7 +139,7 @@ public class Bernhard extends Avatar{
 		return dir;
 	}
 
-	private Direction walktodrink(Heading heading) {
+	public Direction walktodrink(Heading heading) {
 		Direction dir = Direction.IDLE;
 		// turn west
 		if (initialwestturndone == false) {
@@ -247,7 +247,7 @@ public class Bernhard extends Avatar{
 
 	}
 
-	private static void visualizeArray(Places[][] array) {
+	public static void visualizeArray(Places[][] array) {
         int cols = array.length;
         int rows = array[0].length;
 
@@ -290,7 +290,7 @@ public class Bernhard extends Avatar{
 		}
     }
 
-	private static void updateArray(Places[][] array) {
+	public static void updateArray(Places[][] array) {
         int cols = array.length;
         int rows = array[0].length;
 
@@ -302,7 +302,7 @@ public class Bernhard extends Avatar{
         }
     }
 
-	private void updateHeading(Heading heading, Direction nextdir) {
+	public void updateHeading(Heading heading, Direction nextdir) {
 		if (heading == Heading.NORTH) {
 			if (nextdir == Direction.TURN_LEFT_ON_SPOT) {
 				currentHeading = Heading.WEST;
@@ -341,7 +341,7 @@ public class Bernhard extends Avatar{
 	}
 
 	// this method adds the Place in front of the avatar to the mental map
-	private void updateMentalMap (Places[] WhatISee, Heading heading) {
+	public void updateMentalMap (Places[] WhatISee, Heading heading) {
 		// if (WhatISee[1] != Places.PERSON) {
 			if (heading == Heading.NORTH) {
 				mentalmap[mentalmapylocation - 1][mentalmapxlocation] = WhatISee[1];
@@ -358,7 +358,7 @@ public class Bernhard extends Avatar{
 		// }
 	}
 
-	private Direction doscoutturn(Heading heading) {
+	public Direction doscoutturn(Heading heading) {
 		// set Direction to idle in case no other decision can be made here
 		// Direction dir = Direction.IDLE;
 		// while (scoutturn < 4) {
@@ -376,7 +376,7 @@ public class Bernhard extends Avatar{
 		// return dir;
 	}
 
-	private Places checksquareonright(Heading heading) {
+	public Places checksquareonright(Heading heading) {
 		// Failsafe: set squareonright to WALL in case the function fails so it at least returns something. 
 		// WALL is the least critical thing to put in mental map as it only results in avoiding 
 		// some squares in the worst case instead of trying to use invalid squares if e.g. PATH
@@ -397,7 +397,7 @@ public class Bernhard extends Avatar{
 		return squareonright;
 	}
 
-	private void updateMentalMapLocation (Heading heading, Direction nextDirection) {
+	public void updateMentalMapLocation (Heading heading, Direction nextDirection) {
 		if (heading == Heading.NORTH) {
 			if (nextDirection == Direction.FORWARD) {
 				mentalmapylocation--;
@@ -468,7 +468,7 @@ public class Bernhard extends Avatar{
 		}
 	}
 
-	private Direction scoutmap(Heading heading) {
+	public Direction scoutmap(Heading heading) {
 		Direction dir = Direction.IDLE;
 		boolean squareinfrontusable = checksquareinfrontusable(heading);
 		if (movedlastturn == true) {
@@ -583,7 +583,7 @@ public class Bernhard extends Avatar{
 		return dir;
 	}
 
-	private boolean checksquareonrightusable (Heading heading) {
+	public boolean checksquareonrightusable (Heading heading) {
 		Places temp = checksquareonright(heading);
 		if (temp == Places.PATH || temp == null) {
 			return true;
@@ -595,7 +595,7 @@ public class Bernhard extends Avatar{
 
 
 	// this will check if the square in front is usable but will NOT check if there is a person there
-	private boolean checksquareinfrontusable(Heading heading) {
+	public boolean checksquareinfrontusable(Heading heading) {
 
 		if (this.getWhatISee()[1] == Places.BAR || this.getWhatISee()[1] == Places.POOL 
 		|| this.getWhatISee()[1] == Places.TOILET || this.getWhatISee()[1] == Places.FUSSBALL 
@@ -608,7 +608,7 @@ public class Bernhard extends Avatar{
 		}
 	}
 
-	private void findBarStools () {
+	public void findBarStools () {
 		//we find the barstool first because the dancefloor location is not known yet. if we go to the barstool we will find the dancefloor
 		for (int z = 0; z < mentalmap.length; z++) {
 			for (int y = 0; y < mentalmap[0].length; y++) {
@@ -621,7 +621,7 @@ public class Bernhard extends Avatar{
 		}
 	}
 
-	private Direction movetobouncer(Heading heading) {
+	public Direction movetobouncer(Heading heading) {
 		Direction dir = Direction.IDLE;
 		if (this.getWhatISee()[1] == Places.BOUNCER) {
 			gotobouncerdone = true;
@@ -650,7 +650,7 @@ public class Bernhard extends Avatar{
 		return dir;
 	}
 
-	private Direction gotobarstool(Heading heading) {
+	public Direction gotobarstool(Heading heading) {
 		Direction dir = Direction.IDLE;
 		// turn west at beginning
 		if (initialwestturndone == false) {

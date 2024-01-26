@@ -15,7 +15,6 @@ import com.simulation.enums.Shape;
 import com.simulation.matrix.LocatedAvatar;
 
 import java.awt.Color;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
@@ -35,24 +34,22 @@ public class Mynul extends Avatar {
     private int moonwalkingBottomCounter = 0;
     private int moonwalkingLeftCounter = 0;
     private int moonwalkingRightCounter = 0;
-    private int barDelayCounter = 0;
     private int moonwalkingLoop = 2;
     private int centerAlignMovements =0;
     private int centerAlignXY=0;
     private boolean isReadyForDancing = false;
     private boolean preparingToCenterAlign = false;
-    private boolean isMoving = true;
-    private boolean reachedAtLounge = false;
     private Heading currentHeading = Heading.NORTH;
     private HashMap<String, Places> surroundingsMap = new HashMap<>();
-    private String[][] mentalMap = new String[50][50];
-    private PrettyPrintMindMap printer = new PrettyPrintMindMap();
+    private String[][] mentalMap = new String[50][50];;
+//    private int xPos = 50;
+//    private int yPos = 50;
     private LocatedAvatar myLocation = null;
 
     public Mynul(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
         super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
-        for (int i = 0; i < 24; i++) { // Populating array with empty values rather than null for better visibility
-        	Arrays.fill(mentalMap[i], "    ");	
+        for (int i = 0; i < 50; i++) { // Populating array with empty values rather than null for better visibility
+        	Arrays.fill(mentalMap[i], "");
     	}
     }
 
@@ -60,7 +57,6 @@ public class Mynul extends Avatar {
     public Direction moveAvatar() {
     	Direction dir = Direction.IDLE;
     	updateSurroundingsMap();
-    	updateMindMap();
         
         if (isOnDanceFloor) {
             dir = dancingAlgo(); // Continue dancing
@@ -69,50 +65,38 @@ public class Mynul extends Avatar {
             isOnDanceFloor = true; // Mark that Mynul is now on the dance floor
             dir = dancingAlgo(); // Start dancing
         }
-        else if (goToBar && surroundingsMap.getOrDefault("next", Places.PATH) == Places.BAR) {
+        else if (goToBar && surroundingsMap.getOrDefault("front", Places.PATH) == Places.BAR) {
+        	System.out.println("Reached at bar");
         	if(!drinkOrdered) {
-        		System.out.println("Reached at bar");
         		this.drink(BeverageType.BEER);		// Order Drink
-        		System.out.println("Drink ordered at bar.");
         		drinkOrdered = true;
-        		dir = Direction.IDLE;
-        		displayMap();
         	}
-        	else if(barDelayCounter++ > 10){
-        		goToBar = false;
-        		goToLoungeArea = true;
-        		dir = Direction.TURN_RIGHT_ON_SPOT;
+        	else {
+        		if(this.getAlcoholPercentage() > 0) {
+        			// Drink allotted successfully
+        			goToBar = false;
+        			goToLoungeArea = true;
+        		}
         	}
-        	dir = Direction.IDLE; 
+        	return Direction.IDLE;
         }
-        else if (goToLoungeArea && (surroundingsMap.getOrDefault("next", Places.PATH) == Places.LOUNGE_BIG || surroundingsMap.getOrDefault("next", Places.PATH) == Places.LOUNGE_SMALL)) {
-        	if(!reachedAtLounge) {
-        		System.out.println("Reached at "+surroundingsMap.getOrDefault("next", Places.PATH)+" area");
-        		System.out.println("Mynul is so tired now. Sitting in Lounge having his favourite drink.");
-        		displayMap();
-        		reachedAtLounge = true;
-        	}
-        	dir = Direction.IDLE;
+        else if (goToLoungeArea && (surroundingsMap.getOrDefault("front", Places.PATH) == Places.LOUNGE_BIG || surroundingsMap.getOrDefault("front", Places.PATH) == Places.LOUNGE_SMALL)) {
+        	System.out.println("Reached at Lounge Area");
+        	System.out.println("Mynul is so tired now. Sitting in Lounge having his favourite drink.");
+        	return Direction.IDLE;
         }
         else {
         	dir =  navigateToDesiredLocation();
         }
-        
-        if(dir == Direction.IDLE){
-    		this.isMoving = false;
-    		System.out.println(this.getName()+" is stopped.");
-    	}
-    	else {
-    		this.isMoving = true;
-    		System.out.println(this.getName()+" is moving.");
-    	}
-        
+        updateMindMap();
+//        displayMap();
         return dir;
     }
     public void setLocatedAvatar(LocatedAvatar _myLocation) {
     	this.myLocation = _myLocation;
     }
     private void updateMindMap() {
+//    	updateHeading(dir);
     	updateMentalMap(this.getWhatISee(), this.myLocation.getHeading(), this.myLocation.getX(), this.myLocation.getY());
     }
     
@@ -132,7 +116,7 @@ public class Mynul extends Avatar {
 			case POOL:
 				return Direction.TURN_LEFT_ON_SPOT;
 			case FUSSBALL:
-				return Direction.TURN_LEFT_ON_SPOT;
+				return Direction.TURN_RIGHT_ON_SPOT;
 			case PERSON:
 				return Direction.TURN_RIGHT_ON_SPOT;
 	//				return Direction.BACK;
@@ -158,14 +142,14 @@ public class Mynul extends Avatar {
     	Random rand = new Random();
 		int number = rand.nextInt(100);
 		Direction dir = Direction.IDLE;
-		if (number <= 75) {
+		if (number <= 45) {
 			dir = Direction.FORWARD;
-		} else if (number < 85) {
-			dir = Direction.BACK;
-		} else if (number < 95) {
-			dir = Direction.LEFT;
-		} else {
+		} else if (number < 65) {
 			dir = Direction.RIGHT;
+		} else if (number < 75) {
+			dir = Direction.BACK;
+		} else {
+			dir = Direction.LEFT;
 		}
 		return dir;
     }
@@ -217,6 +201,9 @@ public class Mynul extends Avatar {
     }
     
     public Direction dancingAlgo() {
+    	if(isReadyForDancing){
+    		System.out.println(this.getName() + " is dancing");    		
+    	}
     	if(getWhatISee()[1] == Places.PERSON) {
     		return Direction.TURN_LEFT_ON_SPOT;
     	}
@@ -261,12 +248,8 @@ public class Mynul extends Avatar {
 			isOnDanceFloor = false;
 			goToDancefloor = false;
 			goToBar = true;
-			displayMap();
-			System.out.println("Desired location updated to BAR.");
 		}
-    	if(isReadyForDancing){
-    		System.out.println(this.getName() + " is dancing");    		
-    	}
+    	
     	return Direction.IDLE;
 		
 	}
@@ -276,54 +259,45 @@ public class Mynul extends Avatar {
     }
 
     public void fight(Avatar opponent) {
-        // TODO: Implement fighting behavior
+        
     }
 
     public void talk(Avatar person) {
-        // TODO: Implement talking behavior
+       
     }
 
     public void smoke() {
-        // TODO: Implement smoking behavior
+        
     }
 
     public void toilet(int timeInToilet) {
-        // TODO: Implement toilet behavior
+       
     }
 
     public void playPool() {
-        // TODO: Implement playing pool behavior
+        
     }
 
     public void playFussball() {
-        // TODO: Implement playing fussball behavior
+        
     }
     public void updateMentalMap (Places[] WhatISee, Heading currentHeading, int x, int y) {
-			if (WhatISee[1] == Places.PERSON){
-				return;
-			}
+		if (WhatISee[1] == Places.PERSON){
+			return;
+		}
 			String placeString = WhatISee[1].toString();
-			if(mentalMap[y][x] == "    ") { // only update if its blank
-				mentalMap[y][x] = WhatISee[0].toString();
-			}
-			int _x = x;
-			int _y = y;
-			
-			if (_y > 0 && currentHeading == Heading.NORTH) {
-				_y = _y -1;
+			mentalMap[x][y] = WhatISee[0].toString();
+			if (y > 0 && currentHeading == Heading.NORTH) {
+				mentalMap[x][y - 1] = placeString;
 			}
 			else if (currentHeading == Heading.EAST) {
-				_x = _x + 1;
+				mentalMap[x + 1][y] = placeString;
 			}
 			else if (currentHeading == Heading.SOUTH) {
-				_y = _y+1;
+				mentalMap[x][y+1] = placeString;
 			}
-			else if (_x > 0 && currentHeading == Heading.WEST) {
-				_x = _x-1;
-			}
-			
-			if(mentalMap[_y][_x] == "    ") {
-				mentalMap[_y][_x] = placeString;
+			else if (x > 0 && currentHeading == Heading.WEST) {
+				mentalMap[x-1][y] = placeString;
 			}
 	}
     private void updateHeading(Direction nextdir) {
@@ -376,100 +350,8 @@ public class Mynul extends Avatar {
 		}
 	}
     private void displayMap() {
-    	printer.print(mentalMap);
-}
-
-    // PrettyPrint 
-private class PrettyPrintMindMap {
-
-    private static final char BORDER_KNOT = '+';
-    private static final char HORIZONTAL_BORDER = '-';
-    private static final char VERTICAL_BORDER = '|';
-
-    private static final String DEFAULT_AS_NULL = "(NULL)";
-
-    private final PrintStream out = System.out;
-    private final String asNull = DEFAULT_AS_NULL;
-
-    public void print(String[][] table) {
-        if ( table == null ) {
-            throw new IllegalArgumentException("No tabular data provided");
-        }
-        if ( table.length == 0 ) {
-            return;
-        }
-        final int[] widths = new int[getMaxColumns(table)];
-        adjustColumnWidths(table, widths);
-        printPreparedTable(table, widths, getHorizontalBorder(widths));
-    }
-
-    private void printPreparedTable(String[][] table, int widths[], String horizontalBorder) {
-        final int lineLength = horizontalBorder.length();
-        out.println(horizontalBorder);
-        for ( final String[] row : table ) {
-            if ( row != null ) {
-                out.println(getRow(row, widths, lineLength));
-                out.println(horizontalBorder);
-            }
+        for (String[] row : mentalMap) {
+            System.out.println(Arrays.deepToString(row));
         }
     }
-
-    private String getRow(String[] row, int[] widths, int lineLength) {
-        final StringBuilder builder = new StringBuilder(lineLength).append(VERTICAL_BORDER);
-        final int maxWidths = widths.length;
-        for ( int i = 0; i < maxWidths; i++ ) {
-            builder.append(padRight(getCellValue(safeGet(row, i, null)), widths[i])).append(VERTICAL_BORDER);
-        }
-        return builder.toString();
-    }
-
-    private String getHorizontalBorder(int[] widths) {
-        final StringBuilder builder = new StringBuilder(256);
-        builder.append(BORDER_KNOT);
-        for ( final int w : widths ) {
-            for ( int i = 0; i < w; i++ ) {
-                builder.append(HORIZONTAL_BORDER);
-            }
-            builder.append(BORDER_KNOT);
-        }
-        return builder.toString();
-    }
-
-    private int getMaxColumns(String[][] rows) {
-        int max = 0;
-        for ( final String[] row : rows ) {
-            if ( row != null && row.length > max ) {
-                max = row.length;
-            }
-        }
-        return max;
-    }
-
-    private void adjustColumnWidths(String[][] rows, int[] widths) {
-        for ( final String[] row : rows ) {
-            if ( row != null ) {
-                for ( int c = 0; c < widths.length; c++ ) {
-                    final String cv = getCellValue(safeGet(row, c, asNull));
-                    final int l = cv.length();
-                    if ( widths[c] < l ) {
-                        widths[c] = l;
-                    }
-                }
-            }
-        }
-    }
-
-    private static String padRight(String s, int n) {
-        return String.format("%1$-" + n + "s", s);
-    }
-
-    private static String safeGet(String[] array, int index, String defaultValue) {
-        return index < array.length ? array[index] : defaultValue;
-    }
-
-    private String getCellValue(Object value) {
-        return value == null ? asNull : value.toString();
-    }
-
-  }
 }
