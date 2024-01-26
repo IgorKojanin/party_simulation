@@ -161,6 +161,7 @@ public class Thorvin extends Avatar {
 				goBarDone = false;
 				bucketCheck = 5;
 				waitNext = 6;
+				drink(BeverageType.BEER);
 			}
 		} else if (bucketCheck == 5) {
 			dir = doScout();
@@ -209,6 +210,7 @@ public class Thorvin extends Avatar {
 	public void drink(BeverageType type) { // Ask bartender to drink. The update alcohol levels happens automatically!
 		// TODO
 		// increase the drunkness level and subsequently make it lose coordination
+		System.out.println("Order Beer");
 	}
 
 	private Places getAction() { // what i want to do next
