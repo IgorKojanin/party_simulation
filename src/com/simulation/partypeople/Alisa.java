@@ -418,7 +418,7 @@ public class Alisa extends Avatar {
     }
 
     private void checkIfSeatOccupied() {
-        System.out.println("checking occupants");
+//        System.out.println("checking occupants");
         if (getWhatISee()[1] == Places.PERSON) {
             int rowIncrease = currentPosition[0] - lastPosition[0];
             int colIncrease = currentPosition[1] - lastPosition[1];
@@ -432,10 +432,10 @@ public class Alisa extends Avatar {
             } else if (colIncrease < 0) {
                 mindmap[currentPosition[0]][currentPosition[1] - 1] = getWhatISee()[1];
             }
-            System.out.println("Gotta find a new spot");
+//            System.out.println("Gotta find a new spot");
             setDirectionTurnLeftOnSpot();
         } else {
-            System.out.println("Occupying");
+//            System.out.println("Occupying");
             setDirectionForward();
         }
     }
@@ -854,16 +854,19 @@ public class Alisa extends Avatar {
                         findLounge();
                     } else {
                         dir = Direction.IDLE;
-                        if (!printed) {
-                            printMindmap();
-                            System.out.println("Total squares: " + rows * cols);
-                            printed = true;
-                        }
+//                        if (!printed) {
+//                            printMindmap();
+//                            System.out.println("Total squares: " + rows * cols);
+//                            printed = true;
+//                        }
                     }
                 }
             }
         } catch (Exception e) {
-            System.out.println("Alisa failed T_T");
+            if(!printed) {
+                System.out.println("Alisa failed T_T");
+                printed = true;
+            }
             dir = Direction.IDLE;
         }
         updateLastTwoMoves();
