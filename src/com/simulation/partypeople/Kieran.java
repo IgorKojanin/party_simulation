@@ -69,8 +69,7 @@ public class Kieran extends Avatar {
 	private boolean challengeMode = true; // Flag to set if challenge mode, if false contains print statements
 
 	/* Constructor */
-	public Kieran(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime,
-			int startX, int startY) {
+	public Kieran(Shape shape, Color color, int borderWidth, int avatarAge, String avatarName, int waitingTime) {
 		super(shape, color, borderWidth, avatarAge, avatarName, waitingTime);
 		movementQueue.offer(Direction.FORWARD);
 		placesQueue.offer(Places.DANCEFLOOR);
